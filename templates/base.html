@@ -64,6 +64,71 @@
     {% block content %}
     {% endblock %}
 
+    <footer class="text-center text-lg-start">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-4 col-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Links</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#!" class="text-dark">Home</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark">Explore Recipes</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark">Sign Up</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark">Log In</a>
+                        </li>
+                    </ul>
+                </div>
+            
+                <!--Grid column-->
+                <div class="col-md-4 col-6 mb-md-0">
+                    <h5 class="text-uppercase mb-0">Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-dark">info@cookle.com</a>
+                        </li>
+                        <li>
+                            <!-- Section: Social media -->
+                            <section class="mb-4">
+                                <!-- Facebook -->
+                                <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;"
+                                    href="#!" role="button">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <!-- Instagram -->
+                                <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac;"
+                                    href="#!" role="button">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </section>
+                        </li>
+                    </ul>
+                </div>
+            
+                <!--Grid column-->
+                <div class="col-md-4 col-6 mb-4 mb-md-0 d-none d-md-block">
+                    <a class="me-2" href="">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" loading="lazy" height="150px">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Copyright -->
+        <div class="text-center p-3">
+            © 2020 Copyright:
+            <a class="text-dark" href="https://mdbootstrap.com/">Cookle.com</a>
+        </div>
+    </footer>
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -74,6 +139,5 @@
     {% block scripts %}
     {% endblock %}
     
-></script>
 </body>
 </html>

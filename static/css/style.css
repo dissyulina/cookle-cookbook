@@ -1,0 +1,27 @@
+
+
+.navbar-brand > img {
+    height: 100px;
+}
+
+.btn-primary {
+    background-color: #55857F;
+    border-radius: 20px;
+}
+
+.btn-secondary {
+    border: 1px solid #55857F;
+    background-color: #fff;
+    border-radius: 20px;
+    color: #55857F;
+}
+
+.btn-primary.focus, .btn-primary:focus, .btn-primary:hover {
+    background-color: #1e4641; 
+}
+
+.btn-secondary.focus, .btn-secondary:focus, .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.884);
+    color: #55857F;
+    border: 1px solid #55857F;
+}

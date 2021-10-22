@@ -25,7 +25,7 @@
             <!-- Container wrapper -->
             <div class="container">
                 <!-- Navbar brand -->
-                <a class="navbar-brand me-2" href="">
+                <a class="navbar-brand me-2" href="#">
                     <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" loading="lazy">
                 </a>
             
@@ -44,14 +44,14 @@
                             <a class="nav-link" href="#">Home</a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#">Explore Recipes</a>
+                            <a class="nav-link" href="{{ url_for('get_recipes') }}">Explore Recipes</a>
                         </li>
                     </ul>
                     <!-- Sign up / log in buttons -->
                     <div class="d-flex align-items-center">
-                        <button type="button" class="btn btn-primary me-2">
+                        <a role="button" class="btn btn-primary me-2" href="{{ url_for('register') }}">
                             Sign Up
-                        </button>
+                        </a>
                         <button type="button" class="btn btn-secondary me-3">
                             Log In
                         </button>

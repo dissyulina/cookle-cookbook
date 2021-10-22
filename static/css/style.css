@@ -25,3 +25,23 @@
     color: #55857F;
     border: 1px solid #55857F;
 }
+
+/* Recipe page */
+.card, 
+.card .bg-image {
+    border-radius: 1rem;
+}
+
+.bg-image img {
+    height: 18rem;
+    width: auto;
+    background-size: contain;
+}
+
+.btn-save-recipe {
+    background-color: #E97A2E;
+}
+
+.btn-save-recipe i {
+    color: #fff;
+}

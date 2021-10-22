@@ -1,21 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 
+<section class="background">
     <div class="container">
         <div class="row py-5">
             {% for recipe in recipes %}
                 <div class="div col-6 col-md-4 col-lg-3">
-                    <div class="card">
+                    <div class="card shadow-2-strong h-100">
                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{ recipe.recipe_image }}"  onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
-                            <a href="#!">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                            </a>
+                            <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
                             <p class="card-text">
-                                <i class="far fa-thumbs-up"></i>{{ recipe.total_likes }}<br>
+                                <i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}<br>
                                 by: {{ recipe.username }}
                             </p>
                             <div class="d-flex justify-content-end">
@@ -27,8 +25,6 @@
             {% endfor %}
         </div>
     </div>
-    
-
-
+</section>
 
 {% endblock %}

@@ -32,10 +32,16 @@
     border-radius: 1rem;
 }
 
-.bg-image img {
+.bg-image {
+    min-width: 100%;
     height: 18rem;
-    width: auto;
-    background-size: contain;
+}
+
+.bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-position :center;
 }
 
 .btn-save-recipe {
@@ -44,4 +50,8 @@
 
 .btn-save-recipe i {
     color: #fff;
+}
+
+.background {
+    background: url(../images/background.png) no-repeat center center;
 }

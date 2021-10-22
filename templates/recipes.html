@@ -1,28 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section class="background">
-    <div class="container">
-        <div class="row py-5">
-            {% for recipe in recipes %}
-                <div class="div col-6 col-md-4 col-lg-3">
-                    <div class="card shadow-2-strong h-100">
-                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
-                            <p class="card-text">
-                                <i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}<br>
-                                by: {{ recipe.username }}
-                            </p>
-                            <div class="d-flex justify-content-end">
-                                <a href="#!" class="btn btn-save-recipe btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+<section class="bg-image">
+    <img src="../static/images/background.png" class="w-100">
+    <div class="mask" style="background-color: rgba(251, 251, 251, 0.5)">
+        <div class="container">
+            <div class="row py-5">
+                {% for recipe in recipes %}
+                    <div class="div col-6 col-md-4 col-lg-3">
+                        <div class="card shadow-2-strong h-100">
+                            <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
+                                <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
+                                <a href="#!">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
+                                <p class="card-text">
+                                    <i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}<br>
+                                    by: {{ recipe.username }}
+                                </p>
+                                <div class="d-flex justify-content-end">
+                                    <a href="#!" class="btn btn-save-recipe btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </section>

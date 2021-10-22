@@ -28,16 +28,17 @@
 
 /* Recipe page */
 .card, 
-.card .bg-image {
+.card .card-image,
+.card-image img {
     border-radius: 1rem;
 }
 
-.bg-image {
+.card-image {
     min-width: 100%;
     height: 18rem;
 }
 
-.bg-image img {
+.card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;

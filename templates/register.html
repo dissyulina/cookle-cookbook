@@ -40,7 +40,7 @@
                     <!-- Pills content -->
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                            <form method="POST" action="{{ url_for('register') }}">
+                            <form method="POST" action="{{ url_for('register') }}" id="form-register">
                                 <!-- Name input -->
                                 <div class="form-outline mb-4">
                                     <input type="text" id="name" name="name" class="form-control" />
@@ -71,6 +71,30 @@
                                     <textarea class="form-control" id="about" name="about" rows="4"></textarea>
                                     <label class="form-label" for="about">About you and your love for cooking</label>
                                 </div>
+                                <!-- Upload image/ profile picture -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="radio-img" id="radio-img1" value="1" checked>
+                                    <label class="form-check-label text-start" for="radio-img1">Use default</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="radio-img" id="radio-img2" value="2">
+                                    <label class="form-check-label text-start" for="radio-img2">Image url</label>
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="profile-url" name="profile-url" class="form-control">
+                                        <label class="form-label" for="profile-url">Paste here the image url</label>
+                                    </div>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="radio-img" id="radio-img3" value="3">
+                                    <label class="form-check-label text-start" for="radio-img3">Choose file from your computer</label>
+                                    <div class="mb-4">
+                                        <input type="file" class="form-control" name="profile-image" id="profile-image">
+                                    </div>
+
+								<div class="mb-4">
+                                    <img id="show-image" src="{{ url_for('static', filename='images/user.png') }}" width="300">
+                                </div>
+
                                 <!-- Submit button -->
                                 <button type="submit" class="btn btn-primary my-3">Sign Up</button>
                                 <!-- Login buttons -->

@@ -75,3 +75,7 @@
 */
 
 /* Register page */
+.card-login {
+    width: 85%;
+    max-width: 40rem;
+}

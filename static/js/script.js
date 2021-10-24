@@ -35,3 +35,17 @@ function loadImage(){
     var url = document.getElementById("profile-url");
     image.src = url.value;
 }
+
+/* To check passwords match before submitting, addapted from: 
+https://stackoverflow.com/questions/21727317/how-to-check-confirm-password-field-in-form-without-reloading-page/21727518
+*/
+$('#repeat-password').on('keyup', function () {
+    console.log("keyup");
+    if ($('#password').val() == $('#repeat-password').val()) {
+        $('#valid-message').html('Passwords match.').css('color', 'green');
+        $('.submit-btn').prop('disabled', false).removeClass('disabled');
+    } else {
+        $('#valid-message').html('Passwords do not match.').css('color', 'red');
+        $('.submit-btn').prop('disabled', true).addClass('disabled');
+    }
+});

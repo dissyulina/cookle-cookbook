@@ -3,7 +3,7 @@
 <section>
     <div class="w-100 background">
         <div class="overlay py-5">
-            <div class="container">
+            <div class="container d-flex justify-content-center align-items-center">
                     <!-- flash messages -->
 
                     {% with messages = get_flashed_messages(with_categories=True) %}
@@ -17,9 +17,9 @@
                     {% endwith %}
 
 
-                <div class="card p-2 p-md-5 text-center card-login">
+                <div class="card p-2 p-md-5 card-login">
                     
-                    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                    <ul class="nav nav-pills text-center nav-justified mb-3" id="ex1" role="tablist">
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="tab-register" data-mdb-toggle="pill" href="#pills-register"
                                 role="tab" aria-controls="pills-register" aria-selected="false">
@@ -43,29 +43,34 @@
                             <form method="POST" action="{{ url_for('register') }}" id="form-register">
                                 <!-- Name input -->
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="name" name="name" class="form-control" />
+                                    <input type="text" id="name" name="name" class="form-control" required>
                                     <label class="form-label" for="name">Name</label>
                                 </div>
                                 <!-- Username input -->
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="username" name="username" class="form-control" />
+                                    <input type="text" id="username" name="username" class="form-control" minlength="4" 
+                                    maxlength="20" required>
                                     <label class="form-label" for="username">Username</label>
                                 </div>
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="email" name="email" class="form-control" />
+                                    <input type="email" id="email" name="email" class="form-control" required>
                                     <label class="form-label" for="email">Email</label>
                                 </div>
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="password" name="password" class="form-control" />
+                                    <input type="password" id="password" name="password" class="form-control" minlength="5" 
+                                        maxlength="16" required>
                                     <label class="form-label" for="password">Password</label>
+                                    <div class="invalid-feedback">Password's length must be 5 to 16 characters.</div>
                                 </div>
                                 <!-- Repeat Password input -->
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="repeatpassword" name="repeatpassword" class="form-control" />
-                                    <label class="form-label" for="repeatpassword">Repeat password</label>
+                                <div class="form-outline">
+                                    <input type="password" id="repeat-password" name="repeat-password" 
+                                        class="form-control" required>
+                                    <label class="form-label" for="repeat-password">Repeat password</label>
                                 </div>
+                                <div id="valid-message" class="mb-4"></div>
                                 <!-- About input -->
                                 <div class="form-outline mb-4">
                                     <textarea class="form-control" id="about" name="about" rows="4"></textarea>
@@ -90,15 +95,14 @@
                                     <div class="mb-4">
                                         <input type="file" class="form-control" name="profile-image" id="profile-image">
                                     </div>
-
-								<div class="mb-4">
+                                </div>
+                                <!-- Rendering image from url -->
+								<div class="mb-4 text-center">
                                     <img id="show-image" src="{{ url_for('static', filename='images/user.png') }}" width="300">
                                 </div>
-
-                                <!-- Submit button -->
-                                <button type="submit" class="btn btn-primary my-3">Sign Up</button>
-                                <!-- Login buttons -->
+                                <!-- Submit button & Log In link-->
                                 <div class="text-center">
+                                    <button type="submit" class="btn btn-primary my-3 submit-btn">Sign Up</button>
                                     <p>Already a member? <a href="#!">Log In</a></p>
                                 </div>
                             </form>

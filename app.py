@@ -41,7 +41,11 @@ def register():
             "password": generate_password_hash(request.form.get("password")),
             "name": request.form.get("name").lower(),
             "email": request.form.get("email"),
-            "about": request.form.get("about")
+            "about": request.form.get("about"),
+            "user_image": request.form.get("profile-url"),
+            "saved_recipes": [],
+            "upload_recipes": [],
+            "is_admin": False
         }
         mongo.db.users.insert_one(register)
 

@@ -3,7 +3,7 @@
 <section>
     <div class="w-100 background">
         <div class="overlay py-5">
-            <div class="container d-flex justify-content-center align-items-center">
+            <div class="container d-flex flex-column justify-content-center align-items-center">
                     <!-- flash messages -->
 
                     {% with messages = get_flashed_messages(with_categories=True) %}
@@ -17,123 +17,77 @@
                     {% endwith %}
 
 
-                <div class="card p-2 p-md-5 card-login">
-                    
-                    <ul class="nav nav-pills text-center nav-justified mb-3" id="ex1" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="tab-register" data-mdb-toggle="pill" href="#pills-register"
-                                role="tab" aria-controls="pills-register" aria-selected="false">
-                                Register
-                            </a>
-                        </li>
-                        <!-- Pills navs 
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="tab-login" data-mdb-toggle="pill" href="#pills-login" 
+                <div class="card p-2 p-md-5 card-login">                 
+                    <form method="POST" action="{{ url_for('register') }}" id="form-register">
+                        <!-- Name input -->
+                        <div class="form-outline mb-4">
+                            <input type="text" id="name" name="name" class="form-control" required>
+                            <label class="form-label" for="name">Name</label>
+                        </div>
+                        <!-- Username input -->
+                        <div class="form-outline mb-4">
+                            <input type="text" id="username" name="username" class="form-control" minlength="4" 
+                            maxlength="20" required>
+                            <label class="form-label" for="username">Username</label>
+                        </div>
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <input type="email" id="email" name="email" class="form-control" required>
+                            <label class="form-label" for="email">Email</label>
+                        </div>
+                        <!-- Password input -->
+                        <div class="form-outline mb-4">
+                            <input type="password" id="password" name="password" class="form-control" minlength="5" 
+                                maxlength="16" required>
+                            <label class="form-label" for="password">Password</label>
+                            <div class="invalid-feedback">Password's length must be 5 to 16 characters.</div>
+                        </div>
+                        <!-- Repeat Password input -->
+                        <div class="form-outline">
+                            <input type="password" id="repeat-password" name="repeat-password" 
+                                class="form-control" required>
+                            <label class="form-label" for="repeat-password">Repeat password</label>
+                        </div>
+                        <div id="valid-message" class="mb-4"></div>
+                        <!-- About input -->
+                        <div class="form-outline mb-4">
+                            <textarea class="form-control" id="about" name="about" rows="4"></textarea>
+                            <label class="form-label" for="about">About you and your love for cooking</label>
+                        </div>
+                        <!-- Upload image/ profile picture -->
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio-img" id="radio-img1" value="1" checked>
+                            <label class="form-check-label text-start" for="radio-img1">Use default</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio-img" id="radio-img2" value="2">
+                            <label class="form-check-label text-start" for="radio-img2">Image url</label>
+                            <div class="form-outline mb-4">
+                                <input type="text" id="profile-url" name="profile-url" class="form-control">
+                                <label class="form-label" for="profile-url">Paste here the image url</label>
+                            </div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio-img" id="radio-img3" value="3">
+                            <label class="form-check-label text-start" for="radio-img3">Choose file from your computer</label>
+                            <div class="mb-4">
+                                <input type="file" class="form-control" name="profile-image" id="profile-image">
+                            </div>
+                        </div>
+                        <!-- Rendering image from url -->
+                        <div class="mb-4 text-center">
+                            <img id="show-image" src="{{ url_for('static', filename='images/user.png') }}" width="300">
+                        </div>
+                        <!-- Submit button & Log In link-->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary my-3 submit-btn">Sign Up</button>
+                            <p>Already a member? 
+                                <span><a class="nav-link" id="tab-login" data-mdb-toggle="pill" href="#pills-login" 
                                 role="tab" aria-controls="pills-login" aria-selected="false">
-                                Login
-                            </a>
-                        </li>
-                        -->
-                    </ul>
-                     
-                    
-                    <!-- Pills content -->
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                            <form method="POST" action="{{ url_for('register') }}" id="form-register">
-                                <!-- Name input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="name" name="name" class="form-control" required>
-                                    <label class="form-label" for="name">Name</label>
-                                </div>
-                                <!-- Username input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="username" name="username" class="form-control" minlength="4" 
-                                    maxlength="20" required>
-                                    <label class="form-label" for="username">Username</label>
-                                </div>
-                                <!-- Email input -->
-                                <div class="form-outline mb-4">
-                                    <input type="email" id="email" name="email" class="form-control" required>
-                                    <label class="form-label" for="email">Email</label>
-                                </div>
-                                <!-- Password input -->
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="password" name="password" class="form-control" minlength="5" 
-                                        maxlength="16" required>
-                                    <label class="form-label" for="password">Password</label>
-                                    <div class="invalid-feedback">Password's length must be 5 to 16 characters.</div>
-                                </div>
-                                <!-- Repeat Password input -->
-                                <div class="form-outline">
-                                    <input type="password" id="repeat-password" name="repeat-password" 
-                                        class="form-control" required>
-                                    <label class="form-label" for="repeat-password">Repeat password</label>
-                                </div>
-                                <div id="valid-message" class="mb-4"></div>
-                                <!-- About input -->
-                                <div class="form-outline mb-4">
-                                    <textarea class="form-control" id="about" name="about" rows="4"></textarea>
-                                    <label class="form-label" for="about">About you and your love for cooking</label>
-                                </div>
-                                <!-- Upload image/ profile picture -->
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radio-img" id="radio-img1" value="1" checked>
-                                    <label class="form-check-label text-start" for="radio-img1">Use default</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radio-img" id="radio-img2" value="2">
-                                    <label class="form-check-label text-start" for="radio-img2">Image url</label>
-                                    <div class="form-outline mb-4">
-                                        <input type="text" id="profile-url" name="profile-url" class="form-control">
-                                        <label class="form-label" for="profile-url">Paste here the image url</label>
-                                    </div>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radio-img" id="radio-img3" value="3">
-                                    <label class="form-check-label text-start" for="radio-img3">Choose file from your computer</label>
-                                    <div class="mb-4">
-                                        <input type="file" class="form-control" name="profile-image" id="profile-image">
-                                    </div>
-                                </div>
-                                <!-- Rendering image from url -->
-								<div class="mb-4 text-center">
-                                    <img id="show-image" src="{{ url_for('static', filename='images/user.png') }}" width="300">
-                                </div>
-                                <!-- Submit button & Log In link-->
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary my-3 submit-btn">Sign Up</button>
-                                    <p>Already a member? <a href="#!">Log In</a></p>
-                                </div>
-                            </form>
+                                Login</a></span>
+                            </p>
                         </div>
-
-                        <!--
-
-                        <div class="tab-pane fade" id="pills-login" role="tabpanel"
-                            aria-labelledby="tab-login">
-                            <form>
-                                 Username input
-                                <div class="form-outline mb-4">
-                                    <input type="email" id="loginName" class="form-control"/>
-                                    <label class="form-label" for="loginName">Username</label>
-                                </div>
-                                 Password input 
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="loginPassword" class="form-control"/>
-                                    <label class="form-label" for="loginPassword">Password</label>
-                                </div>
-                                 Submit button 
-                                <button type="submit" class="btn btn-primary my-4">Log In</button>
-                                 Login buttons 
-                                <div class="text-center">
-                                    <p>Not a member? <a href="#!">Sign Up</a></p>
-                                </div>
-                            </form>
-                        </div>
-
-                        -->
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

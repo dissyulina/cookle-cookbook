@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="w-100 background">
+        <div class="overlay py-5">
+            <div class="container d-flex flex-column justify-content-center align-items-center">
+                    <!-- flash messages -->
+                    {% with messages = get_flashed_messages(with_categories=True) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                                    <h4>Hello {{ message }}</h4>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+
+                <div class="card p-2 p-md-5 card-login">
+                    <form method="POST" action="{{ url_for('login') }}" id="form-login">
+                        <div class="form-outline mb-4">
+                            <input id="username" name="username" type="text" minlength="5"
+                        maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="form-control validate" required>
+                            <label class="form-label" for="username">Username</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <input id="password" name="password" type="password" minlength="5"
+                        maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="form-control validate" required>
+                            <label class="form-label" for="password">Password</label>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary my-4">Log In</button>
+                            <p>Not a member? <span><a href="{{ url_for('register') }}">Sign Up</a></span></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

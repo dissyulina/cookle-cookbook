@@ -49,3 +49,15 @@ $('#repeat-password').on('keyup', function () {
         $('.submit-btn').prop('disabled', true).addClass('disabled');
     }
 });
+
+
+/* When login button is clicked, change pills login to active 
+$("#login-btn").click(function(e) {
+    e.preventDefault();
+    $("#tab-login").addClass("active").attr("aria-selected","true");
+    $("#tab-register").removeClass("active").attr("aria-selected","false");
+    $("#pills-login").addClass("show active");
+    $("#pills-register").removeClass("show active");
+
+});
+*/

@@ -5,17 +5,17 @@
         <div class="overlay py-5">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-md-4">
-                        <img src="{{ username.user_image }}" class="img-fluid" onerror="this.src='../../static/images/user.png';" alt="{{ username }}'s profile picture">
+                    <div class="col-12 col-md-4 square-image">
+                        <img src="{{ user.user_image }}" class="img-fluid" onerror="this.src='../../static/images/user.png';" alt="{{ username }}'s profile picture">
                     </div>
-                    <div class="col-12 col-md-4">
-                        <h3>{{ username }}'s Profile</h3>
+                    <div class="col-12 col-md-8">
+                        <h3>My Profile Page</h3>
+                        <p>Username : <span>{{ username }}</span></p>
+                        <p>Email : <span>{{ user.email }}</span></p>
+                        <p>About you and your love for cooking : <span>{{ user.about }}</span></p>
+                        <a role="button" class="btn btn-secondary">Edit Profile</a>
                     </div>
-
                 </div>
-                    
-
-
             </div>
         </div>
     </div>

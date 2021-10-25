@@ -61,3 +61,11 @@ $("#login-btn").click(function(e) {
 
 });
 */
+
+/* Make sure user image is square 
+var divWidth = $('.square-image').width(); 
+
+$(window).resize(function(){
+    $('.square-image').height(divWidth);
+});
+*/

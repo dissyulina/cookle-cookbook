@@ -38,7 +38,8 @@
     height: 18rem;
 }
 
-.card-image img {
+.card-image img,
+.square-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -75,7 +76,12 @@
 */
 
 /* Register page */
-.card-login {
+.form-width {
     width: 85%;
     max-width: 40rem;
+}
+
+.square-image {
+    overflow: hidden;
+    background-color: blue;
 }

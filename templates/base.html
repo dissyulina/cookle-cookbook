@@ -48,6 +48,9 @@
                         </li>
                         {% if session.user %}
                             <li class="nav-item me-3">
+                                <a class="nav-link" href="{{ url_for('add_recipe') }}">Add Recipe</a>
+                            </li>
+                            <li class="nav-item me-3">
                                 <a class="nav-link" href="{{ url_for('profile', username=session['user']) }}" class="text-dark">Profile</a>
                             </li>
                             <li class="nav-item me-3">

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="w-100 background">
+        <div class="overlay py-5">
+            <div class="container d-flex flex-column justify-content-center align-items-center">
+                    <!-- flash messages -->
+                    {% with messages = get_flashed_messages(with_categories=True) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                                    <h4>{{ message }}</h4>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+
+                <h3>Add Recipe</h3>
+                <form class="row g-3 form-width">
+                    <div class="col-12">
+                        <label for="recipe-name" class="form-label">Recipe Name</label>
+                        <input type="text" class="form-control" id="recipe-name" name="recipe-name" placeholder="The Best Fried Rice">
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <label for="serving" class="form-label">Serves</label>
+                        <input type="text" class="form-control" id="serving" name="serving" placeholder="2"> person
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="time" class="form-label">Prep + Cooking Time</label>
+                        <input type="text" class="form-control" id="time" name="time" placeholder="30"> minutes
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="category-name" class="form-label">Category</label>
+                        <select id="category-name" name="category-name" class="form-select">
+                            <option selected>Appetizer</option>
+                            <option>Main</option>
+                            <option>Dessert</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="ingredients" class="form-label">Ingredients</label>
+                        <input type="text" class="form-control" id="ingredients" name="ingredients" placeholder="2 cloves of garlic">
+                        <a href="" role="button">Add more ingredients</a>
+                    </div>
+                    <div class="col-12">
+                        <label for="directions" class="form-label">Ingredients</label>
+                        <input type="text" class="form-control" id="directions" name="directions" placeholder="Mince the garlic and shallots">
+                        <a href="" role="button">Add more steps</a>
+                    </div>
+                    <div class="col-12">
+                        <label for="recipe-image" class="form-label">Recipe's Image</label>
+                        <input type="text" class="form-control" id="recipe-image" name="recipe-image" placeholder="Place the url here..">
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center my-5">
+                        <a href="" role="button" class="btn me-5">Cancel</a>
+                        <button type="submit" class="btn">Submit Recipe</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

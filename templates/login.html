@@ -9,7 +9,7 @@
                         {% if messages %}
                             {% for category, message in messages %}
                                 <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-                                    <h4>Hello {{ message }}</h4>
+                                    <h4>{{ message }}</h4>
                                 </div>
                             {% endfor %}
                         {% endif %}

@@ -5,14 +5,14 @@ $(document).ready(function(){
             alert(radioValue);
             $(".show-image").attr("src","");
             $('#profile-image').val("");
-            $("#profile-url").change(function(){
+            $("#image-url").change(function(){
                 loadImage();
             });
 
         } else if (radioValue === "3") {
             alert(radioValue);
             $(".show-image").attr("src","");
-            $('#profile-url').val("");
+            $('#image-url').val("");
             $("#profile-image").change(function(){
                 readURL(this);
             });
@@ -33,8 +33,10 @@ function readURL(input) {
 
 function loadImage(){
     var image = document.getElementsByClassName("show-image");
-    var url = document.getElementById("profile-url");
+    var url = document.getElementById("image-url");
+    console.log(image);
     image[0].src = url.value;
+    console.log(image[0]);
 }
 
 /* To check passwords match before submitting, addapted from: 
@@ -51,17 +53,6 @@ $('#repeat-password').on('keyup', function () {
     }
 });
 
-
-/* When login button is clicked, change pills login to active 
-$("#login-btn").click(function(e) {
-    e.preventDefault();
-    $("#tab-login").addClass("active").attr("aria-selected","true");
-    $("#tab-register").removeClass("active").attr("aria-selected","false");
-    $("#pills-login").addClass("show active");
-    $("#pills-register").removeClass("show active");
-
-});
-*/
 
 /* Make sure user image is square 
 var divWidth = $('.square-image').width(); 
@@ -105,8 +96,13 @@ $("#ingredients-wrapper").on("click", ".btn-remove", function(e){
     ingredients--;
 });
 
-$("#ingredients-wrapper").on("click", ".btn-remove", function(e){
+$("#directions-wrapper").on("click", ".btn-remove", function(e){
     e.preventDefault();
     $(this).parent('div').remove();
     ingredients--;
+});
+
+/* Display recipe image in add recipe page */
+$("#image-url").change(function(){
+    loadImage();
 });

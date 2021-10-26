@@ -26,6 +26,16 @@
     border: 1px solid #55857F;
 }
 
+.btn-rec-primary {
+    background-color: #EF6C00;
+    color: #fff;
+}
+
+.btn-rec-secondary {
+    background-color: #fff;
+    color: #EF6C00;
+}
+
 /* Recipe page */
 .card, 
 .card .card-image,

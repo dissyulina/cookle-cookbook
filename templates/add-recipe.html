@@ -17,31 +17,37 @@
 
 
                 <h3 class="my-5">Add Recipe</h3>
-                <form class="row g-3 form-width">
+                <form class="row g-3 form-width" method="POST" action="{{ url_for('add_recipe') }}">
+                    <!-- Recipe Name -->
                     <div class="col-12">
-                        <label for="recipe-name" class="form-label"><i class="fas fa-utensils"></i> Recipe Name</label>
-                        <input type="text" class="form-control" id="recipe-name" name="recipe-name" placeholder="The Best Fried Rice">
+                        <label for="recipe_name" class="form-label"><i class="fas fa-utensils"></i> Recipe Name</label>
+                        <input type="text" class="form-control" id="recipe_name" name="recipe_name" placeholder="The Best Fried Rice">
+                    <!-- Description -->
                     </div><div class="col-12">
                         <label for="description" class="form-label"><i class="fas fa-comment"></i> Descriptions or comments about this recipe</label>
                         <textarea class="form-control" id="description" name="description" rows="4" placeholder="Indonesian version of fried rice"></textarea>
                     </div>
+                    <!-- Serving -->
                     <div class="col-12 col-md-2">
                         <label for="serving" class="form-label"><i class="fas fa-users"></i> Serves</label>
                         <input type="text" class="form-control" id="serving" name="serving" placeholder="2"> person
                     </div>
+                    <!-- Prep & Cooking Time -->
                     <div class="col-12 col-md-4">
                         <label for="time" class="form-label"><i class="fas fa-clock"></i> Prep + Cooking Time</label>
                         <input type="text" class="form-control" id="time" name="time" placeholder="30"> minutes
                     </div>
+                    <!-- Categories selection -->
                     <div class="col-12 col-md-6">
-                        <label for="category-name" class="form-label"><i class="fas fa-tag"></i> Category</label>
-                        <select id="category-name" name="category-name" class="form-select" required>
+                        <label for="category_name" class="form-label"><i class="fas fa-tag"></i> Category</label>
+                        <select id="category_name" name="category_name" class="form-select" required>
                             <option value="" disabled selected>Choose Category</option>
                             {% for category in categories %}
                                 <option value="{{ category.category_name }}">{{ category.category_name }}</option>
                             {% endfor %}
                         </select>
                     </div>
+                    <!-- Ingredients -->
                     <div class="col-12">
                         <label for="ingredients" class="form-label"><i class="fas fa-carrot"></i> Ingredients</label>
                         <div class="col-12" id="ingredients-wrapper">
@@ -51,6 +57,7 @@
                             <a href="" role="button" id="add-ing-btn"><i class="fas fa-plus"></i> Add more ingredients</a>
                         </div>
                     </div>
+                    <!-- Directions -->
                     <div class="col-12">
                         <label for="directions" class="form-label"><i class="fas fa-clipboard-list"></i> Directions</label>
                         <div class="col-12" id="directions-wrapper">
@@ -60,21 +67,21 @@
                             <a href="" role="button" id="add-dir-btn"><i class="fas fa-plus"></i> Add more steps</a>
                         </div>
                     </div>
+                    <!-- Recipe's Image Url input-->
                     <div class="col-12">
                         <label for="image-url" class="form-label"><i class="fas fa-image"></i> Recipe's Image</label>
-                        <input type="text" class="form-control" id="image-url" name="recipe-image" placeholder="Place the url here..">
+                        <input type="text" class="form-control" id="image-url" name="recipe_image" placeholder="Place the url here..">
                     </div>
                     <!-- Rendering image from url -->
                     <div class="mb-4 text-center">
                         <img class="show-image" src="{{ url_for('static', filename='images/dish-placeholder.png') }}" width="300">
                     </div>
+                    <!-- Buttons -->
                     <div class="d-flex align-items-center justify-content-center my-5">
-                        <a href="" role="button" class="btn btn-rec-primary btn-rounded btn-lg me-5">Cancel</a>
-                        <button type="submit" class="btn btn-rec-secondary btn-rounded btn-lg">Submit Recipe</button>
+                        <a href="" role="button" class="btn btn-rec-secondary btn-rounded btn-lg me-5">Cancel</a>
+                        <button type="submit" class="btn btn-rec-primary btn-rounded btn-lg"><i class="fas fa-folder-plus"></i>  Submit Recipe</button>
                     </div>
-
                 </form>
-
             </div>
         </div>
     </div>

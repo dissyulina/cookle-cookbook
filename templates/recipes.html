@@ -5,6 +5,19 @@
     <div class="w-100 background">
         <div class="overlay">
             <div class="container">
+                <!-- flash messages -->
+
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                                <h4>{{ message }}</h4>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+
                 <div class="row py-5 g-4">
                     {% for recipe in recipes %}
                         <div class="div col-6 col-md-4 col-lg-3">

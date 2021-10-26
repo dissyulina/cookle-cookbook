@@ -3,14 +3,15 @@ $(document).ready(function(){
         let radioValue = $('input[name=radio-img]:checked', '#form-register').val();
         if (radioValue === "2") {
             alert(radioValue);
-            $("#show-image").attr("src","");
+            $(".show-image").attr("src","");
             $('#profile-image').val("");
             $("#profile-url").change(function(){
                 loadImage();
             });
+
         } else if (radioValue === "3") {
             alert(radioValue);
-            $("#show-image").attr("src","");
+            $(".show-image").attr("src","");
             $('#profile-url').val("");
             $("#profile-image").change(function(){
                 readURL(this);
@@ -24,16 +25,16 @@ function readURL(input) {
         var reader = new FileReader();
         
         reader.onload = function (e) {
-            $('#show-image').attr('src', e.target.result);
+            $('.show-image').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }
 }
 
 function loadImage(){
-    var image = document.getElementById("show-image");
+    var image = document.getElementsByClassName("show-image");
     var url = document.getElementById("profile-url");
-    image.src = url.value;
+    image[0].src = url.value;
 }
 
 /* To check passwords match before submitting, addapted from: 
@@ -69,3 +70,43 @@ $(window).resize(function(){
     $('.square-image').height(divWidth);
 });
 */
+
+/* Add Recipe page */
+let ingredients = 1;
+let maxIngredients = 30;
+let directions = 1;
+let maxDirections = 30;
+
+$("#add-ing-btn").click(function (e) {
+    e.preventDefault();
+    $("#ingredients-wrapper").append(
+    `<div class="d-flex flex-row">
+        <input type="text" class="form-control flex-grow new-field" name="ingredients" placeholder="2 cloves of garlic">
+        <button class="btn btn-remove" type="button"><i class="fas fa-trash-alt"></i></button>
+    </div>`);
+    ingredients++
+});
+
+$("#add-dir-btn").click(function (e) {
+    e.preventDefault();
+    $("#directions-wrapper").append(
+    `<div class="d-flex flex-row">
+        <input type="text" class="form-control new-field" name="directions" placeholder="Mince the garlic and shallots">
+        <button class="btn btn-remove" type="button"><i class="fas fa-trash-alt"></i></button>
+    </div>`);
+    ingredients++
+});
+
+/* Delete parent div when clicking the remove button,
+ref: https://stackoverflow.com/questions/6647736/how-to-delete-parent-element-using-jquery */
+$("#ingredients-wrapper").on("click", ".btn-remove", function(e){
+    e.preventDefault();
+    $(this).parent('div').remove();
+    ingredients--;
+});
+
+$("#ingredients-wrapper").on("click", ".btn-remove", function(e){
+    e.preventDefault();
+    $(this).parent('div').remove();
+    ingredients--;
+});

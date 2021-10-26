@@ -41,17 +41,29 @@
                     </div>
                     <div class="col-12">
                         <label for="ingredients" class="form-label">Ingredients</label>
-                        <input type="text" class="form-control" id="ingredients" name="ingredients" placeholder="2 cloves of garlic">
-                        <a href="" role="button">Add more ingredients</a>
+                        <div class="col-12" id="ingredients-wrapper">
+                            <input type="text" class="form-control ingredients" name="ingredients" placeholder="2 cloves of garlic">
+                        </div>
+                        <div class="col-12">
+                            <a href="" role="button" id="add-ing-btn">Add more ingredients</a>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <label for="directions" class="form-label">Ingredients</label>
-                        <input type="text" class="form-control" id="directions" name="directions" placeholder="Mince the garlic and shallots">
-                        <a href="" role="button">Add more steps</a>
+                        <label for="directions" class="form-label">Directions</label>
+                        <div class="col-12" id="directions-wrapper">
+                            <input type="text" class="form-control directions" name="directions" placeholder="Mince the garlic and shallots">
+                        </div>
+                        <div class="col-12">
+                            <a href="" role="button" id="add-dir-btn">Add more steps</a>
+                        </div>
                     </div>
                     <div class="col-12">
                         <label for="recipe-image" class="form-label">Recipe's Image</label>
                         <input type="text" class="form-control" id="recipe-image" name="recipe-image" placeholder="Place the url here..">
+                    </div>
+                    <!-- Rendering image from url -->
+                    <div class="mb-4 text-center">
+                        <img class="show-image" src="{{ url_for('static', filename='images/dish-placeholder.png') }}" width="300">
                     </div>
                     <div class="d-flex align-items-center justify-content-center my-5">
                         <a href="" role="button" class="btn me-5">Cancel</a>

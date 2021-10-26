@@ -92,8 +92,10 @@
 }
 
 .square-image {
+    max-width: 25rem;
+    max-height: 25rem;
     overflow: hidden;
-    background-color: blue;
+    background-color: #fff;
 }
 /*
 .ingredients {

@@ -21,7 +21,7 @@
                     <!-- Recipe Name -->
                     <div class="col-12">
                         <label for="recipe_name" class="form-label"><i class="fas fa-utensils"></i> Recipe Name</label>
-                        <input type="text" class="form-control" id="recipe_name" name="recipe_name" placeholder="The Best Fried Rice">
+                        <input type="text" class="form-control" id="recipe_name" name="recipe_name" placeholder="The Best Fried Rice" required>
                     <!-- Description -->
                     </div><div class="col-12">
                         <label for="description" class="form-label"><i class="fas fa-comment"></i> Descriptions or comments about this recipe</label>
@@ -30,12 +30,12 @@
                     <!-- Serving -->
                     <div class="col-12 col-md-2">
                         <label for="serving" class="form-label"><i class="fas fa-users"></i> Serves</label>
-                        <input type="text" class="form-control" id="serving" name="serving" placeholder="2"> person
+                        <input type="text" class="form-control" id="serving" name="serving" placeholder="2" required> person
                     </div>
                     <!-- Prep & Cooking Time -->
                     <div class="col-12 col-md-4">
                         <label for="time" class="form-label"><i class="fas fa-clock"></i> Prep + Cooking Time</label>
-                        <input type="text" class="form-control" id="time" name="time" placeholder="30"> minutes
+                        <input type="text" class="form-control" id="time" name="time" placeholder="30" required> minutes
                     </div>
                     <!-- Categories selection -->
                     <div class="col-12 col-md-6">
@@ -51,7 +51,7 @@
                     <div class="col-12">
                         <label for="ingredients" class="form-label"><i class="fas fa-carrot"></i> Ingredients</label>
                         <div class="col-12" id="ingredients-wrapper">
-                            <input type="text" class="form-control ingredients" name="ingredients" placeholder="2 cloves of garlic">
+                            <input type="text" class="form-control ingredients" name="ingredients" placeholder="2 cloves of garlic" required>
                         </div>
                         <div class="col-12">
                             <a href="" role="button" id="add-ing-btn"><i class="fas fa-plus"></i> Add more ingredients</a>
@@ -61,7 +61,7 @@
                     <div class="col-12">
                         <label for="directions" class="form-label"><i class="fas fa-clipboard-list"></i> Directions</label>
                         <div class="col-12" id="directions-wrapper">
-                            <input type="text" class="form-control directions" name="directions" placeholder="Mince the garlic and shallots">
+                            <input type="text" class="form-control directions" name="directions" placeholder="Mince the garlic and shallots" required>
                         </div>
                         <div class="col-12">
                             <a href="" role="button" id="add-dir-btn"><i class="fas fa-plus"></i> Add more steps</a>

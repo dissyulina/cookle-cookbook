@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="w-100 background">
+        <div class="overlay py-5">
+            <div class="container">
+                <div class="text-center my-5">
+                    <h3>{{ recipe.recipe_name }}</h3>
+                    <p>by: {{ recipe.username }}</p>
+                </div>
+                <div class="row g-5 g-lg-0 mt-5">
+                    <div class="col-12 col-lg-4 d-flex flex-column">
+                        <div class="square-image flex-fill">
+                            <img src="{{ recipe.recipe_image }}" class="img-fluid" onerror="this.src='../../static/images/dish-placeholder.png';" alt="{{ recipe.recipe_name }}">
+                        </div>
+                        <div class="row mt-3 px-5">
+                            <div class="col-6">
+                                <p><i class="fas fa-users"></i> {{ recipe.serving }} person</p>
+                                <p><i class="fas fa-clock"></i> {{ recipe.time }} min</p>
+                            </div>
+                            <div class="col-6">
+                                <p><i class="fas fa-tag"></i> {{ recipe.category_name }}</p>
+                                <p><i class="fas fa-thumbs-up"></i> {{ recipe.total_likes }}</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-12 col-lg-8">
+                        <div class="ms-lg-5">
+                            <p>{{ recipe.description }}</p>
+                        </div>
+                        <div class="mt-5 ms-lg-5">
+                            <h4 class="mb-2">Ingredients: </h4>
+                            {% for ingredient in recipe.ingredients %}
+                                <div>
+                                    <input class="form-check-input" type="checkbox" value="" aria-label="ingredient" id="checkbox">
+                                    <label class="form-check-label d-inline">{{ ingredient }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="mt-5 ms-lg-5">
+                            <h4 class="mb-2">Directions: </h4>
+                            {% for direction in recipe.directions %}
+                                <div>
+                                    <input class="form-check-input" type="checkbox" value="" aria-label="direction">
+                                    <label class="form-check-label d-inline">{{ direction }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

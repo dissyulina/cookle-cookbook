@@ -35,11 +35,11 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="category-name" class="form-label"><i class="fas fa-tag"></i> Category</label>
-                        <select id="category-name" name="category-name" class="form-select">
-                            <option selected>Appetizer</option>
-                            <option>Main</option>
-                            <option>Dessert</option>
-                            <option>Others</option>
+                        <select id="category-name" name="category-name" class="form-select" required>
+                            <option value="" disabled selected>Choose Category</option>
+                            {% for category in categories %}
+                                <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="col-12">

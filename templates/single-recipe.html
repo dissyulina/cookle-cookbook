@@ -14,7 +14,7 @@
                     <!-- Edit and Delete buttons only available to a user's own recipe-->
                     {% if session.user|lower == recipe.username|lower %}
                         <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" role="button" class="btn btn-sm btn-rec-secondary me-2"><i class="fas fa-edit"></i> Edit</a>
-                        <a role="button" class="btn btn-sm btn-rec-secondary me-2"><i class="fas fa-trash-alt"></i> Delete</a>
+                        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" role="button" class="btn btn-sm btn-rec-secondary me-2"><i class="fas fa-trash-alt"></i> Delete</a>
                     {% endif %}
                 </div>
                 <div class="row g-5 g-lg-0 mt-5">

@@ -25,14 +25,6 @@ def get_recipes():
     return render_template("recipes.html", recipes=recipes)
 
 
-@app.route("/recipe/<recipe_id>")
-def get_single_recipe(recipe_id):
-    recipe = mongo.db.recipes.find_one(
-        {"_id": ObjectId(recipe_id)})
-
-    return render_template("single-recipe.html", recipe=recipe)
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -137,6 +129,25 @@ def add_recipe():
 
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("add-recipe.html", categories=categories)
+
+
+# -- Get data for a single recipe --
+@app.route("/recipe/<recipe_id>")
+def get_single_recipe(recipe_id):
+    recipe = mongo.db.recipes.find_one(
+        {"_id": ObjectId(recipe_id)})
+
+    return render_template("single-recipe.html", recipe=recipe)
+
+
+# -- Edit a recipe --
+@app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
+def edit_recipe(recipe_id):
+    recipe = mongo.db.recipes.find_one(
+        {"_id": ObjectId(recipe_id)})
+    
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template("edit-recipe.html", recipe=recipe, categories=categories)
 
 
 

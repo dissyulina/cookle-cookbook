@@ -18,14 +18,17 @@
                 {% endwith %}
                 
                 <h3>Manage Categories</h3>
-                <div class="row">
+                <div class="row my-5">
+                    <a href="{{ url_for('add_category') }}" role="button" class="btn btn-lg btn-primary"><i class="fas fa-plus-square"></i> Add Category</a>
+                </div>
+                <div class="row g-5">
                     {% for category in categories %}
                         <div class="col-12 col-s-6 col-md-4 col-lg-3">
                             <div class="card">
                                 <div class="card-body">
-                                <h5 class="card-title">{{ category.category_name }}</h5>
-                                    <div>
-                                        <button type="button" class="btn btn-secondary btn-sm">Edit</button>
+                                <h5 class="card-title text-center my-4">{{ category.category_name }}</h5>
+                                    <div class="mb-4 mx-3 d-flex justify-content-center">
+                                        <button type="button" class="btn btn-secondary btn-sm me-2">Edit</button>
                                         <button type="button" class="btn btn-secondary btn-sm">Delete</button>
                                     </div>
                                 </div>

@@ -1,0 +1,42 @@
+
+<!-- This page is only accessible by admin -->
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="w-100 background">
+        <div class="overlay py-5">
+            <div class="container d-flex flex-column justify-content-center align-items-center">
+                <!-- flash messages -->
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                                <h4>{{ message }}</h4>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                
+                <h3>Manage Categories</h3>
+                <div class="row">
+                    {% for category in categories %}
+                        <div class="col-12 col-s-6 col-md-4 col-lg-3">
+                            <div class="card">
+                                <div class="card-body">
+                                <h5 class="card-title">{{ category.category_name }}</h5>
+                                    <div>
+                                        <button type="button" class="btn btn-secondary btn-sm">Edit</button>
+                                        <button type="button" class="btn btn-secondary btn-sm">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

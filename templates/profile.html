@@ -10,10 +10,26 @@
                     </div>
                     <div class="col-12 col-md-8">
                         <h3>My Profile Page</h3>
-                        <p>Username : <span>{{ username }}</span></p>
+                        <p>Username : <span>{{ user.username }}</span></p>
                         <p>Email : <span>{{ user.email }}</span></p>
                         <p>About you and your love for cooking : <span>{{ user.about }}</span></p>
                         <a role="button" class="btn btn-secondary">Edit Profile</a>
+                    </div>
+                    <div class="row mt-5">
+                        <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseExample"
+                            aria-expanded="false" aria-controls="collapseExample">
+                            See all my recipes: <i class="fas fa-chevron-circle-down"></i>
+                        </button>
+                        <!-- Collapsed content -->
+                        <div class="col-12 col-lg-6">
+                            <div class="collapse mt-3" id="collapseExample">
+                                <div class="card card-body d-flex flex-row align-items-center">
+                                    <div class="flex-grow-1">Anim pariatur cliche reprehenderit</div>
+                                    <button type="button" class="btn btn-sm btn-rec-secondary me-2 d-inline-flex"><i class="fas fa-edit"></i></button>
+                                    <button type="button" class="btn btn-sm btn-rec-secondary d-inline-flex"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

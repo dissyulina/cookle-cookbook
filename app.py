@@ -18,6 +18,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
+# -- Display all recipes --
 @app.route("/")
 @app.route("/get_recipes")
 def get_recipes():
@@ -25,6 +26,7 @@ def get_recipes():
     return render_template("recipes.html", recipes=recipes)
 
 
+# -- User register/ sign up --
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -57,6 +59,7 @@ def register():
     return render_template("register.html")
 
 
+# -- User log in --
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -85,21 +88,20 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/profile/<username>", methods=["GET", "POST"])
+# -- User's profile page --
+@app.route("/profile/<username>")
 def profile(username):
-    # grab the session user's username from db
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    # user variable for user image
+    # user variable to grab user's data
     user = mongo.db.users.find_one(
         {"username": session["user"]})
 
     if session["user"]:
-        return render_template("profile.html", username=username, user=user)
+        return render_template("profile.html", user=user)
 
     return redirect(url_for("login"))
 
 
+# -- User log out --
 @app.route("/logout")
 def logout():
     # remove user from session cookie
@@ -108,6 +110,7 @@ def logout():
     return redirect(url_for("login"))
 
 
+# -- Add/create a recipe --
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     if request.method == "POST":

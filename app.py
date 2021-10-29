@@ -44,7 +44,7 @@ def register():
             "about": request.form.get("about"),
             "user_image": request.form.get("profile-url"),
             "saved_recipes": [],
-            "upload_recipes": [],
+            "uploaded_recipes": [],
             "is_admin": False
         }
         mongo.db.users.insert_one(register)
@@ -111,7 +111,7 @@ def logout():
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     if request.method == "POST":
-        recipe = {
+        submit = {
             "category_name": request.form.get("category_name"),
             "recipe_name": request.form.get("recipe_name"),
             "description": request.form.get("description"),
@@ -123,7 +123,11 @@ def add_recipe():
             "total_likes": 0,
             "username": session["user"]
         }
-        mongo.db.recipes.insert_one(recipe)
+        new_recipe_id = mongo.db.recipes.insert_one(submit).inserted_id
+        # Adds the new recipe_id to user's cookbook
+        mongo.db.recipes.find_one(new_recipe_id)
+        mongo.db.users.update_one({"username": session["user"]},
+                                 {"$push": {"uploaded_recipes": new_recipe_id}})
         flash("Recipe Successfully Added")
         return redirect(url_for("get_recipes"))
 
@@ -216,6 +220,44 @@ def delete_category(category_id):
     mongo.db.categories.remove({"_id": ObjectId(category_id)})
     flash("Category Successfully Deleted", "success")
     return redirect(url_for("get_categories"))
+
+
+# -- Save Recipe to Cookbook --
+@app.route("/save_to_cookbook/<recipe_id>", methods=["GET", "POST"])
+def save_to_cookbook(recipe_id):
+    """
+    Adds recipe to the current users' cookbook
+    Favouriting functionality inspired by:
+    https://github.com/johnnycistudent/recipe-app/blob/master/app.py
+    """
+    recipe = mongo.db.recipes.find_one(
+        {"_id": ObjectId(recipe_id)})
+
+    if session["user"] != recipe["username"]:
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+
+        saved_recipes = user["saved_recipes"]
+
+        # Checks if recipe is already in cookbook
+        if ObjectId(recipe_id) not in saved_recipes:
+            # Adds recipe_id to user's cookbook
+            mongo.db.users.update_one({"username": session["user"]},
+                                      {"$push": {"saved_recipes": ObjectId(recipe_id)}})
+            flash("Recipe added to My Favourites", "success")
+            return redirect(url_for("get_recipes",
+                                recipe_id=recipe_id))
+        else:
+            # If recipe is already in cookbook
+            flash("Already Added to favourites", "info")
+            return redirect(url_for("get_recipes",
+                                recipe_id=recipe_id))
+
+    else:
+        # if user created the recipe, they cannot save it
+        flash("This recipe is created by you!")
+        return redirect(url_for("get_recipes",
+                                recipe_id=recipe_id))
 
 
 if __name__ == "__main__":

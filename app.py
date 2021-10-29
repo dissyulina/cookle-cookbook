@@ -157,7 +157,8 @@ def edit_recipe(recipe_id):
             "username": session["user"]
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
-        flash("Recipe Successfully Edited")
+        flash("Recipe Successfully Edited", "success")
+        return redirect(url_for("get_recipes"))
 
     recipe = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})
@@ -207,6 +208,14 @@ def edit_category(category_id):
 
     category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
     return render_template("edit-category.html", category=category)
+
+
+# -- Edit Category (admin only) --
+@app.route("/delete_category/<category_id>")
+def delete_category(category_id):
+    mongo.db.categories.remove({"_id": ObjectId(category_id)})
+    flash("Category Successfully Deleted", "success")
+    return redirect(url_for("get_categories"))
 
 
 if __name__ == "__main__":

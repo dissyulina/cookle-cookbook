@@ -32,6 +32,11 @@
                                 <p><i class="fas fa-thumbs-up"></i> {{ recipe.total_likes }}</p>
                             </div>
                         </div>
+                        <div class="row d-flex flex-column">
+                            <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-rec-secondary my-2"><i class="fas fa-plus"></i> Save this recipe to your cookbook</a>
+                            <a href="{{ url_for('like_recipe', recipe_id=recipe._id) }}" class="btn btn-rec-secondary my-2"><i class="far fa-thumbs-up"></i> Like this recipe</a> 
+                            <a href="" class="btn btn-rec-secondary my-2"><i class="far fa-comment-dots"></i> Write a review</a>
+                        </div>
                         
                     </div>
                     <div class="col-12 col-lg-8">

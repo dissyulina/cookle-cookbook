@@ -47,6 +47,7 @@ def register():
             "user_image": request.form.get("profile-url"),
             "saved_recipes": [],
             "uploaded_recipes": [],
+            "liked_recipes": [],
             "is_admin": False
         }
         mongo.db.users.insert_one(register)
@@ -101,7 +102,8 @@ def profile(username):
             {"_id": {"$in": user["saved_recipes"]}})
 
         return render_template("profile.html", user=user,
-                                saved_recipes=saved_recipes, uploaded_recipes=uploaded_recipes)
+                               saved_recipes=saved_recipes,
+                               uploaded_recipes=uploaded_recipes)
 
     return redirect(url_for("login"))
 
@@ -119,7 +121,7 @@ def edit_profile(user_id):
         mongo.db.users.update({"_id": ObjectId(user_id)}, {"$set": submit})
         flash("Profile Successfully Edited", "success")
         return redirect(url_for("profile", username=session["user"]))
-        
+
     user = mongo.db.users.find_one(
         {"_id": ObjectId(user_id)})
     return render_template("edit-profile.html", user=user)
@@ -241,12 +243,40 @@ def edit_category(category_id):
     return render_template("edit-category.html", category=category)
 
 
-# -- Edit Category (admin only) --
+# -- Delete Category (admin only) --
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
     mongo.db.categories.remove({"_id": ObjectId(category_id)})
     flash("Category Successfully Deleted", "success")
     return redirect(url_for("get_categories"))
+
+
+# -- Like a recipe  --
+@app.route("/like_recipe/<recipe_id>", methods=["GET", "POST"])
+def like_recipe(recipe_id):
+    recipe = mongo.db.recipes.find_one(
+        {"_id": ObjectId(recipe_id)})
+    user = mongo.db.users.find_one(
+            {"username": session["user"]})
+    liked_recipes = user["liked_recipes"]
+
+    # Checks if recipe is already liked by the user
+    if ObjectId(recipe_id) not in liked_recipes:
+        # Like this recipe
+        mongo.db.users.update_one({"username": session["user"]},
+                                  {"$push": {"liked_recipes": ObjectId(recipe_id)}})
+        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
+                                    {"$inc": {"total_likes": 1}})
+        return redirect(url_for("get_single_recipe",
+                            recipe_id=recipe_id))
+    else:
+        # If the user already liked this recipe, unlike the recipe
+        mongo.db.users.update_one({"username": session["user"]},
+                                  {"$pull": {"liked_recipes": ObjectId(recipe_id)}})
+        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
+                                    {"$inc": {"total_likes": -1}})
+        return redirect(url_for("get_single_recipe",
+                            recipe_id=recipe_id))
 
 
 # -- Save Recipe to Cookbook --

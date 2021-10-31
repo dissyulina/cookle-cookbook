@@ -343,6 +343,27 @@ def like_recipe(recipe_id):
                                 recipe_id=recipe_id))
 
 
+# -- My Cookbook Page --
+@app.route("/cookbook/<username>")
+def get_cookbook(username):
+    if session["user"] == username:
+        # user variable to grab user's data
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+        uploaded_recipes = mongo.db.recipes.find(
+            {"_id": {"$in": user["uploaded_recipes"]}})
+        saved_recipes = mongo.db.recipes.find(
+            {"_id": {"$in": user["saved_recipes"]}})
+
+        all_recipes = list(uploaded_recipes) + list(saved_recipes)
+        return render_template("cookbook.html", user=user,
+                               all_recipes=all_recipes,
+                               saved_recipes=saved_recipes,
+                               uploaded_recipes=uploaded_recipes)
+
+    return redirect(url_for("login"))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

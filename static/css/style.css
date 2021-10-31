@@ -1,4 +1,12 @@
+body {
+    color: #3f3f3f;
+    font-family: Nunito, sans-serif;
+    font-weight: 600;
+}
 
+h3 {
+    font-weight: 800;
+}
 
 .navbar-brand > img {
     height: 100px;
@@ -104,3 +112,9 @@
     margin-right: 0.5rem;
 }
 */
+
+/* My Cookbook Page */
+.nav-pills .nav-link.active {
+    background-color: #A9C2BE;
+    color: #2b2b2b;
+}

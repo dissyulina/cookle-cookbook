@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section>
+    <div class="w-100 background">
+        <div class="overlay">
+            <div class="container">
+                <!-- flash messages -->
+
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                                <h4>{{ message }}</h4>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <h3 class="py-5 text-center">My Cookbook</h3>
+
+                <!-- Pills navs -->
+                <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="ex3-tab-1" data-mdb-toggle="pill" href="#ex3-pills-1" role="tab" aria-controls="ex3-pills-1" aria-selected="true">
+                            All Recipes
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="ex3-tab-2" data-mdb-toggle="pill" href="#ex3-pills-2" role="tab" aria-controls="ex3-pills-2" aria-selected="false">
+                            Uploaded Recipes
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="ex3-tab-3" data-mdb-toggle="pill" href="#ex3-pills-3" role="tab" aria-controls="ex3-pills-3" aria-selected="false">
+                            Saved Recipes
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Pills content -->
+                <div class="tab-content" id="ex2-content">
+                    <div class="tab-pane fade show active" id="ex3-pills-1" role="tabpanel" aria-labelledby="ex3-tab-1">
+                        <!-- Content for All Recipes -->
+                        <div class="row py-5 g-4">
+                            {% for recipe in all_recipes %}
+                                <div class="div col-6 col-md-4 col-lg-3">
+                                    <div class="card shadow-2-strong h-100">
+                                        <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
+                                            <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
+                                            <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
+                                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
+                                            <p class="card-text">
+                                                <i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}<br>
+                                                by: {{ recipe.username }}
+                                            </p>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-save-recipe btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- Content for Uploaded Recipes -->
+                    <div class="tab-pane fade" id="ex3-pills-2" role="tabpanel" aria-labelledby="ex3-tab-2">
+                        <div class="row py-5 g-4">
+                            {% for recipe in uploaded_recipes %}
+                                <div class="div col-6 col-md-4 col-lg-3">
+                                    <div class="card shadow-2-strong h-100">
+                                        <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
+                                            <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
+                                            <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
+                                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
+                                            <p class="card-text">
+                                                <i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}<br>
+                                                by: {{ recipe.username }}
+                                            </p>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-save-recipe btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- Content for Saved Recipes -->
+                    <div class="tab-pane fade" id="ex3-pills-3" role="tabpanel" aria-labelledby="ex3-tab-3">
+                        <div class="row py-5 g-4">
+                            {% for recipe in saved_recipes %}
+                                <div class="div col-6 col-md-4 col-lg-3">
+                                    <div class="card shadow-2-strong h-100">
+                                        <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
+                                            <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
+                                            <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
+                                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
+                                            <p class="card-text">
+                                                <i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}<br>
+                                                by: {{ recipe.username }}
+                                            </p>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-save-recipe btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+
+                
+            </div>
+        </div>
+    </div>
+    
+</section>
+
+{% endblock %}

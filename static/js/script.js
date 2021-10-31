@@ -106,3 +106,4 @@ $("#directions-wrapper").on("click", ".btn-remove", function(e){
 $("#image-url").change(function(){
     loadImage();
 });
+

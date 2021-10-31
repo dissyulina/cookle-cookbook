@@ -169,8 +169,31 @@ def add_recipe():
 def get_single_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})
+    user = mongo.db.users.find_one(
+            {"username": session["user"]})
+    saved_recipes = user["saved_recipes"]
+    liked_recipes = user["liked_recipes"]
+    
+    # If the user logged in
+    if session["user"]:
+        # If the recipe is listed in user's cookbook
+        if ObjectId(recipe_id) in saved_recipes:
+            saved_recipe = True
+        else:
+            saved_recipe = False
+        # If the recipe is liked by the user
+        if ObjectId(recipe_id) in liked_recipes:
+            liked_recipe = True
+        else:
+            liked_recipe = False
 
-    return render_template("single-recipe.html", recipe=recipe)
+    else:
+        saved_recipe = False
+        liked_recipe = False
+
+    return render_template("single-recipe.html", recipe=recipe,
+                           user=user, saved_recipe=saved_recipe,
+                           liked_recipe=liked_recipe)
 
 
 # -- Edit a recipe --
@@ -251,34 +274,6 @@ def delete_category(category_id):
     return redirect(url_for("get_categories"))
 
 
-# -- Like a recipe  --
-@app.route("/like_recipe/<recipe_id>", methods=["GET", "POST"])
-def like_recipe(recipe_id):
-    recipe = mongo.db.recipes.find_one(
-        {"_id": ObjectId(recipe_id)})
-    user = mongo.db.users.find_one(
-            {"username": session["user"]})
-    liked_recipes = user["liked_recipes"]
-
-    # Checks if recipe is already liked by the user
-    if ObjectId(recipe_id) not in liked_recipes:
-        # Like this recipe
-        mongo.db.users.update_one({"username": session["user"]},
-                                  {"$push": {"liked_recipes": ObjectId(recipe_id)}})
-        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
-                                    {"$inc": {"total_likes": 1}})
-        return redirect(url_for("get_single_recipe",
-                            recipe_id=recipe_id))
-    else:
-        # If the user already liked this recipe, unlike the recipe
-        mongo.db.users.update_one({"username": session["user"]},
-                                  {"$pull": {"liked_recipes": ObjectId(recipe_id)}})
-        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
-                                    {"$inc": {"total_likes": -1}})
-        return redirect(url_for("get_single_recipe",
-                            recipe_id=recipe_id))
-
-
 # -- Save Recipe to Cookbook --
 @app.route("/save_to_cookbook/<recipe_id>", methods=["GET", "POST"])
 def save_to_cookbook(recipe_id):
@@ -301,19 +296,50 @@ def save_to_cookbook(recipe_id):
             # Adds recipe_id to user's cookbook
             mongo.db.users.update_one({"username": session["user"]},
                                       {"$push": {"saved_recipes": ObjectId(recipe_id)}})
-            flash("Recipe added to My Favourites", "success")
-            return redirect(url_for("get_recipes",
+            flash("Recipe added to My Cookbook", "success")
+            return redirect(url_for("get_single_recipe",
                                 recipe_id=recipe_id))
+
         else:
-            # If recipe is already in cookbook
-            flash("Already Added to favourites", "info")
-            return redirect(url_for("get_recipes",
+            # If recipe is already in cookbook, remove it from the cookbook
+            mongo.db.users.update_one({"username": session["user"]},
+                                      {"$pull": {"saved_recipes": ObjectId(recipe_id)}})
+            flash("Recipe Removed from My Cookbook", "info")
+            return redirect(url_for("get_single_recipe",
                                 recipe_id=recipe_id))
 
     else:
         # if user created the recipe, they cannot save it
         flash("This recipe is created by you!")
-        return redirect(url_for("get_recipes",
+        return redirect(url_for("get_single_recipe",
+                                recipe_id=recipe_id))
+
+
+# -- Like a recipe  --
+@app.route("/like_recipe/<recipe_id>")
+def like_recipe(recipe_id):
+    user = mongo.db.users.find_one(
+            {"username": session["user"]})
+    liked_recipes = user["liked_recipes"]
+
+    # Checks if recipe is already liked by the user
+    if ObjectId(recipe_id) not in liked_recipes:
+        # Like this recipe
+        mongo.db.users.update_one({"username": session["user"]},
+                                  {"$push": {"liked_recipes":
+                                             ObjectId(recipe_id)}})
+        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
+                                    {"$inc": {"total_likes": 1}})
+        return redirect(url_for("get_single_recipe",
+                                recipe_id=recipe_id))
+    else:
+        # If the user already liked this recipe, unlike the recipe
+        mongo.db.users.update_one({"username": session["user"]},
+                                  {"$pull": {"liked_recipes":
+                                             ObjectId(recipe_id)}})
+        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
+                                    {"$inc": {"total_likes": -1}})
+        return redirect(url_for("get_single_recipe",
                                 recipe_id=recipe_id))
 
 

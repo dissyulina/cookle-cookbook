@@ -91,12 +91,17 @@ def login():
 # -- User's profile page --
 @app.route("/profile/<username>")
 def profile(username):
-    # user variable to grab user's data
-    user = mongo.db.users.find_one(
-        {"username": session["user"]})
+    if session["user"] == username:
+        # user variable to grab user's data
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+        uploaded_recipes = mongo.db.recipes.find(
+            {"_id": {"$in": user["uploaded_recipes"]}})
+        saved_recipes = mongo.db.recipes.find(
+            {"_id": {"$in": user["saved_recipes"]}})
 
-    if session["user"]:
-        return render_template("profile.html", user=user)
+        return render_template("profile.html", user=user,
+                                saved_recipes=saved_recipes, uploaded_recipes=uploaded_recipes)
 
     return redirect(url_for("login"))
 
@@ -146,7 +151,7 @@ def add_recipe():
             "username": session["user"]
         }
         new_recipe_id = mongo.db.recipes.insert_one(submit).inserted_id
-        # Adds the new recipe_id to user's cookbook
+        # Adds the new recipe_id to user's cookbook (ref: https://docs.mongodb.com/manual/reference/operator/update/push/)
         mongo.db.recipes.find_one(new_recipe_id)
         mongo.db.users.update_one({"username": session["user"]},
                                  {"$push": {"uploaded_recipes": new_recipe_id}})

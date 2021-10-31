@@ -4,8 +4,8 @@
     <div class="w-100 background">
         <div class="overlay py-5">
             <div class="container">
-                 <!-- flash messages -->
 
+                 <!-- flash messages -->
                  {% with messages = get_flashed_messages(with_categories=True) %}
                     {% if messages %}
                         {% for category, message in messages %}
@@ -16,9 +16,10 @@
                     {% endif %}
                 {% endwith %}
 
+                <!-- Profile -->
                 <div class="row">
                     <div class="col-12 col-md-4 square-image">
-                        <img src="{{ user.user_image }}" class="img-fluid" onerror="this.src='../../static/images/user.png';" alt="{{ username }}'s profile picture">
+                        <img src="{{ user.user_image }}" class="img-fluid" onerror="this.src='../../static/images/user.png';" alt="{{ user.username }}'s profile picture">
                     </div>
                     <div class="col-12 col-md-8">
                         <h3>My Profile Page</h3>
@@ -27,21 +28,45 @@
                         <p>About you and your love for cooking : <span>{{ user.about }}</span></p>
                         <a role="button" class="btn btn-secondary" href="{{ url_for('edit_profile', user_id=user._id) }}">Edit Profile</a>
                     </div>
+
+                    <!-- See All My Recipes -->
                     <div class="row mt-5">
-                        <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseExample"
-                            aria-expanded="false" aria-controls="collapseExample">
-                            See all my recipes: <i class="fas fa-chevron-circle-down"></i>
+                        <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseUploadedRecipes"
+                            aria-expanded="false" aria-controls="collapseUploadedRecipes">
+                            See all my uploaded recipes: <i class="fas fa-chevron-circle-down"></i>
                         </button>
                         <!-- Collapsed content -->
-                        <div class="col-12 col-lg-6">
-                            <div class="collapse mt-3" id="collapseExample">
-                                <div class="card card-body d-flex flex-row align-items-center">
-                                    <div class="flex-grow-1">Anim pariatur cliche reprehenderit</div>
-                                    <button type="button" class="btn btn-sm btn-rec-secondary me-2 d-inline-flex"><i class="fas fa-edit"></i></button>
-                                    <button type="button" class="btn btn-sm btn-rec-secondary d-inline-flex"><i class="fas fa-trash-alt"></i></button>
+                        {% for recipe in uploaded_recipes %}
+                            <div class="col-12 col-lg-6">
+                                <div class="collapse mt-3" id="collapseUploadedRecipes">
+                                    <div class="card card-body d-flex flex-row align-items-center">
+                                        <div class="flex-grow-1">{{ recipe.recipe_name }}</div>
+                                        <button type="button" class="btn btn-sm btn-rec-secondary me-2 d-inline-flex"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-sm btn-rec-secondary d-inline-flex"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- See All Saved Recipes -->
+                    <div class="row mt-5">
+                        <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseSavedRecipes"
+                            aria-expanded="false" aria-controls="collapseSavedRecipes">
+                            See all my saved recipes: <i class="fas fa-chevron-circle-down"></i>
+                        </button>
+                        <!-- Collapsed content -->
+                        {% for recipe in saved_recipes %}
+                            <div class="col-12 col-lg-6">
+                                <div class="collapse mt-3" id="collapseSavedRecipes">
+                                    <div class="card card-body d-flex flex-row align-items-center">
+                                        <div class="flex-grow-1">{{ recipe.recipe_name }}</div>
+                                        <button type="button" class="btn btn-sm btn-rec-secondary me-2 d-inline-flex"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-sm btn-rec-secondary d-inline-flex"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

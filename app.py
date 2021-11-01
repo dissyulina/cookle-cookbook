@@ -169,13 +169,13 @@ def add_recipe():
 def get_single_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})
-    user = mongo.db.users.find_one(
-            {"username": session["user"]})
-    saved_recipes = user["saved_recipes"]
-    liked_recipes = user["liked_recipes"]
     
     # If the user logged in
-    if session["user"]:
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+        saved_recipes = user["saved_recipes"]
+        liked_recipes = user["liked_recipes"]
         # If the recipe is listed in user's cookbook
         if ObjectId(recipe_id) in saved_recipes:
             saved_recipe = True
@@ -186,14 +186,16 @@ def get_single_recipe(recipe_id):
             liked_recipe = True
         else:
             liked_recipe = False
+        
+        return render_template("single-recipe.html", recipe=recipe,
+                           user=user, saved_recipe=saved_recipe,
+                           liked_recipe=liked_recipe)
 
     else:
         saved_recipe = False
         liked_recipe = False
-
-    return render_template("single-recipe.html", recipe=recipe,
-                           user=user, saved_recipe=saved_recipe,
-                           liked_recipe=liked_recipe)
+        
+    return render_template("single-recipe.html", recipe=recipe)
 
 
 # -- Edit a recipe --

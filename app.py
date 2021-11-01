@@ -23,7 +23,12 @@ mongo = PyMongo(app)
 @app.route("/get_recipes")
 def get_recipes():
     recipes = mongo.db.recipes.find()
-    return render_template("recipes.html", recipes=recipes)
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+        return render_template("recipes.html", recipes=recipes, user=user)
+    else:
+        return render_template("recipes.html", recipes=recipes)
 
 
 # -- User register/ sign up --
@@ -139,29 +144,35 @@ def logout():
 # -- Add/create a recipe --
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
-    if request.method == "POST":
-        submit = {
-            "category_name": request.form.get("category_name"),
-            "recipe_name": request.form.get("recipe_name"),
-            "description": request.form.get("description"),
-            "ingredients": request.form.getlist("ingredients"),
-            "directions": request.form.getlist("directions"),
-            "recipe_image": request.form.get("recipe_image"),
-            "serving": request.form.get("serving"),
-            "time": request.form.get("time"),
-            "total_likes": 0,
-            "username": session["user"]
-        }
-        new_recipe_id = mongo.db.recipes.insert_one(submit).inserted_id
-        # Adds the new recipe_id to user's cookbook (ref: https://docs.mongodb.com/manual/reference/operator/update/push/)
-        mongo.db.recipes.find_one(new_recipe_id)
-        mongo.db.users.update_one({"username": session["user"]},
-                                 {"$push": {"uploaded_recipes": new_recipe_id}})
-        flash("Recipe Successfully Added")
-        return redirect(url_for("get_recipes"))
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+    if "user" in session:
+        if request.method == "POST":
+            submit = {
+                "category_name": request.form.get("category_name"),
+                "recipe_name": request.form.get("recipe_name"),
+                "description": request.form.get("description"),
+                "ingredients": request.form.getlist("ingredients"),
+                "directions": request.form.getlist("directions"),
+                "recipe_image": request.form.get("recipe_image"),
+                "serving": request.form.get("serving"),
+                "time": request.form.get("time"),
+                "total_likes": 0,
+                "username": session["user"]
+            }
+            new_recipe_id = mongo.db.recipes.insert_one(submit).inserted_id
+            # Adds the new recipe_id to user's cookbook (ref: https://docs.mongodb.com/manual/reference/operator/update/push/)
+            mongo.db.recipes.find_one(new_recipe_id)
+            mongo.db.users.update_one({"username": session["user"]},
+                                    {"$push": {"uploaded_recipes": new_recipe_id}})
+            flash("Recipe Successfully Added")
+            return redirect(url_for("get_recipes"))
 
-    categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("add-recipe.html", categories=categories)
+        categories = mongo.db.categories.find().sort("category_name", 1)
+        return render_template("add-recipe.html", categories=categories, user=user)
+    else:
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+        return redirect(url_for("login"))
 
 
 # -- Get data for a single recipe --

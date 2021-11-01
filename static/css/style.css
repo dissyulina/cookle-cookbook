@@ -54,6 +54,10 @@ h2, h3 {
     padding: 5px;
 }
 
+.form-outline .form-control {
+    background-color: #fff;
+}
+
 /* Recipe page */
 .card, 
 .card .card-image,

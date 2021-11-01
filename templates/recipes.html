@@ -6,7 +6,6 @@
         <div class="overlay">
             <div class="container">
                 <!-- flash messages -->
-
                 {% with messages = get_flashed_messages(with_categories=True) %}
                     {% if messages %}
                         {% for category, message in messages %}
@@ -17,31 +16,52 @@
                     {% endif %}
                 {% endwith %}
 
-
-                <div class="row py-5 g-4">
-                    {% for recipe in recipes %}
-                        <div class="div col-6 col-md-4 col-lg-3">
-                            <div class="card shadow-2-strong h-100">
-                                <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
-                                    <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
-                                    <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
-                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                                    </a>
+                <div class="row py-5 d-flex justify-content-center text-center">
+                    <div class="col-md-6">
+                        <h2>Search Recipes</h2>
+                        <form action="{{ url_for('search') }}" method="POST">
+                            <div class="w-100 d-flex py-3">
+                                <div class="form-outline flex-grow-1">
+                                    <input type="text" id="query" name="query" class="form-control" required>
+                                    <label class="form-label" for="query">Search recipes...</label>
                                 </div>
-                                <div class="card-body">
-                                    <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
-                                    <p class="card-text">
-                                        <i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}<br>
-                                        by: {{ recipe.username }}
-                                    </p>
-                                    <div class="d-flex justify-content-end">
-                                        <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-save-recipe btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+                                <button type="submit" class="btn btn-rec-primary">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <a href="{{ url_for('get_recipes') }}" class="btn btn-rec-secondary btn-rounded">Reset</a>
+                        </form>
+                    </div>
+                </div>
+
+                {% if recipes|length > 0 %}
+                    <div class="row py-5 g-4">
+                        {% for recipe in recipes %}
+                            <div class="div col-6 col-md-4 col-lg-3">
+                                <div class="card shadow-2-strong h-100">
+                                    <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
+                                        <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
+                                        <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
+                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
+                                        <p class="card-text">
+                                            <i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}<br>
+                                            by: {{ recipe.username }}
+                                        </p>
+                                        <div class="d-flex justify-content-end">
+                                            <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-save-recipe btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <h4>No results found</h4>
+                {% endif %}
             </div>
         </div>
     </div>

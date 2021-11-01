@@ -58,6 +58,20 @@ h2, h3 {
     background-color: #fff;
 }
 
+.background {
+    background: url(../images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.hero-img {
+    background: url(../images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80vh;
+}
+
 /* Recipe page */
 .card, 
 .card .card-image,
@@ -84,13 +98,6 @@ h2, h3 {
 
 .btn-save-recipe i {
     color: #fff;
-}
-
-.background {
-    background: url(../images/background.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
 }
 
 .overlay {

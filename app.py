@@ -21,14 +21,22 @@ mongo = PyMongo(app)
 # -- Home Page --
 @app.route("/home", methods=["GET", "POST"])
 def home():
-    return render_template("index.html")
+    popular_recipes = mongo.db.recipes.find().sort("total_likes", -1).limit(5)
+
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+        return render_template("index.html", popular_recipes=popular_recipes, user=user)
+    
+    else:
+        return render_template("index.html", popular_recipes=popular_recipes)
 
 
 # -- Display all recipes --
 @app.route("/")
 @app.route("/get_recipes")
 def get_recipes():
-    recipes = list(mongo.db.recipes.find())
+    recipes = list(mongo.db.recipes.find().sort("recipe_name", 1))
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})

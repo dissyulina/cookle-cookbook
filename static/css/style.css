@@ -66,10 +66,13 @@ h2, h3 {
 }
 
 .hero-img {
-    background: url(../images/background.png);
+    background: url(../images/hero.png);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    width: 100vw;
     height: 80vh;
+
 }
 
 /* Recipe page */

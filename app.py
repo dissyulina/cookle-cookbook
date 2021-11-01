@@ -356,8 +356,11 @@ def get_cookbook(username):
             {"_id": {"$in": user["uploaded_recipes"]}})
         saved_recipes = mongo.db.recipes.find(
             {"_id": {"$in": user["saved_recipes"]}})
+        # reference to find from 2 lists: https://stackoverflow.com/questions/47075081/concatenate-pymongo-cursor
+        all_recipes = mongo.db.recipes.find(
+            {'$or': [{"_id": {"$in": user["uploaded_recipes"]}},
+                     {"_id": {"$in": user["saved_recipes"]}}]})
 
-        all_recipes = list(uploaded_recipes) + list(saved_recipes)
         return render_template("cookbook.html", user=user,
                                all_recipes=all_recipes,
                                saved_recipes=saved_recipes,

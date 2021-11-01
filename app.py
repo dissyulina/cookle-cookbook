@@ -279,70 +279,76 @@ def delete_category(category_id):
 # -- Save Recipe to Cookbook --
 @app.route("/save_to_cookbook/<recipe_id>", methods=["GET", "POST"])
 def save_to_cookbook(recipe_id):
-    """
-    Adds recipe to the current users' cookbook
-    Favouriting functionality inspired by:
-    https://github.com/johnnycistudent/recipe-app/blob/master/app.py
-    """
     recipe = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})
+    if "user" in session:
+        if session["user"] != recipe["username"]:
+            user = mongo.db.users.find_one(
+                {"username": session["user"]})
 
-    if session["user"] != recipe["username"]:
-        user = mongo.db.users.find_one(
-            {"username": session["user"]})
+            saved_recipes = user["saved_recipes"]
 
-        saved_recipes = user["saved_recipes"]
+            # Checks if recipe is already in cookbook
+            if ObjectId(recipe_id) not in saved_recipes:
+                # Adds recipe_id to user's cookbook
+                mongo.db.users.update_one({"username": session["user"]},
+                                        {"$push": {"saved_recipes": ObjectId(recipe_id)}})
+                flash("Recipe added to My Cookbook", "success")
+                return redirect(url_for("get_single_recipe",
+                                    recipe_id=recipe_id))
 
-        # Checks if recipe is already in cookbook
-        if ObjectId(recipe_id) not in saved_recipes:
-            # Adds recipe_id to user's cookbook
-            mongo.db.users.update_one({"username": session["user"]},
-                                      {"$push": {"saved_recipes": ObjectId(recipe_id)}})
-            flash("Recipe added to My Cookbook", "success")
-            return redirect(url_for("get_single_recipe",
-                                recipe_id=recipe_id))
+            else:
+                # If recipe is already in cookbook, remove it from the cookbook
+                mongo.db.users.update_one({"username": session["user"]},
+                                        {"$pull": {"saved_recipes": ObjectId(recipe_id)}})
+                flash("Recipe Removed from My Cookbook", "info")
+                return redirect(url_for("get_single_recipe",
+                                    recipe_id=recipe_id))
 
         else:
-            # If recipe is already in cookbook, remove it from the cookbook
-            mongo.db.users.update_one({"username": session["user"]},
-                                      {"$pull": {"saved_recipes": ObjectId(recipe_id)}})
-            flash("Recipe Removed from My Cookbook", "info")
+            # if user created the recipe, they cannot save it
+            flash("This recipe is created by you!")
             return redirect(url_for("get_single_recipe",
-                                recipe_id=recipe_id))
+                                    recipe_id=recipe_id))
 
     else:
-        # if user created the recipe, they cannot save it
-        flash("This recipe is created by you!")
-        return redirect(url_for("get_single_recipe",
-                                recipe_id=recipe_id))
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+
+    return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
 
 
 # -- Like a recipe  --
 @app.route("/like_recipe/<recipe_id>")
 def like_recipe(recipe_id):
-    user = mongo.db.users.find_one(
-            {"username": session["user"]})
-    liked_recipes = user["liked_recipes"]
+    if "user" in session:
+        user = mongo.db.users.find_one(
+                {"username": session["user"]})
+        liked_recipes = user["liked_recipes"]
 
-    # Checks if recipe is already liked by the user
-    if ObjectId(recipe_id) not in liked_recipes:
-        # Like this recipe
-        mongo.db.users.update_one({"username": session["user"]},
-                                  {"$push": {"liked_recipes":
-                                             ObjectId(recipe_id)}})
-        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
-                                    {"$inc": {"total_likes": 1}})
-        return redirect(url_for("get_single_recipe",
-                                recipe_id=recipe_id))
+        # Checks if recipe is already liked by the user
+        if ObjectId(recipe_id) not in liked_recipes:
+            # Like this recipe
+            mongo.db.users.update_one({"username": session["user"]},
+                                    {"$push": {"liked_recipes":
+                                                ObjectId(recipe_id)}})
+            mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
+                                        {"$inc": {"total_likes": 1}})
+            return redirect(url_for("get_single_recipe",
+                                    recipe_id=recipe_id))
+        else:
+            # If the user already liked this recipe, unlike the recipe
+            mongo.db.users.update_one({"username": session["user"]},
+                                    {"$pull": {"liked_recipes":
+                                                ObjectId(recipe_id)}})
+            mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
+                                        {"$inc": {"total_likes": -1}})
+            return redirect(url_for("get_single_recipe",
+                                    recipe_id=recipe_id))
     else:
-        # If the user already liked this recipe, unlike the recipe
-        mongo.db.users.update_one({"username": session["user"]},
-                                  {"$pull": {"liked_recipes":
-                                             ObjectId(recipe_id)}})
-        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
-                                    {"$inc": {"total_likes": -1}})
-        return redirect(url_for("get_single_recipe",
-                                recipe_id=recipe_id))
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+    
+    return redirect(url_for("get_single_recipe",
+                            recipe_id=recipe_id))
 
 
 # -- My Cookbook Page --

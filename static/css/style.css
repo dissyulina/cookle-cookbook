@@ -71,6 +71,7 @@ h2, h3 {
     min-height: 100vh;
 }
 
+/* Home Page */
 .hero-img {
     background: url(../images/hero.png);
     background-repeat: no-repeat;
@@ -80,6 +81,11 @@ h2, h3 {
     height: 80vh;
 
 }
+.bg-green {
+    background-color: #1e4641;
+    color: #fff;
+}
+
 
 /* Recipe page */
 .card-title {

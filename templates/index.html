@@ -4,7 +4,7 @@
 <header class="pb-5">
     <div class="w-100 hero-img d-flex justify-content-center align-items-center">
         <div class="container text-center">
-            <h1 class="logo-text ">Cookle</h1>
+            <h1 class="logo-text">Cookle</h1>
             <h4>Add, share, and save your favorite recipes online!</h2>
             <div class="row py-3 d-flex justify-content-center">
                 <div class="col-md-6">
@@ -72,7 +72,7 @@
 
 <!-- Recent Recipes Section   -->
 <!-- Code for carousel was sourced and modified from: https://www.codeply.com/p/0CWffz76Q9 -->
-<section class="container text-center my-5">
+<section class="container text-center py-5">
     <h4 class="font-weight-light pb-5">See our newest recipes!</h4>
     <div class="row mx-auto my-auto justify-content-center">
         <div id="recentRecipesCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -114,5 +114,34 @@
     </div>
 </section>
 
+<section class="my-5">
+    <div class="container bg-green">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <img src="{{ url_for('static', filename='images/tablet.jpg') }}" alt="A Tablet on the table" class="img-fluid">
+            </div>
+            <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
+                <div class="container my-5">
+                    <h3 class="pt-3 mb-3">Create your own online cookbook from your favorite recipes!</h3>
+                    <p><i class="fas fa-check"></i> Create your account</p>
+                    <p><i class="fas fa-check"></i> See any recipes you like? Add it to your cookbook.</p>
+                    <p><i class="fas fa-check"></i> Upload and share your own recipe so everyone can try it as well!</p>
+                    <div class="pt-3 pb-5">
+                        <a role="button" class="btn btn-secondary me-2" href="{{ url_for('register') }}">
+                            Sign Up
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container text-center">
+        <h3>We are <span class="logo-text">Cookle</span></h3>
+        <p>We are a recipe-sharing community, where all recipes come from homecooks all over the world. Would you like to invite your friends and family to share their recipes as well? Provide the email address, and we’ll send them an invitation email to sign up to Cookle</p>
+    </div>
+</section>
 
 {% endblock %}

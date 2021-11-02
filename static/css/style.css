@@ -86,7 +86,17 @@ h2, h3 {
     color: #fff;
 }
 
+.bg-green img {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: cover;
+}
 
+
+.bg-light-gray {
+    background-color: #F9F9F9;
+}
 /* Recipe page */
 .card-title {
     font-size: 1rem;

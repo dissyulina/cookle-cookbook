@@ -27,14 +27,14 @@
 </header>
 
 <!-- Popular Recipes Section   -->
-<!-- Making Carousel, ref: https://www.codeply.com/p/0CWffz76Q9 -->
+<!-- Code for carousel was sourced and modified from: https://www.codeply.com/p/0CWffz76Q9 -->
 <section class="container text-center my-5">
     <h4 class="font-weight-light pb-5">Check out our popular recipes!</h4>
     <div class="row mx-auto my-auto justify-content-center">
-        <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div id="popularRecipesCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner p-3" role="listbox">
                 {% for recipe in popular_recipes %}
-                    <div class="carousel-item">
+                    <div class="carousel-item popular-item">
                         <div class="col-6 col-md-4 col-lg-3 me-2">
                             <div class="card shadow-2-strong h-100">
                                 <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
@@ -60,14 +60,59 @@
                 {% endfor %}
             </div>
             <!-- Button Prev & Next Slide -->
-            <a class="carousel-control-prev bg-transparent w-aut" role="button" data-mdb-slide="prev" data-mdb-target="#recipeCarousel">
+            <a class="carousel-control-prev bg-transparent w-aut" role="button" data-mdb-slide="prev" data-mdb-target="#popularRecipesCarousel">
                 <span class="carousel-control-prev-icon"></span>
             </a>
-            <a class="carousel-control-next bg-transparent w-aut" role="button" data-mdb-slide="next" data-mdb-target="#recipeCarousel">
+            <a class="carousel-control-next bg-transparent w-aut" role="button" data-mdb-slide="next" data-mdb-target="#popularRecipesCarousel">
                 <span class="carousel-control-next-icon"></span>
             </a>
         </div>
     </div>
 </section>
+
+<!-- Recent Recipes Section   -->
+<!-- Code for carousel was sourced and modified from: https://www.codeply.com/p/0CWffz76Q9 -->
+<section class="container text-center my-5">
+    <h4 class="font-weight-light pb-5">See our newest recipes!</h4>
+    <div class="row mx-auto my-auto justify-content-center">
+        <div id="recentRecipesCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner p-3" role="listbox">
+                {% for recipe in recent_recipes %}
+                    <div class="carousel-item recent-item">
+                        <div class="col-6 col-md-4 col-lg-3 me-2">
+                            <div class="card shadow-2-strong h-100">
+                                <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
+                                    <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
+                                    <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
+                                    <div class="row">
+                                        <div class="card-text col-6">
+                                            <p><i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}</p>
+                                        </div>
+                                        <div class="d-flex justify-content-end col-6">
+                                            <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-save-recipe btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- Button Prev & Next Slide -->
+            <a class="carousel-control-prev bg-transparent w-aut" role="button" data-mdb-slide="prev" data-mdb-target="#recentRecipesCarousel">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next bg-transparent w-aut" role="button" data-mdb-slide="next" data-mdb-target="#recentRecipesCarousel">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </div>
+</section>
+
 
 {% endblock %}

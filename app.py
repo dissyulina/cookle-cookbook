@@ -19,21 +19,23 @@ mongo = PyMongo(app)
 
 
 # -- Home Page --
+@app.route("/")
 @app.route("/home", methods=["GET", "POST"])
 def home():
     popular_recipes = mongo.db.recipes.find().sort("total_likes", -1).limit(5)
-
+    recent_recipes = mongo.db.recipes.find().sort("_id", -1).limit(5)
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
-        return render_template("index.html", popular_recipes=popular_recipes, user=user)
+        return render_template("index.html", popular_recipes=popular_recipes,
+                               recent_recipes=recent_recipes, user=user)
     
     else:
-        return render_template("index.html", popular_recipes=popular_recipes)
+        return render_template("index.html", popular_recipes=popular_recipes,
+                               recent_recipes=recent_recipes)
 
 
 # -- Display all recipes --
-@app.route("/")
 @app.route("/get_recipes")
 def get_recipes():
     recipes = list(mongo.db.recipes.find().sort("recipe_name", 1))
@@ -192,7 +194,7 @@ def add_recipe():
             mongo.db.recipes.find_one(new_recipe_id)
             mongo.db.users.update_one({"username": session["user"]},
                                     {"$push": {"uploaded_recipes": new_recipe_id}})
-            flash("Recipe Successfully Added")
+            flash("Recipe Successfully Added", "success")
             return redirect(url_for("get_recipes"))
 
         categories = mongo.db.categories.find().sort("category_name", 1)

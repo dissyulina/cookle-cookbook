@@ -123,5 +123,5 @@ items.forEach((el) => {
         next = next.nextElementSibling
     }
 })
-
-$(".carousel-item").first().addClass("active");
+$(".popular-item").first().addClass("active");
+$(".recent-item").first().addClass("active");

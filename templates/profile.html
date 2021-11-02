@@ -28,47 +28,61 @@
                         <p>About you and your love for cooking : <span>{{ user.about }}</span></p>
                         <a role="button" class="btn btn-secondary" href="{{ url_for('edit_profile', user_id=user._id) }}">Edit Profile</a>
                     </div>
+                </div>
 
-                    <!-- See All My Recipes -->
-                    <div class="row mt-5">
-                        <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseUploadedRecipes"
-                            aria-expanded="false" aria-controls="collapseUploadedRecipes">
-                            See all my uploaded recipes: <i class="fas fa-chevron-circle-down"></i>
-                        </button>
-                        <!-- Collapsed content -->
-                        {% for recipe in uploaded_recipes %}
-                            <div class="col-12 col-lg-6">
-                                <div class="collapse mt-3" id="collapseUploadedRecipes">
-                                    <div class="card card-body d-flex flex-row align-items-center">
-                                        <div class="flex-grow-1">{{ recipe.recipe_name }}</div>
-                                        <a class="btn btn-sm btn-rec-secondary me-2 d-inline-flex" role="button"><i class="fas fa-edit"></i></a>
-                                        <a class="btn btn-sm btn-rec-secondary d-inline-flex" role="button"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
+                <!-- Buttons -->
+                <div class="row text-center pt-5">
+                    <div class="col-6 col-sm-4 py-3">
+                        <a href="{{ url_for('add_recipe') }}" role="button" class="btn btn-rec-primary btn-lg">Create Recipe</a>
                     </div>
-
-                    <!-- See All Saved Recipes -->
-                    <div class="row mt-5">
-                        <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseSavedRecipes"
-                            aria-expanded="false" aria-controls="collapseSavedRecipes">
-                            See all my saved recipes: <i class="fas fa-chevron-circle-down"></i>
-                        </button>
-                        <!-- Collapsed content -->
-                        {% for recipe in saved_recipes %}
-                            <div class="col-12 col-lg-6">
-                                <div class="collapse mt-3" id="collapseSavedRecipes">
-                                    <div class="card card-body d-flex flex-row align-items-center">
-                                        <div class="flex-grow-1">{{ recipe.recipe_name }}</div>
-                                        <button type="button" class="btn btn-sm btn-rec-secondary me-2 d-inline-flex"><i class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn btn-sm btn-rec-secondary d-inline-flex"><i class="fas fa-trash-alt"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
+                    <div class="col-6 col-sm-4 py-3">
+                        <a href="{{ url_for('get_recipes') }}" role="button" class="btn btn-rec-primary btn-lg">Explore Recipe</a>
+                    </div>
+                    <div class="col-12 col-sm-4 py-3">
+                        <a href="{{ url_for('get_cookbook', username=session['user']) }}" role="button" class="btn btn-rec-primary btn-lg">My Cookbook</a>
                     </div>
                 </div>
+
+                <!-- See All My Recipes -->
+                <div class="row mt-5">
+                    <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseUploadedRecipes"
+                        aria-expanded="false" aria-controls="collapseUploadedRecipes">
+                        See all my uploaded recipes: <i class="fas fa-chevron-circle-down"></i>
+                    </button>
+                    <!-- Collapsed content -->
+                    {% for recipe in uploaded_recipes %}
+                        <div class="col-12 col-lg-6">
+                            <div class="collapse mt-3" id="collapseUploadedRecipes">
+                                <div class="card card-body d-flex flex-row align-items-center">
+                                    <div class="flex-grow-1">{{ recipe.recipe_name }}</div>
+                                    <a class="btn btn-sm btn-rec-secondary me-2 d-inline-flex" role="button"><i class="fas fa-edit"></i></a>
+                                    <a class="btn btn-sm btn-rec-secondary d-inline-flex" role="button"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- See All Saved Recipes -->
+                <div class="row mt-5">
+                    <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseSavedRecipes"
+                        aria-expanded="false" aria-controls="collapseSavedRecipes">
+                        See all my saved recipes: <i class="fas fa-chevron-circle-down"></i>
+                    </button>
+                    <!-- Collapsed content -->
+                    {% for recipe in saved_recipes %}
+                        <div class="col-12 col-lg-6">
+                            <div class="collapse mt-3" id="collapseSavedRecipes">
+                                <div class="card card-body d-flex flex-row align-items-center">
+                                    <div class="flex-grow-1">{{ recipe.recipe_name }}</div>
+                                    <button type="button" class="btn btn-sm btn-rec-secondary me-2 d-inline-flex"><i class="fas fa-edit"></i></button>
+                                    <button type="button" class="btn btn-sm btn-rec-secondary d-inline-flex"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                
             </div>
         </div>
     </div>

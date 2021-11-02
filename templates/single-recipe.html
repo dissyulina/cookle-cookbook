@@ -43,7 +43,7 @@
                                 <p><i class="fas fa-thumbs-up"></i> {{ recipe.total_likes }}</p>
                             </div>
                         </div>
-                        <div class="row d-flex flex-column">
+                        <div class="row d-flex flex-column px-5 btn-action-recipe">
                             <!-- Save Recipe button -->
                             {% if saved_recipe %}
                                 <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-rec-secondary my-2" id="btn-save-recipe"><i class="fas fa-check"></i> Saved to Cookbook</a>

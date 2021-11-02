@@ -1,7 +1,13 @@
 body {
     color: #3f3f3f;
-    font-family: Nunito, sans-serif;
-    font-weight: 600;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+}
+
+.logo-text {
+    font-family: 'Pacifico', cursive;
+    font-size: 4rem;
+    color: #53837d;
 }
 
 h2, h3 {
@@ -13,15 +19,15 @@ h2, h3 {
 }
 
 .btn-primary {
-    background-color: #55857F;
+    background-color: #53837d;
     border-radius: 20px;
 }
 
 .btn-secondary {
-    border: 1px solid #55857F;
+    border: 1px solid #53837d;
     background-color: #fff;
     border-radius: 20px;
-    color: #55857F;
+    color: #53837d;
 }
 
 .btn-primary.focus, .btn-primary:focus, .btn-primary:hover {

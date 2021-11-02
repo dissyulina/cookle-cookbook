@@ -21,21 +21,21 @@
                     <!-- Recipe Name -->
                     <div class="col-12">
                         <label for="recipe_name" class="form-label"><i class="fas fa-utensils"></i> Recipe Name</label>
-                        <input type="text" class="form-control" id="recipe_name" name="recipe_name" minlength="5" maxlength="40" placeholder="The Best Fried Rice" required>
+                        <input type="text" class="form-control" id="recipe_name" name="recipe_name" minlength="5" maxlength="40" required>
                     <!-- Description -->
                     </div><div class="col-12">
                         <label for="description" class="form-label"><i class="fas fa-comment"></i> Descriptions or comments about this recipe</label>
-                        <textarea class="form-control" id="description" name="description" rows="4" minlength="5" maxlength="500" placeholder="Indonesian version of fried rice"></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="4" minlength="5" maxlength="500"></textarea>
                     </div>
                     <!-- Serving -->
                     <div class="col-12 col-md-2">
                         <label for="serving" class="form-label"><i class="fas fa-users"></i> Serves</label>
-                        <input type="text" class="form-control" id="serving" name="serving" placeholder="2" required> person
+                        <input type="text" class="form-control" id="serving" name="serving" required> person
                     </div>
                     <!-- Prep & Cooking Time -->
                     <div class="col-12 col-md-4">
                         <label for="time" class="form-label"><i class="fas fa-clock"></i> Prep + Cooking Time</label>
-                        <input type="text" class="form-control" id="time" name="time" placeholder="30" required> minutes
+                        <input type="text" class="form-control" id="time" name="time" required> minutes
                     </div>
                     <!-- Categories selection -->
                     <div class="col-12 col-md-6">
@@ -51,7 +51,7 @@
                     <div class="col-12">
                         <label for="ingredients" class="form-label"><i class="fas fa-carrot"></i> Ingredients</label>
                         <div class="col-12" id="ingredients-wrapper">
-                            <input type="text" class="form-control ingredients" name="ingredients" placeholder="2 cloves of garlic" required>
+                            <input type="text" class="form-control ingredients" name="ingredients" required>
                         </div>
                         <div class="col-12">
                             <a href="" role="button" id="add-ing-btn"><i class="fas fa-plus"></i> Add more ingredients</a>
@@ -61,7 +61,7 @@
                     <div class="col-12">
                         <label for="directions" class="form-label"><i class="fas fa-clipboard-list"></i> Directions</label>
                         <div class="col-12" id="directions-wrapper">
-                            <input type="text" class="form-control directions" name="directions" placeholder="Mince the garlic and shallots" required>
+                            <input type="text" class="form-control directions" name="directions" required>
                         </div>
                         <div class="col-12">
                             <a href="" role="button" id="add-dir-btn"><i class="fas fa-plus"></i> Add more steps</a>
@@ -69,8 +69,8 @@
                     </div>
                     <!-- Recipe's Image Url input-->
                     <div class="col-12">
-                        <label for="image-url" class="form-label"><i class="fas fa-image"></i> Recipe's Image</label>
-                        <input type="text" class="form-control" id="image-url" name="recipe_image" placeholder="Place the url here..">
+                        <label for="image-url" class="form-label"><i class="fas fa-image"></i> Recipe's Image (Url / Image's address)</label>
+                        <input type="text" class="form-control" id="image-url" name="recipe_image">
                     </div>
                     <!-- Rendering image from url -->
                     <div class="mb-4 text-center">

@@ -76,6 +76,11 @@ h2, h3 {
 }
 
 /* Recipe page */
+.card-title {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
 .card, 
 .card .card-image,
 .card-image img {
@@ -141,4 +146,36 @@ h2, h3 {
 .nav-pills .nav-link.active {
     background-color: #A9C2BE;
     color: #2b2b2b;
+}
+
+/* For Carousel in index.html */
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+.carousel-inner .carousel-item-end.active,
+.carousel-inner .carousel-item-next {
+    transform: translateX(25%);
+}
+
+.carousel-inner .carousel-item-start.active, 
+.carousel-inner .carousel-item-prev {
+    transform: translateX(-25%);
+}
+
+.carousel-inner .carousel-item-end,
+.carousel-inner .carousel-item-start { 
+  transform: translateX(0);
+}
+
+@media (max-width: 400px) {
+    .card-image {
+        height: 10rem;
+    }
+    .card-body {
+        font-size: 14px;
+    }
 }

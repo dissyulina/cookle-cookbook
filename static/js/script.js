@@ -2,7 +2,6 @@ $(document).ready(function(){
     $('input[type=radio][name=radio-img]').change(function() {
         let radioValue = $('input[name=radio-img]:checked', '#form-register').val();
         if (radioValue === "2") {
-            alert(radioValue);
             $(".show-image").attr("src","");
             $('#profile-image').val("");
             $("#image-url").change(function(){
@@ -10,7 +9,6 @@ $(document).ready(function(){
             });
 
         } else if (radioValue === "3") {
-            alert(radioValue);
             $(".show-image").attr("src","");
             $('#image-url').val("");
             $("#profile-image").change(function(){

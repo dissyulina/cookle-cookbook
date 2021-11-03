@@ -107,18 +107,24 @@
                         <li>
                             <a href="{{ url_for('get_recipes') }}" class="text-dark">Explore Recipes</a>
                         </li>
-                        <li>
-                            <a href="{{ url_for('profile', username=session['user']) }}" class="text-dark">Profile</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('get_cookbook', username=session['user']) }}" class="text-dark">My Cookbook</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('register') }}" class="text-dark">Sign Up</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('login') }}" class="text-dark">Log In</a>
-                        </li>
+                        {% if session.user %}
+                            <li>
+                                <a class="text-dark" href="{{ url_for('add_recipe') }}">Create Recipe</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('profile', username=session['user']) }}" class="text-dark">Profile</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('get_cookbook', username=session['user']) }}" class="text-dark">My Cookbook</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ url_for('register') }}" class="text-dark">Sign Up</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('login') }}" class="text-dark">Log In</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             

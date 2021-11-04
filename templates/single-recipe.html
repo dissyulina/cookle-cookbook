@@ -46,17 +46,18 @@
                         <div class="row d-flex flex-column px-5 btn-action-recipe">
                             <!-- Save Recipe button -->
                             {% if saved_recipe %}
-                                <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-rec-secondary my-2" id="btn-save-recipe"><i class="fas fa-check"></i> Saved to Cookbook</a>
+                                <a role="button" href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-rec-secondary my-2" id="btn-save-recipe"><i class="fas fa-check"></i> Saved to Cookbook</a>
                             {% else %}
-                                <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-rec-secondary my-2" id="btn-save-recipe"><i class="fas fa-plus"></i> Save This Recipe</a>
+                                <a role="button" href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-rec-secondary my-2" id="btn-save-recipe"><i class="fas fa-plus"></i> Save This Recipe</a>
                             {% endif %}
                             <!-- Like Recipe button -->
                             {% if liked_recipe %}
-                                <a href="{{ url_for('like_recipe', recipe_id=recipe._id) }}" class="btn btn-rec-secondary my-2"><i class="fas fa-thumbs-up"></i> Liked</a> 
+                                <a role="button" href="{{ url_for('like_recipe', recipe_id=recipe._id) }}" class="btn btn-rec-secondary my-2"><i class="fas fa-thumbs-up"></i> Liked</a> 
                             {% else %}
-                                <a href="{{ url_for('like_recipe', recipe_id=recipe._id) }}" class="btn btn-rec-secondary my-2"><i class="far fa-thumbs-up"></i> Like this recipe</a> 
+                                <a role="button" href="{{ url_for('like_recipe', recipe_id=recipe._id) }}" class="btn btn-rec-secondary my-2"><i class="far fa-thumbs-up"></i> Like this recipe</a> 
                             {% endif %}
-                            <a href="" class="btn btn-rec-secondary my-2"><i class="far fa-comment-dots"></i> Write a review</a>
+                            <!-- Write a review button -->
+                            <a role="button" class="btn btn-rec-secondary my-2" id="btn-review"><i class="far fa-comment-dots"></i> Write a review</a>
                         </div>
                         
                     </div>
@@ -82,6 +83,24 @@
                                 </div>
                             {% endfor %}
                         </div>
+                    </div>
+                </div>
+
+                <!-- Reviews section-->
+                <div class="bg-white my-5 p-3">
+                    <h4>Reviews</h4>
+                    <!-- Write a new review -->
+                    <div id="new-review" class="d-none">
+                        <form class="row g-3" method="POST" action="{{ url_for('write_review', recipe_id=recipe._id) }}">  
+                            <div class="col-12">
+                                <textarea class="form-control" id="write_review" name="write_review" rows="4" minlength="5" maxlength="500" placeholder="Write your review here... "></textarea>
+                            </div>
+                            <!-- Buttons -->
+                            <div class="d-flex align-items-center justify-content-end my-2">
+                                <a href="" role="button" class="btn btn-rec-secondary btn-rounded btn-sm me-2">Cancel</a>
+                                <button type="submit" class="btn btn-rec-primary btn-rounded btn-sm"> Submit Recipe</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

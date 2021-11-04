@@ -415,6 +415,18 @@ def get_cookbook(username):
     return redirect(url_for("login"))
 
 
+# -- Write a review --
+@app.route("/write_review/<recipe_id>", methods=["GET", "POST"])
+def write_review():
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+    if "user" in session:
+        return render_template("single-recipe.html", recipe_id=recipe_id, user=user)
+    else:
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+        return redirect(url_for("login"))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

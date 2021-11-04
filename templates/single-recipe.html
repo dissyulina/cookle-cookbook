@@ -87,10 +87,10 @@
                 </div>
 
                 <!-- Reviews section-->
-                <div class="bg-white my-5 p-3">
-                    <h4>Reviews</h4>
+                <div class="bg-white my-5 p-3 p-md-5">
+                    <h4><strong>Reviews ({{ recipe.total_reviews }})</strong></h4>
                     <!-- Write a new review -->
-                    <div id="new-review" class="d-none">
+                    <div id="write-review" class="d-none">
                         <form class="row g-3" method="POST" action="{{ url_for('write_review', recipe_id=recipe._id) }}">  
                             <div class="col-12">
                                 <textarea class="form-control" id="write_review" name="write_review" rows="4" minlength="5" maxlength="500" placeholder="Write your review here... "></textarea>
@@ -98,10 +98,24 @@
                             <!-- Buttons -->
                             <div class="d-flex align-items-center justify-content-end my-2">
                                 <a href="" role="button" class="btn btn-rec-secondary btn-rounded btn-sm me-2">Cancel</a>
-                                <button type="submit" class="btn btn-rec-primary btn-rounded btn-sm"> Submit Recipe</button>
+                                <button type="submit" class="btn btn-rec-primary btn-rounded btn-sm">Submit Review</button>
                             </div>
                         </form>
                     </div>
+                    <!-- Display all reviews -->
+                    {% for review in reviews %}
+                        {% if recipe._id == review.recipe_id %}
+                            <div>
+                                <div class="d-flex justify-content-start align-items-baseline">
+                                    <div class="profile-img">
+                                        <img src="{{ review.user_image }}" alt="profile-picture">
+                                    </div>
+                                    <p class="ms-3"><strong>{{ review.username }}</strong></p>
+                                </div>
+                                <p>{{ review.review_text }}</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>

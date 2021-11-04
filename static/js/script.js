@@ -127,5 +127,5 @@ $(".recent-item").first().addClass("active");
 
 /* Single Recipe Page: If user clicks Write A Review button, show form */
 $("#btn-review").click(function() {
-    $("#new-review").toggleClass('d-none')
+    $("#write-review").toggleClass('d-none')
 });

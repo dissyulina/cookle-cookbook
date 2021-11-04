@@ -209,6 +209,7 @@ def add_recipe():
 def get_single_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})
+    reviews = mongo.db.reviews.find().sort("_id", 1)
     
     # If the user logged in
     if "user" in session:
@@ -229,13 +230,13 @@ def get_single_recipe(recipe_id):
         
         return render_template("single-recipe.html", recipe=recipe,
                            user=user, saved_recipe=saved_recipe,
-                           liked_recipe=liked_recipe)
+                           liked_recipe=liked_recipe, reviews=reviews)
 
     else:
         saved_recipe = False
         liked_recipe = False
         
-    return render_template("single-recipe.html", recipe=recipe)
+    return render_template("single-recipe.html", recipe=recipe, reviews=reviews)
 
 
 # -- Edit a recipe --
@@ -421,20 +422,25 @@ def get_cookbook(username):
 def write_review(recipe_id):
     recipe_id = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})["_id"]
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+    username = user["username"]
+    user_image = user["user_image"]
+
     if "user" in session:
         if request.method == "POST":
             submit = {
                 "review_text": request.form.get("write_review"),
-                "username": session["user"],
+                "username": username,
+                "user_image": user_image,
                 "recipe_id": recipe_id
             }
             mongo.db.reviews.insert_one(submit)
             mongo.db.recipes.update_one({"_id": recipe_id},
                                         {"$inc": {"total_reviews": 1}})
             flash("Review Successfully Added", "success")
-            return redirect(url_for("get_single_recipe",
-                                    recipe_id=recipe_id))
-        return render_template("single-recipe.html", recipe_id=recipe_id, user=user)
+            return redirect(url_for("get_single_recipe", recipe_id=recipe_id, user=user))
+        return render_template("single-recipe.html", recipe_id=recipe_id, user=user, reviews=reviews)
     else:
         flash("You're not logged in. Please log in or sign up first.", "warning")
         return redirect(url_for("login"))

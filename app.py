@@ -252,6 +252,7 @@ def edit_recipe(recipe_id):
             "serving": request.form.get("serving"),
             "time": request.form.get("time"),
             "total_likes": 0,
+            "total_reviews": 0,
             "username": session["user"]
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
@@ -402,7 +403,7 @@ def get_cookbook(username):
             {"_id": {"$in": user["uploaded_recipes"]}})
         saved_recipes = mongo.db.recipes.find(
             {"_id": {"$in": user["saved_recipes"]}})
-        # reference to find from 2 lists: https://stackoverflow.com/questions/47075081/concatenate-pymongo-cursor
+        # to find from 2 lists, ref: https://stackoverflow.com/questions/47075081/concatenate-pymongo-cursor
         all_recipes = mongo.db.recipes.find(
             {'$or': [{"_id": {"$in": user["uploaded_recipes"]}},
                      {"_id": {"$in": user["saved_recipes"]}}]})
@@ -417,10 +418,22 @@ def get_cookbook(username):
 
 # -- Write a review --
 @app.route("/write_review/<recipe_id>", methods=["GET", "POST"])
-def write_review():
-    user = mongo.db.users.find_one(
-        {"username": session["user"]})
+def write_review(recipe_id):
+    recipe_id = mongo.db.recipes.find_one(
+        {"_id": ObjectId(recipe_id)})["_id"]
     if "user" in session:
+        if request.method == "POST":
+            submit = {
+                "review_text": request.form.get("write_review"),
+                "username": session["user"],
+                "recipe_id": recipe_id
+            }
+            mongo.db.reviews.insert_one(submit)
+            mongo.db.recipes.update_one({"_id": recipe_id},
+                                        {"$inc": {"total_reviews": 1}})
+            flash("Review Successfully Added", "success")
+            return redirect(url_for("get_single_recipe",
+                                    recipe_id=recipe_id))
         return render_template("single-recipe.html", recipe_id=recipe_id, user=user)
     else:
         flash("You're not logged in. Please log in or sign up first.", "warning")

@@ -187,7 +187,9 @@ def add_recipe():
                 "serving": request.form.get("serving"),
                 "time": request.form.get("time"),
                 "total_likes": 0,
-                "username": session["user"]
+                "username": session["user"],
+                "total_reviews": 0,
+                "reviews": []
             }
             new_recipe_id = mongo.db.recipes.insert_one(submit).inserted_id
             # Adds the new recipe_id to user's cookbook (ref: https://docs.mongodb.com/manual/reference/operator/update/push/)
@@ -227,6 +229,7 @@ def get_single_recipe(recipe_id):
             liked_recipe = True
         else:
             liked_recipe = False
+            
         
         return render_template("single-recipe.html", recipe=recipe,
                            user=user, saved_recipe=saved_recipe,
@@ -236,34 +239,40 @@ def get_single_recipe(recipe_id):
         saved_recipe = False
         liked_recipe = False
         
-    return render_template("single-recipe.html", recipe=recipe, reviews=reviews)
+    return render_template("single-recipe.html", recipe=recipe)
 
 
 # -- Edit a recipe --
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
-    if request.method == "POST":
-        submit = {
-            "category_name": request.form.get("category_name"),
-            "recipe_name": request.form.get("recipe_name"),
-            "description": request.form.get("description"),
-            "ingredients": request.form.getlist("ingredients"),
-            "directions": request.form.getlist("directions"),
-            "recipe_image": request.form.get("recipe_image"),
-            "serving": request.form.get("serving"),
-            "time": request.form.get("time"),
-            "total_likes": 0,
-            "total_reviews": 0,
-            "username": session["user"]
-        }
-        mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
-        flash("Recipe Successfully Edited", "success")
-        return redirect(url_for("get_recipes"))
+    # If the user logged in
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+    if "user" in session:
+        if request.method == "POST":
+            mongo.db.recipes.update_one(
+                {"_id": ObjectId(recipe_id)}, {
+                    '$set': {
+                            "category_name": request.form.get("category_name"),
+                            "recipe_name": request.form.get("recipe_name"),
+                            "description": request.form.get("description"),
+                            "ingredients": request.form.getlist("ingredients"),
+                            "directions": request.form.getlist("directions"),
+                            "recipe_image": request.form.get("recipe_image"),
+                            "serving": request.form.get("serving"),
+                            "time": request.form.get("time"),
+                        }
+                })
+            flash("Recipe Successfully Edited", "success")
+            return redirect(url_for("get_recipes"))
 
-    recipe = mongo.db.recipes.find_one(
-        {"_id": ObjectId(recipe_id)})
-    categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("edit-recipe.html", recipe=recipe, categories=categories)
+        recipe = mongo.db.recipes.find_one(
+            {"_id": ObjectId(recipe_id)})
+        categories = mongo.db.categories.find().sort("category_name", 1)
+        return render_template("edit-recipe.html", recipe=recipe, categories=categories, user=user)
+    else:
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+        return redirect(url_for("login"))
 
 
 # -- Delete a recipe --
@@ -349,7 +358,7 @@ def save_to_cookbook(recipe_id):
 
         else:
             # if user created the recipe, they cannot save it
-            flash("This recipe is created by you!")
+            flash("You created this recipe. It's already in your cookbook.")
             return redirect(url_for("get_single_recipe",
                                     recipe_id=recipe_id))
 
@@ -438,12 +447,27 @@ def write_review(recipe_id):
             mongo.db.reviews.insert_one(submit)
             mongo.db.recipes.update_one({"_id": recipe_id},
                                         {"$inc": {"total_reviews": 1}})
+                                
             flash("Review Successfully Added", "success")
             return redirect(url_for("get_single_recipe", recipe_id=recipe_id, user=user))
         return render_template("single-recipe.html", recipe_id=recipe_id, user=user, reviews=reviews)
     else:
         flash("You're not logged in. Please log in or sign up first.", "warning")
         return redirect(url_for("login"))
+
+
+# -- Edit a review --
+"""
+@app.route("/edit_review/<recipe_id>", methods=["GET", "POST"])
+def edit_review(review_id):
+
+    review = mongo.db.reviews.find_one(
+        {"_id": ObjectId(review_id)})
+    return redirect(url_for("get_single_recipe",
+                                    review=review))
+    # return render_template("single-recipe.html", review=review)
+"""
+
 
 
 if __name__ == "__main__":

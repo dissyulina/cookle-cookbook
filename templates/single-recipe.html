@@ -104,19 +104,23 @@
                             </div>
                         </form>
                     </div>
-                    <!-- Edit a review (only displayed when the users click the button to edit their review)-->
-                    <div id="edit-review" class="d-none">
-                        <form class="row g-3" method="POST" action="{{ url_for('edit_review', recipe_id=recipe._id) }}">  
-                            <div class="col-12">
-                                <textarea class="form-control" id="edit_review" name="edit_review" rows="4" minlength="5" maxlength="500" required>{{ review.review_text }}</textarea>
+                    {% if session.user %}
+                        {% if recipe.total_reviews > 0 %}
+                            <!-- Edit a review (only displayed when the users click the button to edit their review)-->
+                            <div id="edit-review" class="d-none">
+                                <form class="row g-3" method="POST" action="{{ url_for('edit_review', review_id=review._id) }}">  
+                                    <div class="col-12">
+                                        <textarea class="form-control" id="edit_review" name="edit_review" rows="4" minlength="5" maxlength="500" required>{{ review.review_text }}</textarea>
+                                    </div>
+                                    <!-- Buttons -->
+                                    <div class="d-flex align-items-center justify-content-end my-2">
+                                        <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" role="button" class="btn btn-rec-secondary btn-rounded btn-sm me-2">Cancel</a>
+                                        <button type="submit" class="btn btn-rec-primary btn-rounded btn-sm">Submit Review</button>
+                                    </div>
+                                </form>
                             </div>
-                            <!-- Buttons -->
-                            <div class="d-flex align-items-center justify-content-end my-2">
-                                <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" role="button" class="btn btn-rec-secondary btn-rounded btn-sm me-2">Cancel</a>
-                                <button type="submit" class="btn btn-rec-primary btn-rounded btn-sm">Submit Review</button>
-                            </div>
-                        </form>
-                    </div>
+                        {% endif %}
+                    {% endif %}
                     <!-- Display all reviews -->
                     {% for review in reviews %}
                         {% if recipe._id == review.recipe_id %}
@@ -126,15 +130,18 @@
                                         <img src="{{ review.user_image }}" onerror="this.src='../../static/images/user.png';" alt="profile-picture">
                                     </div>
                                     <p class="ms-3"><strong>{{ review.username }}</strong></p>
-                                    <div class="ms-auto dropstart">
-                                        <button type="button" class="btn-edit-delete" data-mdb-toggle="dropdown" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ url_for('edit_review', recipe_id=recipe._id) }}" id="btn-edit-review"><i class="fas fa-edit"></i> Edit</a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fas fa-trash-alt"></i> Delete</a></li>
-                                        </ul>
-                                    </div>
+                                    <!-- Edit & Delete dropdown button only available if the logged in user owns the review -->
+                                    {% if session.user|lower == review.username|lower %}
+                                        <div class="ms-auto dropstart">
+                                            <button type="button" class="btn-edit-delete" data-mdb-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#" id="btn-edit-review"><i class="fas fa-edit"></i> Edit</a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash-alt"></i> Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    {% endif %}
                                 </div>
                                 <p>{{ review.review_text }}</p>
                             </div>

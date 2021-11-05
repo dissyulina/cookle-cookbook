@@ -133,6 +133,7 @@ $("#btn-review").click(function() {
 /* Single Recipe Page: If user clicks Edit review button, show form */
 $("#btn-edit-review").click(function() {
     $("#edit-review").removeClass('d-none')
+    /*$("#edit_review").text("{{ review.review_text }}")*/
 });
 $("#btn-cancel-review").click(function() {
     $("#edit-review").addClass('d-none')

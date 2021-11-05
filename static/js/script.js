@@ -129,3 +129,11 @@ $(".recent-item").first().addClass("active");
 $("#btn-review").click(function() {
     $("#write-review").toggleClass('d-none')
 });
+
+/* Single Recipe Page: If user clicks Edit review button, show form */
+$("#btn-edit-review").click(function() {
+    $("#edit-review").removeClass('d-none')
+});
+$("#btn-cancel-review").click(function() {
+    $("#edit-review").addClass('d-none')
+});

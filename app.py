@@ -193,7 +193,7 @@ def add_recipe():
             }
             new_recipe_id = mongo.db.recipes.insert_one(submit).inserted_id
             # Adds the new recipe_id to user's cookbook (ref: https://docs.mongodb.com/manual/reference/operator/update/push/)
-            mongo.db.recipes.find_one(new_recipe_id)
+            # mongo.db.recipes.find_one(new_recipe_id)
             mongo.db.users.update_one({"username": session["user"]},
                                     {"$push": {"uploaded_recipes": new_recipe_id}})
             flash("Recipe Successfully Added", "success")
@@ -212,6 +212,8 @@ def get_single_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})
     reviews = mongo.db.reviews.find().sort("_id", 1)
+    review = mongo.db.reviews.find_one(
+        {"_id": {"$in": recipe["reviews"]}})
     
     # If the user logged in
     if "user" in session:
@@ -233,7 +235,7 @@ def get_single_recipe(recipe_id):
         
         return render_template("single-recipe.html", recipe=recipe,
                            user=user, saved_recipe=saved_recipe,
-                           liked_recipe=liked_recipe, reviews=reviews)
+                           liked_recipe=liked_recipe, reviews=reviews, review=review)
 
     else:
         saved_recipe = False
@@ -261,8 +263,8 @@ def edit_recipe(recipe_id):
                             "recipe_image": request.form.get("recipe_image"),
                             "serving": request.form.get("serving"),
                             "time": request.form.get("time"),
-                        }
-                })
+                            }
+                    })
             flash("Recipe Successfully Edited", "success")
             return redirect(url_for("get_recipes"))
 
@@ -429,44 +431,51 @@ def get_cookbook(username):
 # -- Write a review --
 @app.route("/write_review/<recipe_id>", methods=["GET", "POST"])
 def write_review(recipe_id):
-    recipe_id = mongo.db.recipes.find_one(
-        {"_id": ObjectId(recipe_id)})["_id"]
+    recipe = mongo.db.recipes.find_one(
+        {"_id": ObjectId(recipe_id)})
     user = mongo.db.users.find_one(
         {"username": session["user"]})
     username = user["username"]
     user_image = user["user_image"]
-
+    
     if "user" in session:
+        """
         if request.method == "POST":
             submit = {
                 "review_text": request.form.get("write_review"),
                 "username": username,
                 "user_image": user_image,
-                "recipe_id": recipe_id
+                "recipe_id": ObjectId(recipe_id)
             }
-            mongo.db.reviews.insert_one(submit)
-            mongo.db.recipes.update_one({"_id": recipe_id},
-                                        {"$inc": {"total_reviews": 1}})
+            new_review_id = mongo.db.reviews.insert_one(submit).inserted_id
+
+            mongo.db.recipes.update_one(
+                {"_id": ObjectId(recipe_id)}, {
+                    "$push": {"reviews": new_review_id},
+                    "$inc": {"total_reviews": 1}
+                }
+            )
                                 
             flash("Review Successfully Added", "success")
-            return redirect(url_for("get_single_recipe", recipe_id=recipe_id, user=user))
-        return render_template("single-recipe.html", recipe_id=recipe_id, user=user, reviews=reviews)
-    else:
-        flash("You're not logged in. Please log in or sign up first.", "warning")
-        return redirect(url_for("login"))
+            return redirect(url_for("get_single_recipe", recipe=recipe, user=user, recipe_id=recipe_id))
+        """
+        return render_template("single-recipe.html", recipe=recipe, user=user)
 
-
-# -- Edit a review --
-"""
-@app.route("/edit_review/<recipe_id>", methods=["GET", "POST"])
-def edit_review(review_id):
-
+# -- Edit a review review = mongo.db.reviews.find_one({"_id": {"$in": recipe["reviews"]}})--
+@app.route("/recipe/<recipe_id>", methods=["GET", "POST"])
+def edit_review(recipe_id):
+    recipe = mongo.db.recipes.find_one(
+        {"_id": ObjectId(recipe_id)})
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
     review = mongo.db.reviews.find_one(
         {"_id": ObjectId(review_id)})
-    return redirect(url_for("get_single_recipe",
-                                    review=review))
-    # return render_template("single-recipe.html", review=review)
-"""
+    
+
+    if "user" in session:
+
+        return render_template("single-recipe.html", review=review, user=user, recipe=recipe)
+
 
 
 

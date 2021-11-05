@@ -145,6 +145,16 @@ h2, h3 {
 }
 */
 
+/* Single recipe page */
+.bg-white {
+    border-radius: 10px;
+}
+
+.btn-edit-delete {
+    border: none;
+    background-color: #fff;
+}
+
 /* Register page */
 .form-width {
     width: 85%;
@@ -155,7 +165,6 @@ h2, h3 {
     max-width: 25rem;
     max-height: 25rem;
     overflow: hidden;
-    background-color: #fff;
 }
 /*
 .ingredients {

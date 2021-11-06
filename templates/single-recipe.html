@@ -104,6 +104,7 @@
                             </div>
                         </form>
                     </div>
+                    <!-- Edit an existing review (displayed only when a user click the edit button of their own comment)-->
                     {% if session.user %}
                         {% if recipe.total_reviews > 0 %}
                             <!-- Edit a review (only displayed when the users click the button to edit their review)-->
@@ -138,7 +139,7 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="#" id="btn-edit-review"><i class="fas fa-edit"></i> Edit</a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash-alt"></i> Delete</a></li>
+                                                <li><a class="dropdown-item" href="{{ url_for('delete_review', review_id=review._id) }}"><i class="fas fa-trash-alt"></i> Delete</a></li>
                                             </ul>
                                         </div>
                                     {% endif %}

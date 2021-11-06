@@ -465,7 +465,8 @@ def write_review(recipe_id):
         
         return render_template("single-recipe.html", recipe=recipe, user=user)
 
-# -- Edit a review review = mongo.db.reviews.find_one({"_id": {"$in": recipe["reviews"]}})--
+
+# -- Edit a review (only available for the user's own review) --
 @app.route("/edit_review/<review_id>/", methods=["GET", "POST"])
 def edit_review(review_id):
     # recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -484,6 +485,21 @@ def edit_review(review_id):
             return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
 
         return render_template("single-recipe.html", review=review, user=user)
+
+
+# -- Delete a comment (only available for the user's own review) --
+@app.route("/delete_review/<review_id>")
+def delete_review(review_id):
+    review = mongo.db.reviews.find_one(
+        {"_id": ObjectId(review_id)})
+    recipe_id = review["recipe_id"]
+    mongo.db.reviews.remove({"_id": ObjectId(review_id)})
+    mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)}, {
+                                "$pull": {"reviews": ObjectId(review_id)},
+                                "$inc": {"total_reviews": -1}})
+
+    flash("Review Successfully Deleted", "success")
+    return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
 
 
 if __name__ == "__main__":

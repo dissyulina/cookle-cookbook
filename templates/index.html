@@ -11,13 +11,12 @@
                     <form action="{{ url_for('search') }}" method="POST">
                         <div class="w-100 d-flex py-3">
                             <div class="form-outline flex-grow-1">
-                                <input type="text" id="query" name="query" class="form-control" required>
-                                <label class="form-label" for="query">Search recipes...</label>
+                                <input type="text" id="home-query" name="query" class="form-control" required>
+                                <label class="form-label" for="home-query">Search recipes...</label>
                             </div>
-                            <button type="submit" class="btn btn-rec-primary me-2">
+                            <button type="submit" id="btn-query" class="btn btn-rec-primary me-2">
                                 <i class="fas fa-search"></i>
                             </button>
-                            <a href="{{ url_for('get_recipes') }}" class="btn btn-rec-secondary">Reset</a>
                         </div>
                     </form>
                 </div>

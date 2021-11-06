@@ -1,3 +1,12 @@
+/* Home Page: To pass the value of the search box to recipes page */
+$("#btn-query").click(function() {
+    let query = $("#home-query").val();
+    sessionStorage.setItem("query",query);
+})
+$("#query").attr("value",sessionStorage.getItem("query"))
+sessionStorage.removeItem("query");
+
+
 $(document).ready(function(){
     $('input[type=radio][name=radio-img]').change(function() {
         let radioValue = $('input[name=radio-img]:checked', '#form-register').val();
@@ -128,13 +137,11 @@ $(".recent-item").first().addClass("active");
 /* Single Recipe Page: If user clicks Write A Review button, show form */
 $("#btn-review").click(function() {
     $("#write-review").toggleClass('d-none')
+    $("#write_review").focus();
 });
 
 /* Single Recipe Page: If user clicks Edit review button, show form */
 $("#btn-edit-review").click(function() {
     $("#edit-review").removeClass('d-none')
-    /*$("#edit_review").text("{{ review.review_text }}")*/
-});
-$("#btn-cancel-review").click(function() {
-    $("#edit-review").addClass('d-none')
+    $("#edit_review").focus();
 });

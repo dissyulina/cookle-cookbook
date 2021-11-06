@@ -84,13 +84,15 @@ def get_recipes():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
-    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
+    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}).sort("total_likes", -1))
+    recipes_paginated = paginated(recipes)
+    pagination = pagination_args(recipes)
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
-        return render_template("recipes.html", recipes=recipes, user=user)
+        return render_template("recipes.html", recipes=recipes_paginated, pagination=pagination, user=user)
     else:
-        return render_template("recipes.html", recipes=recipes)
+        return render_template("recipes.html", recipes=recipes_paginated, pagination=pagination)
 
 
 # -- User register/ sign up --

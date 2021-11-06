@@ -61,7 +61,7 @@
                                 <li>
                                     <a class="nav-link dropdown-item" href="{{ url_for('get_cookbook', username=session['user']) }}" class="text-dark">My Cookbook</a>
                                 </li>
-                                {% if session.user|lower == "admin"|lower %}:
+                                {% if session.user|lower == "admin"|lower %}
                                     <li>
                                         <a class="nav-link dropdown-item" href="{{ url_for('get_categories') }}">Manage Categories</a>
                                     </li>

@@ -328,37 +328,46 @@ def delete_recipe(recipe_id):
 # -- Manage Categories --
 @app.route("/get_categories")
 def get_categories():
-    categories = list(mongo.db.categories.find().sort("category_name", 1))
-    return render_template("categories.html", categories=categories)
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+    if "user" in session:
+        categories = list(mongo.db.categories.find().sort("category_name", 1))
+        return render_template("categories.html", categories=categories, user=user)
 
 
 # -- Add New Category (admin only) --
 @app.route("/add_category", methods=["GET", "POST"])
 def add_category():
-    if request.method == "POST":
-        category = {
-            "category_name": request.form.get("category_name"),
-        }
-        mongo.db.categories.insert(category)
-        flash("New Category Successfully Added", "success")
-        return redirect(url_for("get_categories"))
-  
-    return render_template("add-category.html")
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+    if "user" in session:
+        if request.method == "POST":
+            category = {
+                "category_name": request.form.get("category_name"),
+            }
+            mongo.db.categories.insert(category)
+            flash("New Category Successfully Added", "success")
+            return redirect(url_for("get_categories"))
+    
+        return render_template("add-category.html", user=user)
 
 
 # -- Edit Category (admin only) --
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
-    if request.method == "POST":
-        submit = {
-            "category_name": request.form.get("category_name"),
-        }
-        mongo.db.categories.update({"_id": ObjectId(category_id)}, submit)
-        flash("Category Successfully Edited", "success")
-        return redirect(url_for("get_categories"))
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+    if "user" in session:
+        if request.method == "POST":
+            submit = {
+                "category_name": request.form.get("category_name"),
+            }
+            mongo.db.categories.update({"_id": ObjectId(category_id)}, submit)
+            flash("Category Successfully Edited", "success")
+            return redirect(url_for("get_categories"))
 
-    category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
-    return render_template("edit-category.html", category=category)
+        category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+        return render_template("edit-category.html", category=category, user=user)
 
 
 # -- Delete Category (admin only) --

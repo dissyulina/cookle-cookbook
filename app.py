@@ -3,6 +3,7 @@ from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
+from flask_paginate import Pagination, get_page_args
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
@@ -35,16 +36,48 @@ def home():
                                recent_recipes=recent_recipes)
 
 
+# Pagination 
+"""
+Pagination adapted from:
+    https://github.com/rebeccatraceyt/bake-it-til-you-make-it/blob/master/app.py and
+    https://gist.github.com/mozillazg/69fb40067ae6d80386e10e105e6803c9
+"""
+PER_PAGE = 12
+
+def paginated(recipes):
+    # Set pagination configuration
+    page, per_page, offset = get_page_args(page_parameter="page",
+                                           per_page_parameter="per_page")
+    offset = page * PER_PAGE - PER_PAGE
+    return recipes[offset: offset + PER_PAGE]
+
+def pagination_args(recipes):
+    # Set pagination configuration
+    page, per_page, offset = get_page_args(page_parameter="page",
+                                           per_page_parameter="per_page")
+    total = len(recipes)
+    return Pagination(page=page,
+                      per_page=PER_PAGE,
+                      total=total,
+                      css_framework="bootstrap4")
+
+
 # -- Display all recipes --
 @app.route("/get_recipes")
 def get_recipes():
     recipes = list(mongo.db.recipes.find().sort("recipe_name", 1))
+
+    # pagination code adapted from:
+    # https://github.com/rebeccatraceyt/bake-it-til-you-make-it/blob/master/app.py
+    recipes_paginated = paginated(recipes)
+    pagination = pagination_args(recipes)
+
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
-        return render_template("recipes.html", recipes=recipes, user=user)
+        return render_template("recipes.html", recipes=recipes_paginated, pagination=pagination, user=user)
     else:
-        return render_template("recipes.html", recipes=recipes)
+        return render_template("recipes.html", recipes=recipes_paginated, recipes_paginated=recipes_paginated, pagination=pagination)
 
 
 # -- Search Recipes --

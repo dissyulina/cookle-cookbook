@@ -62,10 +62,14 @@
                 {% else %}
                     <h4>No results found</h4>
                 {% endif %}
+
+                <!-- Pagination -->
+                <div class="d-flex justify-content-center pagination-nav py-4">
+                    {{ pagination.links }}
+                </div>
             </div>
         </div>
     </div>
-    
 </section>
 
 {% endblock %}

@@ -145,3 +145,21 @@ $("#btn-edit-review").click(function() {
     $("#edit-review").removeClass('d-none')
     $("#edit_review").focus();
 });
+
+/* My Cookbook page: Keep the current pill active on page reload */
+$(document).ready(function(){
+    $('a[data-mdb-toggle="pill"]').click(function(e) {
+        sessionStorage.setItem('activePill', $(e.target).attr('href'));
+    })
+
+    let activePill = sessionStorage.getItem("activePill");
+    if (activePill) {
+        $('#cookbook-pills a[href="' + activePill + '"]').addClass("active")
+        let activeContent = activePill.substring(1);
+        $('#' + activeContent).addClass("show active");
+    } else {
+        $('#cookbook-pills a[href="#ex3-pills-1"]').addClass("active")
+        $('#ex3-pills-1').addClass("show active")
+    }
+});
+

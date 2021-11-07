@@ -20,9 +20,9 @@
                 <h2 class="py-5 text-center">My Cookbook</h2>
 
                 <!-- Pills navs -->
-                <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                <ul class="nav nav-pills nav-justified mb-3" id="cookbook-pills" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="ex3-tab-1" data-mdb-toggle="pill" href="#ex3-pills-1" role="tab" aria-controls="ex3-pills-1" aria-selected="true">
+                        <a class="nav-link" id="ex3-tab-1" data-mdb-toggle="pill" href="#ex3-pills-1" role="tab" aria-controls="ex3-pills-1" aria-selected="true">
                             All Recipes
                         </a>
                     </li>
@@ -39,8 +39,8 @@
                 </ul>
                 
                 <!-- Pills content -->
-                <div class="tab-content" id="ex2-content">
-                    <div class="tab-pane fade show active" id="ex3-pills-1" role="tabpanel" aria-labelledby="ex3-tab-1">
+                <div class="tab-content" id="cookbook-content">
+                    <div class="tab-pane fade" id="ex3-pills-1" role="tabpanel" aria-labelledby="ex3-tab-1">
                         <!-- Content for All Recipes -->
                         <div class="row py-5 g-4">
                             {% for recipe in all_recipes %}
@@ -62,6 +62,10 @@
                                     </div>
                                 </div>
                             {% endfor %}
+                        </div>
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-center pagination-nav py-4">
+                            {{ all_pagination.links }}
                         </div>
                     </div>
                     <!-- Content for Uploaded Recipes -->
@@ -87,6 +91,10 @@
                                 </div>
                             {% endfor %}
                         </div>
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-center pagination-nav py-4">
+                            {{ uploaded_pagination.links }}
+                        </div>
                     </div>
                     <!-- Content for Saved Recipes -->
                     <div class="tab-pane fade" id="ex3-pills-3" role="tabpanel" aria-labelledby="ex3-tab-3">
@@ -111,6 +119,11 @@
                                 </div>
                             {% endfor %}
                         </div>
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-center pagination-nav py-4">
+                            {{ saved_pagination.links }}
+                        </div>
+                    </div>
                     </div>
                 </div>
 

@@ -45,14 +45,12 @@ Pagination adapted from:
 PER_PAGE = 12
 
 def paginated(recipes):
-    # Set pagination configuration
     page, per_page, offset = get_page_args(page_parameter="page",
                                            per_page_parameter="per_page")
     offset = page * PER_PAGE - PER_PAGE
     return recipes[offset: offset + PER_PAGE]
 
 def pagination_args(recipes):
-    # Set pagination configuration
     page, per_page, offset = get_page_args(page_parameter="page",
                                            per_page_parameter="per_page")
     total = len(recipes)
@@ -460,19 +458,31 @@ def get_cookbook(username):
         # user variable to grab user's data
         user = mongo.db.users.find_one(
             {"username": session["user"]})
-        uploaded_recipes = mongo.db.recipes.find(
-            {"_id": {"$in": user["uploaded_recipes"]}})
-        saved_recipes = mongo.db.recipes.find(
-            {"_id": {"$in": user["saved_recipes"]}})
+        uploaded_recipes = list(mongo.db.recipes.find(
+            {"_id": {"$in": user["uploaded_recipes"]}}))
+        saved_recipes = list(mongo.db.recipes.find(
+            {"_id": {"$in": user["saved_recipes"]}}))
+        
         # to find from 2 lists, ref: https://stackoverflow.com/questions/47075081/concatenate-pymongo-cursor
-        all_recipes = mongo.db.recipes.find(
+        all_recipes = list(mongo.db.recipes.find(
             {'$or': [{"_id": {"$in": user["uploaded_recipes"]}},
-                     {"_id": {"$in": user["saved_recipes"]}}]})
+                     {"_id": {"$in": user["saved_recipes"]}}]}))
 
+        # pagination
+        all_recipes_paginated = paginated(all_recipes)
+        all_pagination = pagination_args(all_recipes) 
+        uploaded_recipes_paginated = paginated(uploaded_recipes)
+        uploaded_pagination = pagination_args(uploaded_recipes)
+        saved_recipes_paginated = paginated(saved_recipes)
+        saved_pagination = pagination_args(saved_recipes)
+        
         return render_template("cookbook.html", user=user,
-                               all_recipes=all_recipes,
-                               saved_recipes=saved_recipes,
-                               uploaded_recipes=uploaded_recipes)
+                               all_recipes=all_recipes_paginated,
+                               all_pagination=all_pagination,
+                               uploaded_recipes=uploaded_recipes_paginated,
+                               uploaded_pagination=uploaded_pagination,
+                               saved_recipes=saved_recipes_paginated,
+                               saved_pagination=saved_pagination)
 
     return redirect(url_for("login"))
 

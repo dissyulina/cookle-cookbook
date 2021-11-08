@@ -69,6 +69,16 @@ The target user for this game is:
 -  All ages
 -  People that interested in cooking or baking
 -  People that enjoy the convenience of using technology and social media 
--  People that don't mind to share their recipes online
+-  People that don't mind to share their own recipes online
 
-<br/>
+<br/>   
+
+#### **Site Owner Goals**  
+The site owner is looking to:  
+1. Providing this a platform for online recipe sharing with complete functionality, 
+2. Potentially being a regular user themselves. 
+3. Might also benefit from the collection of the data as a whole.   
+<br/>   
+
+#### **Strategy Table**  
+Based on the user stories and goals above, the developer brainstormed all of the opportunities that could be implemented in the site. All of these opportunities were mapped based on their importance (driven by goals and user needs), and viability (given limited time and resources), to determine which opportunities were going to be included and which were not.   

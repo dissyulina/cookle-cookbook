@@ -42,8 +42,8 @@ As a returning/ registered user, I want to:
 As an Administrative Account holder, I want to:
 1. Be able to do all the functionalities as a registered user can
 2. Add, Edit, or Delete a category of recipes
-3. Be able to edit the recipes listed on the site as needed.
-4. Be able to delete the recipes listed on the site as needed.
+3. Be able to edit any recipes listed on the site as needed.
+4. Be able to delete any recipes listed on the site as needed.
 5. Be able to delete offensive reviews on the site as needed.
 6. Be able to delete/remove a user as needed.  
 <br/>   
@@ -75,10 +75,65 @@ The target user for this game is:
 
 #### **Site Owner Goals**  
 The site owner is looking to:  
-1. Providing this a platform for online recipe sharing with complete functionality, 
-2. Potentially being a regular user themselves. 
-3. Might also benefit from the collection of the data as a whole.   
+1. Providing this a platform for online recipe sharing with complete functionality, and potentially being a regular user themselves. 
+2. Might also benefit from the collection of the data as a whole.   
+3. Still having a control to add tags or categories to the data, to remove data that aren't suitable for the site's purpose or rules.
 <br/>   
 
 #### **Strategy Table**  
 Based on the user stories and goals above, the developer brainstormed all of the opportunities that could be implemented in the site. All of these opportunities were mapped based on their importance (driven by goals and user needs), and viability (given limited time and resources), to determine which opportunities were going to be included and which were not.   
+
+
+The chart below is the mapping of all of the opportunities. The yellow circle signifies which opportunities/ features have the highest combination of importance and viability.   
+![The mapping of the opportunities](assets/readme/opportunities-mapping.png "The mapping of the opportunities")
+
+<br />  
+
+### **2. Scope Plane**  
+Based on the mapping in the Strategy Plane, a scope was defined for the site with room for future improvements.
+* **Functional Requirements**   
+   The users will be able to:
+   - Sign up and log in to the site by providing username and password.
+   - View and Edit their profile (option to change username, email address, and/or user image).
+   - Delete their account
+   - Upload a recipe 
+   - Edit their own recipe
+   - Delete their own recipe
+   - View all recipes on the site
+   - Search for recipes
+   - Save favorite recipes to cookbook
+   - Remove a previously saved recipes from cookbook
+   - View the cookbook that is filled with their own recipes and their saved favorite recipes
+   - Like a recipe
+   - Remove a like 
+   - Write a review on a recipe
+   - Edit their own review
+   - Delete their own review 
+   - Print a recipe page
+   - Share a recipe page   
+
+   The admin/ site owners will be able to:
+   - Have all functionalities as a user does
+   - Add a category of recipes
+   - Edit a category
+   - Delete a category
+   - Delete any recipes listed on the site (if needed)
+   - Delete any offensive reviews on the site (if needed)
+   - Delete any user (if needed)  
+<br/>     
+
+* **Non functional requirements**  
+   - The users will be able to invite friends to join the site by providing the email address. As the site is a community based recipe sharing, the number of members are very important to hopefully add more data (in this instance, recipes) to the site.   
+<br/>   
+
+* **Content requirements**   
+   - An individual recipe page that includes: recipe name, description, serving size, time, category, ingredients, and direction. It also features reviews and number of likes as an additional information on how good the recipe is.
+   - The home page features:
+     - 10 popular recipes, which are the recipes that received the most likes.
+     - 10 newest uploaded recipes
+     - Product recommendation
+   - The cookbook features all recipes that had been saved to cookbook, and the users' uploaded recipes as well.   
+
+
+
+

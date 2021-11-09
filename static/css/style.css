@@ -108,6 +108,10 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 }
 /* Recipes page */
 .card-title {
+    color: #181A18;
+}
+
+.card-title {
     font-size: 1rem;
     font-weight: 700;
 }
@@ -138,9 +142,13 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
     height: 100%;
     min-height: 100vh;
 }
+
 .btn-save-recipe {
     background-color: #E97A2E;
     color: #fff;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
 .btn-action-recipe a {
     background-color: #E97A2E;

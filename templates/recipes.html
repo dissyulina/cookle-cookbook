@@ -45,13 +45,15 @@
                                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                         </a>
                                     </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
-                                        <p class="card-text">
-                                            <i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}<br>
-                                            by: {{ recipe.username }}
+                                    <div class="card-body d-flex flex-column">
+                                        <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
+                                            <h5 class="card-title py-0 py-s-2">{{ recipe.recipe_name }}</h5>
+                                        </a>
+                                        <p class="card-text mb-0">
+                                            by: {{ recipe.username }} <br>
+                                            <i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}
                                         </p>
-                                        <div class="d-flex justify-content-end">
+                                        <div>
                                             <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-save-recipe btn-floating btn-lg"><i class="fas fa-plus"></i></a>
                                         </div>
                                     </div>

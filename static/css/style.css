@@ -1,5 +1,5 @@
 body {
-    color: #3f3f3f;
+    color: #181A18;
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 400;
 }
@@ -69,6 +69,15 @@ h2, h3 {
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;
+}
+
+/* Navbar hide on scroll down, show on scroll up
+Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
+.scrolled-down{
+    transform:translateY(-100%); transition: all 0.3s ease-in-out;
+}
+.scrolled-up{
+    transform:translateY(0); transition: all 0.3s ease-in-out;
 }
 
 /* Home Page */

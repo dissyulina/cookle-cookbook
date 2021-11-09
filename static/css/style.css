@@ -4,6 +4,10 @@ body {
     font-weight: 400;
 }
 
+.btn {
+    color: #181A18;
+}
+
 .logo-text {
     font-family: 'Pacifico', cursive;
     font-size: 4rem;
@@ -50,6 +54,9 @@ h2, h3 {
     color: #EF6C00;
 }
 
+.btn-min-length {
+    min-width: 4rem;
+}
 .profile-img img {
     width: 50px;
     height: 50px;
@@ -102,12 +109,24 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
     object-fit: cover;
 }
 
-
 .bg-light-gray {
     background-color: #F9F9F9;
 }
+
+/*Profile page */
+.btn-nav-profile a {
+    height: 100%;
+    width: 100%;
+}
+
+.dropstart i {
+    color: #EF6C00;
+}
+
 /* Recipes page */
-.card-title {
+.card-title, 
+#collapseUploadedRecipes a,
+#collapseSavedRecipes a  {
     color: #181A18;
 }
 

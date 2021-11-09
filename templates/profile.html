@@ -17,29 +17,33 @@
                 {% endwith %}
 
                 <!-- Profile -->
-                <div class="row">
+                <h3 class="pb-5 pt-3 text-center">My Profile Page</h3>
+                <div class="row pb-3 pb-md-5 d-flex justify-content-center">
                     <div class="col-12 col-md-4 square-image">
                         <img src="{{ user.user_image }}" class="img-fluid" onerror="this.src='../../static/images/user.png';" alt="{{ user.username }}'s profile picture">
                     </div>
-                    <div class="col-12 col-md-8">
-                        <h3>My Profile Page</h3>
+                    <div class="col-12 col-md-8 py-3 px-2 px-sm-5">
                         <p>Username : <span>{{ user.username }}</span></p>
                         <p>Email : <span>{{ user.email }}</span></p>
                         <p>About you and your love for cooking : <span>{{ user.about }}</span></p>
                         <a role="button" class="btn btn-secondary" href="{{ url_for('edit_profile', user_id=user._id) }}">Edit Profile</a>
                     </div>
                 </div>
+                <hr/>
 
                 <!-- Buttons -->
-                <div class="row text-center pt-5">
-                    <div class="col-6 col-sm-4 py-3">
-                        <a href="{{ url_for('add_recipe') }}" role="button" class="btn btn-rec-primary btn-lg">Create Recipe</a>
+                <div class="row text-center pt-3 pt-md-4 pt-lg-5 btn-nav-profile">
+                    <div class="col-12 col-lg-3 py-1 mb-md-4 mb-lg-0">
+                        <h4><strong>What do you want to do?</strong></h4>
                     </div>
-                    <div class="col-6 col-sm-4 py-3">
-                        <a href="{{ url_for('get_recipes') }}" role="button" class="btn btn-rec-primary btn-lg">Explore Recipe</a>
+                    <div class="col-12 col-md-4 col-lg-3 py-1">
+                        <a href="{{ url_for('add_recipe') }}" role="button" class="btn btn-rec-primary btn-lg d-flex align-items-center justify-content-center"><i class="fas fa-folder-plus me-2"></i> Create A Recipe</a>
                     </div>
-                    <div class="col-12 col-sm-4 py-3">
-                        <a href="{{ url_for('get_cookbook', username=session['user']) }}" role="button" class="btn btn-rec-primary btn-lg">My Cookbook</a>
+                    <div class="col-12 col-md-4 col-lg-3 py-1">
+                        <a href="{{ url_for('get_recipes') }}" role="button" class="btn btn-rec-primary btn-lg d-flex align-items-center justify-content-center"><i class="fas fa-search me-2"></i> Explore Recipes</a>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 py-1">
+                        <a href="{{ url_for('get_cookbook', username=session['user']) }}" role="button" class="btn btn-rec-primary btn-lg d-flex align-items-center justify-content-center"><i class="fas fa-book-open me-2"></i>Go to My Cookbook</a>
                     </div>
                 </div>
 
@@ -54,9 +58,16 @@
                         <div class="col-12 col-lg-6">
                             <div class="collapse mt-3" id="collapseUploadedRecipes">
                                 <div class="card card-body d-flex flex-row align-items-center">
-                                    <div class="flex-grow-1">{{ recipe.recipe_name }}</div>
-                                    <a class="btn btn-sm btn-rec-secondary me-2 d-inline-flex" role="button"><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-sm btn-rec-secondary d-inline-flex" role="button"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" class="flex-grow-1">{{ recipe.recipe_name }}</a>
+                                    <div class="ms-auto dropstart">
+                                        <button type="button" class="btn-edit-delete" data-mdb-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}"><i class="fas fa-edit"></i> Edit</a></li>
+                                            <li><a class="dropdown-item" href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}"><i class="fas fa-trash-alt"></i> Delete</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -74,8 +85,7 @@
                         <div class="col-12 col-lg-6">
                             <div class="collapse mt-3" id="collapseSavedRecipes">
                                 <div class="card card-body d-flex flex-row align-items-center">
-                                    <div class="flex-grow-1">{{ recipe.recipe_name }}</div>
-                                    <button type="button" class="btn btn-sm btn-rec-secondary me-2 d-inline-flex"><i class="fas fa-edit"></i></button>
+                                    <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" class="flex-grow-1">{{ recipe.recipe_name }}</a>
                                     <button type="button" class="btn btn-sm btn-rec-secondary d-inline-flex"><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </div>

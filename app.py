@@ -393,7 +393,7 @@ def save_to_cookbook(recipe_id):
                 # Adds recipe_id to user's cookbook
                 mongo.db.users.update_one({"username": session["user"]},
                                         {"$push": {"saved_recipes": ObjectId(recipe_id)}})
-                flash("Recipe added to My Cookbook", "success")
+                flash("Recipe Added to My Cookbook", "success")
                 return redirect(url_for("get_single_recipe",
                                     recipe_id=recipe_id))
 
@@ -407,7 +407,7 @@ def save_to_cookbook(recipe_id):
 
         else:
             # if user created the recipe, they cannot save it
-            flash("You created this recipe. It's already in your cookbook.")
+            flash("You created this recipe. You can't remove this from your cookbook", "info")
             return redirect(url_for("get_single_recipe",
                                     recipe_id=recipe_id))
 

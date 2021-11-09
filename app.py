@@ -64,7 +64,6 @@ def pagination_args(recipes):
 @app.route("/get_recipes")
 def get_recipes():
     recipes = list(mongo.db.recipes.find().sort("recipe_name", 1))
-
     # pagination code adapted from:
     # https://github.com/rebeccatraceyt/bake-it-til-you-make-it/blob/master/app.py
     recipes_paginated = paginated(recipes)
@@ -73,9 +72,10 @@ def get_recipes():
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
-        return render_template("recipes.html", recipes=recipes_paginated, pagination=pagination, user=user)
+        saved_recipes = user["saved_recipes"]
+        return render_template("recipes.html", recipes=recipes_paginated, pagination=pagination, user=user, saved_recipes=saved_recipes)
     else:
-        return render_template("recipes.html", recipes=recipes_paginated, recipes_paginated=recipes_paginated, pagination=pagination)
+        return render_template("recipes.html", recipes=recipes_paginated, pagination=pagination)
 
 
 # -- Search Recipes --

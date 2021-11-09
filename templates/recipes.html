@@ -53,8 +53,17 @@
                                             by: {{ recipe.username }} <br>
                                             <i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}
                                         </p>
+                                        <!-- Save recipe circle button, if it's already in the cookboook disable the button-->
                                         <div>
-                                            <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-save-recipe btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+                                            {% if session.user %}
+                                                {% if session.user|lower == recipe.username|lower or recipe._id in saved_recipes %}
+                                                    <a role="button" class="btn bg-light btn-absolute btn-floating btn-lg disabled" aria-disabled="true"><i class="fas fa-check"></i></a>
+                                                {% else %}
+                                                    <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" role="button" class="btn btn-rec-primary btn-absolute btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+                                                {% endif %}
+                                            {% else %}
+                                                <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" role="button" class="btn btn-rec-primary btn-absolute btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

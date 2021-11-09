@@ -184,9 +184,7 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
     min-height: 100vh;
 }
 
-.btn-save-recipe {
-    background-color: #E97A2E;
-    color: #fff;
+.btn-absolute {
     position: absolute;
     bottom: 10px;
     right: 10px;

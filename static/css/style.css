@@ -24,14 +24,14 @@ h2, h3 {
 
 .btn-primary {
     background-color: #53837d;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .btn-secondary {
-    border: 1px solid #53837d;
+    border: 1px solid #1e4641;
     background-color: #fff;
-    border-radius: 20px;
-    color: #53837d;
+    border-radius: 10px;
+    color: #1e4641;
 }
 
 .btn-primary.focus, .btn-primary:focus, .btn-primary:hover {
@@ -67,6 +67,16 @@ h2, h3 {
     padding: 5px;
 }
 
+.btn-close {
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.close {
+    color: #fff;
+}
+
 .form-outline .form-control {
     background-color: #fff;
 }
@@ -85,6 +95,19 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 }
 .scrolled-up{
     transform:translateY(0); transition: all 0.3s ease-in-out;
+}
+/* Modals */
+
+.modal-content {
+    background-color: #55857F;
+    color: #fff;
+}
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-footer {
+    border-top: none;
 }
 
 /* Home Page */

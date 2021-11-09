@@ -12,9 +12,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet" type="text/css">
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+
     {% block styles %}
     {% endblock %}
     <title>Cookle</title>
+
 </head>
 
 <body>
@@ -48,7 +50,7 @@
                         </li>
                         {% if session.user %}
                         <li class="btn-group nav-item dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center profile-img" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center profile-img" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                                 <img src="{{ user.user_image}}" onerror="this.src='../../static/images/user.png';" class="rounded-circle" height="22" alt="profile picture" loading="lazy">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
@@ -175,6 +177,8 @@
     
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
 
     <!-- JS -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

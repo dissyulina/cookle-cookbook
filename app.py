@@ -194,6 +194,23 @@ def edit_profile(user_id):
     return render_template("edit-profile.html", user=user)
 
 
+# -- Delete my profile --
+@app.route("/delete_profile/<username>")
+def delete_profile(username):
+    if session["user"] == username:
+        mongo.db.users.remove(
+            {"username": username.lower()})
+        flash("Profile Deleted", "info")
+        session.pop("user")
+        return redirect(url_for("register"))
+
+    else:
+        # if wrong user
+        flash("You do not have permission.")
+        return redirect(url_for("get_recipes",
+                                username=session["user"]))
+
+
 # -- User log out --
 @app.route("/logout")
 def logout():

@@ -18,17 +18,46 @@
 
                 <!-- Profile -->
                 <h3 class="pb-5 pt-3 text-center">My Profile Page</h3>
+                <div class= "d-flex justify-content-end align-items-center py-3">
+                    <a role="button" class="btn btn-secondary btn-sm me-2 mb-2" href="{{ url_for('edit_profile', user_id=user._id) }}"><i class="fas fa-edit"></i> Edit Profile</a>
+                    <a role="button" class="btn btn-secondary btn-sm mb-2" data-mdb-toggle="modal" data-mdb-target="#modalDeleteProfile" ><i class="fas fa-trash-alt"></i> Delete Account</a>
+                </div>
                 <div class="row pb-3 pb-md-5 d-flex justify-content-center">
                     <div class="col-12 col-md-4 square-image">
                         <img src="{{ user.user_image }}" class="img-fluid" onerror="this.src='../../static/images/user.png';" alt="{{ user.username }}'s profile picture">
                     </div>
-                    <div class="col-12 col-md-8 py-3 px-2 px-sm-5">
-                        <p>Username : <span>{{ user.username }}</span></p>
-                        <p>Email : <span>{{ user.email }}</span></p>
-                        <p>About you and your love for cooking : <span>{{ user.about }}</span></p>
-                        <a role="button" class="btn btn-secondary" href="{{ url_for('edit_profile', user_id=user._id) }}">Edit Profile</a>
+                    <div class="col-12 col-md-8 py-3 px-2 px-sm-3">
+                        <p><strong>Username : </strong><span>{{ user.username }}</span></p>
+                        <p><strong>Email : </strong><span>{{ user.email }}</span></p>
+                        <p><strong>About you and your love for cooking : </strong><span>{{ user.about }}</span></p>
                     </div>
                 </div>
+
+                <!-- Modal confirmation before deleting your recipe -->
+                <div class="modal fade" id="modalDeleteProfile" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1"
+                aria-labelledby="modalDeleteProfileLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content bg-green">
+                            <button type="button" class="btn-close btn-close-white" data-mdb-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-header text-white d-flex flex-column justify-content-center align-items-center">
+                                <i class="fas fa-trash-alt fa-5x py-3"></i>
+                                <h4 class="modal-title text-center" id="modalDeleteProfileLabel"><strong>Are you sure you want to delete your account?</strong></h4>
+                                <p>We'll miss you..</p>
+                            </div>
+                            <div class="modal-body text-center">
+                                Please note that deleting your account doesn't mean removing all your recipes or reviews. If you want to do that, you'll have to delete them one by one manually before deleting your account.
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                                    Cancel
+                                </button>
+                                <a class="btn btn-secondary" href="{{ url_for('delete_profile', username=session['user']) }}"><i class="fas fa-trash-alt"></i> Yes, Delete</a></li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Modal -->
+
                 <hr/>
 
                 <!-- Buttons -->

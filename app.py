@@ -64,6 +64,7 @@ def pagination_args(recipes):
 @app.route("/get_recipes")
 def get_recipes():
     recipes = list(mongo.db.recipes.find().sort("recipe_name", 1))
+    categories = mongo.db.categories.find().sort("category_name", 1)
     # pagination code adapted from:
     # https://github.com/rebeccatraceyt/bake-it-til-you-make-it/blob/master/app.py
     recipes_paginated = paginated(recipes)
@@ -73,16 +74,45 @@ def get_recipes():
         user = mongo.db.users.find_one(
             {"username": session["user"]})
         saved_recipes = user["saved_recipes"]
-        return render_template("recipes.html", recipes=recipes_paginated, pagination=pagination, user=user, saved_recipes=saved_recipes)
+        return render_template("recipes.html", categories=categories, recipes=recipes_paginated, pagination=pagination, user=user, saved_recipes=saved_recipes)
     else:
-        return render_template("recipes.html", recipes=recipes_paginated, pagination=pagination)
+        return render_template("recipes.html", categories=categories, recipes=recipes_paginated, pagination=pagination)
 
 
 # -- Search Recipes --
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
+    categories = mongo.db.categories.find().sort("category_name", 1)
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}).sort("total_likes", -1))
+    recipes_paginated = paginated(recipes)
+    pagination = pagination_args(recipes)
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+        return render_template("recipes.html", categories=categories, recipes=recipes_paginated, pagination=pagination, user=user)
+    else:
+        return render_template("recipes.html", categories=categories, recipes=recipes_paginated, pagination=pagination)
+
+
+# -- Filter Recipes --
+@app.route("/search/<category>", methods=["GET", "POST"])
+def filter(category):
+    query = request.form.get("query")
+
+    if query == None:
+        recipes = list(mongo.db.recipes.find({"category_name": category}).sort("total_likes", -1))
+    else:
+        recipes = list(mongo.db.recipes.find(
+            {"$and":[{"$text": {"$search": query}},
+                     {"category_name": category}]}).sort("total_likes", -1))
+
+        """
+        
+
+        recipes =  list(mongo.db.recipes.find({"category_name": category}: {"$in": {"$text": {"$search": query}}}).sort("total_likes", -1))
+        """
+
     recipes_paginated = paginated(recipes)
     pagination = pagination_args(recipes)
     if "user" in session:

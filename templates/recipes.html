@@ -34,6 +34,23 @@
                     </div>
                 </div>
 
+                <!-- Dropdown Filter -->
+                <div>
+                    <button type="button" class="btn btn-sm btn-rec-secondary me-1 me-sm-2 dropdown-toggle" 
+                        id="categoryDropdown" data-mdb-toggle="dropdown" aria-expanded="false">
+                        By Category
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="categoryDropdown">
+                        {% for category in categories %}
+                            <li>
+                                <a class="nav-link dropdown-item" role="button" href="{{ url_for('filter', category=category.category_name) }}">
+                                    {{ category.category_name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
                 {% if recipes|length > 0 %}
                     <div class="row py-5 g-4">
                         {% for recipe in recipes %}

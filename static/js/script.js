@@ -140,16 +140,16 @@ $("#image-url").change(function(){
     loadImage();
 });
 
-/* For Carousel in Home page */
-let items = document.querySelectorAll('.carousel .carousel-item')
-
-items.forEach((el) => {
+/* Home Page: Carousel for popular recipes */
+/* Code for carousel was sourced and modified from: https://www.codeply.com/p/0CWffz76Q9 */
+let popularItems = document.querySelectorAll('#popularRecipesCarousel .carousel-item')
+popularItems.forEach((el) => {
     const minPerSlide = 4
     let next = el.nextElementSibling
     for (var i=1; i<minPerSlide; i++) {
         if (!next) {
             // wrap carousel by using first child
-        	next = items[0]
+        	next = popularItems[0]
       	}
         let cloneChild = next.cloneNode(true)
         el.appendChild(cloneChild.children[0])
@@ -157,7 +157,40 @@ items.forEach((el) => {
     }
 })
 $(".popular-item").first().addClass("active");
+
+/* Home Page: Carousel for recent recipes */
+let recentItems = document.querySelectorAll('#recentRecipesCarousel .carousel-item')
+recentItems.forEach((el) => {
+    const minPerSlide = 4
+    let next = el.nextElementSibling
+    for (var i=1; i<minPerSlide; i++) {
+        if (!next) {
+            // wrap carousel by using first child
+        	next = recentItems[0]
+      	}
+        let cloneChild = next.cloneNode(true)
+        el.appendChild(cloneChild.children[0])
+        next = next.nextElementSibling
+    }
+})
 $(".recent-item").first().addClass("active");
+
+/* Home Page: Carousel for cookbooks we love */
+let cookbooksItems = document.querySelectorAll('#cookbooksCarousel .carousel-item')
+cookbooksItems.forEach((el) => {
+    const minPerSlide = 4
+    let next = el.nextElementSibling
+    for (var i=1; i<minPerSlide; i++) {
+        if (!next) {
+            // wrap carousel by using first child
+        	next = cookbooksItems[0]
+      	}
+        let cloneChild = next.cloneNode(true)
+        el.appendChild(cloneChild.children[0])
+        next = next.nextElementSibling
+    }
+})
+$(".cookbooks-item").first().addClass("active");
 
 
 /* Single Recipe Page: If user clicks Write A Review button, show form */

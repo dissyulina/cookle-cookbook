@@ -28,7 +28,8 @@
 <!-- Popular Recipes Section   -->
 <!-- Code for carousel was sourced and modified from: https://www.codeply.com/p/0CWffz76Q9 -->
 <section class="container text-center my-5">
-    <h4 class="font-weight-light pb-5">Check out our popular recipes!</h4>
+    <h3 class="font-extra-bold pb-2">Our popular recipes.</h3>
+    <p class="pb-3">Check out the most loved recipes in the community. They're awesome and deliciously proven! Try it today and taste it for yourself.</p>
     <div class="row mx-auto my-auto justify-content-center">
         <div id="popularRecipesCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner p-3" role="listbox">
@@ -73,7 +74,8 @@
 <!-- Recent Recipes Section   -->
 <!-- Code for carousel was sourced and modified from: https://www.codeply.com/p/0CWffz76Q9 -->
 <section class="container text-center py-5">
-    <h4 class="font-weight-light pb-5">See our newest recipes!</h4>
+    <h3 class="pb-2 font-extra-bold">Our newest recipes.</h3>
+    <p class="pb-3">At least one new recipe is added per day by our team so you wouldn't run out of ideas of what to cook tonight! See our newest recipes below.</p>
     <div class="row mx-auto my-auto justify-content-center">
         <div id="recentRecipesCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner p-3" role="listbox">
@@ -115,6 +117,91 @@
     <a href="{{ url_for('get_recipes') }}" class="ml-auto">See more recipes <i class="fas fa-arrow-right"></i></a>
 </section>
 
+<!-- Book Recommendation section -->
+<!-- Code for carousel was sourced and modified from: https://www.codeply.com/p/0CWffz76Q9 -->
+<section class="container text-center py-5">
+    <h4 class="font-extra-bold pb-2">Cookbooks we love.</h4>
+    <p class="pb-3">Sometimes you just want to buy a good 'ol cookbook, but there're so many choices on the market. Hand-picked carefully by our trusted team, here are the best of the best cookbooks out there.</p>
+    <div class="row mx-auto my-auto justify-content-center">
+        <div id="cookbooksCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner p-3" role="listbox">
+
+                    <div class="carousel-item cookbooks-item">
+                        <div class="col-6 col-md-4 col-lg-3 me-2">
+                            <div class="book-image">
+                                <img src="{{ url_for('static', filename='images/cookbooks/half-baked-harvest.jpg') }}" alt="book cover" loading="lazy">
+                            </div>
+                            <div>
+                                <a href="https://www.amazon.com/s?k=half+baked+harvest+super+simple&tag=faketag">Half Baked Harvest Super Simple<span class="d-none d-sm-inline">: More Than 125 Recipes for Instant, Overnight, Meal-Prepped, and Easy Comfort Foods</span>: A Cookbook</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item cookbooks-item">
+                        <div class="col-6 col-md-4 col-lg-3 me-2">
+                            <div class="book-image">
+                                <img src="{{ url_for('static', filename='images/cookbooks/joshua-weissman.jpg') }}" alt="book cover" loading="lazy">
+                            </div>
+                            <div>
+                                <a href="https://www.amazon.com/s?k=joshua+weissman&tag=faketag">Joshua Weissman: An Unapologetic Cookbook</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item cookbooks-item">
+                        <div class="col-6 col-md-4 col-lg-3 me-2">
+                            <div class="book-image">
+                                <img src="{{ url_for('static', filename='images/cookbooks/complete-veg-cookbook.jpg') }}" alt="book cover" loading="lazy">
+                            </div>
+                            <div>
+                                <a href="https://www.amazon.com/s?k=the+complete+vegetarian+cookbook&tag=faketag">The Complete Vegetarian Cookbook<span class="d-none d-sm-inline">: A Fresh Guide to Eating Well With 700 Foolproof Recipes</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item cookbooks-item">
+                        <div class="col-6 col-md-4 col-lg-3 me-2">
+                            <div class="book-image">
+                                <img src="{{ url_for('static', filename='images/cookbooks/essentials-of-classic.jpg') }}" alt="book cover" loading="lazy">
+                            </div>
+                            <div>
+                                <a href="https://www.amazon.com/s?k=essentials+of+classic+italian+cooking&tag=faketag">Essentials of Classic Italian Cooking</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item cookbooks-item">
+                        <div class="col-6 col-md-4 col-lg-3 me-2">
+                            <div class="book-image">
+                                <img src="{{ url_for('static', filename='images/cookbooks/skinny-taste.jpg') }}" alt="book cover" loading="lazy">
+                            </div>
+                            <div>
+                                <a href="https://www.amazon.com/s?k=skinnytaste+meal+prep&tag=faketag">Skinnytaste Meal Prep: <span class="d-none d-sm-inline">Healthy Make-Ahead Meals and Freezer Recipes to Simplify Your Life: </span>A Cookbook</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item cookbooks-item">
+                        <div class="col-6 col-md-4 col-lg-3 me-2">
+                            <div class="book-image">
+                                <img src="{{ url_for('static', filename='images/cookbooks/once-upon-achef.jpg') }}" alt="book cover" loading="lazy">
+                            </div>
+                            <div>
+                                <a href="https://www.amazon.com/s?k=essentials+of+classic+italian+cooking&tag=faketag">Once Upon a Chef: <span class="d-none d-sm-inline">Weeknight/Weekend: 70 Quick-Fix Weeknight Dinners + 30 Luscious Weekend Recipes: </span>A Cookbook</a>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+            <!-- Button Prev & Next Slide -->
+            <a class="carousel-control-prev bg-transparent w-aut" role="button" data-mdb-slide="prev" data-mdb-target="#cookbooksCarousel">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next bg-transparent w-aut" role="button" data-mdb-slide="next" data-mdb-target="#cookbooksCarousel">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- Register to Cookle section-->
 <section class="mt-5 py-3 bg-green">
     <div class="container">
         <div class="row">
@@ -138,6 +225,7 @@
     </div>
 </section>
 
+<!-- Invite your friends section -->
 <section class="py-5 bg-light-gray">
     <div class="container text-center">
         <h3 class="my-5">We are <span class="logo-text">Cookle</span></h3>

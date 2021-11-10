@@ -18,6 +18,10 @@ h2, h3 {
     font-weight: 800;
 }
 
+.font-extra-bold {
+    font-weight: 900;
+}
+
 .navbar-brand > img {
     height: 100px;
 }
@@ -173,13 +177,20 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
     height: 18rem;
 }
 
+.book-image {
+    height: 18rem;
+    width: 100%;
+}
+
 .card-image img,
-.square-image img {
+.square-image img,
+.book-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     background-position :center;
 }
+
 
 .overlay {
     background-color: rgba(251, 251, 251, 0.5);
@@ -269,11 +280,25 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
   transform: translateX(0);
 }
 
+/* Media Queries */
+
 @media (max-width: 400px) {
     .card-image {
         height: 10rem;
     }
+    .book-image {
+        height: 15rem;
+    }
     .card-body {
         font-size: 14px;
     }
+    #cookbooksCarousel a {
+        font-size: 0.8rem;
+        line-height: 0.8;
+    }
 }
+
+@media (min-width: 1200px) {
+    .book-image {
+        height: 25rem;
+    }

@@ -23,8 +23,8 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/home", methods=["GET", "POST"])
 def home():
-    popular_recipes = mongo.db.recipes.find().sort("total_likes", -1).limit(5)
-    recent_recipes = mongo.db.recipes.find().sort("_id", -1).limit(5)
+    popular_recipes = mongo.db.recipes.find().sort("total_likes", -1).limit(8)
+    recent_recipes = mongo.db.recipes.find().sort("_id", -1).limit(8)
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})

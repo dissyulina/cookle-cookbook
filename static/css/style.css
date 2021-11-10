@@ -11,7 +11,7 @@ body {
 .logo-text {
     font-family: 'Pacifico', cursive;
     font-size: 4rem;
-    color: #53837d;
+    color: #3c726c;
 }
 
 h2, h3 {
@@ -23,7 +23,8 @@ h2, h3 {
 }
 
 .btn-primary {
-    background-color: #53837d;
+    background-color: #3c726c;
+    color: #fff;
     border-radius: 10px;
 }
 

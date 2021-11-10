@@ -147,6 +147,10 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 }
 
 /* Recipes page */
+#category-option p {
+    margin-bottom: 5px;
+}
+
 .card-title, 
 #collapseUploadedRecipes a,
 #collapseSavedRecipes a  {

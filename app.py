@@ -90,37 +90,28 @@ def search():
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
-        return render_template("recipes.html", categories=categories, recipes=recipes_paginated, pagination=pagination, user=user)
+        saved_recipes = user["saved_recipes"]
+        return render_template("recipes.html", categories=categories, recipes=recipes_paginated, pagination=pagination, user=user, saved_recipes=saved_recipes)
     else:
         return render_template("recipes.html", categories=categories, recipes=recipes_paginated, pagination=pagination)
 
 
 # -- Filter Recipes --
-@app.route("/search/<category>", methods=["GET", "POST"])
-def filter(category):
-    query = request.form.get("query")
-
-    if query == None:
-        recipes = list(mongo.db.recipes.find({"category_name": category}).sort("total_likes", -1))
-    else:
-        recipes = list(mongo.db.recipes.find(
-            {"$and":[{"$text": {"$search": query}},
-                     {"category_name": category}]}).sort("total_likes", -1))
-
-        """
-        
-
-        recipes =  list(mongo.db.recipes.find({"category_name": category}: {"$in": {"$text": {"$search": query}}}).sort("total_likes", -1))
-        """
-
+@app.route("/filter", methods=["GET", "POST"])
+def filter():
+    category_name = request.form.get("category")
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    recipes = list(mongo.db.recipes.find({"category_name": category_name}).sort("total_likes", -1))
     recipes_paginated = paginated(recipes)
     pagination = pagination_args(recipes)
+
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
-        return render_template("recipes.html", recipes=recipes_paginated, pagination=pagination, user=user)
+        saved_recipes = user["saved_recipes"]
+        return render_template("recipes.html", categories=categories, recipes=recipes_paginated, pagination=pagination, user=user, saved_recipes=saved_recipes)
     else:
-        return render_template("recipes.html", recipes=recipes_paginated, pagination=pagination)
+        return render_template("recipes.html", categories=categories, recipes=recipes_paginated, pagination=pagination)
 
 
 # -- User register/ sign up --

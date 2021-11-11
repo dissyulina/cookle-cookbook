@@ -2,7 +2,7 @@
 Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 document.addEventListener("DOMContentLoaded", function(){
     el_autohide = document.querySelector('.autohide');
-    // add padding-top to body (if necessary)
+    // add padding-top to body
     navbar_height = document.querySelector('.navbar').offsetHeight;
     document.body.style.paddingTop = navbar_height + 'px';
   
@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function(){
       }); 
     }
 }); 
-
 
 /* Home Page: To pass the value of the search box to recipes page */
 $("#btn-query").click(function() {
@@ -86,26 +85,16 @@ $('#repeat-password').on('keyup', function () {
     }
 });
 
-
-/* Make sure user image is square 
-var divWidth = $('.square-image').width(); 
-
-$(window).resize(function(){
-    $('.square-image').height(divWidth);
-});
-*/
-
-/* Add Recipe page */
+/* Add Recipe / Edit Recipe Page: Add new line to ingredients and directions */
 let ingredients = 1;
 let maxIngredients = 30;
 let directions = 1;
 let maxDirections = 30;
-
 $("#add-ing-btn").click(function (e) {
     e.preventDefault();
     $("#ingredients-wrapper").append(
     `<div class="d-flex flex-row">
-        <input type="text" class="form-control flex-grow new-field" name="ingredients" placeholder="2 cloves of garlic">
+        <input type="text" class="form-control flex-grow new-field" name="ingredients" placeholder="2 cloves of garlic" required>
         <button class="btn btn-remove" type="button"><i class="fas fa-trash-alt"></i></button>
     </div>`);
     ingredients++
@@ -115,13 +104,13 @@ $("#add-dir-btn").click(function (e) {
     e.preventDefault();
     $("#directions-wrapper").append(
     `<div class="d-flex flex-row">
-        <input type="text" class="form-control new-field" name="directions" placeholder="Mince the garlic and shallots">
+        <input type="text" class="form-control new-field" name="directions" placeholder="Mince the garlic and shallots" required>
         <button class="btn btn-remove" type="button"><i class="fas fa-trash-alt"></i></button>
     </div>`);
     ingredients++
 });
 
-/* Delete parent div when clicking the remove button,
+/* Add Recipe / Edit Recipe Page: Delete parent div when clicking the remove ingredient/direction button,
 ref: https://stackoverflow.com/questions/6647736/how-to-delete-parent-element-using-jquery */
 $("#ingredients-wrapper").on("click", ".btn-remove", function(e){
     e.preventDefault();

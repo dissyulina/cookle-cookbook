@@ -101,11 +101,6 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 }
 /* Modals */
 
-.modal-content {
-    background-color: #55857F;
-    color: #fff;
-}
-
 .modal-header {
     border-bottom: none;
 }
@@ -125,7 +120,9 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 
 }
 .bg-green {
-    background-color: #1e4641;
+    /*
+    background-color: #1e4641;*/
+    background-color: #3c726c;
     color: #fff;
 }
 

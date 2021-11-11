@@ -138,7 +138,7 @@ Based on the mapping in the Strategy Plane, a scope was defined for the site wit
 <br/>   
 
 ### **3. Structure Plane**    
-The website was organized in a Hierarchical Tree Structure that ensures the user can navigate easily and intuitively. Below is the website workflow. 
+The website was organized in a Hierarchical Tree Structure that ensures the user can navigate easily and intuitively. Below is the website workflow (was designed using [Creately](https://creately.com/)). 
 ![The structure and workflow of the website](static/images/readme/structure.png "The structure and workflow of the website")  
 Navigation to Home Page, Explore Recipes Page, View Profile Page, Create Recipe Page, My Cookbook Page, and to Log Out are always available on Navbar. So for instance if the users decide to log out when they are in the middle of creating a recipe, they can do it easily.  
 
@@ -147,18 +147,24 @@ Navigation to Home Page, Explore Recipes Page, View Profile Page, Create Recipe 
    - For Guest User: Home, Explore Recipes, Sign Up, Log In   
    - For Logged In User: Home, Explore Recipes, A profile picture dropdown button with nav links to: View Profile, Create Recipes, My Cookbook, Log Out.   
 * **Home Page**: Search Recipes, Carousel of 8 Popular Recipes, Carousel of 8 Newest Recipes, Carousel of Cookbooks Reccomendation, Invite a friend.
-* **Explore Recipes Page**: Searh Recipes, All Recipes in the site can be viewed here
+* **Explore Recipes Page**: Searh Recipes, All Recipes in the site can be viewed here.
 * **Individual Recipe Page**: 
-   - For Guest User: View the recipe, Share recipe, Print recipe, Add recipe to cookbook and Like recipe (will be directed to login page)
-   - For Logged In User: View the recipe, Share recipe, Print recipe, Add recipe to cookbook/ Remove from cookbook, Like recipe/ Remove a like, Write review
-   - For Logged In User who created that recipe: View the recipe, Edit recipe, Delete recipe, Share recipe, Print recipe, Add recipe to cookbook, Like recipe, Write review
+   - For Guest User: View the recipe, Share recipe, Print recipe, Add recipe to cookbook and Like recipe (will be directed to login page).
+   - For Logged In User: View the recipe, Share recipe, Print recipe, Add recipe to cookbook/ Remove from cookbook, Like recipe/ Remove a like, Write review.
+   - For Logged In User who created that recipe: additional option to Edit recipe and Delete recipe.   
    - For Logged In User who had written a review on that page: additional option to Edit review and Delete review.
-* **View Profile Page**: Edit profile, Delete account
-* **Create Recipe Page**: Create a recipe
-* **My Cookbook**: View own recipes and previously saved recipes
+* **View Profile Page**: Edit profile, Delete account.
+* **Create Recipe Page**: Create a recipe.
+* **My Cookbook**: View own recipes and previously saved recipes.
 * **Footer**: same navigation links as Navbar, with additional Contact Us and social media information.   
 
 
+#### **Database Structure**
+
+### **4. Skeleton Plane**
+Wireframes/ mock-ups were created using Figma to design the navigation and interface of the website. For a better and clearer visualization before coding, and also to check if the color scheme and images match and work great together, the wireframes were created fully designed.
+
+[Wireframes for Home Page](static/images/readme/wireframes/homepage-wireframe.png)
 
 
 

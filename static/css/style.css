@@ -19,6 +19,10 @@ h2, h3 {
     font-weight: 800;
 }
 
+h4 {
+    font-weight: 700;
+}
+
 .font-extra-bold {
     font-weight: 900;
 }
@@ -221,10 +225,17 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 */
 
 /* Single recipe page */
+.bg-overlay {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
 .bg-white {
     border-radius: 10px;
 }
 
+.recipe-stat {
+    width: 300px;
+}
 .btn-edit-delete {
     border: none;
     background-color: #fff;

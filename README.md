@@ -1,6 +1,6 @@
 # **Cookle**
 
-![Cookle website in various devices](assets/readme/am-i-responsive.png "Cookle website in various devices")  
+![Cookle website in various devices](static/images/readme/am-i-responsive.jpg "Cookle website in various devices")  
 
 Cookle is a recipe sharing web application that allows user to easily create and save their recipes online, as well as search for recipes and conveniently save them to the cookbook. Inspired by online recipe sharing platform such as Allrecipes and Cookpad, Cookle was designed as a modern and fun web-application with a great UI/UX in mind, and 
  
@@ -124,15 +124,40 @@ Based on the mapping in the Strategy Plane, a scope was defined for the site wit
 
 * **Non functional requirements**  
    - The users will be able to invite friends to join the site by providing the email address. As the site is a community based recipe sharing, the number of members are very important to hopefully add more data (in this instance, recipes) to the site.   
+   - The users will be able to navigate easily and intuitively throughout the site, able to log in and log out at every page the users currently at.   
 <br/>   
 
 * **Content requirements**   
    - An individual recipe page that includes: recipe name, description, serving size, time, category, ingredients, and direction. It also features reviews and number of likes as an additional information on how good the recipe is.
    - The home page features:
-     - 10 popular recipes, which are the recipes that received the most likes.
-     - 10 newest uploaded recipes
-     - Product recommendation
-   - The cookbook features all recipes that had been saved to cookbook, and the users' uploaded recipes as well.   
+     - 8 popular recipes, which are the recipes that received the most likes.
+     - 8 newest uploaded recipes
+     - Product (cookbooks) recommendation, so that the site's owners could conceivably earn money from people looking to buy the book.
+   - The online cookbook features all recipes that had been saved to cookbook by users, and users' uploaded recipes as well.   
+
+<br/>   
+
+### **3. Structure Plane**    
+The website was organized in a Hierarchical Tree Structure that ensures the user can navigate easily and intuitively. Below is the website workflow. 
+![The structure and workflow of the website](static/images/readme/structure.png "The structure and workflow of the website")  
+Navigation to Home Page, Explore Recipes Page, View Profile Page, Create Recipe Page, My Cookbook Page, and to Log Out are always available on Navbar. So for instance if the users decide to log out when they are in the middle of creating a recipe, they can do it easily.  
+
+#### **Organisation of Functionality and Content**
+* **Navbar**:   
+   - For Guest User: Home, Explore Recipes, Sign Up, Log In   
+   - For Logged In User: Home, Explore Recipes, A profile picture dropdown button with nav links to: View Profile, Create Recipes, My Cookbook, Log Out.   
+* **Home Page**: Search Recipes, Carousel of 8 Popular Recipes, Carousel of 8 Newest Recipes, Carousel of Cookbooks Reccomendation, Invite a friend.
+* **Explore Recipes Page**: Searh Recipes, All Recipes in the site can be viewed here
+* **Individual Recipe Page**: 
+   - For Guest User: View the recipe, Share recipe, Print recipe, Add recipe to cookbook and Like recipe (will be directed to login page)
+   - For Logged In User: View the recipe, Share recipe, Print recipe, Add recipe to cookbook/ Remove from cookbook, Like recipe/ Remove a like, Write review
+   - For Logged In User who created that recipe: View the recipe, Edit recipe, Delete recipe, Share recipe, Print recipe, Add recipe to cookbook, Like recipe, Write review
+   - For Logged In User who had written a review on that page: additional option to Edit review and Delete review.
+* **View Profile Page**: Edit profile, Delete account
+* **Create Recipe Page**: Create a recipe
+* **My Cookbook**: View own recipes and previously saved recipes
+* **Footer**: same navigation links as Navbar, with additional Contact Us and social media information.   
+
 
 
 

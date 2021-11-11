@@ -162,9 +162,15 @@ Navigation to Home Page, Explore Recipes Page, View Profile Page, Create Recipe 
 #### **Database Structure**
 
 ### **4. Skeleton Plane**
-Wireframes/ mock-ups were created using Figma to design the navigation and interface of the website. For a better and clearer visualization before coding, and also to check if the color scheme and images match and work great together, the wireframes were created fully designed.
+Wireframes/ mock-ups were created using Figma to design the navigation and interface of the website. For a better and clearer visualization before coding, and also to check if the color scheme and images match and work great together, the wireframes were created with such details, in three different device sizes: desktop, tablet, and mobile.   
 
-[Wireframes for Home Page](static/images/readme/wireframes/homepage-wireframe.png)
+* [Wireframes for Home Page](static/images/readme/wireframes/homepage-wireframe.png)   
+* [Wireframes for Explore Recipes Page](static/images/readme/wireframes/explore-recipes-wireframe.png)   
+* [Wireframes for Individual Recipe Page](static/images/readme/wireframes/individual-recipe-wireframe.png)   
+* [Wireframes for Sign Up Page](static/images/readme/wireframes/sign-up-wireframe.png)   
+* [Wireframes for Create and Edit Recipe Page](static/images/readme/wireframes/create-edit-recipe-wireframe.png)   
+* [Wireframes for My Cookbook Page](static/images/readme/wireframes/my-cookbook-wireframe.png)   
+* [Wireframes for View Profile Page](static/images/readme/wireframes/view-profile-wireframe.png)  
 
 
 

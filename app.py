@@ -117,35 +117,41 @@ def filter():
 # -- User register/ sign up --
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    if request.method == "POST":
-        # check if username already exists in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+    if "user" in session:
+        # remove user from session cookie
+        flash("You have been logged out", "info")
+        session.pop("user")
+        return render_template("register.html")
+    else:
+        if request.method == "POST":
+            # check if username already exists in db
+            existing_user = mongo.db.users.find_one(
+                {"username": request.form.get("username").lower()})
 
-        if existing_user:
-            flash("Username already exists", "warning")
-            return redirect(url_for("register"))
+            if existing_user:
+                flash("Username already exists", "warning")
+                return redirect(url_for("register"))
 
-        register = {
-            "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password")),
-            "name": request.form.get("name").lower(),
-            "email": request.form.get("email"),
-            "about": request.form.get("about"),
-            "user_image": request.form.get("profile-url"),
-            "saved_recipes": [],
-            "uploaded_recipes": [],
-            "liked_recipes": [],
-            "is_admin": False
-        }
-        mongo.db.users.insert_one(register)
+            register = {
+                "username": request.form.get("username").lower(),
+                "password": generate_password_hash(request.form.get("password")),
+                "name": request.form.get("name").lower(),
+                "email": request.form.get("email"),
+                "about": request.form.get("about"),
+                "user_image": request.form.get("profile-url"),
+                "saved_recipes": [],
+                "uploaded_recipes": [],
+                "liked_recipes": [],
+                "is_admin": False
+            }
+            mongo.db.users.insert_one(register)
 
-        # put the new user into 'session' cookie
-        session["user"] = request.form.get("username").lower()
-        flash("Registration Successful!", "success")
-        return redirect(url_for("profile", username=session["user"]))
+            # put the new user into 'session' cookie
+            session["user"] = request.form.get("username").lower()
+            flash("Registration Successful!", "success")
+            return redirect(url_for("profile", username=session["user"]))
 
-    return render_template("register.html")
+        return render_template("register.html")
 
 
 # -- User log in --

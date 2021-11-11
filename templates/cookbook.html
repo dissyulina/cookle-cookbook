@@ -20,34 +20,41 @@
                 <h2 class="py-5 text-center">My Cookbook</h2>
 
                 <!-- Pills navs -->
-                <ul class="nav nav-pills nav-justified mb-3" id="cookbook-pills" role="tablist">
+                <ul class="nav nav-pills nav-justified mb-3 d-flex" id="cookbook-pills" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="ex3-tab-1" data-mdb-toggle="pill" href="#ex3-pills-1" role="tab" aria-controls="ex3-pills-1" aria-selected="true">
-                            All Recipes
+                        <a class="nav-link" id="all-rec" data-mdb-toggle="pill" href="#all-pills" 
+                            role="tab" aria-controls="all-pills" aria-selected="true">
+                            All <br/>
+                            Recipes
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="ex3-tab-2" data-mdb-toggle="pill" href="#ex3-pills-2" role="tab" aria-controls="ex3-pills-2" aria-selected="false">
-                            Uploaded Recipes
+                        <a class="nav-link" id="upload-rec" data-mdb-toggle="pill" href="#upload-pills" 
+                            role="tab" aria-controls="upload-pills" aria-selected="false">
+                            Uploaded <br/>
+                            Recipes
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="ex3-tab-3" data-mdb-toggle="pill" href="#ex3-pills-3" role="tab" aria-controls="ex3-pills-3" aria-selected="false">
-                            Saved Recipes
+                        <a class="nav-link" id="saved-rec" data-mdb-toggle="pill" href="#saved-pills" 
+                            role="tab" aria-controls="saved-pills" aria-selected="false">
+                            Saved <br/> 
+                            Recipes
                         </a>
                     </li>
                 </ul>
                 
                 <!-- Pills content -->
                 <div class="tab-content" id="cookbook-content">
-                    <div class="tab-pane fade" id="ex3-pills-1" role="tabpanel" aria-labelledby="ex3-tab-1">
+                    <div class="tab-pane fade" id="all-pills" role="tabpanel" aria-labelledby="all-rec">
                         <!-- Content for All Recipes -->
                         <div class="row py-5 g-4">
                             {% for recipe in all_recipes %}
                                 <div class="div col-6 col-md-4 col-lg-3">
                                     <div class="card shadow-2-strong h-100">
                                         <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
-                                            <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
+                                            <img src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }}"  
+                                                onerror="this.src='../../static/images/logo.png';" class="card-img-top">
                                             <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
                                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                             </a>
@@ -69,13 +76,15 @@
                         </div>
                     </div>
                     <!-- Content for Uploaded Recipes -->
-                    <div class="tab-pane fade" id="ex3-pills-2" role="tabpanel" aria-labelledby="ex3-tab-2">
+                    <div class="tab-pane fade" id="upload-pills" role="tabpanel" aria-labelledby="upload-rec">
                         <div class="row py-5 g-4">
                             {% for recipe in uploaded_recipes %}
                                 <div class="div col-6 col-md-4 col-lg-3">
                                     <div class="card shadow-2-strong h-100">
-                                        <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
-                                            <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
+                                        <div class="bg-image hover-overlay ripple card-image" 
+                                            data-mdb-ripple-color="light">
+                                            <img src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }}" 
+                                                onerror="this.src='../../static/images/logo.png';" class="card-img-top">
                                             <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
                                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                             </a>
@@ -97,13 +106,14 @@
                         </div>
                     </div>
                     <!-- Content for Saved Recipes -->
-                    <div class="tab-pane fade" id="ex3-pills-3" role="tabpanel" aria-labelledby="ex3-tab-3">
+                    <div class="tab-pane fade" id="saved-pills" role="tabpanel" aria-labelledby="saved-rec">
                         <div class="row py-5 g-4">
                             {% for recipe in saved_recipes %}
                                 <div class="div col-6 col-md-4 col-lg-3">
                                     <div class="card shadow-2-strong h-100">
                                         <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
-                                            <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
+                                            <img src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }}" 
+                                                onerror="this.src='../../static/images/logo.png';" class="card-img-top">
                                             <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
                                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                             </a>
@@ -132,11 +142,13 @@
                 <div class="row d-flex justify-content-center pb-5">
                     <div class="col-10 col-sm-8 col-lg-6">
                         <div class="d-flex justify-content-evenly mb-5">
-                            <a role="button" class="btn btn-lg btn-rec-primary me-3" href="{{ url_for('add_recipe') }}">
+                            <a role="button" class="btn btn-lg btn-rec-primary me-3" 
+                                href="{{ url_for('add_recipe') }}">
                                 <i class="fas fa-folder-plus"></i> 
                                 Create Recipe
                             </a>
-                            <a role="button" class="btn btn-lg btn-rec-primary" href="{{ url_for('get_recipes') }}">
+                            <a role="button" class="btn btn-lg btn-rec-primary" 
+                                href="{{ url_for('get_recipes') }}">
                                 <i class="fas fa-search"></i> 
                                 Explore Recipes
                             </a>

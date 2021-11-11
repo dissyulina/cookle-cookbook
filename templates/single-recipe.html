@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block styles %}
-    <!-- Meta tags for social media sharing -->
+    <!-- Meta tags for social media sharing 
+         ref: https://css-tricks.com/essential-meta-tags-social-media/-->
     <meta property="og:title" content="{{ recipe.recipe_name }}">
     <meta property="og:description" content="{{ recipe.description }}">
     <meta property="og:image" content="{{ recipe.recipe_image }}">
@@ -33,7 +34,8 @@
                     <p>by: {{ recipe.username }}</p>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <!-- Share to social media button -->
+                    <!-- Share to social media button, using sharer.js 
+                         Ref: https://ellisonleao.github.io/sharer.js/ -->
                     <button type="button" class="btn btn-sm btn-rec-secondary me-1 me-sm-2 dropdown-toggle" 
                         id="shareDropdown" data-mdb-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-share-alt"></i> Share
@@ -43,6 +45,7 @@
                             <a class="nav-link dropdown-item" role="button" data-sharer="whatsapp" 
                                 data-title="Checkout this awesome recipe!" 
                                 data-url="https://cookle-cookbook.herokuapp.com/recipe/{{ recipe._id }}">
+                                <i class="fab fa-whatsapp text-success"></i> 
                                 Share to Whatsapp
                             </a>
                         </li>
@@ -50,6 +53,7 @@
                             <a class="nav-link dropdown-item" role="button" data-sharer="facebook" 
                                 data-hashtag="AwesomeRecipe" 
                                 data-url="https://cookle-cookbook.herokuapp.com/recipe/{{ recipe._id }}">
+                                <i class="fab fa-facebook-square text-primary"></i> 
                                 Share to Facebook
                             </a>
                         </li>
@@ -57,12 +61,14 @@
                             <a class="nav-link dropdown-item" role="button" data-sharer="twitter" 
                                 data-title="Checkout this awesome recipe!" data-hashtags="AwesomeRecipe" 
                                 data-url="https://cookle-cookbook.herokuapp.com/recipe/{{ recipe._id }}">
+                                <i class="fab fa-twitter text-info"></i> 
                                 Share to Twitter
                             </a>
                         </li>
                         <li>
                             <a class="nav-link dropdown-item" role="button" data-sharer="pinterest" 
                                 data-url="https://cookle-cookbook.herokuapp.com/recipe/{{ recipe._id }}">
+                                <i class="fab fa-pinterest text-danger"></i> 
                                 Share to Pinterest
                             </a>
                         </li>
@@ -292,7 +298,8 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="{{ url_for('delete_review', review_id=review._id) }}">
+                                                    <a data-mdb-toggle="modal" data-mdb-target="#modalDeleteReview" role="button" 
+                                                        class="dropdown-item" href="{{ url_for('delete_review', review_id=review._id) }}">
                                                         <i class="fas fa-trash-alt"></i> Delete
                                                     </a>
                                                 </li>
@@ -302,6 +309,33 @@
                                 </div>
                                 <p>{{ review.review_text }}</p>
                             </div>
+
+                            <!-- Modal confirmation before deleting review-->
+                            <div class="modal fade" id="modalDeleteReview" data-mdb-backdrop="static" data-mdb-keyboard="false" 
+                                tabindex="-1" aria-labelledby="modalDeleteReviewLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content bg-green">
+                                        <button type="button" class="btn-close btn-close-white" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                        <div class="modal-header text-white d-flex flex-column justify-content-center align-items-center">
+                                            <i class="fas fa-book-open fa-5x py-3"></i>
+                                            <h4 class="modal-title text-center" id="modalDeleteReviewLabel">
+                                                <strong>Are you sure you want to delete this review?</strong>
+                                            </h4>
+                                        </div>
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                                                <i class="far fa-window-close"></i> Cancel
+                                            </button>
+                                            <a class="btn btn-secondary" href="{{ url_for('delete_review', review_id=review._id) }}">
+                                                <i class="fas fa-trash-alt"></i> Yes, Delete
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Modal -->
+                            
                         {% endif %}
                     {% endfor %}
                 </div>

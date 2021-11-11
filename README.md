@@ -159,7 +159,11 @@ Navigation to Home Page, Explore Recipes Page, View Profile Page, Create Recipe 
 * **Footer**: same navigation links as Navbar, with additional Contact Us and social media information.   
 
 
-#### **Database Structure**
+#### **Database Structure**   
+Database schema was designed using [diagram.io](https://dbdiagram.io/home).   
+![Database structure](static/images/readme/database.png "Database structure")   
+
+<br/>   
 
 ### **4. Skeleton Plane**
 Wireframes/ mock-ups were created using Figma to design the navigation and interface of the website. For a better and clearer visualization before coding, and also to check if the color scheme and images match and work great together, the wireframes were created with such details, in three different device sizes: desktop, tablet, and mobile.   
@@ -173,4 +177,29 @@ Wireframes/ mock-ups were created using Figma to design the navigation and inter
 * [Wireframes for View Profile Page](static/images/readme/wireframes/view-profile-wireframe.png)  
 
 
+#### **Design Changes on The Final Product**
+While I relied heavily on these Wireframes in order to maintain the desired design, there are several differences between the Mockups and the final product:
+
+* Colors of the buttons were altered to separate the functionality more consistently:
+  - Green buttons for things that related to user/ profile: Sign Up, Log In, Edit Profile, Delete Account   
+  - Orange buttons for things that related to the recipes and reviews   
+  The shades were a bit darkened to achieve the desirable contrast with the text inside, while still maintaining the green and orange color scheme.   
+* The site name 'Cookle' was displayed in the landing page for branding purpose
+* The text 'search' inside the search button is changed to a magnifying glass icon to save spaces.   
+* Write a review button on individual recipe page was placed closer to the review section for easier access, especially in small devices.   
+* On Explore Recipe page, in the wireframes there were navigation pills to choose the category. The same navigation pills were also used in My Cookbook to separate the self-created recipes and the saved recipes. After applying this pills, I found it hard to apply pagination to the page that use navigation pills. Because of that, the navigation pills in Explore recipes were changed to select element to choose the category.
+
+<br/>   
+
+### **5. Surface Plane**   
+#### **Color Scheme**   
+The overall theme of the site was orange and green, which were derived from the hero image. Using [Coolors](https://coolors.co), I add the colors from the hero image, darkened the green and orange as necessary to achieve a higher contrast with white text inside.   
+![The color scheme](static/images/readme/color-scheme.jpg "The color scheme")  
+
+#### **Typography**  
+All of the fonts were sourced from [Google Fonts](https://fonts.google.com).   
+* Main fonts: Nunito Sans   
+  A sans-serif type of font was chosen to give a simple, clean, and modern look to the site. As the background is already filled with blob patterns and fun colors, it is important to balance it out with a simple font.
+* Secondary fonts: Pacifico   
+  Pacifico was used only for the logo 'Cookle'
 

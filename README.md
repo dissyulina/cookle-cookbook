@@ -237,12 +237,27 @@ All of the fonts were sourced from [Google Fonts](https://fonts.google.com).
      * **Pagination** : Pagination functionality will be activated when the recipes displayed are more than 12 recipes.   
    
    - **Sign Up Page**   
-     * **Input Fields** : The input fields allow users to enter their information to register to the website. It's built with validation messages as a respond if the users fill it incorrectly. 
+     * **Input Fields** : The input fields allow users to enter their information to register to the website. 
+       The input fields are: 
+       - Name (required) 
+       - Username (required) 
+       - Email (required) 
+       - Password (required) 
+       - Repeat Password (required)
+       - About you and your love for cooking (Optional)
+       - Profile Image (Optional)
+       They're built with validation messages as a respond if the users fill it incorrectly. 
      * **Image Preview** : One of the fields that the users can fill out is a profile image (url). This will come with an image preview for the image url that the users provide.
      * **Confirm Password** :  The password field is hashed using [Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/utils/#module-werkzeug.security). Once the password field is filled, there is a confirm password field to ensure the users had written the desirable password. The submit form button is disabled untill both passwords matches.
-     * **Log In Option** : At the bottom of the form, there's a reminder to the users to log in instead if they already have an account.
-
+     * **Log In Option** : At the bottom of the form, there's a reminder to the users to log in instead if they already have an account.  
+   
+   - **Log In Page** 
+     * **Input Fields** : The input fields allow users to enter their information to login to the website, by providing Username and Password.
+     * **Sign Up Option** : At the bottom of the form, there's a reminder to the users to sign up instead if they are not a member.
      
+   - **Create Recipe Page**
+
+
    
 
 

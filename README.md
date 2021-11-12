@@ -200,6 +200,54 @@ The overall theme of the site was orange and green, which were derived from the 
 All of the fonts were sourced from [Google Fonts](https://fonts.google.com).   
 * Main fonts: Nunito Sans   
   A sans-serif type of font was chosen to give a simple, clean, and modern look to the site. As the background is already filled with blob patterns and fun colors, it is important to balance it out with a simple font.
-* Secondary fonts: Pacifico   
-  Pacifico was used only for the logo 'Cookle'
+* Logo fonts: Pacifico   
+  A cursive type of font Pacifico was used only for the logo 'Cookle', and was chosen to contrast it with the main font. So that it's easily recognisable between website content.
+
+#### **Imagery**  
+- Hero Image was chosen because it’s bright, fun, and capturing attention on the first impression. It is also picturing various food items that corresponds to a recipe sharing web application. The hero image was chosen at the first stage of designing the site and determines the whole color theme of the website, thus it has a very important role.
+- The background image for all pages (excluding index.html) was actually the hero image without most of its drawing components. Using online editor [Photopea](https://www.photopea.com/), I edited the hero image.   
+
+<br/>   
+
+## **Features**  
+### **Existing Features**  
+### **a. General Design Features**  
+   - **Fully responsive** - Each page of the site is fully responsive on all device sizes (with minimum dimension 320px or an iPhone 5) and features intuitive navigational buttons.   
+   - **Navbar** - The Navbar is responsive and turns to a hamburger menu in smaller device. The Navbar is fixed, dissapering on scroll down, and showing again on scroll up. This feature gives the best of both worlds where the user can always access the Navbar without it taking up the space for content.
+      * For guest users, the Sign Up and Log In buttons are visible right away, conventionally placed at the top-right of the page.
+      * After the user successfully logged in, the previously Sign Up and Log In buttons turn to a profile picture navigation drop down, which provvides the links to Create Recipe, to View Profile, to go to My Cookbook, and to Log Out.
+   - **Flash Messages** - Flash messages provide the user the necessary feedback of their action whether it's successfully executed or not.
+   - **Recipe Cards** - Recipe cards are used consistently throughout the website, providing users with the image of the recipe, the recipe's name, total likes, and add to cookbook button (a plus sign icon). This add to cookbook button is also displayed even when the user hasn't logged in/ registered, in order to give the user a glimpse of what they can get by registering to the website. When guest users click this button, it will direct them to the login page.
+   - **Footer** - The footer is available on all pages, provides the navigation links like Navbar, with additional contact information and social media icons. 
+   - **A Secure Website** - In addition to front-end manipulation (for instance the Edit Recipe button is hidden for users that don't own that recipe), a back-end defensive programming was also built to prevent any unallowed action performed by a user.   
+
+### **b. Page Design Features**     
+
+   - **Home Page / Landing Page**
+     * **Search Bar** : Right away centered in the middle of the hero-image, a Search Bar allows users to search a recipe. After the users click the search button, they will be brought to the Explore Recipes page with the result of their query. 
+     * **Carousel** : There are three carousels in the home page, displaying 8 Popular Recipes, 8 Newest Recipes, and 6 Cookbook Recommendation. Carousel was chosen to add some interactive section for the user, also to allow more contents to be displayed.
+     * **Sign Up** : A small section inviting the users to register to site by explaining how the website works.
+     * **Invite Your Friends** : Also a small section to convince users to invite their friends and family to join Cookle.   
+
+   - **Explore Recipes**   
+     * **Search Bar** : Search bar function allowing users to search for a recipe.
+     * **Category Select** : Category select element allowing users to view all recipes based on a category.
+     * **Reset Button** : A reset button was placed under the search bar and the select category, allowing users to reset the query and show all recipes instead.
+     * **Recipe Cards** : All recipes in the website is displayed alphabetically ordered in cards. If users use the search or category select, the cards are sorted by number of likes. 
+     * **Pagination** : Pagination functionality will be activated when the recipes displayed are more than 12 recipes.   
+   
+   - **Sign Up Page**   
+     * **Input Fields** : The input fields allow users to enter their information to register to the website. It's built with validation messages as a respond if the users fill it incorrectly. 
+     * **Image Preview** : One of the fields that the users can fill out is a profile image (url). This will come with an image preview for the image url that the users provide.
+     * **Confirm Password** :  The password field is hashed using [Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/utils/#module-werkzeug.security). Once the password field is filled, there is a confirm password field to ensure the users had written the desirable password. The submit form button is disabled untill both passwords matches.
+     * **Log In Option** : At the bottom of the form, there's a reminder to the users to log in instead if they already have an account.
+
+     
+   
+
+
+
+
+
+
 

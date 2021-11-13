@@ -42,7 +42,7 @@
                         </div>
                         <!-- Rendering image from url -->
                         <div class="mb-4 text-center">
-                            <img class="show-image" src="{{ user.user_image }}" width="300">
+                            <img class="show-image" src="{{ user.user_image }}" onerror="this.src='../../static/images/user.png';" width="300">
                         </div>
                         <!-- Submit button & Log In link-->
                         <div class="text-center">

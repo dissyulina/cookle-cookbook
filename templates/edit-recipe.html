@@ -91,12 +91,12 @@
                     </div>
                     <!-- Recipe's Image Url input-->
                     <div class="col-12">
-                        <label for="image-url" class="form-label"><i class="fas fa-image"></i> Recipe's Image</label>
+                        <label for="image-url" class="form-label"><i class="fas fa-image"></i> Recipe's Image (Url / Image's address)</label>
                         <input type="text" class="form-control" id="image-url" name="recipe_image" value="{{ recipe.recipe_image }}">
                     </div>
                     <!-- Rendering image from url -->
-                    <div class="mb-4 text-center square-image">
-                        <img class="show-image" src="{{ recipe.recipe_image }}" onerror="{{ url_for('static', filename='images/dish-placeholder.png') }}" width="300">
+                    <div class="mb-4 text-center">
+                        <img class="show-image" src="{{ recipe.recipe_image }}" onerror="this.src='../../static/images/dish-placeholder.png';" width="300">
                     </div>
                     <!-- Buttons -->
                     <div class="d-flex align-items-center justify-content-center my-5">

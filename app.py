@@ -503,14 +503,14 @@ def get_cookbook(username):
         user = mongo.db.users.find_one(
             {"username": session["user"]})
         uploaded_recipes = list(mongo.db.recipes.find(
-            {"_id": {"$in": user["uploaded_recipes"]}}))
+            {"_id": {"$in": user["uploaded_recipes"]}}).sort("recipe_name", 1))
         saved_recipes = list(mongo.db.recipes.find(
-            {"_id": {"$in": user["saved_recipes"]}}))
+            {"_id": {"$in": user["saved_recipes"]}}).sort("recipe_name", 1))
         
         # to find from 2 lists, ref: https://stackoverflow.com/questions/47075081/concatenate-pymongo-cursor
         all_recipes = list(mongo.db.recipes.find(
             {'$or': [{"_id": {"$in": user["uploaded_recipes"]}},
-                     {"_id": {"$in": user["saved_recipes"]}}]}))
+                     {"_id": {"$in": user["saved_recipes"]}}]}).sort("recipe_name", 1))
 
         # pagination
         all_recipes_paginated = paginated(all_recipes)

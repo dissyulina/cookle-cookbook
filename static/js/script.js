@@ -211,3 +211,17 @@ $(document).ready(function(){
     }
 });
 
+/* EmailJS */
+function sendMail(inviteForm) {
+    emailjs.send("yahoo","cookle_ms3", "send_to": inviteForm.emailInvite.value)
+    .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+    }, 
+    function(error) {
+        console.log('FAILED...', error);
+    });
+    return false;
+}
+
+
+    

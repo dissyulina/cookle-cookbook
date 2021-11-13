@@ -66,7 +66,7 @@
                                 <div class="card shadow-2-strong h-100">
                                     <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
                                         <img src="{{ recipe.recipe_image }}" class="card-img-top" 
-                                            onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
+                                            onerror="this.src='../../static/images/dish-placeholder.png';" alt="{{ recipe.recipe_name }}">
                                         <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
                                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                         </a>

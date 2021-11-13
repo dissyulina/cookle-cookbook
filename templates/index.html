@@ -1,4 +1,17 @@
 {% extends "base.html" %}
+
+{% block styles %}
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js">
+</script>
+<script type="text/javascript">
+    (function(){
+        emailjs.init("user_ezh2VDVtQvTX8KoZQDplM");
+    })();
+</script>
+
+{% endblock %}
+
 {% block content %}
 
 <header class="pb-5">
@@ -231,11 +244,11 @@
         <p>We are a recipe-sharing community, where all recipes come from homecooks all over the world. Would you like to invite your friends and family to share their recipes as well? Provide the email address, and we’ll send them an invitation email to sign up to Cookle.</p>
         <div class="row py-3 d-flex justify-content-center">
             <div class="col-md-6">
-                <form action="" method="">
+                <form onsubmit="return sendMail(this);" id="inviteForm">
                     <div class="w-100 d-flex py-3">
                         <div class="form-outline flex-grow-1">
-                            <input type="text" id="query" name="query" class="form-control" required>
-                            <label class="form-label" for="query">Email address</label>
+                            <input type="text" id="emailInvite" name="emailInvite" class="form-control" required>
+                            <label class="form-label" for="emailInvite">Email address</label>
                         </div>
                         <button type="submit" class="btn btn-rec-primary me-2">Send Invitation</button>
                     </div>

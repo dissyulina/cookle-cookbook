@@ -5,7 +5,8 @@ body {
 }
 
 .btn,
-.nav-pills .nav-link {
+.nav-pills .nav-link,
+.form-label {
     color: #181A18;
 }
 

@@ -30,12 +30,12 @@
                     <!-- Serving -->
                     <div class="col-12 col-md-2">
                         <label for="serving" class="form-label"><i class="fas fa-users"></i> Serves</label>
-                        <input type="text" class="form-control" id="serving" name="serving" required> person
+                        <input type="text" class="form-control" id="serving" name="serving"> person
                     </div>
                     <!-- Prep & Cooking Time -->
                     <div class="col-12 col-md-4">
                         <label for="time" class="form-label"><i class="fas fa-clock"></i> Prep + Cooking Time</label>
-                        <input type="text" class="form-control" id="time" name="time" required> minutes
+                        <input type="text" class="form-control" id="time" name="time"> minutes
                     </div>
                     <!-- Categories selection -->
                     <div class="col-12 col-md-6">
@@ -78,7 +78,7 @@
                     </div>
                     <!-- Buttons -->
                     <div class="d-flex align-items-center justify-content-center my-5">
-                        <a href="" role="button" class="btn btn-rec-secondary btn-rounded btn-lg me-5">Cancel</a>
+                        <a href="{{ url_for('get_recipes') }}" role="button" class="btn btn-rec-secondary btn-rounded btn-lg me-5">Cancel</a>
                         <button type="submit" class="btn btn-rec-primary btn-rounded btn-lg"><i class="fas fa-folder-plus"></i>  Submit Recipe</button>
                     </div>
                 </form>

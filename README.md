@@ -219,7 +219,9 @@ All of the fonts were sourced from [Google Fonts](https://fonts.google.com).
    - **Flash Messages** - Flash messages provide the user the necessary feedback of their action whether it's successfully executed or not.
    - **Recipe Cards** - Recipe cards are used consistently throughout the website, providing users with the image of the recipe, the recipe's name, total likes, and add to cookbook button (a plus sign icon). This add to cookbook button is also displayed even when the user hasn't logged in/ registered, in order to give the user a glimpse of what they can get by registering to the website. When guest users click this button, it will direct them to the login page.
    - **Footer** - The footer is available on all pages, provides the navigation links like Navbar, with additional contact information and social media icons. 
-   - **A Secure Website** - In addition to front-end manipulation (for instance the Edit Recipe button is hidden for users that don't own that recipe), a back-end defensive programming was also built to prevent any unallowed action performed by a user.   
+   - **A Secure Website** - In addition to front-end manipulation (for example the Edit Recipe button is hidden for users that don't own that recipe), a back-end defensive programming was also built to prevent any unallowed action performed by a user.   
+   - **CONTACT MODAL**
+   - **Modal Confirmation**
 
 ### **b. Page Design Features**     
 
@@ -238,24 +240,84 @@ All of the fonts were sourced from [Google Fonts](https://fonts.google.com).
    
    - **Sign Up Page**   
      * **Input Fields** : The input fields allow users to enter their information to register to the website. 
-       The input fields are: 
+       The input fields include: 
        - Name (required) 
        - Username (required) 
        - Email (required) 
        - Password (required) 
        - Repeat Password (required)
-       - About you and your love for cooking (Optional)
-       - Profile Image (Optional)
+       - About you and your love for cooking (optional)
+       - Profile Image (optional)
        They're built with validation messages as a respond if the users fill it incorrectly. 
-     * **Image Preview** : One of the fields that the users can fill out is a profile image (url). This will come with an image preview for the image url that the users provide.
+     * **Image Preview** : One of the fields that the users can fill out is a profile image (url). This will come with an image preview for the image url the users provide.
      * **Confirm Password** :  The password field is hashed using [Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/utils/#module-werkzeug.security). Once the password field is filled, there is a confirm password field to ensure the users had written the desirable password. The submit form button is disabled untill both passwords matches.
+     * **Sign Up (Submit) Button** : A sign up button to submit the registration form.
      * **Log In Option** : At the bottom of the form, there's a reminder to the users to log in instead if they already have an account.  
    
    - **Log In Page** 
      * **Input Fields** : The input fields allow users to enter their information to login to the website, by providing Username and Password.
-     * **Sign Up Option** : At the bottom of the form, there's a reminder to the users to sign up instead if they are not a member.
-     
-   - **Create Recipe Page**
+     * **Log In (Submit) Button** : A log in button to submit the login form.
+     * **Sign Up Option** : At the bottom of the form, there's a reminder to the users to sign up instead if they are not a member.   
+    
+   - **Profile Page**   
+     * **View Profile** : Small section where users can see their profile image, username, email address, and about you.
+     * **User Management Buttons** : Users can find buttons to Edit their profile, or Delete their account on the top right of the page.   
+     * **Call to Action Buttons (Recipe Sharing)** : From this page users can also directly access all pages, including Create Recipe page, Explore Recipes page, and My Cookbook page.
+     * **Collapsible Uploaded Recipes** : Users can see all their uploaded recipes in one page, in a collapsible button to save spaces. There's a vertical ellipsis button at the end of every recipe title, that provides edit or delete option. The recipe title is also clickable, and users can directly go to the recipe page.
+     * **Collapsible Saved Recipes** : Same as the collapsible uploaded recipes, users can also see all their saved recipes in one page in a collapsible button. There's a remove recipe button (trash can icon) at the end of every recipe title, that provides the functionality to remove the recipe from users' cookbook. The recipe title is clickable as well, and users can directly go to the recipe page.  
+
+   - **Edit Profile Page**  
+     * **Input Fields** : The input fields are prepopulated with users existing information.
+       The input fields that can be edited include: 
+       - Username (required) 
+       - Email (required) 
+       - About you and your love for cooking (optional)
+       - Profile Image (optional)
+     * **Image Preview** : One of the fields that the users can fill out is a profile image (url). This will come with an image preview for the image url the users provide.
+     * **Submit and Cancel Buttons** : A submit and cancel buttons for the form. After one of the buttons is clicked, it will direct the users back to the Profile page.
+
+   - **Create Recipe Page**  
+     * **Input Fields** : The input fields allow users to enter the recipe's information to the website. 
+       The input fields include: 
+       - Recipe's Name (required) 
+       - Description of the recipe (optional)
+       - Serving (optional)
+       - Preparation + Cooking Time (optional)  
+       - Category (required)
+       - Ingredients (required)
+       - Directions (required)
+       - Recipe's Image (optional)
+     * **Image Preview** : One of the fields that the users can fill out is a recipe image (url). This will come with an image preview for the image url the users provide.  
+     * **Submit and Cancel Buttons** : A submit and cancel buttons for the form. After one of the buttons is clicked, it will direct the users to Explore Recipes page.  
+
+   - **Single Recipe Page** 
+     * **Recipe's Information** : all information from the Create Recipe form are displayed in one page.
+     * **Reviews section** : 
+     * **Call to Action Buttons**:
+       - **Share Button** : On the top right of the page, users can find Share to social media button (Share to Whatsapp, Facebook, Twitter, and Pinterest). It's beneficial for the site if the users want to share this recipe to social media, as this could lead to more recognition to the site and would hopefully bring more members.
+       - **Print Button** : Next to the Share button, users can find Print button that provide convinience for users to print the recipe.
+       - **Edit Recipe and Delete Recipe Buttons** :
+       - **Add to Cookbook Button** : Users can add this recipe to their cookbook by clicking this button. The button will changed to Saved to Cookbook (with a check icon) if the recipe is added to the Cookbook. If it's clicked again, there's a modal confirmation to confirm if the users actually want to remove this recipe from their cookbook. The modal is completed with Cancel and Remove buttons.
+       - **Like Button** :
+       - **Add Review Button**
+       - **Edit Review and Delete Review Buttons**
+    
+   - **Edit Recipe Page**
+     * **Input Fields** : The input fields are prepopulated with the recipe's existing information. 
+       The input fields that can be edited include: 
+       - Recipe's Name (required) 
+       - Description of the recipe (optional)
+       - Serving (optional)
+       - Preparation + Cooking Time (optional)  
+       - Category (required)
+       - Ingredients (required)
+       - Directions (required)
+       - Recipe's Image (optional)
+     * **Image Preview** : One of the fields that the users can fill out is a recipe image (url). This will come with an image preview for the image url the users provide.  
+     * **Submit and Cancel Buttons** : A submit and cancel buttons for the form. After one of the buttons is clicked, it will direct the users back to the Single Recipe page. 
+
+
+
 
 
    

@@ -240,7 +240,7 @@ All of the fonts were sourced from [Google Fonts](https://fonts.google.com).
    
    - **Sign Up Page**   
      * **Input Fields** : The input fields allow users to enter their information to register to the website. 
-       The input fields include: 
+       The input fields consist of: 
        - Name (required) 
        - Username (required) 
        - Email (required) 
@@ -278,7 +278,7 @@ All of the fonts were sourced from [Google Fonts](https://fonts.google.com).
 
    - **Create Recipe Page**  
      * **Input Fields** : The input fields allow users to enter the recipe's information to the website. 
-       The input fields include: 
+       The input fields consist of: 
        - Recipe's Name (required) 
        - Description of the recipe (optional)
        - Serving (optional)
@@ -291,16 +291,16 @@ All of the fonts were sourced from [Google Fonts](https://fonts.google.com).
      * **Submit and Cancel Buttons** : A submit and cancel buttons for the form. After one of the buttons is clicked, it will direct the users to Explore Recipes page.  
 
    - **Single Recipe Page** 
-     * **Recipe's Information** : all information from the Create Recipe form are displayed in one page.
-     * **Reviews section** : 
-     * **Call to Action Buttons**:
-       - **Share Button** : On the top right of the page, users can find Share to social media button (Share to Whatsapp, Facebook, Twitter, and Pinterest). It's beneficial for the site if the users want to share this recipe to social media, as this could lead to more recognition to the site and would hopefully bring more members.
+     * **Recipe's Information** : All information from the Create Recipe form are displayed in one page.
+     * **Reviews section** : Right below the recipe, there's a review section where all reviews are displayed. Every review consists of a profile picture and username of the writer and the review itself.
+     * **Call to Action Buttons**
+       - **Share Button** : On the top right of the page, users can find Share to social media button (Share to Whatsapp, Facebook, Twitter, and Pinterest). It's considered beneficial for the site if the users want to share this recipe to social media, as this could lead to more recognition to the site and would hopefully bring more members. I used sharer.js which is a small javascript libary for this functionality.
        - **Print Button** : Next to the Share button, users can find Print button that provide convinience for users to print the recipe.
-       - **Edit Recipe and Delete Recipe Buttons** :
+       - **Edit Recipe and Delete Recipe Buttons** : These two buttons are placed next to the print button and only displayed for user that has created the recipe. The Edit Recipe button will bring the user to the Edit Recipe page. While clicking the Delete Recipe button will bring up a modal to confirm before removing the recipe.
        - **Add to Cookbook Button** : Users can add this recipe to their cookbook by clicking this button. The button will changed to Saved to Cookbook (with a check icon) if the recipe is added to the Cookbook. If it's clicked again, there's a modal confirmation to confirm if the users actually want to remove this recipe from their cookbook. The modal is completed with Cancel and Remove buttons.
-       - **Like Button** :
-       - **Add Review Button**
-       - **Edit Review and Delete Review Buttons**
+       - **Like Button** : Users can like the recipe by clicking this button, and unlike it by clicking it again. A user can like a recipe without saving it on cookbook, and vice versa. The number of likes is an important data for the site, as this number affects the popular recipes carousel on home page, and the search query result is sorted according to number of likes.
+       - **Add Review Button** : Users can add a review by clicking the Add Review Button. It will shows a text area form right above the reviews section, completed with a Submit Review and Cancel button.
+       - **Edit Review and Delete Review Buttons** : For the reviews that were written by the user, a vertical ellipsis button is placed at the right side of a review, providing option to Edit or to Delete the review.  
     
    - **Edit Recipe Page**
      * **Input Fields** : The input fields are prepopulated with the recipe's existing information. 
@@ -314,9 +314,48 @@ All of the fonts were sourced from [Google Fonts](https://fonts.google.com).
        - Directions (required)
        - Recipe's Image (optional)
      * **Image Preview** : One of the fields that the users can fill out is a recipe image (url). This will come with an image preview for the image url the users provide.  
-     * **Submit and Cancel Buttons** : A submit and cancel buttons for the form. After one of the buttons is clicked, it will direct the users back to the Single Recipe page. 
+     * **Submit and Cancel Buttons** : A submit and cancel buttons for the form. After one of the buttons is clicked, it will direct the users back to the Single Recipe page.  
 
+   - **My Cookbook Page**  
+     * **Navigation Pills** : My cookbook page consists of three different pills which are: All Recipes (Uploaded + Saved Recipes), Uploaded Recipes, and Saved Recipes. Users can click the navigation pills to navigate between the recipes.
+     * **Recipe Cards** : All recipes in the cookbook are displayed alphabetically in cards. 
+     * **Call to Action Button** : Users can navigate easily to create a new recipe or to explore recipes from this page.
+       - **Create Recipes** : This button will direct users to the Add Recipe form.   
+       - **Explore Recipes** : This button will direct users tp the Explore Recipes page.  
 
+   - **Categories Page** (only available to admin)  
+     * **All Categories** : All categories are displayed in this page. For now there are 5 categories in the site: Appetizer, Main, Dessert, Snack, and Other. Admin can edit these categories in the future, add a new category, or delete it.
+     * **Add Category Button** : As the recipes database grow bigger, admin can add new categories such as drinks, vegetarian, kids menu, etc. It will direct the user to the Add Category Page.
+     * **Edit Category Button** : Edit category button is placed for every category. It will direct the users to Edit Category page.
+     * **Delete Category Button** : Delete category button is also placed for every category. When clicked, there will be a modal pop up to confirm before deleting.   
+
+   - **Add Category Page** (only available to admin)
+     * **Input Field** : The input field allow users to enter a new category name to the website. 
+     * **Add Category and Cancel Buttons** : An add category (submit) and cancel buttons for the form.
+    
+   - **Edit Category Page** (only available to admin)
+     * **Input Field** : The input field is alredy prepopulated with the existing category, and it allow users to edit the category.
+     * **Edit Category and Cancel Buttons** : An edit category (submit) and cancel buttons for the form.
+
+<br/>   
+
+#### **Features to be implemented in the future**   
+
+Due to limited resources (time constraint, skill of the developer at the moment, and other reasons), some features couldn't be implemented now. In the future on the next development phase, these features would be great addition to the game:   
+1. Forgot Password / Change Password Functionality   
+   This functionality would give users an option to change password, by sending a secure link to change password to user's email address. 
+
+2. Separate page for review   
+   As for now, the reviews were displayed on the same page with the recipe. However if there are a lot of reviews, it would disturbed the recipe page layout because it would be too long. The idea is to displayed only 5 latest reviews and add a link navigation to see all reviews.  
+
+3. A profile page where for public view with all recipes that the user has created   
+   A username is not yet clickable for this project. However in futute development of this project, a profile page for public viewing can be built. By clicking a username, another user can view the public profile page, and can see all recipes that this user had created. 
+
+4. Users can upload image from computer   
+   It is advisable by Code Institute to use url to upload images in this project. To upload a file from a computer and locate it on somewhere will be covered on the upcoming lesson, Fullstack with Django.   
+  
+
+  
 
 
 

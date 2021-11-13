@@ -206,8 +206,8 @@ $(document).ready(function(){
         let activeContent = activePill.substring(1);
         $('#' + activeContent).addClass("show active");
     } else {
-        $('#cookbook-pills a[href="#ex3-pills-1"]').addClass("active")
-        $('#ex3-pills-1').addClass("show active")
+        $('#cookbook-pills a[href="#all-pills"]').addClass("active")
+        $('#all-pills').addClass("show active")
     }
 });
 

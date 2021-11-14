@@ -12,7 +12,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet" type="text/css">
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-
     {% block styles %}
     {% endblock %}
     <!-- Email JS -->
@@ -25,11 +24,9 @@
         })();
     </script>
     <title>Cookle</title>
-
 </head>
 
 <body>
-
     <header>
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top autohide">
@@ -37,7 +34,8 @@
             <div class="container">
                 <!-- Navbar brand -->
                 <a class="navbar-brand me-2" href="#">
-                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Cookle's logo" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" 
+                        alt="Cookle's logo" loading="lazy">
                 </a>
             
                 <!-- Toggle button -->
@@ -52,34 +50,50 @@
                     <!-- Left links -->
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                            <a class="nav-link" href="{{ url_for('home') }}">
+                                Home
+                            </a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="{{ url_for('get_recipes') }}">Explore Recipes</a>
+                            <a class="nav-link" href="{{ url_for('get_recipes') }}">
+                                Explore Recipes
+                            </a>
                         </li>
                         {% if session.user %}
                         <li class="btn-group nav-item dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center profile-img" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ user.user_image}}" onerror="this.src='../../static/images/user.png';" class="rounded-circle" height="22" alt="profile picture" loading="lazy">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center profile-img" role="button" 
+                                id="navbarDropdownMenuLink" data-mdb-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ user.user_image}}" onerror="this.src='../../static/images/user.png';" 
+                                    class="rounded-circle" height="22" alt="profile picture" loading="lazy">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                                 <li class="nav-item">
-                                    <a class="nav-link dropdown-item" href="{{ url_for('add_recipe') }}">Create Recipe</a>
+                                    <a class="nav-link dropdown-item" href="{{ url_for('add_recipe') }}">
+                                        Create Recipe
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link dropdown-item" href="{{ url_for('profile', username=session['user']) }}" class="text-dark">View Profile</a>
+                                    <a class="nav-link dropdown-item"
+                                        href="{{ url_for('profile', username=session['user']) }}">
+                                        View Profile
+                                    </a>
                                 </li>
                                 <li>
-                                    <a class="nav-link dropdown-item" href="{{ url_for('get_cookbook', username=session['user']) }}" class="text-dark">My Cookbook</a>
+                                    <a class="nav-link dropdown-item"
+                                        href="{{ url_for('get_cookbook', username=session['user']) }}">
+                                        My Cookbook
+                                    </a>
                                 </li>
                                 {% if session.user|lower == "admin"|lower %}
                                     <li>
-                                        <a class="nav-link dropdown-item" href="{{ url_for('get_categories') }}">Manage Categories</a>
+                                        <a class="nav-link dropdown-item" href="{{ url_for('get_categories') }}">
+                                            Manage Categories
+                                        </a>
                                     </li>
                                 {% endif %}
                                 <li><hr class="dropdown-divider" /></li>
                                 <li>
-                                    <a class="nav-link dropdown-item" class="text-dark" href="{{ url_for('logout') }}">Log Out</a>
+                                    <a class="nav-link dropdown-item" href="{{ url_for('logout') }}">Log Out</a>
                                 </li>
                             </ul>
                         </li>
@@ -90,7 +104,8 @@
                                 <a role="button" class="btn btn-primary me-2" href="{{ url_for('register') }}">
                                     Sign Up
                                 </a>
-                                <a role="button" class="btn btn-secondary me-3" id="login-btn" href="{{ url_for('login') }}">
+                                <a role="button" class="btn btn-secondary me-3" 
+                                    id="login-btn" href="{{ url_for('login') }}">
                                     Log In
                                 </a>
                             </div>
@@ -103,7 +118,7 @@
     {% block content %}
     {% endblock %}
 
-    <footer class="text-center text-lg-start">
+    <footer class="text-lg-start">
         <!-- Grid container -->
         <div class="container p-4">
             <!--Grid row-->
@@ -113,27 +128,39 @@
                     <h5 class="text-uppercase">Links</h5>
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#!" class="text-dark">Home</a>
+                            <a href="#!">Home</a>
                         </li>
                         <li>
-                            <a href="{{ url_for('get_recipes') }}" class="text-dark">Explore Recipes</a>
+                            <a href="{{ url_for('get_recipes') }}">
+                                Explore Recipes
+                            </a>
                         </li>
                         {% if session.user %}
                             <li>
-                                <a class="text-dark" href="{{ url_for('add_recipe') }}">Create Recipe</a>
+                                <a href="{{ url_for('add_recipe') }}">
+                                    Create Recipe
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ url_for('profile', username=session['user']) }}" class="text-dark">Profile</a>
+                                <a href="{{ url_for('profile', username=session['user']) }}">
+                                    Profile
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ url_for('get_cookbook', username=session['user']) }}" class="text-dark">My Cookbook</a>
+                                <a href="{{ url_for('get_cookbook', username=session['user']) }}">
+                                    My Cookbook
+                                </a>
                             </li>
                         {% else %}
                             <li>
-                                <a href="{{ url_for('register') }}" class="text-dark">Sign Up</a>
+                                <a href="{{ url_for('register') }}">
+                                    Sign Up
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ url_for('login') }}" class="text-dark">Log In</a>
+                                <a href="{{ url_for('login') }}">
+                                    Log In
+                                </a>
                             </li>
                         {% endif %}
                     </ul>
@@ -141,27 +168,34 @@
             
                 <!--Grid column-->
                 <div class="col-md-4 col-6 mb-md-0">
-                    <h5 class="text-uppercase mb-0">Contact Us</h5>
+                    <h5 class="text-uppercase mb-0">Contact</h5>
                     <ul class="list-unstyled">
                         <li>
-                            <a data-mdb-toggle="modal" data-mdb-target="#modalContact" role="button" class="btn btn-sm">Contact Form</a>
+                            <p>Fill out this contact form:</p>
+                            <a data-mdb-toggle="modal" data-mdb-target="#modalContact" 
+                                role="button" class="btn btn-sm">
+                                Contact Form
+                            </a>
                         </li>
-                        <li>
-                            Or email us at: 
-                            <a href="mailto:info@cookle.com" target="_blank" class="text-dark">info@cookle.com</a>
+                        <li class="py-2">
+                            <p>Or email us at: </p>
+                            <a href="mailto:info@cookle.com" target="_blank">
+                                info@cookle.com
+                            </a>
                         </li>
                         <li>
                             <!-- Section: Social media -->
                             <section class="mb-4">
+                                <p>Follow us:</p>
                                 <!-- Facebook -->
-                                <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;"
-                                    href="#!" role="button">
-                                    <i class="fab fa-facebook-f"></i>
+                                <a class="btn btn-floating me-1" id="fb-icon" href="https://www.facebook.com" role="button" 
+                                    target="_blank" rel="noopener" aria-label="Open our facebook page in a new tab">
+                                    <i class="fab fa-facebook-f text-white"></i>
                                 </a>
                                 <!-- Instagram -->
-                                <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac;"
-                                    href="#!" role="button">
-                                    <i class="fab fa-instagram"></i>
+                                <a class="btn btn-floating" id="ig-icon" href="https://www.instagram.com" role="button" 
+                                target="_blank" rel="noopener" aria-label="Open our facebook page in a new tab">
+                                    <i class="fab fa-instagram text-white"></i>
                                 </a>
                             </section>
                         </li>
@@ -171,7 +205,8 @@
                 <!--Grid column-->
                 <div class="col-md-4 col-6 mb-4 mb-md-0 d-none d-md-block">
                     <a class="me-2" href="">
-                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" loading="lazy" height="150px">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" 
+                            alt="Cookle's logo" loading="lazy" height="150px">
                     </a>
                 </div>
             </div>
@@ -180,7 +215,9 @@
         <!-- Copyright -->
         <div class="text-center p-3">
             For Educational Purposes - 
-            <a class="text-dark" href="https://github.com/dissyulina"><i class="fab fa-github"></i> Dissy Ulina</a>
+            <a class="text-dark" href="https://github.com/dissyulina">
+                <i class="fab fa-github"></i> Dissy Ulina
+            </a>
         </div>
 
         <!-- Modal Contact Form -->
@@ -188,12 +225,14 @@
             tabindex="-1" aria-labelledby="modalContactLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content bg-green">
-                    <div class="d-none d-flex flex-column justify-content-center align-items-center" id="message-sent">
+                    <div class="d-none d-flex flex-column justify-content-center align-items-center" 
+                        id="message-sent">
                         <i class="fas fa-check fa-5x py-3"></i>
                         <p>Message sent</p>
                     </div>
                     <div id="contact-modal">
-                        <button type="button" class="btn-close btn-close-white" data-mdb-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white" 
+                            data-mdb-dismiss="modal" aria-label="Close"></button>
                         <div class="modal-header text-white d-flex flex-column justify-content-center align-items-center">
                             <i class="fas fa-envelope fa-5x py-3"></i>
                             <h4 class="modal-title text-center" id="modalContactLabel">
@@ -204,16 +243,21 @@
                             <form class="py-3 px-3" onsubmit="return sendMail(this);" id="contact-form">
                                 <div class="mb-3">
                                     <label for="name" class="form-label text-white">Name: </label>
-                                    <input type="text" class="form-control" id="name" placeholder="John Doe" name="name" required>
+                                    <input type="text" class="form-control" placeholder="John Doe" 
+                                        id="name" name="name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label text-white">Email address: </label>
-                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="name@example.com" name="email" required>
-                                    <small id="emailHelp" class="form-text text-white">We'll never share your email with anyone else.</small>
+                                    <input type="email" class="form-control" aria-describedby="emailHelp" 
+                                        id="email" placeholder="name@example.com" name="email" required>
+                                    <small id="emailHelp" class="form-text text-white">
+                                        We'll never share your email with anyone else.
+                                    </small>
                                 </div>
                                 <div class="mb-3">
                                     <label for="message" class="form-label text-white">Message: </label>
-                                    <textarea class="form-control" id="message" rows="5" placeholder="Your message" name="message" required></textarea>
+                                    <textarea class="form-control" id="message" rows="5" 
+                                        placeholder="Your message" name="message" required></textarea>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">
                                     <button type="button" class="btn btn-secondary btn-sm" data-mdb-dismiss="modal">
@@ -239,7 +283,6 @@
     
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
 
     <!-- JS -->

@@ -1,5 +1,6 @@
 body {
-    color: #181A18;
+    /*color: #181A18;*/
+    color:#262626;
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 400;
 }
@@ -7,11 +8,8 @@ body {
 .btn,
 .nav-pills .nav-link,
 .form-label {
-    color: #181A18;
-}
-
-hr {
-    max-width: 70%;
+    /*color: #181A18;*/
+    color: #262626;
 }
 
 .logo-text {
@@ -35,7 +33,10 @@ h4 {
 .navbar-brand > img {
     height: 100px;
 }
-
+.btn {
+    text-transform: capitalize;
+    font-size: 1rem;
+}
 .btn-primary {
     background-color: #3c726c;
     color: #fff;
@@ -92,6 +93,7 @@ h4 {
 
 .form-outline .form-control {
     background-color: #fff;
+    height: 100%;
 }
 
 .background {
@@ -99,6 +101,26 @@ h4 {
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;
+}
+
+/* Navbar */
+.navbar-light .navbar-nav .nav-link,
+footer, 
+footer li>a {
+    color: #4f4f4f;
+}
+
+/*Footer */
+footer p {
+    margin-bottom: 0;
+}
+
+#fb-icon {
+    background-color: #3b5998;
+}
+
+#ig-icon {
+    background-color: #ac2bac;
 }
 
 /* Navbar hide on scroll down, show on scroll up
@@ -131,8 +153,9 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 }
 .bg-green {
     /*
-    background-color: #1e4641;*/
     background-color: #3c726c;
+    */
+    background-color: #1e4641;
     color: #fff;
 }
 

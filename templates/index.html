@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<header class="pb-5">
+<section class="pb-5">
     <div class="w-100 hero-img d-flex justify-content-center align-items-center">
         <div class="container text-center">
             <h1 class="logo-text">Cookle</h1>
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-</header>
+</section>
 
 <!-- Popular Recipes Section   -->
 <!-- Code for carousel was sourced and modified from: https://www.codeply.com/p/0CWffz76Q9 -->
@@ -122,7 +122,7 @@
 <!-- Code for carousel was sourced and modified from: https://www.codeply.com/p/0CWffz76Q9 -->
 <section class="container text-center py-5">
     <h4 class="font-extra-bold pb-2">Cookbooks we love.</h4>
-    <p class="pb-3">Sometimes you just want to buy a good 'ol cookbook, but there're so many choices on the market. Hand-picked carefully by our trusted team, here are the best of the best cookbooks out there.</p>
+    <p class="pb-3">Sometimes you just want to buy a good 'ol cookbook, but there're so many choices on the market. Hand-picked carefully by our trusted team, here are the best of the best cookbooks out there in our opinion.</p>
     <div class="row mx-auto my-auto justify-content-center">
         <div id="cookbooksCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner p-3" role="listbox">
@@ -210,12 +210,12 @@
             </div>
             <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
                 <div class="container my-5">
-                    <h3 class="pt-3 mb-3">Create your own online cookbook from your favorite recipes!</h3>
-                    <p><i class="fas fa-check"></i> Create your account</p>
-                    <p><i class="fas fa-check"></i> See any recipes you like? Add it to your cookbook.</p>
-                    <p><i class="fas fa-check"></i> Upload and share your own recipe so everyone can try it as well!</p>
-                    <div class="pt-3 pb-5">
-                        <a role="button" class="btn btn-secondary me-2" href="{{ url_for('register') }}">
+                    <h3 class="pt-3 mb-4">Create your own online cookbook from your favorite recipes!</h3>
+                    <p class="mb-0"><i class="fas fa-check"></i> Create your account</p>
+                    <p class="mb-0"><i class="fas fa-check"></i> See any recipes you like? Add it to your cookbook.</p>
+                    <p class="mb-0"><i class="fas fa-check"></i> Upload and share your own recipe so everyone can try it as well!</p>
+                    <div class="pt-5 pb-5 text-center text-md-start">
+                        <a role="button" class="btn btn-secondary" href="{{ url_for('register') }}">
                             Sign Up
                         </a>
                     </div>
@@ -228,17 +228,17 @@
 <!-- Invite your friends section -->
 <section class="py-5 bg-light-gray">
     <div class="container text-center">
-        <h3 class="my-5">We are <span class="logo-text">Cookle</span></h3>
+        <h3 class="my-5">We are <span class="logo-text display-4">Cookle</span></h3>
         <p>We are a recipe-sharing community, where all recipes come from homecooks all over the world. Would you like to invite your friends and family to share their recipes as well? Provide the email address, and we’ll send them an invitation email to sign up to Cookle.</p>
         <div class="row py-3 d-flex justify-content-center">
             <div class="col-md-6">
-                <form onsubmit="return sendInvitation(this);">
+                <form onsubmit="return sendInvitation(this);" id="invite-form">
                     <div class="w-100 d-flex py-3">
                         <div class="form-outline flex-grow-1">
                             <input type="text" id="emailInvite" name="emailInvite" class="form-control" required>
                             <label class="form-label" for="emailInvite">Email address</label>
                         </div>
-                        <button type="submit" class="btn btn-rec-primary me-2">Send Invitation</button>
+                        <button type="submit" class="btn btn-primary me-2" id="btn-invite">Send Invitation</button>
                     </div>
                 </form>
             </div>

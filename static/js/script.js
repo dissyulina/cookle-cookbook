@@ -211,9 +211,9 @@ $(document).ready(function(){
     }
 });
 
-/* EmailJS */
-function sendMail(inviteForm) {
-    emailjs.send("yahoo","cookle_ms3", "send_to": inviteForm.emailInvite.value)
+/* EmailJS for Inviting Friends*/
+function sendInvitation(inviteForm) {
+    emailjs.send("yahoo","cookle_ms3", {"send_to": inviteForm.emailInvite.value})
     .then(function(response) {
         console.log('SUCCESS!', response.status, response.text);
     }, 
@@ -222,6 +222,32 @@ function sendMail(inviteForm) {
     });
     return false;
 }
+
+/* EmailJS for Contact Form*/
+function sendMail(contactForm) {
+    emailjs.send("yahoo", "contact_cookle", {
+        "from_name": contactForm.name.value,
+        "from_email": contactForm.email.value,
+        "message": contactForm.message.value,
+    })
+    .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+        // Change the display
+        $("#message-sent").removeClass("d-none");
+        $("#contact-modal").addClass("d-none");
+        // After 2 seconds turn it back to contact form
+        setTimeout(function(){
+            $('#contact-form')[0].reset();
+            $("#message-sent").addClass("d-none");
+            $("#contact-modal").removeClass("d-none");
+        }, 2000);
+    }, 
+    function(error) {
+        console.log('FAILED...', error);
+    });
+    return false;
+}
+
 
 
     

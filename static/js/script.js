@@ -216,6 +216,13 @@ function sendInvitation(inviteForm) {
     emailjs.send("yahoo","cookle_ms3", {"send_to": inviteForm.emailInvite.value})
     .then(function(response) {
         console.log('SUCCESS!', response.status, response.text);
+        // Change the display
+        $("#btn-invite").html('<i class="fas fa-check"></i> Sent');
+        // After 2 seconds turn it back to empty form
+        setTimeout(function(){
+            $('#invite-form')[0].reset();
+            $("#btn-invite").html('Send Invitation');
+        }, 2000);
     }, 
     function(error) {
         console.log('FAILED...', error);

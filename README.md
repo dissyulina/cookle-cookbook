@@ -342,8 +342,8 @@ All of the fonts were sourced from [Google Fonts](https://fonts.google.com).
 #### **Features to be implemented in the future**   
 
 Due to limited resources (time constraint, skill of the developer at the moment, and other reasons), some features couldn't be implemented now. In the future on the next development phase, these features would be great addition to the game:   
-1. Forgot Password / Change Password Functionality   
-   This functionality would give users an option to change password, by sending a secure link to change password to user's email address. 
+1. Forgot Password Functionality   
+   This functionality would give users an option to change password without logging in first to the website. This would usually be done by sending a secure link to change password to user's email address. For now the users can only change their password by logging in and clicking the change password button.
 
 2. Separate page for review   
    As for now, the reviews were displayed on the same page with the recipe. However if there are a lot of reviews, it would disturbed the recipe page layout because it would be too long. The idea is to displayed only 5 latest reviews and add a link navigation to see all reviews.  
@@ -352,8 +352,29 @@ Due to limited resources (time constraint, skill of the developer at the moment,
    A username is not yet clickable for this project. However in futute development of this project, a profile page for public viewing can be built. By clicking a username, another user can view the public profile page, and can see all recipes that this user had created. 
 
 4. Users can upload image from computer   
-   It is advisable by Code Institute to use url to upload images in this project. To upload a file from a computer and locate it on somewhere will be covered on the upcoming lesson, Fullstack with Django.   
+   It is advisable by Code Institute to use url to upload images in this project. To upload a file from a computer and locate it on somewhere will be covered on the upcoming lesson, Fullstack with Django.     
   
+<br/>   
+
+## **Issues and Bugs**  
+### **Solved Issues**  
+I ran into several issues and bugs while developing the website. Some of the tough ones are listed below, along with the solutions that successfully solved them.   
+
+1. **Issue**: I chose MDB (Material Design Bootstrap) as a main front-end library in this project, having heard that MDB provides the great UI components like Materialize, but also gives the convenience of responsive design as Bootstrap. In the middle of the project I wanted to build some multi-cards carousel for popular recipes, newest recipes, and cookbooks we love on the Home Page. It came by surprise that when I searched this feature on MDB, the multi-items / cards carousel feature was locked and it's only available for paid users. I searched on google and tried to apply various methods that I found, with so many failures, as it was difficult to build a carousel without using a library.   
+
+   **Solution**:  
+
+2. **Issues** : On My Cookbook page, I used navigation pills to separate the recipes into three pills/tabs: Uploaded (self-created) Recipes, Saved Recipes, and All Recipes (Uploaded Recipes + Saved Recipes). I've made the arrays of ```created_recipes``` and ```saved_recipes```  under the  ```Users``` document, therefore I had to concaenate the two arrays, take the ```recipe_id``` and find them inside the ```Recipes``` document.    
+
+   **Solution** : After many search on google, I found [this topic](https://stackoverflow.com/questions/47075081/concatenate-pymongo-cursor) on Stack Overflow, using ```'$or'``` to concatenate two cursors, and applied it successfully.   
+
+3. **Issue** : By reading the pagination method in another students' projects, I could apply the pagination to the Explore Recipes Page without too much difficulties. However when I applied the pagination to My Coobook Page, which has navigation pills inside, I encountered a problem. For example if I was inside the second pill (Saved Recipes), and then I cliked the second page/ next page, it should've brought me to the second page of Saved Recipes. But instead, it went back to the first pill (All Recipes) on second page. After investigating on developer tools, it seemed that when the pagination was clicked, the page reloaded, and the active class automatically went back to the first pill.   
+
+  **Solution** : Once I understood the problem, I used javascript and session storage to manipulate the active class. The last clicked pills is saved the session storage, and on page reloads, add and remove active class manually according to the data from session storage. This way the pagination can be clicked and the page still stays on the active pill.  
+
+### **Unsolved Issues**   
+1. **Issues** : 
+
 
   
 

@@ -297,7 +297,17 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 }
 
 /* For Carousel in index.html */
-
+.carousel-cell {
+    width: 25%;
+    height: 400px;
+    margin-right: 10px;
+    padding-bottom: 5px;
+}
+  
+.carousel-cell .card {
+    display: block;
+}
+  
 .carousel-inner .carousel-item.active,
 .carousel-inner .carousel-item-next,
 .carousel-inner .carousel-item-prev {
@@ -335,6 +345,10 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
         font-size: 0.8rem;
         line-height: 0.8;
     }
+}
+@media (max-width: 991px) {
+.carousel-cell {
+    width: 34%;
 }
 
 @media (min-width: 1200px) {

@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block styles %}
+<!-- Flickity -->
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+{% endblock %}
+
 {% block content %}
 
 <section class="pb-5">
@@ -26,8 +31,38 @@
     </div>
 </section>
 
+<section class="container text-center my-5">
+    <h3 class="font-extra-bold pb-2">Our popular recipes.</h3>
+    <p class="pb-3">Check out the most loved recipes in the community. They're awesome and deliciously proven! Try it today and taste it for yourself.</p>
+    <div class="main-carousel" data-flickity='{ "wrapAround": true }'>
+        {% for recipe in popular_recipes %}
+            <div class="carousel-cell">
+                        <div class="card shadow-2-strong h-100">
+                            <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
+                                <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/logo.png';" alt="{{ recipe.recipe_name }}">
+                                <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                </a>
+                            </div>
+                            <div class="card-body text-start">
+                                <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
+                                <p><i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}</p>
+
+                                        <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-rec-primary btn-absolute btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+
+
+                            </div>
+                        </div>
+                   
+                
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+
 <!-- Popular Recipes Section   -->
-<!-- Code for carousel was sourced and modified from: https://www.codeply.com/p/0CWffz76Q9 -->
+<!-- Code for carousel was sourced and modified from: https://www.codeply.com/p/0CWffz76Q9 
 <section class="container text-center my-5">
     <h3 class="font-extra-bold pb-2">Our popular recipes.</h3>
     <p class="pb-3">Check out the most loved recipes in the community. They're awesome and deliciously proven! Try it today and taste it for yourself.</p>
@@ -60,7 +95,7 @@
                     </div>
                 {% endfor %}
             </div>
-            <!-- Button Prev & Next Slide -->
+            ------------ Button Prev & Next Slide 
             <a class="carousel-control-prev bg-transparent w-aut" role="button" data-mdb-slide="prev" data-mdb-target="#popularRecipesCarousel">
                 <span class="carousel-control-prev-icon"></span>
             </a>
@@ -71,6 +106,7 @@
     </div>
     <a href="{{ url_for('get_recipes') }}" class="ml-auto">See more recipes <i class="fas fa-arrow-right"></i></a>
 </section>
+-->
 
 <!-- Recent Recipes Section   -->
 <!-- Code for carousel was sourced and modified from: https://www.codeply.com/p/0CWffz76Q9 -->

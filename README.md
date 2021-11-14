@@ -433,8 +433,20 @@ Unfortunately, I didn't find enough documentation about this topic and couldn't 
    * [Coolors](https://coolors.co)  
    Coolors was used to create a cohesive color scheme for the website.   
 
+   <br/>   
 
-   <br/>
+
+## **Testing**  
+The testing documentation can be found [here]()). 
+
+<br/>   
+
+## **Deployment**  
+The project was developed using Gitpod as the code editor, committed to Git as a local repository, and pushed/ stored to GitHub. The web application is deployed on Heroku with the repository hosted on Github.
+
+### **Deployment to Heroku**  
+The project was deployed to GitHub Pages using the following steps:   
+
 
 
 

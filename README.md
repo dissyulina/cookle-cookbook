@@ -370,10 +370,74 @@ I ran into several issues and bugs while developing the website. Some of the tou
 
 3. **Issue** : By reading the pagination method in another students' projects, I could apply the pagination to the Explore Recipes Page without too much difficulties. However when I applied the pagination to My Coobook Page, which has navigation pills inside, I encountered a problem. For example if I was inside the second pill (Saved Recipes), and then I cliked the second page/ next page, it should've brought me to the second page of Saved Recipes. But instead, it went back to the first pill (All Recipes) on second page. After investigating on developer tools, it seemed that when the pagination was clicked, the page reloaded, and the active class automatically went back to the first pill.   
 
-  **Solution** : Once I understood the problem, I used javascript and session storage to manipulate the active class. The last clicked pills is saved the session storage, and on page reloads, add and remove active class manually according to the data from session storage. This way the pagination can be clicked and the page still stays on the active pill.  
+   **Solution** : Once I understood the problem, I used javascript and session storage to manipulate the active class. The last clicked pills is saved the session storage, and on page reloads, add and remove active class manually according to the data from session storage. This way the pagination can be clicked and the page still stays on the active pill.  
 
-### **Unsolved Issues**   
-1. **Issues** : 
+### **Known Issues & Unsolved Bugs**  
+1. Continuing from Pagination issues on My Cookbook Page, I noticed one more problem that still persisted. For example if I clicked second pill (Saved Recipe), and then I clicked page-2 of Saved Recipe. From there I wanted to go to first pill (All Recipes), it should've displayed All Recipe page-1. But instead it brought me to All Recipes page-2 (the same page as the previous pill). I googled it and found on [Stack Overflow](https://stackoverflow.com/questions/41719318/flask-many-pagination-on-one-single-page-using-flask-paginate-0-4-5) that it was because there were multiple paginations in one page, each linked to the respective pill. The solution was to handle this is with asynchronous requests (Ajax). I should have three separate endpoints for the three lists of items, each paginated individually. The main HTML page will issue Ajax requests to these three endpoints, and moving between pages in one list should not affect the other two lists at all. 
+Unfortunately, I didn't find enough documentation about this topic and couldn't apply a solution for this problem. Hopefully as I gain more knowledge and experience, I would be able to solve this on the next development phase.  
+
+<br/>   
+
+## **Technology Used**  
+### **Main Languages Used**
+   * [HTML5](https://en.wikipedia.org/wiki/HTML5)   
+   * [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)   
+   * [JavaScript](https://en.wikipedia.org/wiki/JavaScript)   
+   * [Python](https://en.wikipedia.org/wiki/Python_(programming_language))   
+
+### **Libraries and Frameworks**   
+   * [Material Design For Bootstrap](https://mdbootstrap.com/)  
+   MDB was used to assist with the UI/UX components, responsiveness, and styling of the website.  
+   * [jQuery 3.6.0](https://jquery.com/)  
+   jQuery was used as a JavaScript library to help writing less JavaScript code.  
+   * [Sharer.js](https://jinja.palletsprojects.com)   
+   Sharer.js was used to provide the share to social media functionality.   
+   * [Flask](https://flask.palletsprojects.com)   
+   Flask was used as Python web application framework.  
+   * [PyMongo](https://pypi.org/project/pymongo/)   
+   PyMongo was used as a Python distribution containing tools for working with MongoDB.  
+   * [Flask-PyMongo](https://pypi.org/project/Flask-PyMongo/)   
+   Flask-PyMongo was used as a bridge to communicate between Flask and PyMongo.   
+   * [Flask-Paginate](https://pypi.org/project/flask-paginate/)  
+   Flask-Paginate was used to provide pagination functionality.
+   * [Jinja](https://jinja.palletsprojects.com)  
+   Jinja was used as a templating language for Python to display backend data to HTML.   
+   * [Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/utils/#module-werkzeug.security)  
+   Werkzeug was used for password hashing and authentication.   
+   * [Google Fonts](https://fonts.google.com)  
+   Google fonts was used to import the "Nunito Sans", and “Pacifico” fonts into the html file, and were used on all parts of the site.  
+   * [Font Awesome](https://fontawesome.com)  
+   Font Awesome was used throughout the website to add icons for aesthetic and UX purposes.   
+
+### **Database Management**   
+   * [MongoDB](https://www.mongodb.com)   
+   MongoDB was used as an open source database that stores the data/ documents for the application.  
+
+### **Tools and Programs**  
+   * [Git](https://git-scm.com)  
+   Git was used for version control by utilizing the Gitpod terminal to commit to Git and Push to GitHub.  
+   * [GitHub](https://github.com)  
+   GitHub was used to store the projects code after being pushed from Git. 
+   * [Heroku](https://www.heroku.com)   
+   Heroku was used to deploy the website.   
+   * [Figma](https://www.figma.com)  
+   Figma was used to create the wireframes and the high fidelity mock up during the design process.  
+   * [Autoprefixer CSS](https://autoprefixer.github.io)  
+   Autoprefixer CSS was used to add vendor prefixes to the CSS rules, to ensure that they work across all browsers.   
+   * [Am I Responsive](ami.responsivedesign.is)  
+   Am I Responsive was used to preview the website across a variety of popular devices.   
+   * [Photopea](https://www.photopea.com/)   
+   Photopea is an online image editor to edit .ai file, and was used to edit the hero image.  
+   * [Tiny JPG](https://tinyjpg.com) and [Tiny PNG](https://tinypng.com)    
+   Tiny JPG and Tiny PNG were used to reduce the file size of the images.   
+   * [Coolors](https://coolors.co)  
+   Coolors was used to create a cohesive color scheme for the website.   
+
+
+   <br/>
+
+
+
 
 
   

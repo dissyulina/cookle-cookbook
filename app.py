@@ -139,6 +139,10 @@ def search():
 # -- Filter Recipes --
 @app.route("/filter_recipes", methods=["GET", "POST"])
 def filter_recipes():
+    """
+    Function to filter the recipes by their category
+    Results are sorted by number of likes (descending)
+    """
     category_name = request.form.get("category")
     categories = mongo.db.categories.find().sort("category_name", 1)
     recipes = list(mongo.db.recipes.find(
@@ -168,6 +172,9 @@ def filter_recipes():
 # -- User register/ sign up --
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    Function for user registration / signing up
+    """
     if "user" in session:
         # remove user from session cookie
         flash("You have been logged out", "info")
@@ -209,6 +216,9 @@ def register():
 # -- User log in --
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    Function for user login to the site
+    """
     if request.method == "POST":
         # check if username exists in db
         existing_user = mongo.db.users.find_one(
@@ -237,7 +247,14 @@ def login():
 # -- User's profile page --
 @app.route("/profile/<username>")
 def profile(username):
+    """
+    Function for user to view their profile page
+    Add some conditional defensive code to check:
+    - if the user is logged in
+    - if the logged in user is the correct user
+    """
     if "user" in session:
+        # Check if user is correct
         if session["user"] == username:
             # user variable to grab user's data
             user = mongo.db.users.find_one(
@@ -265,6 +282,12 @@ def profile(username):
 # -- Edit profile page --
 @app.route("/edit_profile/<user_id>", methods=["GET", "POST"])
 def edit_profile(user_id):
+    """
+    Function for user to edit their profile
+    Add some conditional defensive code to check:
+    - if the user is logged in
+    - if the logged in user is the correct user
+    """
     if "user" in session:
         user = mongo.db.users.find_one(
             {"_id": ObjectId(user_id)})
@@ -298,6 +321,12 @@ def edit_profile(user_id):
 # -- Change Password page --
 @app.route("/change_password/<user_id>", methods=["GET", "POST"])
 def change_password(user_id):
+    """
+    Function for user to change their password
+    Add some conditional defensive code to check:
+    - if the user is logged in
+    - if the logged in user is the correct user
+    """
     if "user" in session:
         user = mongo.db.users.find_one(
             {"_id": ObjectId(user_id)})
@@ -333,8 +362,10 @@ def change_password(user_id):
 @app.route("/delete_profile/<user_id>")
 def delete_profile(user_id):
     """
-    This functionality is only available for user that owns the profile,
-    and also the Admin.
+    Function for user to delete their account
+    Add some conditional defensive code to check:
+    - if the user is logged in
+    - if the logged in user is the correct user
     """
     if "user" in session:
         user = mongo.db.users.find_one(
@@ -342,7 +373,7 @@ def delete_profile(user_id):
         username = user["username"]
 
         # Check if user is correct
-        if session["user"] == username or session["user"] == "admin":
+        if session["user"] == username:
             mongo.db.users.remove(
                 {"username": username.lower()})
             flash("Profile Deleted", "info")
@@ -363,6 +394,9 @@ def delete_profile(user_id):
 # -- User log out --
 @app.route("/logout")
 def logout():
+    """
+    Function for user to log out
+    """
     # remove user from session cookie
     flash("You have been logged out", "info")
     session.pop("user")
@@ -372,6 +406,12 @@ def logout():
 # -- Add/create a recipe --
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
+    """
+    Function to add a recipe
+    Add some conditional defensive code to check
+        if the user is logged in
+    Also add the new recipe_id to user's cookbook
+    """
     user = mongo.db.users.find_one(
         {"username": session["user"]})
     if "user" in session:
@@ -391,11 +431,6 @@ def add_recipe():
                 "reviews": []
             }
             new_recipe_id = mongo.db.recipes.insert_one(submit).inserted_id
-
-            """
-            Adds the new recipe_id to user's cookbook
-            (https://docs.mongodb.com/manual/reference/operator/update/push/)
-            """
             mongo.db.users.update_one({"username": session["user"]},
                                       {"$push": {
                                           "uploaded_recipes": new_recipe_id}})
@@ -415,13 +450,17 @@ def add_recipe():
 # -- Get data for a single recipe --
 @app.route("/recipe/<recipe_id>")
 def get_single_recipe(recipe_id):
+    """
+    Function for individual recipe page
+    Display the recipe's data and all reviews for the recipe
+    """
     recipe = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})
     reviews = mongo.db.reviews.find().sort("_id", 1)
     if recipe["total_reviews"] > 0:
         review = mongo.db.reviews.find_one({"_id": {"$in": recipe["reviews"]}})
 
-    # If the user logged in
+    # If the user logged in, get data for saved recipe and likes
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
@@ -463,9 +502,16 @@ def get_single_recipe(recipe_id):
                            reviews=reviews)
 
 
-# -- Edit a recipe (Only for the user that owns the recipe, and the admin) --
+# -- Edit a recipe --
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
+    """
+    Function for user to edit their own recipe
+    This function is also accessible by the Admin
+    Add some conditional defensive code to check:
+    - if the user is logged in
+    - if the logged in user is the correct user or admin
+    """
     user = mongo.db.users.find_one(
         {"username": session["user"]})
     recipe = mongo.db.recipes.find_one(
@@ -476,23 +522,18 @@ def edit_recipe(recipe_id):
         if session["user"] == username or session["user"] == "admin":
             # If correct user
             if request.method == "POST":
-                mongo.db.recipes.update_one(
-                    {"_id": ObjectId(recipe_id)}, {
-                        '$set': {
-                                "category_name": request.form.get(
-                                    "category_name"),
-                                "recipe_name": request.form.get("recipe_name"),
-                                "description": request.form.get("description"),
-                                "ingredients": request.form.getlist(
-                                    "ingredients"),
-                                "directions": request.form.getlist(
-                                    "directions"),
-                                "recipe_image": request.form.get(
-                                    "recipe_image"),
-                                "serving": request.form.get("serving"),
-                                "time": request.form.get("time"),
-                                }
-                        })
+                submit = {
+                    "category_name": request.form.get("category_name"),
+                    "recipe_name": request.form.get("recipe_name"),
+                    "description": request.form.get("description"),
+                    "ingredients": request.form.getlist("ingredients"),
+                    "directions": request.form.getlist("directions"),
+                    "recipe_image": request.form.get("recipe_image"),
+                    "serving": request.form.get("serving"),
+                    "time": request.form.get("time"),
+                }
+                mongo.db.users.update({"_id": ObjectId(recipe_id)},
+                                      {"$set": submit})
                 flash("Recipe Successfully Edited", "success")
                 return redirect(url_for("get_recipes"))
 
@@ -512,9 +553,16 @@ def edit_recipe(recipe_id):
         return redirect(url_for("login"))
 
 
-# -- Delete a recipe (Only for the user that owns the recipe, and the admin) --
+# -- Delete a recipe --
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
+    """
+    Function for user to delete their own recipe
+    This function is also accessible by the Admin
+    Add some conditional defensive code to check:
+    - if the user is logged in
+    - if the logged in user is the correct user or admin
+    """
     recipe = mongo.db.recipes.find_one(
             {"_id": ObjectId(recipe_id)})
     username = recipe["username"]
@@ -532,6 +580,13 @@ def delete_recipe(recipe_id):
 # -- Manage Categories (Admin only)--
 @app.route("/get_categories")
 def get_categories():
+    """
+    Function for admin to view all categories
+    Only accessible by Admin
+    Add some conditional defensive code to check:
+    - if the user is logged in
+    - if the logged in user is admin
+    """
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
@@ -552,9 +607,16 @@ def get_categories():
         return redirect(url_for("login"))
 
 
-# -- Add New Category (admin only) --
+# -- Add New Category (Admin only) --
 @app.route("/add_category", methods=["GET", "POST"])
 def add_category():
+    """
+    Function for admin to add a new categories
+    Only accessible by Admin
+    Add some conditional defensive code to check:
+    - if the user is logged in
+    - if the logged in user is admin
+    """
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
@@ -579,9 +641,16 @@ def add_category():
         return redirect(url_for("login"))
 
 
-# -- Edit Category (admin only) --
+# -- Edit Category (Admin only) --
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
+    """
+    Function for admin to edit categories
+    Only accessible by Admin
+    Add some conditional defensive code to check:
+    - if the user is logged in
+    - if the logged in user is admin
+    """
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
@@ -614,6 +683,13 @@ def edit_category(category_id):
 # -- Delete Category (admin only) --
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
+    """
+    Function for admin to delete categories
+    Only accessible by Admin
+    Add some conditional defensive code to check:
+    - if the user is logged in
+    - if the logged in user is admin
+    """
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
@@ -636,13 +712,19 @@ def delete_category(category_id):
 # -- Save Recipe to Cookbook --
 @app.route("/save_to_cookbook/<recipe_id>", methods=["GET", "POST"])
 def save_to_cookbook(recipe_id):
+    """
+    Function for users to save recipe to their cookbook,
+    Also to remove from their cookbook if it's already in the cookbook
+        (added a confirmation modal on front-end before removing)
+    Add conditional defensive code to check
+        if the user is logged in
+    """
     recipe = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})
     if "user" in session:
         if session["user"] != recipe["username"]:
             user = mongo.db.users.find_one(
                 {"username": session["user"]})
-
             saved_recipes = user["saved_recipes"]
 
             # Checks if recipe is already in cookbook
@@ -650,9 +732,8 @@ def save_to_cookbook(recipe_id):
                 # Adds recipe_id to user's cookbook
                 mongo.db.users.update_one({"username": session["user"]},
                                           {"$push": {
-                                              "saved_recipes": ObjectId(
-                                                  recipe_id)
-                                          }})
+                                            "saved_recipes": ObjectId(
+                                                  recipe_id)}})
                 flash("Recipe Added to My Cookbook", "success")
                 return redirect(url_for("get_single_recipe",
                                         recipe_id=recipe_id))
@@ -661,9 +742,8 @@ def save_to_cookbook(recipe_id):
                 # If recipe is already in cookbook, remove it from the cookbook
                 mongo.db.users.update_one({"username": session["user"]},
                                           {"$pull": {
-                                              "saved_recipes": ObjectId(
-                                                  recipe_id)
-                                          }})
+                                            "saved_recipes": ObjectId(
+                                                  recipe_id)}})
                 flash("Recipe Removed from My Cookbook", "info")
                 return redirect(url_for("get_single_recipe",
                                         recipe_id=recipe_id))
@@ -685,6 +765,12 @@ def save_to_cookbook(recipe_id):
 # -- Like a recipe  --
 @app.route("/like_recipe/<recipe_id>")
 def like_recipe(recipe_id):
+    """
+    Function for users to like a recipe
+    Also to unlike a recipe if it's already liked
+    Add conditional defensive code to check
+        if the user is logged in
+    """
     if "user" in session:
         user = mongo.db.users.find_one(
                 {"username": session["user"]})
@@ -724,6 +810,14 @@ def like_recipe(recipe_id):
 # -- My Cookbook Page --
 @app.route("/cookbook/<username>")
 def get_cookbook(username):
+    """
+    Function for users to view their cookbook page
+    Separated in three tabs:
+        uploaded recipes, saved recipes, all (uploaded + saved)
+    Add conditional defensive code to check:
+        - if the user is logged in
+        - if the user is correct
+    """
     if "user" in session:
         if session["user"] == username:
             # user variable to grab user's data
@@ -735,11 +829,6 @@ def get_cookbook(username):
             saved_recipes = list(mongo.db.recipes.find(
                 {"_id": {"$in": user["saved_recipes"]}}
                 ).sort("recipe_name", 1))
-
-            """
-            to find from 2 lists,
-            https://stackoverflow.com/questions/47075081/concatenate-pymongo-cursor
-            """
             all_recipes = list(mongo.db.recipes.find(
                 {'$or': [{"_id": {"$in": user["uploaded_recipes"]}},
                          {"_id": {"$in": user["saved_recipes"]}}]}
@@ -777,6 +866,11 @@ def get_cookbook(username):
 # -- Write a review --
 @app.route("/write_review/<recipe_id>", methods=["GET", "POST"])
 def write_review(recipe_id):
+    """
+    Function for users to write a review
+    Add conditional defensive code to check
+        if the user is logged in
+    """
     recipe = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})
     if "user" in session:
@@ -819,6 +913,12 @@ def write_review(recipe_id):
 # -- Edit a review (only available for the user's own review) --
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
+    """
+    Function for users to edit their review
+    Add conditional defensive code to check
+        - if the user is logged in
+        - if the user is correct
+    """
     review = mongo.db.reviews.find_one(
         {"_id": ObjectId(review_id)})
     recipe_id = review["recipe_id"]
@@ -857,8 +957,12 @@ def edit_review(review_id):
 @app.route("/delete_review/<review_id>")
 def delete_review(review_id):
     """
-    This funtionality only available for the user that
-    owns the review, and also the admin)
+    Function for users to delete their review
+    This functionality is also accessible by Admin
+        (to delete malicious comments if needed)
+    Add conditional defensive code to check
+        - if the user is logged in
+        - if the user is correct or is admin
     """
     review = mongo.db.reviews.find_one(
         {"_id": ObjectId(review_id)})

@@ -188,6 +188,9 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
     color: #EF6C00;
 }
 
+.show-image {
+    max-width: 80%;
+}
 /* Recipes page */
 #category-option p {
     margin-bottom: 5px;

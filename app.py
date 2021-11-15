@@ -221,6 +221,22 @@ def edit_profile(user_id):
     return render_template("edit-profile.html", user=user)
 
 
+# -- Change Password page --
+@app.route("/change_password/<user_id>", methods=["GET", "POST"])
+def change_password(user_id):
+    if request.method == "POST":
+        submit = {
+            "password": generate_password_hash(request.form.get("password")),
+        }
+        mongo.db.users.update({"_id": ObjectId(user_id)}, {"$set": submit})
+        flash("Password Successfully Changed", "success")
+        return redirect(url_for("profile", username=session["user"]))
+
+    user = mongo.db.users.find_one(
+        {"_id": ObjectId(user_id)})
+    return render_template("change-password.html", user=user)
+
+
 # -- Delete my profile --
 @app.route("/delete_profile/<username>")
 def delete_profile(username):
@@ -242,7 +258,7 @@ def delete_profile(username):
 @app.route("/logout")
 def logout():
     # remove user from session cookie
-    flash("You have been logged out")
+    flash("You have been logged out", "info")
     session.pop("user")
     return redirect(url_for("login"))
 

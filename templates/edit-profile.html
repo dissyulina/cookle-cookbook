@@ -16,7 +16,7 @@
                         {% endif %}
                     {% endwith %}
 
-
+                <h3 class="my-5"><i class="fas fa-user-edit"></i> Edit Profile</h3>
                 <div class="card p-2 p-md-5 form-width">                 
                     <form method="POST" action="{{ url_for('edit_profile', user_id=user._id) }}" id="form-register">
                         <!-- Username input -->
@@ -46,8 +46,8 @@
                         </div>
                         <!-- Submit button & Log In link-->
                         <div class="text-center">
-                            <a href="{{ url_for('profile', username=session['user']) }}" role="button" class="btn btn-primary my-3"><i class="fas fa-window-close"></i> Cancel</a>
-                            <button type="submit" class="btn btn-primary my-3 submit-btn">Edit Profile</button>
+                            <a href="{{ url_for('profile', username=session['user']) }}" role="button" class="btn btn-sm btn-secondary my-3"><i class="fas fa-window-close"></i> Cancel</a>
+                            <button type="submit" class="btn btn-sm btn-primary my-3 submit-btn"><i class="fas fa-edit"></i> Edit Profile</button>
                         </div>
                     </form>
                 </div>
@@ -55,6 +55,5 @@
         </div>
     </div>
 </section>
-
 
 {% endblock %}

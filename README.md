@@ -360,9 +360,9 @@ Due to limited resources (time constraint, skill of the developer at the moment,
 ### **Solved Issues**  
 I ran into several issues and bugs while developing the website. Some of the tough ones are listed below, along with the solutions that successfully solved them.   
 
-1. **Issue**: I chose MDB (Material Design Bootstrap) as a main front-end library in this project, having heard that MDB provides the great UI components like Materialize, but also gives the convenience of responsive design as Bootstrap. In the middle of the project I wanted to build some multi-cards carousel for popular recipes, newest recipes, and cookbooks we love on the Home Page. It came by surprise that when I searched this feature on MDB, the multi-items / cards carousel feature was locked and it's only available for paid users. I searched on google and tried to apply various methods that I found, with so many failures, as it was difficult to build a carousel without using a library.   
+1. **Issue**: I chose MDB (Material Design Bootstrap) as the main front-end library in this project, having heard that MDB provides great UI components like Materialize, but also gives the convenience of responsive design as Bootstrap. In the middle of the project I wanted to build some multi-cards carousel for popular recipes, newest recipes, and cookbooks we love on the Home Page. It came by surprise that when I searched this feature on MDB, the multi-items / cards carousel feature was locked and it's only available for paid users. I searched on google and tried to apply various methods that I found, with so many failures, as it was quite difficult to build a carousel manually from scratch without using a library.   
 
-   **Solution**:  
+   **Solution**: I finally found a small library to build a carousel called [Flickity](https://flickity.metafizzy.co/), and it's even beter because the carousel will be touchable/ flickable for touch screen. Reading the documentation and examples, it was easy and simple to use, and I successfully implemented it for my project.
 
 2. **Issues** : On My Cookbook page, I used navigation pills to separate the recipes into three pills/tabs: Uploaded (self-created) Recipes, Saved Recipes, and All Recipes (Uploaded Recipes + Saved Recipes). I've made the arrays of ```created_recipes``` and ```saved_recipes```  under the  ```Users``` document, therefore I had to concaenate the two arrays, take the ```recipe_id``` and find them inside the ```Recipes``` document.    
 
@@ -408,6 +408,8 @@ Unfortunately, I didn't find enough documentation about this topic and couldn't 
    Google fonts was used to import the "Nunito Sans", and “Pacifico” fonts into the html file, and were used on all parts of the site.  
    * [Font Awesome](https://fontawesome.com)  
    Font Awesome was used throughout the website to add icons for aesthetic and UX purposes.   
+   * [Flickity](https://flickity.metafizzy.co/)   
+   Flickity was used to build carousels on Home Page.   
 
 ### **Database Management**   
    * [MongoDB](https://www.mongodb.com)   

@@ -395,8 +395,7 @@ def edit_recipe(recipe_id):
         else:
             # If wrong user
             flash("You are not authorized to do that.", "danger")
-            return redirect(url_for("get_single_recipe", recipe_id=recipe_id, 
-                            username=session["user"]))
+            return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
     else: 
         flash("You're not logged in. Please log in or sign up first.", "warning")
         return redirect(url_for("login"))
@@ -416,8 +415,7 @@ def delete_recipe(recipe_id):
     else:
         # If wrong user
         flash("You are not authorized to do that.", "danger")
-        return redirect(url_for("get_single_recipe", recipe_id=recipe_id, 
-                            username=session["user"]))
+        return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
 
 
 # -- Manage Categories --
@@ -593,19 +591,18 @@ def get_cookbook(username):
         return redirect(url_for("login"))
 
 
-
 # -- Write a review --
 @app.route("/write_review/<recipe_id>", methods=["GET", "POST"])
 def write_review(recipe_id):
     recipe = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})
-    user = mongo.db.users.find_one(
-        {"username": session["user"]})
-    username = user["username"]
-    user_image = user["user_image"]
-    
     if "user" in session:
+        # If user logged in
         if request.method == "POST":
+            user = mongo.db.users.find_one(
+                {"username": session["user"]})
+            username = user["username"]
+            user_image = user["user_image"]
             submit = {
                 "review_text": request.form.get("write_review"),
                 "username": username,
@@ -626,41 +623,74 @@ def write_review(recipe_id):
         
         return render_template("single-recipe.html", recipe=recipe, user=user)
 
+    else:
+        # If not logged in
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+        return redirect(url_for("login"))
+
 
 # -- Edit a review (only available for the user's own review) --
-@app.route("/edit_review/<review_id>/", methods=["GET", "POST"])
+@app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
-    # recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    user = mongo.db.users.find_one(
-        {"username": session["user"]})
     review = mongo.db.reviews.find_one(
         {"_id": ObjectId(review_id)})
     recipe_id = review["recipe_id"]
+
     if "user" in session:
-        if request.method == "POST":
-            submit = {
-                "review_text": request.form.get("edit_review")
-            }
-            mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$set": submit})
-            flash("Review Successfully Edited", "success")
+        # If the user logged in
+        username = review["username"]
+        if session["user"] == username:
+            # If correct user
+            if request.method == "POST":
+                submit = {
+                    "review_text": request.form.get("edit_review")
+                }
+                mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$set": submit})
+                flash("Review Successfully Edited", "success")
+                return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
+
+            return render_template("single-recipe.html", review=review, user=user) 
+
+        else:
+            # If wrong user
+            flash("You are not authorized to do that.", "danger")
             return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
 
-        return render_template("single-recipe.html", review=review, user=user)
+    else:
+        # If not logged in
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+        return redirect(url_for("login"))
 
 
-# -- Delete a comment (only available for the user's own review) --
+# -- Delete a review (only available for the user's own review) --
 @app.route("/delete_review/<review_id>")
 def delete_review(review_id):
     review = mongo.db.reviews.find_one(
         {"_id": ObjectId(review_id)})
     recipe_id = review["recipe_id"]
-    mongo.db.reviews.remove({"_id": ObjectId(review_id)})
-    mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)}, {
-                                "$pull": {"reviews": ObjectId(review_id)},
-                                "$inc": {"total_reviews": -1}})
 
-    flash("Review Successfully Deleted", "success")
-    return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
+    if "user" in session:
+        # If the user logged in
+        username = review["username"]
+        if session["user"] == username:
+            # If correct user
+            mongo.db.reviews.remove({"_id": ObjectId(review_id)})
+            mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)}, {
+                                        "$pull": {"reviews": ObjectId(review_id)},
+                                        "$inc": {"total_reviews": -1}})
+
+            flash("Review Successfully Deleted", "success")
+            return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
+
+        else:
+            # If wrong user
+            flash("You are not authorized to do that.", "danger")
+            return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
+
+    else:
+        # If not logged in
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+        return redirect(url_for("login"))
 
 
 if __name__ == "__main__":

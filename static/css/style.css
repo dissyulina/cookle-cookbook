@@ -28,6 +28,12 @@ h4 {
     font-weight: 700;
 }
 
+.divider {
+    height: 5px;
+    width: 10rem;
+    background-image: linear-gradient(to right, #88c6b7 , #f6f7e6, #F6c28e);
+}
+
 .font-extra-bold {
     font-weight: 900;
 }
@@ -307,50 +313,55 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 .carousel-cell .card {
     display: block;
 }
-  
-.carousel-inner .carousel-item.active,
-.carousel-inner .carousel-item-next,
-.carousel-inner .carousel-item-prev {
-    display: flex;
-}
 
-.carousel-inner .carousel-item-end.active,
-.carousel-inner .carousel-item-next {
-    transform: translateX(25%);
+.cookbooks-item a {
+    font-size: 0.9rem;
+    line-height: 1;
 }
-
-.carousel-inner .carousel-item-start.active, 
-.carousel-inner .carousel-item-prev {
-    transform: translateX(-25%);
-}
-
-.carousel-inner .carousel-item-end,
-.carousel-inner .carousel-item-start { 
-  transform: translateX(0);
-}
-
+ 
 /* Media Queries */
 
-@media (max-width: 400px) {
+@media screen and (max-width: 400px) {
     .card-image {
         height: 10rem;
     }
     .book-image {
-        height: 15rem;
+        height: 14rem;
     }
     .card-body {
         font-size: 14px;
     }
-    #cookbooksCarousel a {
-        font-size: 0.8rem;
-        line-height: 0.8;
+    .carousel-cell {
+        width: 50%;
+        height: 18.75rem;
     }
 }
-@media (max-width: 991px) {
-.carousel-cell {
-    width: 34%;
+
+@media screen and (min-width: 401px) and (max-width: 576px) {
+    .carousel-cell {
+        width: 40%;
+        height: 22rem;
+    }
+    .card-image {
+        height: 12rem;
+    }
 }
 
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .carousel-cell {
+        width: 40%;
+        height: 23rem;
+    }
+    .card-image {
+        height: 14rem;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .carousel-cell {
+        width: 34%;
+    }
+}
 @media (min-width: 1200px) {
     .book-image {
         height: 25rem;

@@ -65,8 +65,10 @@ def pagination_args(recipes):
 def get_recipes():
     recipes = list(mongo.db.recipes.find().sort("recipe_name", 1))
     categories = mongo.db.categories.find().sort("category_name", 1)
-    # pagination code adapted from:
-    # https://github.com/rebeccatraceyt/bake-it-til-you-make-it/blob/master/app.py
+    """
+    pagination code adapted from:
+    https://github.com/rebeccatraceyt/bake-it-til-you-make-it/blob/master/app.py
+    """
     recipes_paginated = paginated(recipes)
     pagination = pagination_args(recipes)
 
@@ -198,44 +200,58 @@ def profile(username):
         return render_template("profile.html", user=user,
                                saved_recipes=saved_recipes,
                                uploaded_recipes=uploaded_recipes)
-
-    return redirect(url_for("login"))
+    else:
+        # if wrong user
+        flash("You are not authorized to view that page", "danger")
+        return redirect(url_for("profile",
+                                username=session["user"]))
 
 
 # -- Edit profile page --
 @app.route("/edit_profile/<user_id>", methods=["GET", "POST"])
 def edit_profile(user_id):
-    if request.method == "POST":
-        submit = {
-            "username": request.form.get("username").lower(),
-            "email": request.form.get("email"),
-            "about": request.form.get("about"),
-            "user_image": request.form.get("profile-url"),
-        }
-        mongo.db.users.update({"_id": ObjectId(user_id)}, {"$set": submit})
-        flash("Profile Successfully Edited", "success")
-        return redirect(url_for("profile", username=session["user"]))
+    if session["user"] == username:
+        if request.method == "POST":
+            submit = {
+                "username": request.form.get("username").lower(),
+                "email": request.form.get("email"),
+                "about": request.form.get("about"),
+                "user_image": request.form.get("profile-url"),
+            }
+            mongo.db.users.update({"_id": ObjectId(user_id)}, {"$set": submit})
+            flash("Profile Successfully Edited", "success")
+            return redirect(url_for("profile", username=session["user"]))
 
-    user = mongo.db.users.find_one(
-        {"_id": ObjectId(user_id)})
-    return render_template("edit-profile.html", user=user)
+        user = mongo.db.users.find_one(
+            {"_id": ObjectId(user_id)})
+        return render_template("edit-profile.html", user=user)
+    else:
+        # if wrong user
+        flash("You are not authorized to view that page", "danger")
+        return redirect(url_for("profile",
+                                username=session["user"]))
 
 
 # -- Change Password page --
 @app.route("/change_password/<user_id>", methods=["GET", "POST"])
 def change_password(user_id):
-    if request.method == "POST":
-        submit = {
-            "password": generate_password_hash(request.form.get("password")),
-        }
-        mongo.db.users.update({"_id": ObjectId(user_id)}, {"$set": submit})
-        flash("Password Successfully Changed", "success")
-        return redirect(url_for("profile", username=session["user"]))
+    if session["user"] == username:
+        if request.method == "POST":
+            submit = {
+                "password": generate_password_hash(request.form.get("password")),
+            }
+            mongo.db.users.update({"_id": ObjectId(user_id)}, {"$set": submit})
+            flash("Password Successfully Changed", "success")
+            return redirect(url_for("profile", username=session["user"]))
 
-    user = mongo.db.users.find_one(
-        {"_id": ObjectId(user_id)})
-    return render_template("change-password.html", user=user)
-
+        user = mongo.db.users.find_one(
+            {"_id": ObjectId(user_id)})
+        return render_template("change-password.html", user=user)
+    else:
+        # if wrong user
+        flash("You are not authorized to view that page", "danger")
+        return redirect(url_for("profile",
+                                username=session["user"]))
 
 # -- Delete my profile --
 @app.route("/delete_profile/<username>")
@@ -249,8 +265,8 @@ def delete_profile(username):
 
     else:
         # if wrong user
-        flash("You do not have permission.")
-        return redirect(url_for("get_recipes",
+        flash("You are not authorized to view that page.", "danger")
+        return redirect(url_for("profile",
                                 username=session["user"]))
 
 
@@ -285,8 +301,11 @@ def add_recipe():
                 "reviews": []
             }
             new_recipe_id = mongo.db.recipes.insert_one(submit).inserted_id
-            # Adds the new recipe_id to user's cookbook (ref: https://docs.mongodb.com/manual/reference/operator/update/push/)
-            # mongo.db.recipes.find_one(new_recipe_id)
+
+            """
+            Adds the new recipe_id to user's cookbook 
+            (https://docs.mongodb.com/manual/reference/operator/update/push/)
+            """
             mongo.db.users.update_one({"username": session["user"]},
                                     {"$push": {"uploaded_recipes": new_recipe_id}})
             flash("Recipe Successfully Added", "success")
@@ -305,7 +324,6 @@ def get_single_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})
     reviews = mongo.db.reviews.find().sort("_id", 1)
-    # review = mongo.db.reviews.find({"_id": ObjectId(review_id)})
     if recipe["total_reviews"] > 0:
         review = mongo.db.reviews.find_one({"_id": {"$in": recipe["reviews"]}})
     
@@ -315,12 +333,12 @@ def get_single_recipe(recipe_id):
             {"username": session["user"]})
         saved_recipes = user["saved_recipes"]
         liked_recipes = user["liked_recipes"]
-        # If the recipe is listed in user's cookbook
+        # If the recipe has been added to user's cookbook
         if ObjectId(recipe_id) in saved_recipes:
             saved_recipe = True
         else:
             saved_recipe = False
-        # If the recipe is liked by the user
+        # If the recipe has been liked by the user
         if ObjectId(recipe_id) in liked_recipes:
             liked_recipe = True
         else:
@@ -345,32 +363,41 @@ def get_single_recipe(recipe_id):
 # -- Edit a recipe --
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
-    # If the user logged in
     user = mongo.db.users.find_one(
         {"username": session["user"]})
-    if "user" in session:
-        if request.method == "POST":
-            mongo.db.recipes.update_one(
-                {"_id": ObjectId(recipe_id)}, {
-                    '$set': {
-                            "category_name": request.form.get("category_name"),
-                            "recipe_name": request.form.get("recipe_name"),
-                            "description": request.form.get("description"),
-                            "ingredients": request.form.getlist("ingredients"),
-                            "directions": request.form.getlist("directions"),
-                            "recipe_image": request.form.get("recipe_image"),
-                            "serving": request.form.get("serving"),
-                            "time": request.form.get("time"),
-                            }
-                    })
-            flash("Recipe Successfully Edited", "success")
-            return redirect(url_for("get_recipes"))
-
-        recipe = mongo.db.recipes.find_one(
+    recipe = mongo.db.recipes.find_one(
             {"_id": ObjectId(recipe_id)})
-        categories = mongo.db.categories.find().sort("category_name", 1)
-        return render_template("edit-recipe.html", recipe=recipe, categories=categories, user=user)
-    else:
+    username = recipe["username"]
+    if "user" in session:
+        # If the user logged in
+        if session["user"] == username:
+            # If correct user
+            if request.method == "POST":
+                mongo.db.recipes.update_one(
+                    {"_id": ObjectId(recipe_id)}, {
+                        '$set': {
+                                "category_name": request.form.get("category_name"),
+                                "recipe_name": request.form.get("recipe_name"),
+                                "description": request.form.get("description"),
+                                "ingredients": request.form.getlist("ingredients"),
+                                "directions": request.form.getlist("directions"),
+                                "recipe_image": request.form.get("recipe_image"),
+                                "serving": request.form.get("serving"),
+                                "time": request.form.get("time"),
+                                }
+                        })
+                flash("Recipe Successfully Edited", "success")
+                return redirect(url_for("get_recipes"))
+
+            categories = mongo.db.categories.find().sort("category_name", 1)
+            return render_template("edit-recipe.html", recipe=recipe, categories=categories, user=user)
+
+        else:
+            # If wrong user
+            flash("You are not authorized to do that.", "danger")
+            return redirect(url_for("get_single_recipe", recipe_id=recipe_id, 
+                            username=session["user"]))
+    else: 
         flash("You're not logged in. Please log in or sign up first.", "warning")
         return redirect(url_for("login"))
 
@@ -378,9 +405,19 @@ def edit_recipe(recipe_id):
 # -- Delete a recipe --
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
-    mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
-    flash("Recipe Successfully Deleted", "success")
-    return redirect(url_for("get_recipes"))
+    recipe = mongo.db.recipes.find_one(
+            {"_id": ObjectId(recipe_id)})
+    username = recipe["username"]
+    if session["user"] == username:
+        # If correct user
+        mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+        flash("Recipe Successfully Deleted", "success")
+        return redirect(url_for("get_recipes"))
+    else:
+        # If wrong user
+        flash("You are not authorized to do that.", "danger")
+        return redirect(url_for("get_single_recipe", recipe_id=recipe_id, 
+                            username=session["user"]))
 
 
 # -- Manage Categories --
@@ -514,37 +551,47 @@ def like_recipe(recipe_id):
 # -- My Cookbook Page --
 @app.route("/cookbook/<username>")
 def get_cookbook(username):
-    if session["user"] == username:
-        # user variable to grab user's data
-        user = mongo.db.users.find_one(
-            {"username": session["user"]})
-        uploaded_recipes = list(mongo.db.recipes.find(
-            {"_id": {"$in": user["uploaded_recipes"]}}).sort("recipe_name", 1))
-        saved_recipes = list(mongo.db.recipes.find(
-            {"_id": {"$in": user["saved_recipes"]}}).sort("recipe_name", 1))
-        
-        # to find from 2 lists, ref: https://stackoverflow.com/questions/47075081/concatenate-pymongo-cursor
-        all_recipes = list(mongo.db.recipes.find(
-            {'$or': [{"_id": {"$in": user["uploaded_recipes"]}},
-                     {"_id": {"$in": user["saved_recipes"]}}]}).sort("recipe_name", 1))
+    if "user" in session:
+        if session["user"] == username:
+            # user variable to grab user's data
+            user = mongo.db.users.find_one(
+                {"username": session["user"]})
+            uploaded_recipes = list(mongo.db.recipes.find(
+                {"_id": {"$in": user["uploaded_recipes"]}}).sort("recipe_name", 1))
+            saved_recipes = list(mongo.db.recipes.find(
+                {"_id": {"$in": user["saved_recipes"]}}).sort("recipe_name", 1))
+            
+            # to find from 2 lists, ref: https://stackoverflow.com/questions/47075081/concatenate-pymongo-cursor
+            all_recipes = list(mongo.db.recipes.find(
+                {'$or': [{"_id": {"$in": user["uploaded_recipes"]}},
+                        {"_id": {"$in": user["saved_recipes"]}}]}).sort("recipe_name", 1))
 
-        # pagination
-        all_recipes_paginated = paginated(all_recipes)
-        all_pagination = pagination_args(all_recipes) 
-        uploaded_recipes_paginated = paginated(uploaded_recipes)
-        uploaded_pagination = pagination_args(uploaded_recipes)
-        saved_recipes_paginated = paginated(saved_recipes)
-        saved_pagination = pagination_args(saved_recipes)
+            # pagination
+            all_recipes_paginated = paginated(all_recipes)
+            all_pagination = pagination_args(all_recipes) 
+            uploaded_recipes_paginated = paginated(uploaded_recipes)
+            uploaded_pagination = pagination_args(uploaded_recipes)
+            saved_recipes_paginated = paginated(saved_recipes)
+            saved_pagination = pagination_args(saved_recipes)
+            
+            return render_template("cookbook.html", user=user,
+                                all_recipes=all_recipes_paginated,
+                                all_pagination=all_pagination,
+                                uploaded_recipes=uploaded_recipes_paginated,
+                                uploaded_pagination=uploaded_pagination,
+                                saved_recipes=saved_recipes_paginated,
+                                saved_pagination=saved_pagination)
+        else:
+            # if wrong user
+            flash("You are not authorized to view that page", "danger")
+            return redirect(url_for("profile",
+                                    username=session["user"]))
         
-        return render_template("cookbook.html", user=user,
-                               all_recipes=all_recipes_paginated,
-                               all_pagination=all_pagination,
-                               uploaded_recipes=uploaded_recipes_paginated,
-                               uploaded_pagination=uploaded_pagination,
-                               saved_recipes=saved_recipes_paginated,
-                               saved_pagination=saved_pagination)
+    else:
+        # If not logged in
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+        return redirect(url_for("login"))
 
-    return redirect(url_for("login"))
 
 
 # -- Write a review --

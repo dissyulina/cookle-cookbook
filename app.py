@@ -418,58 +418,98 @@ def delete_recipe(recipe_id):
         return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
 
 
-# -- Manage Categories --
+# -- Manage Categories (Admin only)--
 @app.route("/get_categories")
 def get_categories():
-    user = mongo.db.users.find_one(
-        {"username": session["user"]})
     if "user" in session:
-        categories = list(mongo.db.categories.find().sort("category_name", 1))
-        return render_template("categories.html", categories=categories, user=user)
+        user = mongo.db.users.find_one(
+        {"username": session["user"]})
+        if user["is_admin"]:
+            categories = list(mongo.db.categories.find().sort("category_name", 1))
+            return render_template("categories.html", categories=categories, user=user)
+        else:
+            # if user is not admin
+            flash("You are not authorized to do view this page.", "danger")
+            return redirect(url_for("profile",
+                                username=session["user"]))
+    else:
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+        return redirect(url_for("login"))
 
 
 # -- Add New Category (admin only) --
 @app.route("/add_category", methods=["GET", "POST"])
 def add_category():
-    user = mongo.db.users.find_one(
-        {"username": session["user"]})
     if "user" in session:
-        if request.method == "POST":
-            category = {
-                "category_name": request.form.get("category_name"),
-            }
-            mongo.db.categories.insert(category)
-            flash("New Category Successfully Added", "success")
-            return redirect(url_for("get_categories"))
-    
-        return render_template("add-category.html", user=user)
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+        if user["is_admin"]:
+            if request.method == "POST":
+                category = {
+                    "category_name": request.form.get("category_name"),
+                }
+                mongo.db.categories.insert(category)
+                flash("New Category Successfully Added", "success")
+                return redirect(url_for("get_categories"))
+        
+            return render_template("add-category.html", user=user)
+        else:
+            # If user is not admin
+            flash("You are not authorized to do view this page.", "danger")
+            return redirect(url_for("profile",
+                                username=session["user"]))
+    else:
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+        return redirect(url_for("login"))
 
 
 # -- Edit Category (admin only) --
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
-    user = mongo.db.users.find_one(
-        {"username": session["user"]})
     if "user" in session:
-        if request.method == "POST":
-            submit = {
-                "category_name": request.form.get("category_name"),
-            }
-            mongo.db.categories.update({"_id": ObjectId(category_id)}, submit)
-            flash("Category Successfully Edited", "success")
-            return redirect(url_for("get_categories"))
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+        if user["is_admin"]:
+            if request.method == "POST":
+                submit = {
+                    "category_name": request.form.get("category_name"),
+                }
+                mongo.db.categories.update({"_id": ObjectId(category_id)}, submit)
+                flash("Category Successfully Edited", "success")
+                return redirect(url_for("get_categories"))
 
-        category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
-        return render_template("edit-category.html", category=category, user=user)
+            category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+            return render_template("edit-category.html", category=category, user=user)
+        else:
+            # If user is not admin
+            flash("You are not authorized to do view this page.", "danger")
+            return redirect(url_for("profile",
+                                username=session["user"]))
+    else:
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+        return redirect(url_for("login"))
 
 
 # -- Delete Category (admin only) --
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
-    mongo.db.categories.remove({"_id": ObjectId(category_id)})
-    flash("Category Successfully Deleted", "success")
-    return redirect(url_for("get_categories"))
-
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+        # Check if user is admin
+        if user["is_admin"]:
+            mongo.db.categories.remove({"_id": ObjectId(category_id)})
+            flash("Category Successfully Deleted", "success")
+            return redirect(url_for("get_categories"))
+        else:
+            # If user is not admin
+            flash("You are not authorized to do view this page.", "danger")
+            return redirect(url_for("profile",
+                                username=session["user"]))
+    else:
+        flash("You're not logged in. Please log in or sign up first.", "warning")
+        return redirect(url_for("login"))
+        
 
 # -- Save Recipe to Cookbook --
 @app.route("/save_to_cookbook/<recipe_id>", methods=["GET", "POST"])
@@ -502,7 +542,7 @@ def save_to_cookbook(recipe_id):
 
         else:
             # if user created the recipe, they cannot save it
-            flash("You created this recipe. You can't remove this from your cookbook", "info")
+            flash("You created this recipe. It's already in your cookbook.", "info")
             return redirect(url_for("get_single_recipe",
                                     recipe_id=recipe_id))
 

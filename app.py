@@ -911,8 +911,8 @@ def write_review(recipe_id):
 
 
 # -- Edit a review (only available for the user's own review) --
-@app.route("/recipe/<recipe_id>/<review_id>", methods=["GET", "POST"])
-def edit_review(recipe_id, review_id):
+@app.route("/edit_review/<review_id>", methods=["GET", "POST"])
+def edit_review(review_id):
     """
     Function for users to edit their review
     Add conditional defensive code to check
@@ -935,11 +935,11 @@ def edit_review(recipe_id, review_id):
                 mongo.db.reviews.update_one(
                     {"_id": ObjectId(review_id)}, {"$set": submit})
                 flash("Review Successfully Edited", "success")
-                return redirect(url_for("get_single_recipe",
-                                        recipe_id=recipe_id))
 
-            return render_template("single-recipe.html",
-                                   review=review)
+                return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
+                
+            return redirect(request.referrer)
+            #return render_template("single-recipe.html", review=review)
 
         else:
             # If wrong user

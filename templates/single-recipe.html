@@ -180,8 +180,8 @@
                                         <i class="far fa-window-close"></i> Cancel
                                     </button>
                                     <a class="btn btn-secondary" href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}">
-                                        <i class="fas fa-trash-alt"></i> Yes, Remove</a>
-                                    </li>
+                                        <i class="fas fa-trash-alt"></i> Yes, Remove
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -215,7 +215,7 @@
                 </div>
 
                 <!-- Reviews section-->
-                <div class="bg-white my-5 p-3 p-md-5">
+                <div class="bg-white my-5 p-3 p-md-5" id="reviews-section">
                     <div class="d-flex justify-content-start align-items-baseline mb-3">
                         <h4 class="me-2 me-sm-3">
                             Reviews ({{ recipe.total_reviews }})
@@ -246,36 +246,41 @@
                             </div>
                         </form>
                     </div>
-                    <!-- Edit an existing review form (only displayed when a user click the edit button of their own comment)-->
-                    {% if session.user %}
-                        {% if recipe.total_reviews > 0 %}
-                            <!-- Edit a review (only displayed when the users click the button to edit their review)-->
-                            <div id="edit-review" class="d-none">
-                                <form class="row" method="POST" action="{{ url_for('edit_review', recipe_id=recipe._id, review_id=review._id) }}">  
-                                    <div class="col-12">
-                                        <textarea class="form-control" id="edit_review" name="edit_review" rows="4" 
-                                            minlength="5" maxlength="500" required>
-                                            {{- review.review_text -}}
-                                        </textarea>
-                                    </div>
-                                    <!-- Buttons -->
-                                    <div class="d-flex align-items-center justify-content-end my-2">
-                                        <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" role="button" 
-                                            class="btn btn-rec-secondary btn-rounded btn-sm me-2">
-                                            Cancel
-                                        </a>
-                                        <button type="submit" class="btn btn-rec-primary btn-rounded btn-sm">
-                                            Submit Review
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        {% endif %}
-                    {% endif %}
+                    <div id="new-edit-review">
+
+                    </div>
+                    
 
                     <!-- Display all reviews -->
                     {% for review in reviews %}
                         {% if recipe._id == review.recipe_id %}
+                            <!-- Edit an existing review form (only displayed when a user click the edit button of their own comment)-->
+                            {% if session.user %}
+                                {% if recipe.total_reviews > 0 %}
+                                    <!-- Edit a review (only displayed when the users click the button to edit their review)-->
+                                    <div id="edit-review" class="d-none" data-id="{{ review._id }}">
+                                        <form class="row" method="POST" action="{{ url_for('edit_review', review_id=review._id) }}">  
+                                            <div class="col-12">
+                                                <textarea class="form-control" id="edit_review" name="edit_review" rows="4" 
+                                                    minlength="5" maxlength="500" required>
+                                                    {{- review.review_text -}}
+                                                </textarea>
+                                            </div>
+                                            <!-- Buttons -->
+                                            <div class="d-flex align-items-center justify-content-end my-2">
+                                                <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" role="button" 
+                                                    class="btn btn-rec-secondary btn-rounded btn-sm me-2">
+                                                    Cancel
+                                                </a>
+                                                <button type="submit" class="btn btn-rec-primary btn-rounded btn-sm">
+                                                    Submit Review
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+ 
                             <div>
                                 <div class="d-flex justify-content-start align-items-baseline">
                                     <div class="profile-img">
@@ -293,12 +298,12 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a class="dropdown-item" id="btn-edit-review">
+                                                    <a class="dropdown-item btn-edit-review" data-id="{{ review._id }}">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a data-mdb-toggle="modal" data-mdb-target="#modalDeleteReview" role="button" 
+                                                    <a data-mdb-toggle="modal" data-mdb-target="#modalDeleteReview{{ review._id }}" role="button" 
                                                         class="dropdown-item">
                                                         <i class="fas fa-trash-alt"></i> Delete
                                                     </a>
@@ -311,7 +316,7 @@
                             </div>
 
                             <!-- Modal confirmation before deleting review-->
-                            <div class="modal fade" id="modalDeleteReview" data-mdb-backdrop="static" data-mdb-keyboard="false" 
+                            <div class="modal fade" id="modalDeleteReview{{ review._id }}" data-mdb-backdrop="static" data-mdb-keyboard="false" 
                                 tabindex="-1" aria-labelledby="modalDeleteReviewLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content bg-green">
@@ -326,14 +331,9 @@
                                             <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
                                                 <i class="far fa-window-close"></i> Cancel
                                             </button>
-                                            <form action="{{ url_for('delete_review', review_id=review._id) }}" method="post">
-                                                <input type="submit" value="Delete" class="btn btn-danger">
-                                            </form>
-                                            <!--
                                             <a class="btn btn-secondary" href="{{ url_for('delete_review', review_id=review._id) }}">
                                                 <i class="fas fa-trash-alt"></i> Yes, Delete
                                             </a>
-                                            -->
                                         </div>
                                     </div>
                                 </div>

@@ -136,10 +136,16 @@ $("#btn-review").click(function() {
 });
 
 /* Single Recipe Page: If user clicks Edit review button, show form */
-$("#btn-edit-review").click(function(e) {
-    e.preventDefault;
+$(".btn-edit-review").click(function(e) {
+    let reviewId = $(e.target).attr('data-id');
+    console.log(reviewId);
+    $('#edit-review[data-id="' + reviewId + '"]').removeClass('d-none').focus();
+    $('#edit-review[data-id="' + reviewId + '"]').detach().appendTo("#new-edit-review")
+
+    /*
     $("#edit-review").removeClass('d-none')
     $("#edit_review").focus();
+    */
 });
 
 /* My Cookbook page: Keep the current pill active on page reload */

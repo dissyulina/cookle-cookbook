@@ -427,6 +427,7 @@ def add_recipe():
                 "time": request.form.get("time"),
                 "total_likes": 0,
                 "username": session["user"],
+                "user_image": user["user_image"],
                 "total_reviews": 0,
                 "reviews": []
             }

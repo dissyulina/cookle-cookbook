@@ -31,7 +31,10 @@
                 <!-- Recipe's Title & Buttons -->
                 <div class="text-center my-5">
                     <h3>{{ recipe.recipe_name }}</h3>
-                    <p>by: {{ recipe.username }}</p>
+                    <div class="profile-img">
+                        <img src="{{ recipe.user_image }}" onerror="this.src='../../static/images/user.png';" 
+                        class="rounded-circle me-1" alt="profile picture" loading="lazy"><span> by: {{ recipe.username }}</span>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-end">
                     <!-- Share to social media button, using sharer.js 

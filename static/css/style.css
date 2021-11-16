@@ -88,6 +88,11 @@ h4 {
     object-fit: cover;
     border-radius: 50%;
 }
+
+.rounded-circle {
+    height: 22px;
+}
+
 .btn-group .btn {
     padding: 5px;
 }

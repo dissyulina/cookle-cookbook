@@ -31,47 +31,14 @@ $("#btn-query").click(function() {
 $("#query").attr("value",sessionStorage.getItem("query"))
 sessionStorage.removeItem("query");
 
-
-$(document).ready(function(){
-    $('input[type=radio][name=radio-img]').change(function() {
-        let radioValue = $('input[name=radio-img]:checked', '#form-register').val();
-        if (radioValue === "2") {
-            $(".show-image").attr("src","");
-            $('#profile-image').val("");
-            $("#image-url").change(function(){
-                loadImage();
-            });
-
-        } else if (radioValue === "3") {
-            $(".show-image").attr("src","");
-            $('#image-url').val("");
-            $("#profile-image").change(function(){
-                readURL(this);
-            });
-        }
-    });
+/* Register page, Edit profile page, Add recipe page, and Edit Recipe page: 
+To render/display image based on url input */
+$(".image-url").on("input", function(){
+    $(".show-image").attr("src", $(".image-url").val());
 });
 
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        
-        reader.onload = function (e) {
-            $('.show-image').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function loadImage(){
-    var image = document.getElementsByClassName("show-image");
-    var url = document.getElementById("image-url");
-    console.log(image);
-    image[0].src = url.value;
-    console.log(image[0]);
-}
-
-/* To check passwords match before submitting, addapted from: 
+/* Register page, Change Password page:
+To check passwords match before submitting, addapted from: 
 https://stackoverflow.com/questions/21727317/how-to-check-confirm-password-field-in-form-without-reloading-page/21727518
 */
 $('#repeat-password').on('keyup', function () {
@@ -85,7 +52,7 @@ $('#repeat-password').on('keyup', function () {
     }
 });
 
-/* Add Recipe / Edit Recipe Page: Add new line to ingredients and directions */
+/* Add Recipe page and Edit Recipe Page: Add new line to ingredients and directions */
 let ingredients = 1;
 let maxIngredients = 30;
 let directions = 1;
@@ -110,7 +77,7 @@ $("#add-dir-btn").click(function (e) {
     ingredients++
 });
 
-/* Add Recipe / Edit Recipe Page: Delete parent div when clicking the remove ingredient/direction button,
+/* Add Recipe and Edit Recipe Page: Delete parent div when clicking the remove ingredient/direction button,
 ref: https://stackoverflow.com/questions/6647736/how-to-delete-parent-element-using-jquery */
 $("#ingredients-wrapper").on("click", ".btn-remove", function(e){
     e.preventDefault();
@@ -124,28 +91,18 @@ $("#directions-wrapper").on("click", ".btn-remove", function(e){
     ingredients--;
 });
 
-/* Display recipe image in add recipe page */
-$("#image-url").change(function(){
-    loadImage();
-});
-
 /* Single Recipe Page: If user clicks Write A Review button, show form */
 $("#btn-review").click(function() {
     $("#write-review").toggleClass('d-none')
     $("#write_review").focus();
 });
 
-/* Single Recipe Page: If user clicks Edit review button, show form */
+/* Single Recipe Page: If user clicks Edit review button, show form and move it up */
 $(".btn-edit-review").click(function(e) {
     let reviewId = $(e.target).attr('data-id');
     console.log(reviewId);
     $('#edit-review[data-id="' + reviewId + '"]').removeClass('d-none').focus();
     $('#edit-review[data-id="' + reviewId + '"]').detach().appendTo("#new-edit-review")
-
-    /*
-    $("#edit-review").removeClass('d-none')
-    $("#edit_review").focus();
-    */
 });
 
 /* My Cookbook page: Keep the current pill active on page reload */
@@ -165,7 +122,7 @@ $(document).ready(function(){
     }
 });
 
-/* EmailJS for Inviting Friends*/
+/* Homepage: EmailJS for Inviting Friends*/
 function sendInvitation(inviteForm) {
     emailjs.send("yahoo","cookle_ms3", {"send_to": inviteForm.emailInvite.value})
     .then(function(response) {
@@ -184,7 +141,7 @@ function sendInvitation(inviteForm) {
     return false;
 }
 
-/* EmailJS for Contact Form*/
+/* Footer (all pages) : EmailJS for Contact Form*/
 function sendMail(contactForm) {
     emailjs.send("yahoo", "contact_cookle", {
         "from_name": contactForm.name.value,

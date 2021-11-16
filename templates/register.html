@@ -16,23 +16,23 @@
                         {% endif %}
                     {% endwith %}
 
-
+                <h3 class="my-5">Register</h3>
                 <div class="card p-2 p-md-5 form-width">                 
                     <form method="POST" action="{{ url_for('register') }}" id="form-register">
                         <!-- Name input -->
                         <div class="form-outline mb-4">
-                            <input type="text" id="name" name="name" class="form-control" required>
+                            <input type="text" name="name" class="form-control" required>
                             <label class="form-label" for="name">Name</label>
                         </div>
                         <!-- Username input -->
                         <div class="form-outline mb-4">
-                            <input type="text" id="username" name="username" pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{4,15}$" class="form-control" minlength="4" 
+                            <input type="text" name="username" pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{4,15}$" class="form-control" minlength="4" 
                             maxlength="20" required>
                             <label class="form-label" for="username">Username</label>
                         </div>
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" id="email" name="email" class="form-control" required>
+                            <input type="email" name="email" class="form-control" required>
                             <label class="form-label" for="email">Email</label>
                         </div>
                         <!-- Password input -->
@@ -55,28 +55,13 @@
                             <label class="form-label" for="about">About you and your love for cooking</label>
                         </div>
                         <!-- Upload image/ profile picture -->
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radio-img" id="radio-img1" value="1" checked>
-                            <label class="form-check-label text-start" for="radio-img1">Use default</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radio-img" id="radio-img2" value="2">
-                            <label class="form-check-label text-start" for="radio-img2">Image url</label>
-                            <div class="form-outline mb-4">
-                                <input type="text" id="image-url" name="profile-url" class="form-control">
-                                <label class="form-label" for="profile-url">Paste here the image url</label>
-                            </div>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radio-img" id="radio-img3" value="3">
-                            <label class="form-check-label text-start" for="radio-img3">Choose file from your computer</label>
-                            <div class="mb-4">
-                                <input type="file" class="form-control" name="profile-image" id="profile-image">
-                            </div>
+                        <div class="form-outline mb-4">
+                            <input type="text" class="form-control image-url" id="profile-url" name="profile-url">
+                            <label for="profile-url" class="form-label">Profile Image (Url / Image's address)</label>
                         </div>
                         <!-- Rendering image from url -->
                         <div class="mb-4 text-center">
-                            <img class="show-image" src="{{ url_for('static', filename='images/user.png') }}" width="300">
+                            <img class="show-image" id="show-image-profile" src="{{ url_for('static', filename='images/user.png') }}" width="300">
                         </div>
                         <!-- Submit button & Log In link-->
                         <div class="text-center">

@@ -368,5 +368,9 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 }
 @media (min-width: 1200px) {
     .book-image {
-        height: 25rem;
+        height: 20rem;
     }
+    #book-carousel .carousel-cell {
+        width:20%;
+    }
+}

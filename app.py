@@ -534,10 +534,11 @@ def edit_recipe(recipe_id):
                     "serving": request.form.get("serving"),
                     "time": request.form.get("time"),
                 }
-                mongo.db.users.update({"_id": ObjectId(recipe_id)},
-                                      {"$set": submit})
+                mongo.db.recipes.update({"_id": ObjectId(recipe_id)},
+                                        {"$set": submit})
                 flash("Recipe Successfully Edited", "success")
-                return redirect(url_for("get_recipes"))
+                return redirect(url_for("get_single_recipe",
+                                        recipe_id=recipe_id))
 
             categories = mongo.db.categories.find().sort("category_name", 1)
             return render_template("edit-recipe.html",

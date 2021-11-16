@@ -33,14 +33,20 @@
 
 <!-- Carousel for Popular Recipes (using Flickity) -->
 <section class="container text-center my-5">
-    <h3 class="font-extra-bold pb-2">Our popular recipes.</h3>
-    <p class="pb-3">Check out the most loved recipes in the community. They're awesome and deliciously proven! Try it today and taste it for yourself.</p>
+    <h3 class="font-extra-bold pb-2">
+        Our popular recipes.
+    </h3>
+    <p class="pb-3">
+        Check out the most loved recipes in the community. 
+        They're awesome and deliciously proven! Try it today and taste it for yourself.
+    </p>
     <div class="main-carousel" data-flickity='{ "wrapAround": true, "autoPlay": true }'>
         {% for recipe in popular_recipes %}
             <div class="carousel-cell">
                 <div class="card shadow-2-strong h-100">
                     <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
-                        <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/dish-placeholder.png';" alt="{{ recipe.recipe_name }}">
+                        <img src="{{ recipe.recipe_image }}" class="card-img-top" alt="{{ recipe.recipe_name }}" 
+                            onerror="this.src='../../static/images/dish-placeholder.png';">
                         <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                         </a>
@@ -48,32 +54,45 @@
                     <div class="card-body text-start">
                         <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
                         <p><i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}</p>
-                        <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-rec-primary btn-absolute btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+                        <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" 
+                            class="btn btn-rec-primary btn-absolute btn-floating btn-lg">
+                            <i class="fas fa-plus"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
     <div class="d-flex justify-content-end">
-        <a href="{{ url_for('get_recipes') }}" class="pt-5">See more recipes <i class="fas fa-arrow-right"></i></a>
+        <a href="{{ url_for('get_recipes') }}" class="pt-5">
+            See more recipes <i class="fas fa-arrow-right"></i>
+        </a>
     </div>
 </section>
 
 <!-- Divider -->
-<div class="d-flex justify-content-center pt-5 pb-3">
+<div class="d-flex justify-content-center pt-3 pb-3">
     <div class="divider"></div>
 </div>
 
 <!-- Carousel for Recent Recipes (using Flickity) -->
 <section class="container text-center my-5">
-    <h3 class="font-extra-bold pb-2">Our newest recipes.</h3>
-    <p class="pb-3">At least one new recipe is added per day by our team so you wouldn't run out of ideas of what to cook tonight! See our newest recipes below.</p>
+    <h3 class="font-extra-bold pb-2">
+        Our newest recipes.
+    </h3>
+    <p class="pb-3">
+        At least one new recipe is added per day by our team so you wouldn't run out of 
+        ideas of what to cook tonight! See our newest recipes below.
+    </p>
     <div class="main-carousel" data-flickity='{ "wrapAround": true, "autoPlay": true }'>
         {% for recipe in recent_recipes %}
             <div class="carousel-cell">
                 <div class="card shadow-2-strong h-100">
-                    <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
-                        <img src="{{ recipe.recipe_image }}" class="card-img-top" onerror="this.src='../../static/images/dish-placeholder.png';" alt="{{ recipe.recipe_name }}">
+                    <div class="bg-image hover-overlay ripple card-image" 
+                        data-mdb-ripple-color="light">
+                        <img src="{{ recipe.recipe_image }}" class="card-img-top" 
+                            onerror="this.src='../../static/images/dish-placeholder.png';" 
+                            alt="{{ recipe.recipe_name }}">
                         <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                         </a>
@@ -81,84 +100,131 @@
                     <div class="card-body text-start">
                         <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
                         <p><i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}</p>
-                        <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" class="btn btn-rec-primary btn-absolute btn-floating btn-lg"><i class="fas fa-plus"></i></a>
+                        <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" 
+                            class="btn btn-rec-primary btn-absolute btn-floating btn-lg">
+                            <i class="fas fa-plus"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
     <div class="d-flex justify-content-end">
-        <a href="{{ url_for('get_recipes') }}" class="pt-5">See more recipes <i class="fas fa-arrow-right"></i></a>
+        <a href="{{ url_for('get_recipes') }}" class="pt-5">
+            See more recipes <i class="fas fa-arrow-right"></i>
+        </a>
     </div>
 </section>
 
 <!-- Divider -->
-<div class="d-flex justify-content-center pt-5 pb-3">
+<div class="d-flex justify-content-center pt-3 pb-3">
     <div class="divider"></div>
 </div>
 
 <!-- Carousel for Cookbooks Recommendation (using Flickity) -->
 <section class="container text-center my-5 pb-5">
     <h3 class="font-extra-bold pb-2">Cookbooks we love.</h3>
-    <p class="pb-3">Sometimes you just want to buy a good 'ol cookbook, but there're so many choices on the market. Hand-picked carefully by our trusted team, here are the best of the best cookbooks out there in our opinion.</p>
+    <p class="pb-3">
+        Sometimes you just want to buy a good 'ol cookbook, but there're so many choices on the market. 
+        Hand-picked carefully by our trusted team, here are the best of the best cookbooks out there in our opinion.
+    </p>
     <div class="main-carousel" id="book-carousel" data-flickity='{ "wrapAround": true, "autoPlay": true }'>
         <div class="carousel-cell">
             <div class="cookbooks-item">
                 <div class="book-image">
-                    <img src="{{ url_for('static', filename='images/cookbooks/half-baked-harvest.jpg') }}" alt="book cover" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/cookbooks/half-baked-harvest.jpg') }}" 
+                        alt="book cover" loading="lazy">
                 </div>
                 <div>
-                    <a href="https://www.amazon.com/s?k=half+baked+harvest+super+simple&tag=faketag">Half Baked Harvest Super Simple<span class="d-none d-sm-inline">: More Than 125 Recipes for Instant, Overnight, Meal-Prepped, and Easy Comfort Foods</span>: A Cookbook</a>
+                    <a href="https://www.amazon.com/s?k=half+baked+harvest+super+simple&tag=faketag" 
+                        target="_blank" rel="noopener" aria-label="Open link to buy this book in a new tab">
+                        Half Baked Harvest Super Simple
+                        <span class="d-none d-sm-inline">
+                            : More Than 125 Recipes for Instant, Overnight, Meal-Prepped, and Easy Comfort Foods
+                        </span>
+                        : A Cookbook
+                    </a>
                 </div>
             </div>
         </div>
         <div class="carousel-cell">
             <div class="cookbooks-item">
                 <div class="book-image">
-                    <img src="{{ url_for('static', filename='images/cookbooks/joshua-weissman.jpg') }}" alt="book cover" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/cookbooks/joshua-weissman.jpg') }}" 
+                        alt="book cover" loading="lazy">
                 </div>
                 <div>
-                    <a href="https://www.amazon.com/s?k=joshua+weissman&tag=faketag">Joshua Weissman: An Unapologetic Cookbook</a>
+                    <a href="https://www.amazon.com/s?k=joshua+weissman&tag=faketag"
+                        target="_blank" rel="noopener" aria-label="Open link to buy this book in a new tab">
+                        Joshua Weissman: An Unapologetic Cookbook
+                    </a>
                 </div>
             </div>
         </div>
         <div class="carousel-cell">
             <div class="cookbooks-item">
                 <div class="book-image">
-                    <img src="{{ url_for('static', filename='images/cookbooks/complete-veg-cookbook.jpg') }}" alt="book cover" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/cookbooks/complete-veg-cookbook.jpg') }}" 
+                        alt="book cover" loading="lazy">
                 </div>
                 <div>
-                    <a href="https://www.amazon.com/s?k=the+complete+vegetarian+cookbook&tag=faketag">The Complete Vegetarian Cookbook<span class="d-none d-sm-inline">: A Fresh Guide to Eating Well With 700 Foolproof Recipes</span></a>
+                    <a href="https://www.amazon.com/s?k=the+complete+vegetarian+cookbook&tag=faketag"
+                        target="_blank" rel="noopener" aria-label="Open link to buy this book in a new tab">
+                        The Complete Vegetarian Cookbook
+                        <span class="d-none d-sm-inline">
+                            : A Fresh Guide to Eating Well With 700 Foolproof Recipes
+                        </span>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="carousel-cell">
             <div class="cookbooks-item">
                 <div class="book-image">
-                    <img src="{{ url_for('static', filename='images/cookbooks/essentials-of-classic.jpg') }}" alt="book cover" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/cookbooks/essentials-of-classic.jpg') }}" 
+                        alt="book cover" loading="lazy">
                 </div>
                 <div>
-                    <a href="https://www.amazon.com/s?k=essentials+of+classic+italian+cooking&tag=faketag">Essentials of Classic Italian Cooking</a>
+                    <a href="https://www.amazon.com/s?k=essentials+of+classic+italian+cooking&tag=faketag"
+                        target="_blank" rel="noopener" aria-label="Open link to buy this book in a new tab">
+                        Essentials of Classic Italian Cooking
+                    </a>
                 </div>
             </div>
         </div>
         <div class="carousel-cell">
             <div class="cookbooks-item">
                 <div class="book-image">
-                    <img src="{{ url_for('static', filename='images/cookbooks/skinny-taste.jpg') }}" alt="book cover" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/cookbooks/skinny-taste.jpg') }}" 
+                        alt="book cover" loading="lazy">
                 </div>
                 <div>
-                    <a href="https://www.amazon.com/s?k=skinnytaste+meal+prep&tag=faketag">Skinnytaste Meal Prep: <span class="d-none d-sm-inline">Healthy Make-Ahead Meals and Freezer Recipes to Simplify Your Life: </span>A Cookbook</a>
+                    <a href="https://www.amazon.com/s?k=skinnytaste+meal+prep&tag=faketag"
+                        target="_blank" rel="noopener" aria-label="Open link to buy this book in a new tab">
+                        Skinnytaste Meal Prep: 
+                        <span class="d-none d-sm-inline">
+                            Healthy Make-Ahead Meals and Freezer Recipes to Simplify Your Life: 
+                        </span>
+                        A Cookbook
+                    </a>
                 </div>
             </div>
         </div>
         <div class="carousel-cell">
             <div class="cookbooks-item">
                 <div class="book-image">
-                    <img src="{{ url_for('static', filename='images/cookbooks/once-upon-achef.jpg') }}" alt="book cover" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/cookbooks/once-upon-achef.jpg') }}" 
+                        alt="book cover" loading="lazy">
                 </div>
                 <div>
-                    <a href="https://www.amazon.com/s?k=essentials+of+classic+italian+cooking&tag=faketag">Once Upon a Chef: <span class="d-none d-sm-inline">Weeknight/Weekend: 70 Quick-Fix Weeknight Dinners + 30 Luscious Weekend Recipes: </span>A Cookbook</a>
+                    <a href="https://www.amazon.com/s?k=essentials+of+classic+italian+cooking&tag=faketag"
+                        target="_blank" rel="noopener" aria-label="Open link to buy this book in a new tab">
+                        Once Upon a Chef: 
+                        <span class="d-none d-sm-inline">
+                            Weeknight/Weekend: 70 Quick-Fix Weeknight Dinners + 30 Luscious Weekend Recipes: 
+                        </span>
+                        A Cookbook
+                    </a>
                 </div>
             </div>
         </div>
@@ -170,14 +236,26 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-6">
-                <img src="{{ url_for('static', filename='images/tablet.jpg') }}" alt="A Tablet on the table" class="img-fluid">
+                <img src="{{ url_for('static', filename='images/tablet.jpg') }}" 
+                    alt="A Tablet on the table" class="img-fluid">
             </div>
             <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
                 <div class="container my-5">
-                    <h3 class="pt-3 mb-4">Create your own online cookbook from your favorite recipes!</h3>
-                    <p class="mb-0"><i class="fas fa-check"></i> Create your account</p>
-                    <p class="mb-0"><i class="fas fa-check"></i> See any recipes you like? Add it to your cookbook.</p>
-                    <p class="mb-0"><i class="fas fa-check"></i> Upload and share your own recipe so everyone can try it as well!</p>
+                    <h3 class="pt-3 mb-4">
+                        Create your own online cookbook from your favorite recipes!
+                    </h3>
+                    <p class="mb-0">
+                        <i class="fas fa-check"></i> 
+                        Create your account
+                    </p>
+                    <p class="mb-0">
+                        <i class="fas fa-check"></i> 
+                        See any recipes you like? Add it to your cookbook.
+                    </p>
+                    <p class="mb-0">
+                        <i class="fas fa-check"></i> 
+                        Upload and share your own recipe so everyone can try it as well!
+                    </p>
                     <div class="pt-5 pb-5 text-center text-md-start">
                         <a role="button" class="btn btn-secondary" href="{{ url_for('register') }}">
                             Sign Up
@@ -193,7 +271,9 @@
 <section class="py-5 bg-light-gray">
     <div class="container text-center">
         <h3 class="my-5">We are <span class="logo-text display-4">Cookle</span></h3>
-        <p>We are a recipe-sharing community, where all recipes come from homecooks all over the world. Would you like to invite your friends and family to share their recipes as well? Provide the email address, and we’ll send them an invitation email to sign up to Cookle.</p>
+        <p>We are a recipe-sharing community, where all recipes come from homecooks all over the world. 
+            Would you like to invite your friends and family to share their recipes as well? 
+            Provide the email address, and we’ll send them an invitation email to sign up to Cookle.</p>
         <div class="row py-3 d-flex justify-content-center">
             <div class="col-sm-10 col-md-8 col-lg-6">
                 <form onsubmit="return sendInvitation(this);" id="invite-form">

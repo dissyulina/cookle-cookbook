@@ -508,6 +508,7 @@ def edit_recipe(recipe_id):
     """
     Function for user to edit their own recipe
     This function is also accessible by the Admin
+        (to edit some mistakes to keep the db clean)
     Add some conditional defensive code to check:
     - if the user is logged in
     - if the logged in user is the correct user or admin
@@ -559,6 +560,7 @@ def delete_recipe(recipe_id):
     """
     Function for user to delete their own recipe
     This function is also accessible by the Admin
+        (to edit spam/unfit posts to keep the db clean)
     Add some conditional defensive code to check:
     - if the user is logged in
     - if the logged in user is the correct user or admin
@@ -735,8 +737,7 @@ def save_to_cookbook(recipe_id):
                                             "saved_recipes": ObjectId(
                                                   recipe_id)}})
                 flash("Recipe Added to My Cookbook", "success")
-                return redirect(url_for("get_single_recipe",
-                                        recipe_id=recipe_id))
+                return redirect(request.referrer)
 
             else:
                 # If recipe is already in cookbook, remove it from the cookbook
@@ -745,15 +746,13 @@ def save_to_cookbook(recipe_id):
                                             "saved_recipes": ObjectId(
                                                   recipe_id)}})
                 flash("Recipe Removed from My Cookbook", "info")
-                return redirect(url_for("get_single_recipe",
-                                        recipe_id=recipe_id))
+                return redirect(request.referrer)
 
         else:
             # if user created the recipe, they cannot save it
             flash("You created this recipe. It's already in your cookbook.",
                   "info")
-            return redirect(url_for("get_single_recipe",
-                                    recipe_id=recipe_id))
+            return redirect(request.referrer)
 
     else:
         flash("You're not logged in. Please log in or sign up first.",
@@ -936,10 +935,10 @@ def edit_review(review_id):
                     {"_id": ObjectId(review_id)}, {"$set": submit})
                 flash("Review Successfully Edited", "success")
 
-                return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
-                
+                return redirect(url_for("get_single_recipe",
+                                        recipe_id=recipe_id))
+
             return redirect(request.referrer)
-            #return render_template("single-recipe.html", review=review)
 
         else:
             # If wrong user
@@ -959,7 +958,7 @@ def delete_review(review_id):
     """
     Function for users to delete their review
     This functionality is also accessible by Admin
-        (to delete malicious comments if needed)
+        (to delete spam/ malicious comments if needed)
     Add conditional defensive code to check
         - if the user is logged in
         - if the user is correct or is admin

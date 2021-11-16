@@ -399,15 +399,16 @@ I ran into several issues and bugs while developing the website. Some of the tou
    1. I created a form for every review, but with bootstrap class ```class="d-none"``` so that basically for every review listed, there's a hidden form.   
    2. I created an html costum data attribute for the form and for the review in accordance, so they would have the same ```data-id="{{ review._id }}```.   
    3. If a user clicked a review to edit, form that has the ```data-id``` that matched the ```data-id``` on the clicked review, will be displayed. I used javascript to remove the class ```class="d-none"```, and then move it up (append the whole form it as a child of a div) on the top of review section.   
-   4. And then form can be submitted as usual by defining ```action="{{ url_for('edit_review', review_id=review._id) }}```.   
-
-
-
-  
+   4. And then form can be submitted as usual by defining ```action="{{ url_for('edit_review', review_id=review._id) }}```.  
+    
+<br/>  
 
 ### **Known Issues & Unsolved Bugs**  
 1. Continuing from Pagination issues on My Cookbook Page, I noticed one more problem that still persisted. For example if I clicked second pill (Saved Recipe), and then I clicked page-2 of Saved Recipe. From there I wanted to go to first pill (All Recipes), it should've displayed All Recipe page-1. But instead it brought me to All Recipes page-2 (the same page as the previous pill). I googled it and found on [Stack Overflow](https://stackoverflow.com/questions/41719318/flask-many-pagination-on-one-single-page-using-flask-paginate-0-4-5) that it was because there were multiple paginations in one page, each linked to the respective pill. The solution was to handle this is with asynchronous requests (Ajax). I should have three separate endpoints for the three lists of items, each paginated individually. The main HTML page will issue Ajax requests to these three endpoints, and moving between pages in one list should not affect the other two lists at all. 
 Unfortunately, I didn't find enough documentation about this topic and couldn't apply a solution for this problem. Hopefully as I gain more knowledge and experience, I would be able to solve this on the next development phase.  
+
+2. In the console, there’s a warning: “Error with Permissions-Policy header: Unrecognized feature: 'interest cohort.”
+There is a new header from Github as part of an effort to ensure the privacy of the users when browsing GitHub pages (through disabling the interest-cohort feature). Unfortunately the interest-cohort can be unrecognized in Chrome or other browsers. However, it's just a warning and doesn't affect anything. This topic can be found on [this link](https://github.community/t/i-have-no-idea-what-the-interest-cohort-is/179780/2).   
 
 <br/>   
 

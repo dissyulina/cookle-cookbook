@@ -372,6 +372,39 @@ I ran into several issues and bugs while developing the website. Some of the tou
 
    **Solution** : Once I understood the problem, I used javascript and session storage to manipulate the active class. The last clicked pills is saved the session storage, and on page reloads, add and remove active class manually according to the data from session storage. This way the pagination can be clicked and the page still stays on the active pill.  
 
+4. **Issues** : On profile page, there's a section where the user can see all their uploaded and saved recipes, and they can also delete/ remove the recipes as their wish. However, before actually deleting the recipe, there's a modal pop up to confirm if the user really wanted to delete it. I encountered a bug that after clicking "Yes, Delete" button on the modal, the recipe that was deleted was always the first recipe on the list. 
+   **Solution** : I put the modal inside the for loop, so for every recipe name there's a modal with the id using ```recipe._id```, so the correct modal will showed up. Below is the simplified code:
+   ```
+      {% for recipe in uploaded_recipes %}
+      
+          <!-- The recipe's name -->
+          {{ recipe.recipe_name }}
+
+          <!-- Button to delete, open a modal -->
+          <a data-mdb-toggle="modal" data-mdb-target="#modalDeleteRecipe{{ recipe._id }}">Delete</a>
+
+          <!-- The modal confirmation -->
+          <div class="modal fade" id="modalDeleteRecipe{{ recipe._id }}">
+              <p>Are you sure you want to delete this recipe?</p>
+              <button type="button" data-mdb-dismiss="modal">Cancel</button>
+              <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}">Yes, Delete</a>
+          </div>
+
+      {% endfor %}    
+   ```    
+
+5. **Issues** : On the single recipe page, I added functionality to write review (and edit or delete it afterwards). Problem arose when I tried to put the form to edit review on the same page as single recipe page. If a user click edit review button, a form input (text area) would show up at the top of review section. It was quite confusing to set up as it wasn't supposed to direct to a different page (like it did with edit recipe and edit profile functionalities), but at the same time it also had to pass a parameter of ```review._id``` to the form.   
+
+   **Solution** : After many trials and errors, here's what I did that solved the problem:   
+   1. I created a form for every review, but with bootstrap class ```class="d-none"``` so that basically for every review listed, there's a hidden form.   
+   2. I created an html costum data attribute for the form and for the review in accordance, so they would have the same ```data-id="{{ review._id }}```.   
+   3. If a user clicked a review to edit, form that has the ```data-id``` that matched the ```data-id``` on the clicked review, will be displayed. I used javascript to remove the class ```class="d-none"```, and then move it up (append the whole form it as a child of a div) on the top of review section.   
+   4. And then form can be submitted as usual by defining ```action="{{ url_for('edit_review', review_id=review._id) }}```.   
+
+
+
+  
+
 ### **Known Issues & Unsolved Bugs**  
 1. Continuing from Pagination issues on My Cookbook Page, I noticed one more problem that still persisted. For example if I clicked second pill (Saved Recipe), and then I clicked page-2 of Saved Recipe. From there I wanted to go to first pill (All Recipes), it should've displayed All Recipe page-1. But instead it brought me to All Recipes page-2 (the same page as the previous pill). I googled it and found on [Stack Overflow](https://stackoverflow.com/questions/41719318/flask-many-pagination-on-one-single-page-using-flask-paginate-0-4-5) that it was because there were multiple paginations in one page, each linked to the respective pill. The solution was to handle this is with asynchronous requests (Ajax). I should have three separate endpoints for the three lists of items, each paginated individually. The main HTML page will issue Ajax requests to these three endpoints, and moving between pages in one list should not affect the other two lists at all. 
 Unfortunately, I didn't find enough documentation about this topic and couldn't apply a solution for this problem. Hopefully as I gain more knowledge and experience, I would be able to solve this on the next development phase.  

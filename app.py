@@ -911,8 +911,8 @@ def write_review(recipe_id):
 
 
 # -- Edit a review (only available for the user's own review) --
-@app.route("/edit_review/<review_id>", methods=["GET", "POST"])
-def edit_review(review_id):
+@app.route("/recipe/<recipe_id>/<review_id>", methods=["GET", "POST"])
+def edit_review(recipe_id, review_id):
     """
     Function for users to edit their review
     Add conditional defensive code to check
@@ -974,10 +974,10 @@ def delete_review(review_id):
         if session["user"] == username or session["user"] == "admin":
             # If correct user
             mongo.db.reviews.remove({"_id": ObjectId(review_id)})
-            mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)}, {
-                                        "$pull": {"reviews": ObjectId(
-                                            review_id)},
-                                        "$inc": {"total_reviews": -1}})
+            mongo.db.recipes.update_one(
+                {"_id": ObjectId(recipe_id)},
+                {"$pull": {"reviews": ObjectId(review_id)},
+                 "$inc": {"total_reviews": -1}})
 
             flash("Review Successfully Deleted", "success")
             return redirect(url_for("get_single_recipe", recipe_id=recipe_id))

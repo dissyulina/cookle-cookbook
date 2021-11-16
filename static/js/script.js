@@ -136,7 +136,8 @@ $("#btn-review").click(function() {
 });
 
 /* Single Recipe Page: If user clicks Edit review button, show form */
-$("#btn-edit-review").click(function() {
+$("#btn-edit-review").click(function(e) {
+    e.preventDefault;
     $("#edit-review").removeClass('d-none')
     $("#edit_review").focus();
 });

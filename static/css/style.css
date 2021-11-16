@@ -184,7 +184,8 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
     width: 100%;
 }
 
-.dropstart i {
+.dropstart i,
+#collapseSavedRecipes i {
     color: #EF6C00;
 }
 

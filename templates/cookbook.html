@@ -18,7 +18,7 @@
                 {% endwith %}
 
                 <h2 class="py-5 text-center">My Cookbook</h2>
-
+                
                 <!-- Pills navs -->
                 <ul class="nav nav-pills nav-justified mb-3 d-flex" id="cookbook-pills" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -54,7 +54,7 @@
                                     <div class="card shadow-2-strong h-100">
                                         <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
                                             <img src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }}"  
-                                                onerror="this.src='../../static/images/logo.png';" class="card-img-top">
+                                                onerror="this.src='../../static/images/dish-placeholder.png';" class="card-img-top">
                                             <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
                                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                             </a>
@@ -84,7 +84,7 @@
                                         <div class="bg-image hover-overlay ripple card-image" 
                                             data-mdb-ripple-color="light">
                                             <img src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }}" 
-                                                onerror="this.src='../../static/images/logo.png';" class="card-img-top">
+                                                onerror="this.src='../../static/images/dish-placeholder.png';" class="card-img-top">
                                             <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
                                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                             </a>
@@ -113,7 +113,7 @@
                                     <div class="card shadow-2-strong h-100">
                                         <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
                                             <img src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }}" 
-                                                onerror="this.src='../../static/images/logo.png';" class="card-img-top">
+                                                onerror="this.src='../../static/images/dish-placeholder.png';" class="card-img-top">
                                             <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
                                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                             </a>
@@ -158,7 +158,6 @@
             </div>
         </div>
     </div>
-    
 </section>
 
 {% endblock %}

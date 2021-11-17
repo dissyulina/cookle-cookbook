@@ -458,7 +458,7 @@ def get_single_recipe(recipe_id):
     """
     recipe = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})
-    reviews = mongo.db.reviews.find().sort("_id", 1)
+    reviews = mongo.db.reviews.find().sort("_id", -1)
     if recipe["total_reviews"] > 0:
         review = mongo.db.reviews.find_one({"_id": {"$in": recipe["reviews"]}})
 
@@ -523,6 +523,8 @@ def edit_recipe(recipe_id):
         # If the user logged in
         if session["user"] == username or session["user"] == "admin":
             # If correct user
+            category = mongo.db.categories.find_one(
+                {"category_name": request.form.get("category_name")})
             if request.method == "POST":
                 submit = {
                     "category_name": request.form.get("category_name"),
@@ -533,6 +535,7 @@ def edit_recipe(recipe_id):
                     "recipe_image": request.form.get("recipe_image"),
                     "serving": request.form.get("serving"),
                     "time": request.form.get("time"),
+                    "category_id": category["_id"],
                 }
                 mongo.db.recipes.update({"_id": ObjectId(recipe_id)},
                                         {"$set": submit})
@@ -665,6 +668,9 @@ def edit_category(category_id):
                 }
                 mongo.db.categories.update(
                     {"_id": ObjectId(category_id)}, submit)
+                # update recipes in recipes coll with the new category name
+                mongo.db.recipes.update_many(
+                    {"category_id": ObjectId(category_id)}, {"$set": submit})
                 flash("Category Successfully Edited", "success")
                 return redirect(url_for("get_categories"))
 
@@ -926,11 +932,13 @@ def edit_review(review_id):
     if "user" in session:
         # If the user logged in
         username = review["username"]
-        if session["user"] == username:
+        if session["user"] == username or session["user"] == "admin":
             # If correct user
             if request.method == "POST":
+                user = mongo.db.users.find_one({"username": username})
                 submit = {
-                    "review_text": request.form.get("edit_review")
+                    "review_text": request.form.get("edit_review"),
+                    "user_id": user["_id"]
                 }
                 mongo.db.reviews.update_one(
                     {"_id": ObjectId(review_id)}, {"$set": submit})

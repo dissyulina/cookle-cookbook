@@ -62,43 +62,43 @@
                             </a>
                         </li>
                         {% if session.user %}
-                        <li class="btn-group nav-item dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center profile-img" role="button" 
-                                id="navbarDropdownMenuLink" data-mdb-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ user.user_image}}" onerror="this.src='../../static/images/user.png';" 
-                                    class="rounded-circle" alt="profile picture" loading="lazy">
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                                <li class="nav-item">
-                                    <a class="nav-link dropdown-item" href="{{ url_for('add_recipe') }}">
-                                        Create Recipe
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link dropdown-item"
-                                        href="{{ url_for('profile', username=session['user']) }}">
-                                        View Profile
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link dropdown-item"
-                                        href="{{ url_for('get_cookbook', username=session['user']) }}">
-                                        My Cookbook
-                                    </a>
-                                </li>
-                                {% if session.user|lower == "admin"|lower %}
-                                    <li>
-                                        <a class="nav-link dropdown-item" href="{{ url_for('get_categories') }}">
-                                            Manage Categories
+                            <li>
+                                <a class="nav-link me-3"
+                                    href="{{ url_for('get_cookbook', username=session['user']) }}">
+                                    My Cookbook
+                                </a>
+                            </li>
+                            <li class="btn-group nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center profile-img" role="button" 
+                                    id="navbarDropdownMenuLink" data-mdb-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ user.user_image}}" onerror="this.src='../../static/images/user.png';" 
+                                        class="rounded-circle" alt="profile picture" loading="lazy">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                                    <li class="nav-item">
+                                        <a class="nav-link dropdown-item" href="{{ url_for('add_recipe') }}">
+                                            Create Recipe
                                         </a>
                                     </li>
-                                {% endif %}
-                                <li><hr class="dropdown-divider" /></li>
-                                <li>
-                                    <a class="nav-link dropdown-item" href="{{ url_for('logout') }}">Log Out</a>
-                                </li>
-                            </ul>
-                        </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link dropdown-item"
+                                            href="{{ url_for('profile', username=session['user']) }}">
+                                            View Profile
+                                        </a>
+                                    </li>
+                                    {% if session.user|lower == "admin"|lower %}
+                                        <li>
+                                            <a class="nav-link dropdown-item" href="{{ url_for('get_categories') }}">
+                                                Manage Categories
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li>
+                                        <a class="nav-link dropdown-item" href="{{ url_for('logout') }}">Log Out</a>
+                                    </li>
+                                </ul>
+                            </li>
                     </ul>
                     <!-- Sign up / log in buttons -->
                         {% else %}
@@ -144,13 +144,13 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url_for('profile', username=session['user']) }}">
-                                    Profile
+                                <a href="{{ url_for('get_cookbook', username=session['user']) }}">
+                                    My Cookbook
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url_for('get_cookbook', username=session['user']) }}">
-                                    My Cookbook
+                                <a href="{{ url_for('profile', username=session['user']) }}">
+                                    View Profile
                                 </a>
                             </li>
                         {% else %}

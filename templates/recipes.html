@@ -24,8 +24,8 @@
                         <form action="{{ url_for('search') }}" method="POST">
                             <div class="w-100 d-flex py-3">
                                 <div class="form-outline flex-grow-1">
-                                    <input type="text" id="query" name="query" class="form-control" required>
-                                    <label class="form-label" for="query">Search recipes...</label>
+                                    <input type="text" id="query" name="query" class="form-control" 
+                                        placeholder="Search recipes..." required>
                                 </div>
                                 <button type="submit" class="btn btn-rec-primary me-2">
                                     <i class="fas fa-search"></i>
@@ -63,8 +63,8 @@
                             <div class="div col-6 col-md-4 col-lg-3">
                                 <div class="card shadow-2-strong h-100">
                                     <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
-                                        <img src="{{ recipe.recipe_image }}" class="card-img-top" 
-                                            onerror="this.src='../../static/images/dish-placeholder.png';" alt="{{ recipe.recipe_name }}">
+                                        <img src="{{ recipe.recipe_image }}" class="card-img-top" alt="{{ recipe.recipe_name }}"
+                                            onerror="this.src='../../static/images/dish-placeholder.png';">
                                         <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
                                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                         </a>

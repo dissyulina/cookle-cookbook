@@ -38,7 +38,7 @@
                         <!-- Password input -->
                         <div class="form-outline mb-4">
                             <input type="password" id="password" name="password" class="form-control" minlength="5" 
-                                maxlength="16" pattern="^[a-zA-Z0-9]{5,15}$" required>
+                                maxlength="16" pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{4,15}$" required>
                             <label class="form-label" for="password">Password</label>
                             <div class="invalid-feedback">Password's length must be 5 to 16 characters.</div>
                         </div>

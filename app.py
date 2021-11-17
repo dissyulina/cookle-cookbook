@@ -274,8 +274,7 @@ def profile(username):
             return redirect(url_for("profile",
                                     username=session["user"]))
     else:
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -304,6 +303,17 @@ def edit_profile(user_id):
                 }
                 mongo.db.users.update({"_id": ObjectId(user_id)},
                                       {"$set": submit})
+
+                # update username and user image in recipes and reviews coll
+                update = {
+                    "username": request.form.get("username").lower(),
+                    "user_image": request.form.get("profile-url"),
+                }
+                mongo.db.recipes.update({"user_id": ObjectId(user_id)},
+                                        {"$set": update})
+                mongo.db.reviews.update({"user_id": ObjectId(user_id)},
+                                        {"$set": update})
+
                 flash("Profile Successfully Edited", "success")
                 return redirect(url_for("profile", username=session["user"]))
             return render_template("edit-profile.html", user=user)
@@ -313,8 +323,7 @@ def edit_profile(user_id):
             return redirect(url_for("profile",
                                     username=session["user"]))
     else:
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -353,8 +362,7 @@ def change_password(user_id):
             return redirect(url_for("profile",
                                     username=session["user"]))
     else:
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -386,8 +394,7 @@ def delete_profile(user_id):
             return redirect(url_for("profile",
                                     username=session["user"]))
     else:
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -444,8 +451,7 @@ def add_recipe():
                                categories=categories,
                                user=user)
     else:
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -554,8 +560,7 @@ def edit_recipe(recipe_id):
             flash("You are not authorized to do that.", "danger")
             return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
     else:
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -609,8 +614,7 @@ def get_categories():
             return redirect(url_for("profile",
                                     username=session["user"]))
     else:
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -643,8 +647,7 @@ def add_category():
             return redirect(url_for("profile",
                             username=session["user"]))
     else:
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -685,8 +688,7 @@ def edit_category(category_id):
             return redirect(url_for("profile",
                             username=session["user"]))
     else:
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -714,8 +716,7 @@ def delete_category(category_id):
             return redirect(url_for("profile",
                             username=session["user"]))
     else:
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -763,8 +764,7 @@ def save_to_cookbook(recipe_id):
             return redirect(request.referrer)
 
     else:
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
 
     return redirect(url_for("get_single_recipe", recipe_id=recipe_id))
 
@@ -807,8 +807,7 @@ def like_recipe(recipe_id):
             return redirect(url_for("get_single_recipe",
                                     recipe_id=recipe_id))
     else:
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
 
     return redirect(url_for("get_single_recipe",
                             recipe_id=recipe_id))
@@ -865,8 +864,7 @@ def get_cookbook(username):
 
     else:
         # If not logged in
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -911,8 +909,7 @@ def write_review(recipe_id):
 
     else:
         # If not logged in
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -932,13 +929,11 @@ def edit_review(review_id):
     if "user" in session:
         # If the user logged in
         username = review["username"]
-        if session["user"] == username or session["user"] == "admin":
+        if session["user"] == username:
             # If correct user
             if request.method == "POST":
-                user = mongo.db.users.find_one({"username": username})
                 submit = {
                     "review_text": request.form.get("edit_review"),
-                    "user_id": user["_id"]
                 }
                 mongo.db.reviews.update_one(
                     {"_id": ObjectId(review_id)}, {"$set": submit})
@@ -956,8 +951,7 @@ def edit_review(review_id):
 
     else:
         # If not logged in
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 
@@ -997,8 +991,7 @@ def delete_review(review_id):
 
     else:
         # If not logged in
-        flash("You're not logged in. Please log in or sign up first.",
-              "warning")
+        flash("Please log in or sign up.", "warning")
         return redirect(url_for("login"))
 
 

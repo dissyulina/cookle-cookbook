@@ -47,12 +47,13 @@ h4 {
 }
 .btn-primary {
     background-color: #3c726c;
+    border: 1px solid #3c726c;
     color: #fff;
     border-radius: 10px;
 }
 
 .btn-secondary {
-    border: 1px solid #1e4641;
+    border: 1px solid #3c726c;
     background-color: #fff;
     border-radius: 10px;
     color: #1e4641;
@@ -64,8 +65,8 @@ h4 {
 
 .btn-secondary.focus, .btn-secondary:focus, .btn-secondary:hover {
     background-color: rgba(255, 255, 255, 0.884);
-    color: #55857F;
-    border: 1px solid #55857F;
+    border: 1px solid #76a19c;
+    color: #1e4641;
 }
 
 .btn-rec-primary {

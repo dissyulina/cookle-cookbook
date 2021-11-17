@@ -436,7 +436,8 @@ def add_recipe():
                                       {"$push": {
                                           "uploaded_recipes": new_recipe_id}})
             flash("Recipe Successfully Added", "success")
-            return redirect(url_for("get_recipes"))
+            return redirect(url_for("get_single_recipe",
+                                    recipe_id=new_recipe_id))
 
         categories = mongo.db.categories.find().sort("category_name", 1)
         return render_template("add-recipe.html",
@@ -493,7 +494,6 @@ def get_single_recipe(recipe_id):
                                    saved_recipe=saved_recipe,
                                    liked_recipe=liked_recipe,
                                    reviews=reviews)
-
     else:
         saved_recipe = False
         liked_recipe = False
@@ -752,7 +752,7 @@ def save_to_cookbook(recipe_id):
 
         else:
             # if user created the recipe, they cannot save it
-            flash("You created this recipe. It's already in your cookbook.",
+            flash("You created this recipe. It's in your cookbook.",
                   "info")
             return redirect(request.referrer)
 
@@ -888,7 +888,6 @@ def write_review(recipe_id):
                 "recipe_id": ObjectId(recipe_id)
             }
             new_review_id = mongo.db.reviews.insert_one(submit).inserted_id
-
             mongo.db.recipes.update_one(
                 {"_id": ObjectId(recipe_id)}, {
                     "$push": {"reviews": new_review_id},

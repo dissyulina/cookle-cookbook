@@ -90,40 +90,41 @@ The chart below is the mapping of all of the opportunities. The yellow circle si
 <br />  
 
 ### **2. Scope Plane**  
-Based on the mapping in the Strategy Plane, a scope was defined for the site with room for future improvements.
+Based on the mapping in the Strategy Plane, a scope was defined for the site with room for future improvements.  
 * **Functional Requirements**   
-   The users will be able to:
-   - Sign up and log in to the site by providing username and password.
-   - View and Edit their profile (option to change username, email address, and/or user image).
-   - Delete their account
-   - Upload a recipe 
-   - Edit their own recipe
-   - Delete their own recipe
-   - View all recipes on the site
-   - Search for recipes
-   - Save favorite recipes to cookbook
-   - Remove a previously saved recipes from cookbook
-   - View the cookbook that is filled with their own recipes and their saved favorite recipes
-   - Like a recipe
-   - Remove a like 
-   - Write a review on a recipe
-   - Edit their own review
-   - Delete their own review 
-   - Print a recipe page
-   - Share a recipe page   
+   The users will be able to:  
+   - Sign up and log in to the site by providing username and password.  
+   - View and Edit their profile (option to change username, email address, and/or user image).  
+   - Delete their account  
+   - Upload a recipe   
+   - Edit their own recipe  
+   - Delete their own recipe  
+   - View all recipes on the site  
+   - Search for recipes  
+   - Save favorite recipes to cookbook  
+   - Remove a previously saved recipes from cookbook  
+   - View the cookbook that is filled with their own recipes and their saved favorite recipes  
+   - Like a recipe  
+   - Remove a like  
+   - Write a review on a recipe  
+   - Edit their own review  
+   - Delete their own review  
+   - Print a recipe page  
+   - Share a recipe page    
 
-   The admin/ site owners will be able to:
-   - Have all functionalities as a user does
-   - Add a category of recipes
-   - Edit a category
-   - Delete a category
-   - Delete any recipes listed on the site (if needed)
-   - Delete any offensive reviews on the site (if needed)
-   - Delete any user (if needed)  
+   The admin/ site owners will be able to:  
+   - Have all functionalities as a user does  
+   - Add a category of recipes  
+   - Edit a category  
+   - Delete a category   
+   - Delete any recipes listed on the site (if needed)   
+   - Delete any offensive reviews on the site (if needed)   
+
 <br/>     
 
 * **Non functional requirements**  
    - The users will be able to invite friends to join the site by providing the email address. As the site is a community based recipe sharing, the number of members are very important to hopefully add more data (in this instance, recipes) to the site.   
+   - The users will be able to send a message to the Admin/ site owners via contact form.  
    - The users will be able to navigate easily and intuitively throughout the site, able to log in and log out at every page the users currently at.   
 <br/>   
 
@@ -156,7 +157,7 @@ Navigation to Home Page, Explore Recipes Page, View Profile Page, Create Recipe 
 * **View Profile Page**: Edit profile, Delete account.
 * **Create Recipe Page**: Create a recipe.
 * **My Cookbook**: View own recipes and previously saved recipes.
-* **Footer**: same navigation links as Navbar, with additional Contact Us and social media information.   
+* **Footer**: same navigation links as Navbar, with additional Contact Form and social media information.   
 
 
 #### **Database Structure**   
@@ -220,8 +221,8 @@ All of the fonts were sourced from [Google Fonts](https://fonts.google.com).
    - **Recipe Cards** - Recipe cards are used consistently throughout the website, providing users with the image of the recipe, the recipe's name, total likes, and add to cookbook button (a plus sign icon). This add to cookbook button is also displayed even when the user hasn't logged in/ registered, in order to give the user a glimpse of what they can get by registering to the website. When guest users click this button, it will direct them to the login page.
    - **Footer** - The footer is available on all pages, provides the navigation links like Navbar, with additional contact information and social media icons. 
    - **A Secure Website** - In addition to front-end manipulation (for example the Edit Recipe button is hidden for users that don't own that recipe), a back-end defensive programming was also built to prevent any unallowed action performed by a user.   
-   - **CONTACT MODAL**
-   - **Modal Confirmation**
+   - **Contact Form Modal** - A contact form modal is available on the footer on every page, giving a quick access to the form for the user wherever page the user currently at. After the user click the send button on the form, there will be a confirmation that the message is sent.
+   - **Modal Confirmation** - For every delete functionality (delete recipe, delete reviews, delete profile, and remove recipe from the cookbook), there's a modal pop up to confirm first if the user wants to delete it. This feature provide a barrier if the user accidentally click the delete button.
 
 ### **b. Page Design Features**     
 
@@ -229,7 +230,7 @@ All of the fonts were sourced from [Google Fonts](https://fonts.google.com).
      * **Search Bar** : Right away centered in the middle of the hero-image, a Search Bar allows users to search a recipe. After the users click the search button, they will be brought to the Explore Recipes page with the result of their query. 
      * **Carousel** : There are three carousels in the home page, displaying 8 Popular Recipes, 8 Newest Recipes, and 6 Cookbook Recommendation. Carousel was chosen to add some interactive section for the user, also to allow more contents to be displayed.
      * **Sign Up** : A small section inviting the users to register to site by explaining how the website works.
-     * **Invite Your Friends** : Also a small section to convince users to invite their friends and family to join Cookle.   
+     * **Invite Your Friends** : A small section to convince users to invite their friends and family to join Cookle. An email is sent to the email address provided by the user with a link to register to Cookle.   
 
    - **Explore Recipes**   
      * **Search Bar** : Search bar function allowing users to search for a recipe.
@@ -339,20 +340,25 @@ All of the fonts were sourced from [Google Fonts](https://fonts.google.com).
 
 <br/>   
 
-#### **Features to be implemented in the future**   
+### **Features to be implemented in the future**   
 
-Due to limited resources (time constraint, skill of the developer at the moment, and other reasons), some features couldn't be implemented now. In the future on the next development phase, these features would be great addition to the game:   
+Due to limited resources (time constraint, skill of the developer at the moment, and other reasons), some features couldn't be implemented now. There are so much potentials to develop this web application on the next development phase, adding more features and functionality. These features would be great addition to the web app:  
+
 1. Forgot Password Functionality   
    This functionality would give users an option to change password without logging in first to the website. This would usually be done by sending a secure link to change password to user's email address. For now the users can only change their password by logging in and clicking the change password button.
 
 2. Separate page for review   
-   As for now, the reviews were displayed on the same page with the recipe. However if there are a lot of reviews, it would disturbed the recipe page layout because it would be too long. The idea is to displayed only 5 latest reviews and add a link navigation to see all reviews.  
+   As for now, the reviews were displayed on the same page with the recipe. However if there are a lot of reviews, it would disturb the recipe page layout because it would be too long. The idea for future development is to display only 5 latest reviews and add a link navigation to the reviews page to see all reviews.  
 
-3. A profile page where for public view with all recipes that the user has created   
-   A username is not yet clickable for this project. However in futute development of this project, a profile page for public viewing can be built. By clicking a username, another user can view the public profile page, and can see all recipes that this user had created. 
+3. A profile page for public view with all recipes that the user has created   
+   A username is not yet clickable for this project. However in future development of this project, a profile page for public viewing can be built. By clicking a username, another user can view the public profile page, and can see all recipes that this user had created. 
 
 4. Users can upload image from computer   
    It is advisable by Code Institute to use url to upload images in this project. To upload a file from a computer and locate it on somewhere will be covered on the upcoming lesson, Fullstack with Django.     
+
+5. Category migration functionality for Admin  
+   In this current feature, the Admin can manage categories by adding a new one, editing or deleting the existing ones. But when Admin deleted a category, it doesn't affect the recipes with that old category, unless the Admin changes the category manually one by one by editing the recipe. As the database grows larger, there might be a need to re-order the categories and recipes. For this reason I would like to buid a category migration functionality/ page for future development.
+   
   
 <br/>   
 

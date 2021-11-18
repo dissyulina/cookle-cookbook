@@ -220,7 +220,7 @@ All of the fonts were sourced from [Google Fonts](https://fonts.google.com).
    - **Flash Messages** - Flash messages provide the user the necessary feedback of their action whether it's successfully executed or not.
    - **Recipe Cards** - Recipe cards are used consistently throughout the website, providing users with the image of the recipe, the recipe's name, total likes, and add to cookbook button (a plus sign icon). This add to cookbook button is also displayed even when the user hasn't logged in/ registered, in order to give the user a glimpse of what they can get by registering to the website. When guest users click this button, it will direct them to the login page.
    - **Footer** - The footer is available on all pages, provides the navigation links like Navbar, with additional contact information and social media icons. 
-   - **A Secure Website** - In addition to front-end manipulation (for example the Edit Recipe button is hidden for users that don't own that recipe), a back-end defensive programming was also built to prevent any unallowed action performed by a user.   
+   - **Defensive back-end** - In addition to front-end manipulation (for example the Edit Recipe button is hidden for users that don't own that recipe), a back-end defensive programming was also built to prevent any unallowed action performed by a user. So users can not just type the url to edit another recipe that wasn't theirs. 
    - **Contact Form Modal** - A contact form modal is available on the footer on every page, giving a quick access to the form for the user wherever page the user currently at. After the user click the send button on the form, there will be a confirmation that the message is sent.
    - **Modal Confirmation** - For every delete functionality (delete recipe, delete reviews, delete profile, and remove recipe from the cookbook), there's a modal pop up to confirm first if the user wants to delete it. This feature provide a barrier if the user accidentally click the delete button.
 
@@ -483,13 +483,149 @@ The testing documentation can be found [here]()).
 
 <br/>   
 
-## **Deployment**  
-The project was developed using Gitpod as the code editor, committed to Git as a local repository, and pushed/ stored to GitHub. The web application is deployed on Heroku with the repository hosted on Github.
+# **Deployment**  
+The project was developed using Gitpod as the IDE, committed to Git as a local repository, and pushed/ stored to GitHub. The web application is deployed on Heroku because we can't host a Python project on Github pages. The repository itself is hosted on Github.   
 
-### **Deployment to Heroku**  
-The project was deployed to GitHub Pages using the following steps:   
+## **Deployment to Heroku**  
+There are two ways to deploy on Heroku:  
+- Using the Heroku Command Line Interface, or 
+- Connect to GitHub Repository. 
+I did the second method as it's the simpler way to deploy to Heroku. The steps are as follows.
+
+1. **Set Up A New Heroku App**   
+   * Navigate to Heroku.com, create a new account or login if you already have an account.   
+   * On the dashboard page, click "Create New App" button.   
+   * Give the app a name, the name must be unique with hypens between words. 
+   * Set the region closest to you, and click "Create App".  
+
+2. **Create A Requirements.txt file**   
+   A requirements.txt file contains a list of the Python dependencies that our project needs to run successfully. It's how Heroku can detect what language we're using. Here are the steps to create a requirements.txt file:   
+   * Create a requirements.txt file by typing in the terminal:    
+      ```pipi3 freeze --local > requirements.txt```   
+   * Add, commit, and push the file:   
+      ```
+      git add -A
+      git commit -m "Add requirements.txt" 
+      git push
+      ```   
+
+3. **Create A Procfile file**   
+   A procfile is a special kind of file that tells Heroku how to run our project.   
+   * In the terminal, type:   
+      ``` echo web: python run.py > Procfile ```   
+      This command tells Heroku that it's going to be a web process, and the command to run our application is "python run.py", which is the name of the python file that we've created.   
+   * Add, commit, and push the file:   
+      ```
+      git add -A
+      git commit -m "Add Procfile" 
+      git push
+      ```   
+
+4. **Connect Our App to Github and**   
+   * In Heroku app dashboard, navigate to the Deploy page. On the Deployment Method, click "Github".  
+   * Click on "Connect to Github" button.   
+   * Fill in the name of your Github repository name and click on "Search".   
+   * After it found the correct repository, click on "Connect".   
+
+5. **Set Up The Environment Variables in Heroku**   
+   Since we'vw contained our environment variables within a hidden file env.py, Heroku won't be able to read those variables. We can securely tell Heroku which variables are required.   
+   * Go back to Heroku dashboard of your flask app, navigate to the "Settings" page.   
+   * Click on "Reveal Config Vars" button, add environment variables in a key-value pairs as below:   
+      Key | Value  
+      --- | --- 
+      IP | 0.0.0.0 
+      PORT | 5000   
+      SECRET_KEY | ```<your_secret_key>```  
+      MONGO_URI | ```mongodb+srv://<username>:<password>@<cluster_name>-ocous.mongodb.net/<database_name>?retryWrites=true&w=majority```  
+      MONGO_DBNAME | ```<database_name>```  
+
+6. **Enable The Automatic Deployment**   
+   * On "Automatic Deploys" section, from our master/main branch click on "Enable Automatic Deployment".  
+   * On "Manual deploy" section, from our master/main click on "Deploy Branch".  
+   * Heroku will now receive the code from Github and start building the app using our required packages. Once it's done, you'll see a notification "Your app was successfully deployed."  The deployed version can now be viewed by selecting View App.
+
+<br/>  
 
 
+## **How To Use This Project**  
+To use this project you can follow these steps:
+
+### **1. Create database on MongoDB**  
+1. **Set Up MongoDB**   
+   * Navigate to mongoDB.com, create an account or login.
+   * Create a cluster by choosing the Shared Cluster:
+     - Select a cloud provider. Amazon Web Service (AWS) is an excellent choice for the project, and then select the region closest to you.  
+     - Select a cluster tier, choose the M0 Tier (Free forever tier).  
+     - Click on cluster name, and fill in cluster name of your choice.  
+     - Click "Create Cluster" button. This cluster name will be used in your MONGO_URI environment variable.   
+   * Navigate to Database Access under the Security section on the left, in order to create our database user credentials:  
+     -  Click on "Add New Database User", create a username and password. Please note to only use a combination of letters and numbers for username and password to avoid any problems that might arise. These username and password will be used in your MONGO_URI environment variable.   
+     - Set the "Database User Privileges" to Read and Write to any database, and click "Add User".   
+   * Click on "Network Access" within the Security menu in order to whitelist our IP address and make sure that it has access to our database. Click "Add IP Address", select "Allow Access from Anywhere", click "Confirm".
+   * Go back to Cluster tab, click on the Collections tab.  
+
+2. **Create database**  
+   You can create the database and the collections according to the [Data Scheme]()  
+   * From the Clusters page, click on the Collections button.  
+   * Click on "Create Database", provide the database name, and one initial collection name. The database name will be used in your MONGO_URI and MONGO_DBNAME environment variables.  
+   * Create more collections by clicking the green button "Create Collection" 
+   * To manually create a document, click on the "Collection", followed by "Insert Document"  
+
+### **2. Fork or Clone The Github Repository**   
+
+#### **Fork GitHub Repository**  
+By forking the GitHub repository you can make a copy of the original repository on your GitHub account to view and/or make changes without affecting the original repository, by using the following steps:   
+
+1. Log in to GitHub.  
+2. Navigate to the main page of the GitHub Repository that you want to fork.  
+3. At the top right of the Repository just below your profile picture, locate the "Fork" Button.  
+4. You should now have a copy of the original repository in your GitHub account.  
+5. Changes made to the forked repository can be merged with the original repository via a pull request.  
+
+#### **Clone Github Repository**   
+By cloning a GitHub Repository you can create a local copy on your computer of the remote repository. The developer who clones a repository can synchronize their copy of the codebase with any updates made by fellow developers with push or pull request. Cloning is done by using the following steps:  
+1. Log in to GitHub 
+2. Navigate to the main page of the GitHub Repository that you want to clone.
+3. Above the list of files, click the dropdown called "Code".
+4. To clone the repository using HTTPS, under "HTTPS", copy the link.
+5. Open Git Bash.
+6. Change the current working directory to the location where you want the cloned directory to be made.
+7. Type git clone, and then paste the URL you copied in Step 4.  
+```
+$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+```
+8. Press Enter. Your local clone will be created.
+```
+$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+> Cloning into `CI-Clone`...
+> remote: Counting objects: 10, done.
+> remote: Compressing objects: 100% (8/8), done.
+> remove: Total 10 (delta 1), reused 10 (delta 1)
+> Unpacking objects: 100% (10/10), done.
+```  
+Changes made on the local machine (cloned repository) can be pushed to the upstream repository directly if you have a write access for the repository. Otherwise, the changes made in the cloned repository are first pushed to the forked repository, and then a pull request is created.  
+Click [Here](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository) to retrieve pictures for some of the buttons and more detailed explanations of the above process.  
+
+
+### **3. Set local environment variables and install dependencies**  
+Once the copy of the repository has been created, the environment variables has to be set:  
+1. Create a .gitignore file in the project's root directory, by typing in the terminal window: ```touch .gitignore```   
+2. Create the environment file, by typing: ```touch env.py```   
+3. Add (write) env.py to the .gitignore file.   
+4. Within the env.py file, enter the project's environment variables:   
+   ```
+   import os
+
+   os.environ.setdefault("IP", "0.0.0.0")
+   os.environ.setdefault("PORT", "5000")
+   os.environ.setdefault("SECRET_KEY", <your_secret_key")
+   os.environ.setdefault("MONGO_URI", "mongodb+srv://<username>:<password>@<cluster_name>-ocous.mongodb.net/<database_name>?retryWrites=true&w=majority")
+   os.environ.setdefault("MONGO_DBNAME", "<database_name")
+   ```
+5. Install all dependencies from the requirements file, by typing:   
+   ```pip3 install -r requirements.txt```   
+
+4. Then go to the deployment section to configure and deploy the app on Heroku, skip the create requirements.txt and Procfile as they're already available in the repo. 
 
 
 

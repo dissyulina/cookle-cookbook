@@ -273,7 +273,7 @@ The database is not a relational database, and MongoDB was used to store the dat
 ## **Existing Features**  
 ### **a. General Design Features**  
    - **Fully responsive** - Each page of the site is fully responsive on all device sizes (with minimum dimension 320px or an iPhone 5) and features intuitive navigational buttons.   
-   - **Navbar** - The Navbar is responsive and turns to a hamburger menu in smaller device. The Navbar is fixed, dissapering on scroll down, and showing again on scroll up. This feature gives the best of both worlds where the user can always access the Navbar without it taking up the space for content.
+   - **Navbar** - The Navbar is responsive and turns to a hamburger menu in smaller device. The Navbar is sticky, dissapering on scroll down, and showing again on scroll up. This feature gives the best of both worlds where the user can always access the Navbar without it taking up the space for content.
       * For guest users, the Sign Up and Log In buttons are visible right away, conventionally placed at the top-right of the page.
       * After the user successfully logged in, the previously Sign Up and Log In buttons turn to a profile picture navigation drop down, which provvides the links to Create Recipe, to View Profile, to go to My Cookbook, and to Log Out.
    - **Flash Messages** - Flash messages provide the user the necessary feedback of their action whether it's successfully executed or not.
@@ -705,7 +705,7 @@ Once the copy of the repository has been created, the environment variables has 
    - Other student's project [Rebecca Tracey](https://github.com/rebeccatraceyt/bake-it-til-you-make-it)  
    - [This Github page](https://gist.github.com/mozillazg/69fb40067ae6d80386e10e105e6803c9).  
       
-3. Fixed Navigation bar that dissapears on scroll down and appears again on scroll up was sourced from [this tutorial](https://bootstrap-menu.com/detail-autohide.html).    
+3. Sticky Navigation bar that dissapears on scroll down and appears again on scroll up was sourced from [this tutorial](https://bootstrap-menu.com/detail-autohide.html).    
 4. Feature to check passoword match on Sign Up page and Change Password page was sourced from [this StackOverflow page](https://stackoverflow.com/questions/21727317/how-to-check-confirm-password-field-in-form-without-reloading-page/21727518).  
 5. Add delete button except on the first field on Add Recipe page and Edit Recipe page (Ingredients and Directions) was sourced from [this StackOverflow page](https://stackoverflow.com/questions/20233721/how-do-you-index-on-a-jinja-template).   
 6. Delete the one input box when delete button is clicked on Add Recipe page and Edit Recipe page (Ingredients and Directions) was sourced from [this StackOverflow page](https://stackoverflow.com/questions/6647736/how-to-delete-parent-element-using-jquery).   

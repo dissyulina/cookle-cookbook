@@ -10,14 +10,32 @@ Please note that this web application was created for the Code Institute’s Mil
 
 <br/>   
 
-## **Table of Contents**   
+# **Table of Contents**   
+1. [UX Development Planes](https://github.com/dissyulina/cookle-cookbook#ux-development-plane)   
+   A. [Strategy Plane](https://github.com/dissyulina/cookle-cookbook#1-strategy-plane)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [User Stories](https://github.com/dissyulina/cookle-cookbook#user-stories)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Online Research](https://github.com/dissyulina/cookle-cookbook#online-research)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Project Goals, User Goals, and Developer Goals](https://github.com/dissyulina/cookle-cookbook#project-goals)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Strategy Table](https://github.com/dissyulina/cookle-cookbook#strategy-table)  
+   B. [Scope Plane](https://github.com/dissyulina/cookle-cookbook#2-scope-plane)  
+   C. [Structure Plane](https://github.com/dissyulina/trivia-world#3-structure-plane)  
+   D. [Skeleton Plane / Wireframes](https://github.com/dissyulina/trivia-world#4-skeleton-plane)  
+   E. [Surface Plane / High Fidelity Mock Up](https://github.com/dissyulina/trivia-world#5-surface-plane)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Color Scheme](https://github.com/dissyulina/trivia-world#color-scheme)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Typography](https://github.com/dissyulina/trivia-world#typography)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Imagery](https://github.com/dissyulina/trivia-world#imagery)  
 
+3. [Features](https://github.com/dissyulina/trivia-world#features)  
+   i. [General Design Features](https://github.com/dissyulina/trivia-world#existing-features)  
+   ii. [Page Design Features](https://github.com/dissyulina/trivia-world#page-design-features)   
+   iii. [Features to be Implemented in The Future](https://github.com/dissyulina/trivia-world#features-to-be-implemented-in-the-future)
 
-## **UX Development Plane**   
-<br/>    
+<br/>   
 
-### **1. Strategy Plane**    
-#### **User Stories**   
+# **1. UX Development Plane**   
+
+## **A. Strategy Plane**    
+### **User Stories**   
 As a new/ unregistered user, I want to:
 1. Be able to search a recipe easily
 2. See the popular recipes of the site
@@ -48,18 +66,18 @@ As an Administrative Account holder, I want to:
 6. Be able to delete/remove a user as needed.  
 <br/>   
 
-#### **Online Research**   
+### **Online Research**   
 As a part of the planning process, online research was done to gain some inspiration on UI and UX of a recipe sharing website, including:
 1. [Allrecipes](https://www.allrecipes.com/)   
 2. [Cookpad](https://cookpad.com/uk?via=jp)   
 3. Similar recipe sharing site created by Code Institute peers (searched in channel peer-code-review on Slack)   
-<br/>   
+ 
 
-#### **Project Goals**  
+### **Project Goals**  
 The primary goal of **Cookle** is to provide a recipe sharing web application, that is visually appealing in design and intuitive for a first time user, that allows user perform basic functionality to create and save their recipes (also edit and delete their recipes), search recipes, save their favorite recipes to the cookbook and conveniently access them in the future. Additional functionalities include: to like a recipe, write a review on a recipe (also edit or delete their review), print a recipe, and share to social media.  
-<br/>   
+ 
 
-#### **User Goals**   
+### **User Goals**   
 The user is looking for:
 1. A recipe sharing website that is simple, easy to use, with fun and modern interface.
 2. A recipe sharing website where the user can share their recipes online to the community. 
@@ -71,25 +89,24 @@ The target user for this game is:
 -  People that enjoy the convenience of using technology and social media 
 -  People that don't mind to share their own recipes online
 
-<br/>   
 
-#### **Site Owner Goals**  
+### **Site Owner Goals**  
 The site owner is looking to:  
 1. Providing this a platform for online recipe sharing with complete functionality, and potentially being a regular user themselves. 
 2. Might also benefit from the collection of the data as a whole.   
 3. Still having a control to add tags or categories to the data, to remove data that aren't suitable for the site's purpose or rules.
-<br/>   
+  
 
-#### **Strategy Table**  
+### **Strategy Table**  
 Based on the user stories and goals above, the developer brainstormed all of the opportunities that could be implemented in the site. All of these opportunities were mapped based on their importance (driven by goals and user needs), and viability (given limited time and resources), to determine which opportunities were going to be included and which were not.   
-
+![The opportunities table](assets/readme/opportunities-table.png "The opportunities table")
 
 The chart below is the mapping of all of the opportunities. The yellow circle signifies which opportunities/ features have the highest combination of importance and viability.   
 ![The mapping of the opportunities](assets/readme/opportunities-mapping.png "The mapping of the opportunities")
 
 <br />  
 
-### **2. Scope Plane**  
+## **B. Scope Plane**  
 Based on the mapping in the Strategy Plane, a scope was defined for the site with room for future improvements.  
 * **Functional Requirements**   
    The users will be able to:  
@@ -120,13 +137,12 @@ Based on the mapping in the Strategy Plane, a scope was defined for the site wit
    - Delete any recipes listed on the site (if needed)   
    - Delete any offensive reviews on the site (if needed)   
 
-<br/>     
 
 * **Non functional requirements**  
    - The users will be able to invite friends to join the site by providing the email address. As the site is a community based recipe sharing, the number of members are very important to hopefully add more data (in this instance, recipes) to the site.   
    - The users will be able to send a message to the Admin/ site owners via contact form.  
    - The users will be able to navigate easily and intuitively throughout the site, able to log in and log out at every page the users currently at.   
-<br/>   
+ 
 
 * **Content requirements**   
    - An individual recipe page that includes: recipe name, description, serving size, time, category, ingredients, and direction. It also features reviews and number of likes as an additional information on how good the recipe is.
@@ -138,12 +154,12 @@ Based on the mapping in the Strategy Plane, a scope was defined for the site wit
 
 <br/>   
 
-### **3. Structure Plane**    
+## **C. Structure Plane**    
 The website was organized in a Hierarchical Tree Structure that ensures the user can navigate easily and intuitively. Below is the website workflow (was designed using [Creately](https://creately.com/)). 
 ![The structure and workflow of the website](static/images/readme/structure.png "The structure and workflow of the website")  
 Navigation to Home Page, Explore Recipes Page, View Profile Page, Create Recipe Page, My Cookbook Page, and to Log Out are always available on Navbar. So for instance if the users decide to log out when they are in the middle of creating a recipe, they can do it easily.  
 
-#### **Organisation of Functionality and Content**
+### **Organisation of Functionality and Content**
 * **Navbar**:   
    - For Guest User: Home, Explore Recipes, Sign Up, Log In   
    - For Logged In User: Home, Explore Recipes, A profile picture dropdown button with nav links to: View Profile, Create Recipes, My Cookbook, Log Out.   
@@ -160,9 +176,9 @@ Navigation to Home Page, Explore Recipes Page, View Profile Page, Create Recipe 
 * **Footer**: same navigation links as Navbar, with additional Contact Form and social media information.   
 
 
+<br/>
 
-
-### **4. Skeleton Plane**
+## **D. Skeleton Plane**
 Wireframes/ mock-ups were created using Figma to design the navigation and interface of the website. For a better and clearer visualization before coding, and also to check if the color scheme and images match and work great together, the wireframes were created with such details, in three different device sizes: desktop, tablet, and mobile.   
 
 * [Wireframes for Home Page](static/images/readme/wireframes/homepage-wireframe.png)   
@@ -174,7 +190,7 @@ Wireframes/ mock-ups were created using Figma to design the navigation and inter
 * [Wireframes for View Profile Page](static/images/readme/wireframes/view-profile-wireframe.png)  
 
 
-#### **Design Changes on The Final Product**
+### **Design Changes on The Final Product**
 While I relied heavily on these Wireframes in order to maintain the desired design, there are several differences between the Mockups and the final product:
 
 * Colors of the buttons were altered to separate the functionality more consistently:
@@ -188,24 +204,24 @@ While I relied heavily on these Wireframes in order to maintain the desired desi
 
 <br/>   
 
-### **5. Surface Plane**   
-#### **Color Scheme**   
+## **E. Surface Plane**   
+### **Color Scheme**   
 The overall theme of the site was orange and green, which were derived from the hero image. Using [Coolors](https://coolors.co), I add the colors from the hero image, darkened the green and orange as necessary to achieve a higher contrast with white text inside.   
 ![The color scheme](static/images/readme/color-scheme.jpg "The color scheme")  
 
-#### **Typography**  
+### **Typography**  
 All of the fonts were sourced from [Google Fonts](https://fonts.google.com).   
 * Main fonts: Nunito Sans   
   A sans-serif type of font was chosen to give a simple, clean, and modern look to the site. As the background is already filled with blob patterns and fun colors, it is important to balance it out with a simple font.
 * Logo fonts: Pacifico   
   A cursive type of font Pacifico was used only for the logo 'Cookle', and was chosen to contrast it with the main font. So that it's easily recognisable between website content.
 
-#### **Imagery**  
+### **Imagery**  
 - Hero Image was chosen because it’s bright, fun, and capturing attention on the first impression. It is also picturing various food items that corresponds to a recipe sharing web application. The hero image was chosen at the first stage of designing the site and determines the whole color theme of the website, thus it has a very important role.
 - The background image for all pages (excluding index.html) was actually the hero image without most of its drawing components. Using online editor [Photopea](https://www.photopea.com/), I edited the hero image.   
 
 
-#### **Database Structure**   
+### **Database Structure**   
 Database schema was designed using [diagram.io](https://dbdiagram.io/home).   
 ![Database structure](static/images/readme/database.png "Database structure")   
 
@@ -215,11 +231,10 @@ The database is not a relational database, and MongoDB was used to store the dat
 * Categories  
 * Reviews  
   
-
 <br/>   
 
-## **Features**  
-### **Existing Features**  
+# **2. Features**  
+## **Existing Features**  
 ### **a. General Design Features**  
    - **Fully responsive** - Each page of the site is fully responsive on all device sizes (with minimum dimension 320px or an iPhone 5) and features intuitive navigational buttons.   
    - **Navbar** - The Navbar is responsive and turns to a hamburger menu in smaller device. The Navbar is fixed, dissapering on scroll down, and showing again on scroll up. This feature gives the best of both worlds where the user can always access the Navbar without it taking up the space for content.
@@ -348,7 +363,7 @@ The database is not a relational database, and MongoDB was used to store the dat
 
 <br/>   
 
-### **Features to be implemented in the future**   
+## **Features to be implemented in the future**   
 
 Due to limited resources (time constraint, skill of the developer at the moment, and other reasons), some features couldn't be implemented now. There are so much potentials to develop this web application on the next development phase, adding more features and functionality. These features would be great addition to the web app:  
 
@@ -370,8 +385,8 @@ Due to limited resources (time constraint, skill of the developer at the moment,
   
 <br/>   
 
-## **Issues and Bugs**  
-### **Solved Issues**  
+# **3. Issues and Bugs**  
+## **Solved Issues**  
 I ran into several issues and bugs while developing the website. Some of the tough ones are listed below, along with the solutions that successfully solved them.   
 
 1. **Issue**: I chose MDB (Material Design Bootstrap) as the main front-end library in this project, having heard that MDB provides great UI components like Materialize, but also gives the convenience of responsive design as Bootstrap. In the middle of the project I wanted to build some multi-cards carousel for popular recipes, newest recipes, and cookbooks we love on the Home Page. It came by surprise that when I searched this feature on MDB, the multi-items / cards carousel feature was locked and it's only available for paid users. I searched on google and tried to apply various methods that I found, with so many failures, as it was quite difficult to build a carousel manually from scratch without using a library.   
@@ -417,7 +432,7 @@ I ran into several issues and bugs while developing the website. Some of the tou
     
 <br/>  
 
-### **Known Issues & Unsolved Bugs**  
+## **Known Issues & Unsolved Bugs**  
 1. Continuing from Pagination issues on My Cookbook Page, I noticed one more problem that still persisted. For example if I clicked second pill (Saved Recipe), and then I clicked page-2 of Saved Recipe. From there I wanted to go to first pill (All Recipes), it should've displayed All Recipe page-1. But instead it brought me to All Recipes page-2 (the same page as the previous pill). I googled it and found on [Stack Overflow](https://stackoverflow.com/questions/41719318/flask-many-pagination-on-one-single-page-using-flask-paginate-0-4-5) that it was because there were multiple paginations in one page, each linked to the respective pill. The solution was to handle this is with asynchronous requests (Ajax). I should have three separate endpoints for the three lists of items, each paginated individually. The main HTML page will issue Ajax requests to these three endpoints, and moving between pages in one list should not affect the other two lists at all. 
 Unfortunately, I didn't find enough documentation about this topic and couldn't apply a solution for this problem. Hopefully as I gain more knowledge and experience, I would be able to solve this on the next development phase.  
 
@@ -426,14 +441,20 @@ There is a new header from Github as part of an effort to ensure the privacy of 
 
 <br/>   
 
-## **Technology Used**  
-### **Main Languages Used**
+
+# **4. Testing**  
+The testing documentation can be found [here](). 
+
+<br/>   
+
+# **5. Technology Used**  
+## **Main Languages Used**
    * [HTML5](https://en.wikipedia.org/wiki/HTML5)   
    * [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)   
    * [JavaScript](https://en.wikipedia.org/wiki/JavaScript)   
    * [Python](https://en.wikipedia.org/wiki/Python_(programming_language))   
 
-### **Libraries and Frameworks**   
+## **Libraries and Frameworks**   
    * [Material Design For Bootstrap](https://mdbootstrap.com/)  
    MDB was used to assist with the UI/UX components, responsiveness, and styling of the website.  
    * [jQuery 3.6.0](https://jquery.com/)  
@@ -459,11 +480,11 @@ There is a new header from Github as part of an effort to ensure the privacy of 
    * [Flickity](https://flickity.metafizzy.co/)   
    Flickity was used to build carousels on Home Page.   
 
-### **Database Management**   
+## **Database Management**   
    * [MongoDB](https://www.mongodb.com)   
    MongoDB was used as an open source database that stores the data/ documents for the application.  
 
-### **Tools and Programs**  
+## **Tools and Programs**  
    * [Git](https://git-scm.com)  
    Git was used for version control by utilizing the Gitpod terminal to commit to Git and Push to GitHub.  
    * [GitHub](https://github.com)  
@@ -483,15 +504,10 @@ There is a new header from Github as part of an effort to ensure the privacy of 
    * [Coolors](https://coolors.co)  
    Coolors was used to create a cohesive color scheme for the website.   
 
-   <br/>   
-
-
-## **Testing**  
-The testing documentation can be found [here]()). 
-
 <br/>   
 
-# **Deployment**  
+
+# **6. Deployment**  
 The project was developed using Gitpod as the IDE, committed to Git as a local repository, and pushed/ stored to GitHub. The web application is deployed on Heroku because we can't host a Python project on Github pages. The repository itself is hosted on Github.   
 
 ## **Deployment to Heroku**  
@@ -552,7 +568,7 @@ I did the second method as it's the simpler way to deploy to Heroku. The steps a
    * On "Manual deploy" section, from our master/main click on "Deploy Branch".  
    * Heroku will now receive the code from Github and start building the app using our required packages. Once it's done, you'll see a notification "Your app was successfully deployed."  The deployed version can now be viewed by selecting View App.
 
-<br/>  
+ 
 
 
 ## **How To Use This Project**  
@@ -637,7 +653,7 @@ Once the copy of the repository has been created, the environment variables has 
 
 <br/>  
 
-# **Credits**  
+# **7. Credits**  
 ## **Code**  
 1. The code in Code Institute's video on Task Manager App was used as a main reference point to set up a project using MongoDB, flask, and jinja template, also build the core CRUD (Create, Read, Update, and Delete) functionalities in this project.  
 
@@ -664,7 +680,7 @@ All recipes content and recipes images in this website were sourced from [Allrec
 
 <br/>  
 
-## **Acknowledgements**   
+## **8. Acknowledgements**   
    * My mentor, Oluwaseun Owonikoko, for the helpful feedback on every detail of the website.  
    * Code Institute's Tutor Support, for the quick response and helfpful solutions.  
    * My husband Sandi, for his daily continuous support and for testing the website across our mobile devices.  

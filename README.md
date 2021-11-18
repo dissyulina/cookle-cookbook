@@ -11,24 +11,50 @@ Please note that this web application was created for the Code Institute’s Mil
 <br/>   
 
 # **Table of Contents**   
-1. [UX Development Planes](https://github.com/dissyulina/cookle-cookbook#ux-development-plane)   
-   A. [Strategy Plane](https://github.com/dissyulina/cookle-cookbook#1-strategy-plane)  
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [User Stories](https://github.com/dissyulina/cookle-cookbook#user-stories)  
+1. [UX Development Planes](https://github.com/dissyulina/cookle-cookbook#1-ux-development-plane)   
+   A. [Strategy Plane](https://github.com/dissyulina/cookle-cookbook#a-strategy-plane)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [User Stories](https://github.com/dissyulina/cookle-cookbook#online-research)  
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Online Research](https://github.com/dissyulina/cookle-cookbook#online-research)  
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Project Goals, User Goals, and Developer Goals](https://github.com/dissyulina/cookle-cookbook#project-goals)  
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Strategy Table](https://github.com/dissyulina/cookle-cookbook#strategy-table)  
-   B. [Scope Plane](https://github.com/dissyulina/cookle-cookbook#2-scope-plane)  
-   C. [Structure Plane](https://github.com/dissyulina/trivia-world#3-structure-plane)  
-   D. [Skeleton Plane / Wireframes](https://github.com/dissyulina/trivia-world#4-skeleton-plane)  
-   E. [Surface Plane / High Fidelity Mock Up](https://github.com/dissyulina/trivia-world#5-surface-plane)  
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Color Scheme](https://github.com/dissyulina/trivia-world#color-scheme)  
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Typography](https://github.com/dissyulina/trivia-world#typography)  
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Imagery](https://github.com/dissyulina/trivia-world#imagery)  
+   B. [Scope Plane](https://github.com/dissyulina/cookle-cookbook#b-scope-plane)  
+   C. [Structure Plane](https://github.com/dissyulina/cookle-cookbook#c-structure-plane)  
+   D. [Skeleton Plane](https://github.com/dissyulina/cookle-cookbook#d-skeleton-plane)  
+   E. [Surface Plane](https://github.com/dissyulina/cookle-cookbook#e-surface-plane)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Color Scheme](https://github.com/dissyulina/cookle-cookbook#color-scheme)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Typography](https://github.com/dissyulina/cookle-cookbook#typography)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Imagery](https://github.com/dissyulina/cookle-cookbook#imagery)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [Database Structure](https://github.com/dissyulina/cookle-cookbook#database-structure)  
 
-3. [Features](https://github.com/dissyulina/trivia-world#features)  
-   i. [General Design Features](https://github.com/dissyulina/trivia-world#existing-features)  
-   ii. [Page Design Features](https://github.com/dissyulina/trivia-world#page-design-features)   
-   iii. [Features to be Implemented in The Future](https://github.com/dissyulina/trivia-world#features-to-be-implemented-in-the-future)
+2. [Features](https://github.com/dissyulina/cookle-cookbook#2-features)  
+   &nbsp;&nbsp;- [Existing Features](https://github.com/dissyulina/cookle-cookbook#existing-features)   
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. [General Design Features](https://github.com/dissyulina/cookle-cookbook#a-general-design-features)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. [Page Design Features](https://github.com/dissyulina/cookle-cookbook#b-page-design-features)   
+   &nbsp;&nbsp;- [Features to be Implemented in The Future](https://github.com/dissyulina/cookle-cookbook#features-to-be-implemented-in-the-future)
+
+3. [Issues and Bugs](https://github.com/dissyulina/cookle-cookbook#3-issues-and-bugs)  
+   &nbsp;&nbsp;- [Solved Issues](https://github.com/dissyulina/cookle-cookbook#solved-issues)  
+   &nbsp;&nbsp;- [Known Issues & Unsolved Bugs](https://github.com/dissyulina/cookle-cookbook#known-issues--unsolved-bugs)  
+   
+4. [Testing](https://github.com/dissyulina/cookle-cookbook#4-testing)   
+   &nbsp;&nbsp;- [Go to TESTING.md](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#cookle-cookbook---testing) 
+
+5. [Technology Used](https://github.com/dissyulina/cookle-cookbook#5-technology-used)  
+   &nbsp;&nbsp;- [Main Languanges](https://github.com/dissyulina/cookle-cookbook#main-languages-used)  
+   &nbsp;&nbsp;- [Libraries and Frameworks](https://github.com/dissyulina/cookle-cookbook#libraries-and-frameworks)  
+   &nbsp;&nbsp;- [Database Management](https://github.com/dissyulina/cookle-cookbook#database-management)  
+   &nbsp;&nbsp;- [Tools and Programs](https://github.com/dissyulina/cookle-cookbook#tools-and-programs)  
+
+6. [Deployment](https://github.com/dissyulina/cookle-cookbook#6-deployment)  
+   &nbsp;&nbsp;- [Deployment to Heroku](https://github.com/dissyulina/cookle-cookbook#deployment-to-heroku)  
+   &nbsp;&nbsp;- [How To Use This Project](https://github.com/dissyulina/cookle-cookbook#how-to-use-this-project)  
+
+7. [Credits](https://github.com/dissyulina/cookle-cookbook#7-credits)  
+   &nbsp;&nbsp;- [Code](https://github.com/dissyulina/cookle-cookbook#code)  
+   &nbsp;&nbsp;- [Contents](https://github.com/dissyulina/cookle-cookbook#contents)    
+   &nbsp;&nbsp;- [Images](https://github.com/dissyulina/cookle-cookbook#images-and-icons)  
+ 
+8. [Acknowledgements](https://github.com/dissyulina/trivia-world#acknowledgements)  
 
 <br/>   
 
@@ -64,7 +90,7 @@ As an Administrative Account holder, I want to:
 4. Be able to delete any recipes listed on the site as needed.
 5. Be able to delete offensive reviews on the site as needed.
 6. Be able to delete/remove a user as needed.  
-<br/>   
+ 
 
 ### **Online Research**   
 As a part of the planning process, online research was done to gain some inspiration on UI and UX of a recipe sharing website, including:
@@ -99,12 +125,16 @@ The site owner is looking to:
 
 ### **Strategy Table**  
 Based on the user stories and goals above, the developer brainstormed all of the opportunities that could be implemented in the site. All of these opportunities were mapped based on their importance (driven by goals and user needs), and viability (given limited time and resources), to determine which opportunities were going to be included and which were not.   
-![The opportunities table](assets/readme/opportunities-table.png "The opportunities table")
+![The opportunities table](static/images/readme/opportunities-table.png "The opportunities table")
 
 The chart below is the mapping of all of the opportunities. The yellow circle signifies which opportunities/ features have the highest combination of importance and viability.   
-![The mapping of the opportunities](assets/readme/opportunities-mapping.png "The mapping of the opportunities")
+![The mapping of the opportunities](static/images/readme/opportunities-mapping.png "The mapping of the opportunities")
 
 <br />  
+
+[Back to top](https://github.com/dissyulina/cookle-cookbook#cookle)  
+<br />  
+
 
 ## **B. Scope Plane**  
 Based on the mapping in the Strategy Plane, a scope was defined for the site with room for future improvements.  
@@ -176,7 +206,10 @@ Navigation to Home Page, Explore Recipes Page, View Profile Page, Create Recipe 
 * **Footer**: same navigation links as Navbar, with additional Contact Form and social media information.   
 
 
-<br/>
+<br/>  
+
+[Back to top](https://github.com/dissyulina/cookle-cookbook#cookle)  
+<br />  
 
 ## **D. Skeleton Plane**
 Wireframes/ mock-ups were created using Figma to design the navigation and interface of the website. For a better and clearer visualization before coding, and also to check if the color scheme and images match and work great together, the wireframes were created with such details, in three different device sizes: desktop, tablet, and mobile.   
@@ -231,7 +264,10 @@ The database is not a relational database, and MongoDB was used to store the dat
 * Categories  
 * Reviews  
   
-<br/>   
+<br/>  
+
+[Back to top](https://github.com/dissyulina/cookle-cookbook#cookle)  
+<br />   
 
 # **2. Features**  
 ## **Existing Features**  
@@ -385,6 +421,9 @@ Due to limited resources (time constraint, skill of the developer at the moment,
   
 <br/>   
 
+[Back to top](https://github.com/dissyulina/cookle-cookbook#cookle)  
+<br />   
+
 # **3. Issues and Bugs**  
 ## **Solved Issues**  
 I ran into several issues and bugs while developing the website. Some of the tough ones are listed below, along with the solutions that successfully solved them.   
@@ -441,6 +480,8 @@ There is a new header from Github as part of an effort to ensure the privacy of 
 
 <br/>   
 
+[Back to top](https://github.com/dissyulina/cookle-cookbook#cookle)  
+<br />  
 
 # **4. Testing**  
 The testing documentation can be found [here](). 
@@ -506,6 +547,8 @@ The testing documentation can be found [here]().
 
 <br/>   
 
+[Back to top](https://github.com/dissyulina/cookle-cookbook#cookle)  
+<br />  
 
 # **6. Deployment**  
 The project was developed using Gitpod as the IDE, committed to Git as a local repository, and pushed/ stored to GitHub. The web application is deployed on Heroku because we can't host a Python project on Github pages. The repository itself is hosted on Github.   
@@ -567,8 +610,6 @@ I did the second method as it's the simpler way to deploy to Heroku. The steps a
    * On "Automatic Deploys" section, from our master/main branch click on "Enable Automatic Deployment".  
    * On "Manual deploy" section, from our master/main click on "Deploy Branch".  
    * Heroku will now receive the code from Github and start building the app using our required packages. Once it's done, you'll see a notification "Your app was successfully deployed."  The deployed version can now be viewed by selecting View App.
-
- 
 
 
 ## **How To Use This Project**  
@@ -653,6 +694,9 @@ Once the copy of the repository has been created, the environment variables has 
 
 <br/>  
 
+[Back to top](https://github.com/dissyulina/cookle-cookbook#cookle)  
+<br />  
+
 # **7. Credits**  
 ## **Code**  
 1. The code in Code Institute's video on Task Manager App was used as a main reference point to set up a project using MongoDB, flask, and jinja template, also build the core CRUD (Create, Read, Update, and Delete) functionalities in this project.  
@@ -673,21 +717,22 @@ Once the copy of the repository has been created, the environment variables has 
 ## **Contents**
 All recipes content and recipes images in this website were sourced from [Allrecipes](https://www.allrecipes.com/) and [Cookpad](https://cookpad.com/uk?via=jp)   
 
-### **Images and Icons**   
+## **Images and Icons**   
 * Hero image was sourced from [Freepik](https://www.freepik.com/), edited by the developer.  
 * Cookle logo was created from [Freelogodesign](https://www.freelogodesign.org/).  
 * 404 error image was sourced from [Undraw](https://undraw.co/illustrations).  
 
 <br/>  
 
-## **8. Acknowledgements**   
+# **8. Acknowledgements**   
    * My mentor, Oluwaseun Owonikoko, for the helpful feedback on every detail of the website.  
    * Code Institute's Tutor Support, for the quick response and helfpful solutions.  
    * My husband Sandi, for his daily continuous support and for testing the website across our mobile devices.  
    * Slack community, as the first help to ask when I encountered a problem.  
 
 <br/>  
-
+[Back to top](https://github.com/dissyulina/cookle-cookbook#cookle)  
+<br />  
   
 
 

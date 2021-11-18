@@ -65,3 +65,28 @@ As a new/ unregistered user, I want to:
    ![How it works section](static/images/readme/testing/user-stories/how-it-works.jpg "How it works section")  
 
 
+
+### **Unregistered User Goals**   
+As a returning/ registered user, I want to:  
+1. Immediately be able to spot the Log In button  
+   * The Log In button is can be seen right away at the top right of the page.  
+   ![Log In button](static/images/readme/testing/user-stories/login.jpg "Log In button")  
+
+2. See the newest added recipes on the site  
+   * On the Home Page, below the popular recipes carousel, users can find eight newest added recipes in the database.  
+   * The recipes are organized in a carousel of recipe cards, with an autoslide feature. The user can also flick the cards on touch screen devices, or click the right arrow (next) or left arrow (previous) to navigate between cards.  
+   ![Newest Recipes carousel](static/images/readme/testing/user-stories/newest-recipes.jpg "Newest Recipes carousel")  
+
+3. Once logged in, easily navigate  to my account settings, my cookbook, and other pages available to me.  
+   * Once user logged-in or signed-up, the links on Navbar that are available to navigate are: Homepage, Explore Recipes page, My Cookbook page, A Dropdown profile picture which has navigation items: Create Recipe, View Profile, and Log Out.  
+   ![Navbar for logged-in user](static/images/readme/testing/user-stories/navbar-logged-in-user.jpg "Navbar for logged-in user")  
+
+4. Be able to Edit or Delete my profile
+5. Be able to Create a recipe and share it to the site, and to Edit or Delete it afterwards as needed
+6. Be able to Save a recipe that I like to my cookbook, and to remove it from my cookbook as needed.
+7. Be able to give a like to a recipe, and also unlike it as needed.
+8. Be able to write a review on a recipe page, and to edit or delete my review
+9. Be able to share a recipe on social media easily
+10. Be able to print a recipe easily
+11. Find a contact page for my inquiries
+

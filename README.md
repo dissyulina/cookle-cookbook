@@ -521,7 +521,7 @@ I did the second method as it's the simpler way to deploy to Heroku. The steps a
       git push
       ```   
 
-4. **Connect Our App to Github and**   
+4. **Connect Our App to Github**   
    * In Heroku app dashboard, navigate to the Deploy page. On the Deployment Method, click "Github".  
    * Click on "Connect to Github" button.   
    * Fill in the name of your Github repository name and click on "Search".   
@@ -627,7 +627,30 @@ Once the copy of the repository has been created, the environment variables has 
 
 4. Then go to the deployment section to configure and deploy the app on Heroku, skip the create requirements.txt and Procfile as they're already available in the repo. 
 
+<br/>  
 
+# **Credits**  
+## **Code**  
+1. Code Institute video on Task Manager App.   
+   This code in this mini project was used as a main reference point to set up a project using MongoDB, flask, and jinja template, also build the core CRUD (Create, Read, Update, and Delete) functionalities in this project.  
+
+2. Other student's project [Rebecca Tracey](https://github.com/rebeccatraceyt/bake-it-til-you-make-it) and this [Github page](https://gist.github.com/mozillazg/69fb40067ae6d80386e10e105e6803c9).  
+   The code for pagination from these github pages were used for pagination in this project.   
+
+3. Fixed Navigation bar that dissapears on scroll down and appears again on scroll up was sourced from [this tutorial](https://bootstrap-menu.com/detail-autohide.html).    
+4. Feature to check passoword match on Sign Up page and Change Password page was sourced from [this StackOverflow page](https://stackoverflow.com/questions/21727317/how-to-check-confirm-password-field-in-form-without-reloading-page/21727518).  
+5. Add delete button except on the first field on Add Recipe page and Edit Recipe page (Ingredients and Directions) was sourced from [this StackOverflow page](https://stackoverflow.com/questions/20233721/how-do-you-index-on-a-jinja-template).   
+6. Delete the one input box when delete button is clicked on Add Recipe page and Edit Recipe page (Ingredients and Directions) was sourced from [this StackOverflow page](https://stackoverflow.com/questions/6647736/how-to-delete-parent-element-using-jquery).   
+7. To share the recipe to social media using sharer.js was sourced from [this GitHub page](https://ellisonleao.github.io/sharer.js/).   
+8. To add meta tags for social media sharing was sourced from [this tutorial on css-tricks](https://css-tricks.com/essential-meta-tags-social-media/).  
+9. Autoprefixer CSS was used to add different vendor prefixer to CSS. All css code was inserted [here](https://autoprefixer.github.io), and paste it back to the style.css.     
+
+
+## **Content**
+1. All recipes content and images in this website were sourced from [Allrecipes](https://www.allrecipes.com/) and Cookpad(https://cookpad.com/uk?via=jp)   
+2. Hero image was sourced from [Freepik](https://www.freepik.com/), edited by the developer.  
+3. Cookle logo was created from [Freelogodesign](https://www.freelogodesign.org/).  
+3. 404 and 500 error images were sourced from [Undraw](https://undraw.co/illustrations).  
 
 
   

@@ -149,3 +149,26 @@ As a returning/ registered user, I want to:
    * To contact the admin or site owners, users can navigate to the footer and click on the "Contact Form" button. Another option to contact would be to send an email or to find the social media page. When the contact form button is clicked, a contact form modal will show up.  
    ![Contact form](static/images/readme/testing/user-stories/contact-form.jpg "Contact form")  
 
+
+### **Administrative Account**   
+As an Administrative Account holder, I want to:
+1. Be able to do all the functionalities as a registered user can
+   * All functionalities as a general user are available for the admin.  
+
+2. Add, Edit, or Delete a category of recipes  
+   * Once the Admin logged-in, a "Manage Categories" navigation link can be found inside the profile picture dropdown button. This navigation link will direct the Admin to the Manage Categories page (categories.html).    
+   ![Manage Categories navigation link](static/images/readme/testing/user-stories/manage-categories-navlink.jpg "Manage Categories navigation link")   
+   * Inside the Manage Categories page, Admin can add a new category, and edit or delete a category.  
+   ![Manage Categories](static/images/readme/testing/user-stories/manage-categories.jpg "Manage Categories")   
+   * A modal will show up when the Delete button is clicked, confirming the deletion.  
+   ![Modal confirmation before deleting a category](static/images/readme/testing/user-stories/modal-delete-category.jpg "Modal confirmation before deleting a category")   
+
+3. Be able to edit any recipes listed on the site as needed.  
+   * The Edit Recipe button on each of the recipe page is available for admin to access, even though the recipe was created by another user. This functionality is added for Admin in order to keep the database clean.
+  
+4. Be able to delete any recipes listed on the site as needed.  
+   * The Delete Recipe button on each of the recipe page is available for admin to access, even though the recipe was created by another user. This functionality is added for Admin in order to keep the database clean.  
+
+5. Be able to delete offensive reviews on the site as needed.  
+   * The Delete review button inside the ellipsis dropdown button is available for admin to access. Admin can only delete a review, not edit it.  
+

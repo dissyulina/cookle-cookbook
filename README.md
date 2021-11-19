@@ -62,34 +62,33 @@ Please note that this web application was created for the Code Institute’s Mil
 
 ## **A. Strategy Plane**    
 ### **User Stories**   
-As a new/ unregistered user, I want to:
-1. Be able to search a recipe easily
-2. See the popular recipes of the site
-3. Explore all recipes that listed in the site
-4. Be able to view a full recipe that I'm interested in
-5. Navigate intuitively and can spot the Sign Up button right away
-6. Understand what the site is about and how it works
+As a new/ unregistered user, I want to:  
+1. Be able to search a recipe easily.  
+2. See the popular recipes of the site.  
+3. Explore all recipes that listed in the site.  
+4. Be able to view a full recipe that I'm interested in.  
+5. Navigate intuitively and can spot the Sign Up button right away.  
+6. Understand what the site is about and how it works.  
 
 As a returning/ registered user, I want to:
-1. Immediately be able to spot the Log In button
-2. See the newest added recipes on the site
-3. Once logged in, easily navigate  to my account settings, my cookbook, and other pages available to me.
-4. Be able to Edit or Delete my profile
-5. Be able to Create a recipe and share it to the site, and to Edit or Delete it afterwards as needed
-6. Be able to Save a recipe that I like to my cookbook, and to remove it from my cookbook as needed.
-7. Be able to give a like to a recipe, and also unlike it as needed.
-8. Be able to write a review on a recipe page, and to edit or delete my review
-9. Be able to share a recipe on social media easily
-10. Be able to print a recipe easily
-11. Find a contact page for my inquiries
+1. Immediately be able to spot the Log In button.  
+2. See the newest added recipes on the site.  
+3. Once logged in, easily navigate  to my account settings, my cookbook, and other pages available to me.  
+4. Be able to Edit or Delete my profile.  
+5. Be able to Create a recipe and share it to the site, and to Edit or Delete it afterwards as needed.  
+6. Be able to Save a recipe that I like to my cookbook, and to remove it from my cookbook as needed.  
+7. Be able to give a like to a recipe, and also unlike it as needed.  
+8. Be able to write a review on a recipe page, and to edit or delete my review.  
+9. Be able to share a recipe on social media easily.  
+10. Be able to print a recipe easily.  
+11. Find a contact page for my inquiries.  
 
 As an Administrative Account holder, I want to:
-1. Be able to do all the functionalities as a registered user can
-2. Add, Edit, or Delete a category of recipes
-3. Be able to edit any recipes listed on the site as needed.
-4. Be able to delete any recipes listed on the site as needed.
-5. Be able to delete offensive reviews on the site as needed.
-6. Be able to delete/remove a user as needed.  
+1. Be able to do all the functionalities as a registered user can.   
+2. Add, Edit, or Delete a category of recipes.  
+3. Be able to edit any recipes listed on the site as needed.  
+4. Be able to delete any recipes listed on the site as needed.  
+5. Be able to delete offensive reviews on the site as needed.  
  
 
 ### **Online Research**   

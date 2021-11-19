@@ -1,9 +1,9 @@
 /* All pages: Navbar hide on scroll down, show on scroll up
 Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 document.addEventListener("DOMContentLoaded", function(){
-    el_autohide = document.querySelector('.autohide');
+    let el_autohide = document.querySelector('.autohide');
     // add padding-top to body
-    navbar_height = document.querySelector('.navbar').offsetHeight;
+    let navbar_height = document.querySelector('.navbar').offsetHeight;
     document.body.style.paddingTop = navbar_height + 'px';
   
     if(el_autohide){
@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", function(){
 $("#btn-query").click(function() {
     let query = $("#home-query").val();
     sessionStorage.setItem("query",query);
-})
-$("#query").attr("value",sessionStorage.getItem("query"))
+});
+$("#query").attr("value",sessionStorage.getItem("query"));
 sessionStorage.removeItem("query");
 
 /* Register page, Edit profile page, Add recipe page, and Edit Recipe page: 
@@ -58,23 +58,33 @@ let maxIngredients = 30;
 let directions = 1;
 let maxDirections = 30;
 $("#add-ing-btn").click(function (e) {
-    e.preventDefault();
-    $("#ingredients-wrapper").append(
-    `<div class="d-flex flex-row">
-        <input type="text" class="form-control flex-grow new-field" name="ingredients" placeholder="2 cloves of garlic" required>
-        <button class="btn btn-remove" type="button"><i class="fas fa-trash-alt"></i></button>
-    </div>`);
-    ingredients++
+    if (ingredients < maxIngredients) {
+        e.preventDefault();
+        $("#ingredients-wrapper").append(
+        `<div class="d-flex flex-row">
+            <input type="text" class="form-control flex-grow new-field" name="ingredients" placeholder="2 cloves of garlic" required>
+            <button class="btn btn-remove" type="button"><i class="fas fa-trash-alt"></i></button>
+        </div>`);
+        ingredients++;
+    } else {
+        $("#add-ing-btn").text("You can't add more ingredients.");
+        e.preventDefault();
+    }
 });
-
+    
 $("#add-dir-btn").click(function (e) {
-    e.preventDefault();
-    $("#directions-wrapper").append(
-    `<div class="d-flex flex-row">
-        <input type="text" class="form-control new-field" name="directions" placeholder="Mince the garlic and shallots" required>
-        <button class="btn btn-remove" type="button"><i class="fas fa-trash-alt"></i></button>
-    </div>`);
-    ingredients++
+    if (directions < maxDirections) {
+        e.preventDefault();
+        $("#directions-wrapper").append(
+        `<div class="d-flex flex-row">
+            <input type="text" class="form-control new-field" name="directions" placeholder="Mince the garlic and shallots" required>
+            <button class="btn btn-remove" type="button"><i class="fas fa-trash-alt"></i></button>
+        </div>`);
+        directions++;
+    } else {
+        $("#add-dir-btn").text("You can't add more directions.");
+        e.preventDefault();
+    }
 });
 
 /* Add Recipe and Edit Recipe Page: Delete parent div when clicking the remove ingredient/direction button,
@@ -82,18 +92,20 @@ ref: https://stackoverflow.com/questions/6647736/how-to-delete-parent-element-us
 $("#ingredients-wrapper").on("click", ".btn-remove", function(e){
     e.preventDefault();
     $(this).parent('div').remove();
+    $("#add-ing-btn").html('<i class="fas fa-plus"></i> Add more ingredients');
     ingredients--;
 });
 
 $("#directions-wrapper").on("click", ".btn-remove", function(e){
     e.preventDefault();
     $(this).parent('div').remove();
-    ingredients--;
+    $("#add-dir-btn").html('<i class="fas fa-plus"></i> Add more directions');
+    directions--;
 });
 
 /* Single Recipe Page: If user clicks Write A Review button, show form */
 $("#btn-review").click(function() {
-    $("#write-review").toggleClass('d-none')
+    $("#write-review").toggleClass('d-none');
     $("#write_review").focus();
 });
 
@@ -101,23 +113,23 @@ $("#btn-review").click(function() {
 $(".btn-edit-review").click(function(e) {
     let reviewId = $(e.target).attr('data-id');
     $('#edit-review' + reviewId).removeClass('d-none').focus();
-    $('#edit-review' + reviewId).detach().appendTo("#new-edit-review")
+    $('#edit-review' + reviewId).detach().appendTo("#new-edit-review");
 });
 
 /* My Cookbook page: Keep the current pill active on page reload */
 $(document).ready(function(){
     $('a[data-mdb-toggle="pill"]').click(function(e) {
         sessionStorage.setItem('activePill', $(e.target).attr('href'));
-    })
+    });
 
     let activePill = sessionStorage.getItem("activePill");
     if (activePill) {
-        $('#cookbook-pills a[href="' + activePill + '"]').addClass("active")
+        $('#cookbook-pills a[href="' + activePill + '"]').addClass("active");
         let activeContent = activePill.substring(1);
         $('#' + activeContent).addClass("show active");
     } else {
-        $('#cookbook-pills a[href="#all-pills"]').addClass("active")
-        $('#all-pills').addClass("show active")
+        $('#cookbook-pills a[href="#all-pills"]').addClass("active");
+        $('#all-pills').addClass("show active");
     }
 });
 
@@ -165,6 +177,3 @@ function sendMail(contactForm) {
     return false;
 }
 
-
-
-    

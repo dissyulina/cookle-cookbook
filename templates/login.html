@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+
+{% block styles %}
+    <!-- Title -->
+    <title>Cookle - Log In</title>
+{% endblock %}
+
 {% block content %}
 <section>
     <div class="w-100 background">
@@ -15,7 +21,7 @@
                         {% endif %}
                     {% endwith %}
 
-
+                <h3 class="my-5">Register</h3>
                 <div class="card p-2 p-md-5 form-width">
                     <form method="POST" action="{{ url_for('login') }}" id="form-login">
                         <div class="form-outline mb-4">

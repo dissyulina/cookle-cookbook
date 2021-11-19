@@ -209,3 +209,27 @@ All warnings and erros were fixed and I put the Html file back to the test. In t
 * [Add Category Page (add-category.html)](static/images/readme/testing/html-css-validator/add-category.jpg)  
 
 
+### **CSS**
+No errors were found, but there are 15 warnings and they are all concerning the vendor prefixes added by Autoprefixer CSS. I decided to ignore the warnings because the vendor prefixes are important to ensure that the styling works across different browsers. 
+* [No Errors found](static/images/readme/testing/html-css-validator/css-no-error.jpg) 
+* [15 Warnings](static/images/readme/testing/html-css-validator/css-warnings.jpg)   
+
+<br/>  
+
+
+## **5. JavaScript Testing**  
+I ran the javascript code through [JSHint](https://jshint.com/), and there were some warnings. 
+Warnings | Actions  
+--- | ---   
+Missing semicolons | Semicolons is added
+Unused variables | Remove the unused variables
+Undefined variables | Define the variables 
+
+All of the warnings have been fixed, except for one warning which shows ```emailjs``` as an undefined variable. However, ```emailjs``` is an external variable from a service that allows sending email from JavaScript, so it's not defined inside the js file. [See here the screen capture of the testing result](static/images/readme/testing/js-hint.jpg).  
+
+<br/>  
+
+## **6. Python Testing**  
+I ran the python code through [Pep8 Online](http://pep8online.com/) and it returned no errors. [See here the screen capture of the testing result](static/images/readme/testing/pep8-test.jpg).   
+
+

@@ -52,17 +52,22 @@ $('#repeat-password').on('keyup', function () {
     }
 });
 
-/* Add Recipe page and Edit Recipe Page: Add new line to ingredients and directions */
-let ingredients = 1;
-let maxIngredients = 30;
-let directions = 1;
-let maxDirections = 30;
+/* Add Recipe page and Edit Recipe Page: Add new line to ingredients (maximum 30 lines) */
+let ingredients;
+let maxIngredients = 15;
+
+if ($("#number-ingredients").text()) {
+    ingredients = parseInt($("#number-ingredients").text()); 
+} else {
+    ingredients = 1;
+}
+
 $("#add-ing-btn").click(function (e) {
     if (ingredients < maxIngredients) {
         e.preventDefault();
         $("#ingredients-wrapper").append(
         `<div class="d-flex flex-row">
-            <input type="text" class="form-control flex-grow new-field" name="ingredients" placeholder="2 cloves of garlic" required>
+            <input type="text" class="form-control flex-grow new-field" name="ingredients" required>
             <button class="btn btn-remove" type="button"><i class="fas fa-trash-alt"></i></button>
         </div>`);
         ingredients++;
@@ -71,13 +76,23 @@ $("#add-ing-btn").click(function (e) {
         e.preventDefault();
     }
 });
-    
+
+/* Add Recipe page and Edit Recipe Page: Add new line to directions (maximum 30 lines) */
+let directions;
+let maxDirections = 15; 
+
+if ($("#number-directions").text()) {
+    directions = parseInt($("#number-directions").text()); 
+} else {
+    directions = 1;
+}
+
 $("#add-dir-btn").click(function (e) {
     if (directions < maxDirections) {
         e.preventDefault();
         $("#directions-wrapper").append(
         `<div class="d-flex flex-row">
-            <input type="text" class="form-control new-field" name="directions" placeholder="Mince the garlic and shallots" required>
+            <input type="text" class="form-control new-field" name="directions" required>
             <button class="btn btn-remove" type="button"><i class="fas fa-trash-alt"></i></button>
         </div>`);
         directions++;

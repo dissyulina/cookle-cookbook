@@ -65,7 +65,6 @@ As a new/ unregistered user, I want to:
    ![How it works section](static/images/readme/testing/user-stories/how-it-works.jpg "How it works section")  
 
 
-
 ### **Registered User Goals**   
 As a returning/ registered user, I want to:  
 1. Immediately be able to spot the Log In button  
@@ -124,15 +123,29 @@ As a returning/ registered user, I want to:
      - A modal will pop up to confirm the remove, as a barrier in case the user accidentaly clicked the button. The modal comes with buttons to Cancel and to Remove.  
      ![Modal confirmation before removing recipe from cookbook](static/images/readme/testing/user-stories/modal-remove-recipe.jpg "Modal confirmation before removing recipe from cookbook")  
 
-
 7. Be able to give a like to a recipe, and also unlike it as needed.  
    * To like a recipe, simply click the "Like this recipe" button on the Recipe page. The button will then turn to "Liked", and the number of likes will increase by one. To unlike a recipe, clicked the "Liked" button again, and it will turn back to "Like this recipe", and the number of likes will decrease by one as well.  
    ![Like this recipe](static/images/readme/testing/user-stories/like-recipe.jpg "Like this recipe") 
    ![A liked recipe](static/images/readme/testing/user-stories/liked-recipe.jpg "A liked recipe")   
 
+8. Be able to write a review on a recipe page, and to edit or delete my review  
+   * To write a review, click the "Write A Review" button on a Recipe page. A text-area form will show up with a Cancel and Submit Review buttons.  
+   ![Write review](static/images/readme/testing/user-stories/write-review.jpg "Write review")  
+   * To edit a review, click on the elipsis button on the right side of the review that the user wants to edit. It will show the options to edit or to delete review. After choosing the Edit button, a text-area with the review text inside will show up.  
+   ![Edit and delete review buttons](static/images/readme/testing/user-stories/edit-delete-review.jpg "Edit and delete review buttons")  
+   ![Edit review](static/images/readme/testing/user-stories/edit-review.jpg "Edit review")   
+   * To delete a review, click again on the elipsis button on the right side of the review that the user wants to delete, and choose the delete option. A modal confirmation will pop up.  
+   ![Modal confirmation before deleting a review](static/images/readme/testing/user-stories/modal-delete-review.jpg "Modal confirmation before deleting a review")  
 
-8. Be able to write a review on a recipe page, and to edit or delete my review
-9. Be able to share a recipe on social media easily
+9. Be able to share a recipe on social media easily  
+   * A dropdown share button is located on the top right of the Recipe page. When clicked, it provides the options to share the recipe page to: Whatsapp, Facebook, Twitter, and Pinterest.  
+   ![Share a recipe page to social media](static/images/readme/testing/user-stories/share.jpg "Share a recipe page to social media")   
+
 10. Be able to print a recipe easily
-11. Find a contact page for my inquiries
+   * A print button is located on the top right of the Recipe page. When clicked, it connects right away to the print feature of the users' computer.  
+   ![Print a recipe page](static/images/readme/testing/user-stories/print.jpg "Print a recipe page")  
+   
+11. Find a contact page for my inquiries  
+   * To contact the admin or site owners, users can navigate to the footer and click on the "Contact Form" button. Another option to contact would be to send an email or to find the social media page. When the contact form button is clicked, a contact form modal will show up.  
+   ![Contact form](static/images/readme/testing/user-stories/contact-form.jpg "Contact form")  
 

@@ -347,6 +347,17 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
     }
 }
 
+@media screen and (max-width: 576px) {
+    .hero-img {
+        background: url(../images/hero-mobile.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100vw;
+        height: 80vh;
+        
+    }
+}
 @media screen and (min-width: 401px) and (max-width: 576px) {
     .carousel-cell {
         width: 40%;

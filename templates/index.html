@@ -46,8 +46,8 @@
                 <div class="card shadow-2-strong h-100">
                     <div class="bg-image hover-overlay ripple card-image" data-mdb-ripple-color="light">
                         <img src="{{ recipe.recipe_image }}" class="card-img-top" alt="{{ recipe.recipe_name }}" 
-                            onerror="this.src='../../static/images/dish-placeholder.png';">
-                        <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
+                            onerror="this.src='../../static/images/dish-placeholder.png';" loading="lazy">
+                        <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" aria-label="view this recipe">
                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                         </a>
                     </div>
@@ -109,18 +109,35 @@
                         data-mdb-ripple-color="light">
                         <img src="{{ recipe.recipe_image }}" class="card-img-top" 
                             onerror="this.src='../../static/images/dish-placeholder.png';" 
-                            alt="{{ recipe.recipe_name }}">
-                        <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}">
+                            alt="{{ recipe.recipe_name }}" loading="lazy">
+                        <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" aria-label="view this recipe">
                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                         </a>
                     </div>
                     <div class="card-body text-start">
                         <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
                         <p><i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}</p>
-                        <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" 
-                            class="btn btn-rec-primary btn-absolute btn-floating btn-lg">
-                            <i class="fas fa-plus"></i>
-                        </a>
+                        <!-- Save recipe circle button, if it's already in the cookboook disable the button-->
+                        <div>
+                            {% if session.user %}
+                                {% if session.user|lower == recipe.username|lower or recipe._id in saved_recipes %}
+                                    <a role="button" aria-disabled="true" aria-label="recipe is saved"
+                                        class="btn bg-light btn-absolute btn-floating btn-lg disabled">
+                                        <i class="fas fa-check"></i>
+                                    </a>
+                                {% else %}
+                                    <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" role="button" 
+                                        class="btn btn-rec-primary btn-absolute btn-floating btn-lg" aria-label="save recipe">
+                                        <i class="fas fa-plus"></i>
+                                    </a>
+                                {% endif %}
+                            {% else %}
+                                <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" role="button" 
+                                    class="btn btn-rec-primary btn-absolute btn-floating btn-lg" aria-label="save recipe">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

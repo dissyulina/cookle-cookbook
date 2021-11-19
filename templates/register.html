@@ -32,8 +32,9 @@
                             </div>
                             <!-- Username input -->
                             <div class="form-outline mb-4">
-                                <input type="text" name="username" id="username" pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{4,15}$" class="form-control" minlength="4" 
-                                maxlength="20" required>
+                                <input type="text" name="username" id="username" pattern="^[a-zA-Z0-9_-]{4,15}$" 
+                                class="form-control" minlength="4" maxlength="15" 
+                                title="Username's length must be 5 to 15 characters, can contain any numbers, letters, hyphens or underscores" required>
                                 <label class="form-label" for="username">Username</label>
                             </div>
                             <!-- Email input -->
@@ -44,7 +45,8 @@
                             <!-- Password input -->
                             <div class="form-outline mb-4">
                                 <input type="password" id="password" name="password" class="form-control" minlength="5" 
-                                    maxlength="16" pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{5,15}$" required>
+                                    maxlength="16" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,16}$" 
+                                    title="Password's length must be 5 to 16 characters, contains at least one number and one letter" required>
                                 <label class="form-label" for="password">Password</label>
                                 <div class="invalid-feedback">Password's length must be 5 to 16 characters.</div>
                             </div>

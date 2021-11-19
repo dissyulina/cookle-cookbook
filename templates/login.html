@@ -25,13 +25,13 @@
                 <div class="card p-2 p-md-5 form-width">
                     <form method="POST" action="{{ url_for('login') }}" id="form-login">
                         <div class="form-outline mb-4">
-                            <input id="username" name="username" type="text" minlength="5"
-                        maxlength="15"  pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{4,15}$" class="form-control validate" required>
+                            <input id="username" name="username" type="text" minlength="5" maxlength="15" 
+                                class="form-control validate" required>
                             <label class="form-label" for="username">Username</label>
                         </div>
                         <div class="form-outline mb-4">
                             <input id="password" name="password" type="password" minlength="5"
-                        maxlength="15" pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{5,15}$" class="form-control validate" required>
+                        maxlength="16" class="form-control validate" required>
                             <label class="form-label" for="password">Password</label>
                         </div>
                         <div class="text-center">

@@ -33,8 +33,10 @@ def home():
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
+        saved_recipes = user["saved_recipes"]
         return render_template("index.html", popular_recipes=popular_recipes,
-                               recent_recipes=recent_recipes, user=user)
+                               recent_recipes=recent_recipes, user=user,
+                               saved_recipes=saved_recipes)
 
     else:
         return render_template("index.html", popular_recipes=popular_recipes,

@@ -20,7 +20,7 @@
                                 <input type="text" id="home-query" name="query" class="form-control" required>
                                 <label class="form-label" for="home-query">Search recipes...</label>
                             </div>
-                            <button type="submit" id="btn-query" class="btn btn-rec-primary me-2">
+                            <button type="submit" id="btn-query" class="btn btn-rec-primary me-2" aria-label="search">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
@@ -54,10 +54,27 @@
                     <div class="card-body text-start">
                         <h5 class="card-title py-2">{{ recipe.recipe_name }}</h5>
                         <p><i class="far fa-thumbs-up"></i> {{ recipe.total_likes }}</p>
-                        <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" 
-                            class="btn btn-rec-primary btn-absolute btn-floating btn-lg">
-                            <i class="fas fa-plus"></i>
-                        </a>
+                        <!-- Save recipe circle button, if it's already in the cookboook disable the button-->
+                        <div>
+                            {% if session.user %}
+                                {% if session.user|lower == recipe.username|lower or recipe._id in saved_recipes %}
+                                    <a role="button" aria-disabled="true" aria-label="recipe is saved"
+                                        class="btn bg-light btn-absolute btn-floating btn-lg disabled">
+                                        <i class="fas fa-check"></i>
+                                    </a>
+                                {% else %}
+                                    <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" role="button" 
+                                        class="btn btn-rec-primary btn-absolute btn-floating btn-lg" aria-label="save recipe">
+                                        <i class="fas fa-plus"></i>
+                                    </a>
+                                {% endif %}
+                            {% else %}
+                                <a href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}" role="button" 
+                                    class="btn btn-rec-primary btn-absolute btn-floating btn-lg" aria-label="save recipe">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

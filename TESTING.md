@@ -66,7 +66,7 @@ As a new/ unregistered user, I want to:
 
 
 
-### **Unregistered User Goals**   
+### **Registered User Goals**   
 As a returning/ registered user, I want to:  
 1. Immediately be able to spot the Log In button  
    * The Log In button is can be seen right away at the top right of the page.  
@@ -78,13 +78,59 @@ As a returning/ registered user, I want to:
    ![Newest Recipes carousel](static/images/readme/testing/user-stories/newest-recipes.jpg "Newest Recipes carousel")  
 
 3. Once logged in, easily navigate  to my account settings, my cookbook, and other pages available to me.  
-   * Once user logged-in or signed-up, the links on Navbar that are available to navigate are: Homepage, Explore Recipes page, My Cookbook page, A Dropdown profile picture which has navigation items: Create Recipe, View Profile, and Log Out.  
+   * Once the user logged-in or signed-up, the links on Navbar that are available to navigate are: Homepage, Explore Recipes page, My Cookbook page, A Dropdown profile picture which has navigation items: Create Recipe, View Profile, and Log Out.  
    ![Navbar for logged-in user](static/images/readme/testing/user-stories/navbar-logged-in-user.jpg "Navbar for logged-in user")  
 
 4. Be able to Edit or Delete my profile
-5. Be able to Create a recipe and share it to the site, and to Edit or Delete it afterwards as needed
-6. Be able to Save a recipe that I like to my cookbook, and to remove it from my cookbook as needed.
-7. Be able to give a like to a recipe, and also unlike it as needed.
+   * Once the user logged-in or signed-up, they will be directed to the Profile page. The first section of the Profile page is "My Profile", where user can see their account information. User can manage their account by clicking the "Manage Account" dropdown button on the top right corner, with options to : Edit Profile (change Username, change Email, change About Me, and change/upload a profile image), Change Password, and Delete Account.  
+   ![Manage Account](static/images/readme/testing/user-stories/manage-account.jpg "Manage Account")  
+   * When the user click "Edit Profile", the user will be directed to the Edit Profile page (edit-profile.html), with buttons to Cancel and to Submit the edited profile.
+   ![Edit Profile](static/images/readme/testing/user-stories/edit-profile.jpg "Edit Profile")  
+   * The user can also delete their profile by clicking "Delete Profile" button. A modal will pop up to confirm the deletion, as a barrier in case the user accidentaly clicked the button. The modal comes with buttons to Cancel and to Delete the profile.  
+   ![Modal confirmation before deleting an account](static/images/readme/testing/user-stories/modal-delete-account.jpg "Modal confirmation before deleting an account")  
+
+5. Be able to Create a recipe and share it to the site, and to Edit or Delete it afterwards as needed  
+   * There are various ways users can create a recipe, to ensure easy navigation, by clicking :
+     - Call to Action button on the Profile page, or  
+     ![CTA create recipe on profile page](static/images/readme/testing/user-stories/cta-profile-create-recipe.jpg "CTA create recipe on profile page")  
+     - The profile picture dropdown button on the Navbar and choose Create Recipe, or  
+     ![Navigation link create recipe](static/images/readme/testing/user-stories/navbar-create-recipe.jpg "Navigation link create recipe")  
+     - Call to action button on the bottom of My Cookbook page, or  
+     ![CTA create recipe on my cookbook page](static/images/readme/testing/user-stories/cta-cookbook-create-recipe.jpg "CTA create recipe on my cookbook page")  
+     - Navigation link to Create Recipe on the footer 
+   * Once the user clicked the Create Recipe link/ button, they will be directed to the Create Recipe page (see here)
+   * There are various was to Edit or Delete a recipe: 
+     - After user created a recipe, the user will be directed to the newly created recipe page. On the top right of the recipe page, the user wil be able to locate an Edit button and a Delete button.  
+     ![Edit and Delete Recipe on Recipe page](static/images/readme/testing/user-stories/edit-delete-recipe.jpg "Edit and Delete Recipe on Recipe page")  
+     - The user can also manage all their created recipes from the Profile page by clicking the "Uploaded Recipes" collapse button, and navigate to the ellipsis button to find the option to Edit and Delete.  
+     ![Edit and Delete Recipe on Profile page](static/images/readme/testing/user-stories/profile-uploaded-recipes.jpg "Edit and Delete Recipe on Profile page")  
+   * Once the user clicked the Edit Recipe button, they will be directed to the Edit Recipe page (see here).  
+   * Once the user clicked the Delete Recipe button, a modal will pop up to confirm the deletion, as a barrier in case the user accidentaly clicked the button. The modal comes with buttons to Cancel and to Delete the recipe.  
+     ![Modal confirmatin before deleting recipe](static/images/readme/testing/user-stories/modal-delete-recipe.jpg "Modal confirmatin before deleting recipe")   
+
+6. Be able to Save a recipe that I like to my cookbook, and to remove it from my cookbook as needed.  
+   * Ways to save a recipe to user's cookbook:
+     - By clicking the plus button on a recipe card. When a recipe is already saved to the cookbook, the plus button becomes disabled and displays a check icon.  
+     ![A Recipe Card](static/images/readme/testing/user-stories/recipe-card.jpg "A Recipe Card") 
+     ![An already saved Recipe Card](static/images/readme/testing/user-stories/recipe-card-saved.jpg "An already saved Recipe Card")  
+     - By clicking the "Save to cookbook" button on a recipe page. When a recipe is already saved to the cookbook, the button will displays "Saved to Cookbook" with a checked icon.  
+     ![Save Recipe on Recipe page](static/images/readme/testing/user-stories/save-recipe.jpg "Save Recipe on Recipe page") 
+     ![Saved Recipe on Recipe page](static/images/readme/testing/user-stories/saved-recipe.jpg "Saved Recipe on Recipe page")   
+
+   * Ways to remove a recipe from user's cookbook:  
+     - By clicking again the Saved to Cookbook button on the Recipe page (see images from previous point). A modal to confirm the remove will show up.
+     - By managing it from the Profile page, where the usec can click on the "See All My Saved Recipes" collapse button, then click the trash icon located on the right side of the recipe's name that the user wants to remove.  
+     ![Remove recipes from cookbook on profile page](static/images/readme/testing/user-stories/profile-saved-recipes.jpg "Remove recipes from cookbook on profile page")  
+     - A modal will pop up to confirm the remove, as a barrier in case the user accidentaly clicked the button. The modal comes with buttons to Cancel and to Remove.  
+     ![Modal confirmation before removing recipe from cookbook](static/images/readme/testing/user-stories/modal-remove-recipe.jpg "Modal confirmation before removing recipe from cookbook")  
+
+
+7. Be able to give a like to a recipe, and also unlike it as needed.  
+   * To like a recipe, simply click the "Like this recipe" button on the Recipe page. The button will then turn to "Liked", and the number of likes will increase by one. To unlike a recipe, clicked the "Liked" button again, and it will turn back to "Like this recipe", and the number of likes will decrease by one as well.  
+   ![Like this recipe](static/images/readme/testing/user-stories/like-recipe.jpg "Like this recipe") 
+   ![A liked recipe](static/images/readme/testing/user-stories/liked-recipe.jpg "A liked recipe")   
+
+
 8. Be able to write a review on a recipe page, and to edit or delete my review
 9. Be able to share a recipe on social media easily
 10. Be able to print a recipe easily

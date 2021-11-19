@@ -19,10 +19,8 @@
     {% block styles %}
     {% endblock %}
     <!-- Email JS -->
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js">
-    </script>
-    <script type="text/javascript">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
         (function(){
             emailjs.init("user_ezh2VDVtQvTX8KoZQDplM");
         })();
@@ -188,8 +186,8 @@
                             </a>
                         </li>
                         <li>
-                            <!-- Section: Social media -->
-                            <section class="mb-4">
+                            <!-- Social media -->
+                            <div class="mb-4">
                                 <p>Follow us:</p>
                                 <!-- Facebook -->
                                 <a class="btn btn-floating me-1" id="fb-icon" href="https://www.facebook.com" role="button" 
@@ -201,7 +199,7 @@
                                 target="_blank" rel="noopener" aria-label="Open our facebook page in a new tab">
                                     <i class="fab fa-instagram text-white"></i>
                                 </a>
-                            </section>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -286,7 +284,7 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     
     <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
 
     <!-- JS -->

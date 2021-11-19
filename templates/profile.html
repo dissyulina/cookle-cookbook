@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+
+{% block styles %}
+    <!-- Title -->
+    <title>Cookle - Profile</title>
+{% endblock %}
+
 {% block content %}
 <section>
     <div class="w-100 background">
@@ -103,14 +109,14 @@
 
                 <!-- See All My Recipes -->
                 <div class="row mt-5">
-                    <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseUploadedRecipes"
-                        aria-expanded="false" aria-controls="collapseUploadedRecipes">
+                    <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target=".collapseUploadedRecipes"
+                        aria-expanded="false">
                         See all my uploaded recipes: <i class="fas fa-chevron-circle-down"></i>
                     </button>
                     <!-- Collapsed content -->
                     {% for recipe in uploaded_recipes %}
                         <div class="col-12 col-lg-6">
-                            <div class="collapse mt-3" id="collapseUploadedRecipes">
+                            <div class="collapse mt-3 collapseUploadedRecipes">
                                 <div class="card card-body d-flex flex-row align-items-center">
                                     <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" class="flex-grow-1">{{ recipe.recipe_name }}</a>
                                     <div class="ms-auto dropstart">
@@ -128,13 +134,13 @@
 
                         <!-- Modal confirmation before deleting your recipe -->
                         <div class="modal fade" id="modalDeleteRecipe{{ recipe._id }}" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1"
-                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            aria-labelledby="staticBackdropLabel{{ recipe._id }}" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content bg-green">
                                     <button type="button" class="btn-close btn-close-white" data-mdb-dismiss="modal" aria-label="Close"></button>
                                     <div class="modal-header text-white d-flex flex-column justify-content-center align-items-center">
                                         <i class="fas fa-trash-alt fa-5x py-3"></i>
-                                        <h4 class="modal-title text-center" id="staticBackdropLabel">Are you sure you want to delete this recipe?</h4>
+                                        <h4 class="modal-title text-center" id="staticBackdropLabel{{ recipe._id }}">Are you sure you want to delete this recipe?</h4>
                                     </div>
                                     <div class="modal-body text-center">
                                         Please note that deleting this recipe also means deleting it from other users' cookbooks as well
@@ -155,14 +161,14 @@
 
                 <!-- See All Saved Recipes -->
                 <div class="row mt-5">
-                    <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseSavedRecipes"
-                        aria-expanded="false" aria-controls="collapseSavedRecipes">
+                    <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target=".collapseSavedRecipes"
+                        aria-expanded="false">
                         See all my saved recipes: <i class="fas fa-chevron-circle-down"></i>
                     </button>
                     <!-- Collapsed content -->
                     {% for recipe in saved_recipes %}
                         <div class="col-12 col-lg-6">
-                            <div class="collapse mt-3" id="collapseSavedRecipes">
+                            <div class="collapse mt-3 collapseSavedRecipes">
                                 <div class="card card-body d-flex flex-row align-items-center">
                                     <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" class="flex-grow-1">{{ recipe.recipe_name }}</a>
                                     <a role="button" data-mdb-toggle="modal" data-mdb-target="#modalRemoveFromCookbook{{ recipe._id }}" 
@@ -175,13 +181,13 @@
 
                         <!-- Modal confirmation before removing recipe from cookbook -->
                         <div class="modal fade" id="modalRemoveFromCookbook{{ recipe._id }}" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1"
-                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            aria-labelledby="modalRemoveRecipeLabel{{ recipe._id }}" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content bg-green">
                                     <button type="button" class="btn-close btn-close-white" data-mdb-dismiss="modal" aria-label="Close"></button>
                                     <div class="modal-header text-white d-flex flex-column justify-content-center align-items-center">
                                         <i class="fas fa-book-open fa-5x py-3"></i>
-                                        <h4 class="modal-title text-center" id="modalRemoveRecipeLabel">
+                                        <h4 class="modal-title text-center" id="modalRemoveRecipeLabel{{ recipe._id }}">
                                             Do you want to remove this recipe from your cookbook?
                                         </h4>
                                     </div>
@@ -190,8 +196,8 @@
                                             <i class="far fa-window-close"></i> Cancel
                                         </button>
                                         <a class="btn btn-secondary" href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}">
-                                            <i class="fas fa-trash-alt"></i> Yes, Remove</a>
-                                        </li>
+                                            <i class="fas fa-trash-alt"></i> Yes, Remove
+                                        </a>
                                     </div>
                                 </div>
                             </div>

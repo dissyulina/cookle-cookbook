@@ -100,9 +100,8 @@ $("#btn-review").click(function() {
 /* Single Recipe Page: If user clicks Edit review button, show form and move it up */
 $(".btn-edit-review").click(function(e) {
     let reviewId = $(e.target).attr('data-id');
-    console.log(reviewId);
-    $('#edit-review[data-id="' + reviewId + '"]').removeClass('d-none').focus();
-    $('#edit-review[data-id="' + reviewId + '"]').detach().appendTo("#new-edit-review")
+    $('#edit-review' + reviewId).removeClass('d-none').focus();
+    $('#edit-review' + reviewId).detach().appendTo("#new-edit-review")
 });
 
 /* My Cookbook page: Keep the current pill active on page reload */

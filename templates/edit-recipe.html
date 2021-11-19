@@ -1,113 +1,154 @@
 {% extends "base.html" %}
+
+{% block styles %}
+    <!-- Title -->
+    <title>Cookle - Edit Recipe</title>
+{% endblock %}
+
 {% block content %}
-<section>
-    <div class="w-100 background">
-        <div class="overlay py-5">
-            <div class="container d-flex flex-column justify-content-center align-items-center">
-                    <!-- flash messages -->
-                    {% with messages = get_flashed_messages(with_categories=True) %}
-                        {% if messages %}
-                            {% for category, message in messages %}
-                                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-                                    <h4>{{ message }}</h4>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
+    <section>
+        <div class="w-100 background">
+            <div class="overlay py-5">
+                <div class="container d-flex flex-column justify-content-center align-items-center">
+                        <!-- flash messages -->
+                        {% with messages = get_flashed_messages(with_categories=True) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                                        <h4>{{ message }}</h4>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
 
 
-                <h3 class="my-5">Edit Recipe</h3>
-                <form class="row g-3 form-width" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
-                    <!-- Recipe Name -->
-                    <div class="col-12">
-                        <label for="recipe_name" class="form-label"><i class="fas fa-utensils"></i> Recipe Name</label>
-                        <input type="text" class="form-control" id="recipe_name" name="recipe_name" minlength="5" maxlength="40" value="{{ recipe.recipe_name }}" required>
-                    <!-- Description -->
-                    </div><div class="col-12">
-                        <label for="description" class="form-label"><i class="fas fa-comment"></i> Descriptions or comments about this recipe</label>
-                        <textarea class="form-control" id="description" name="description" rows="4" minlength="5" maxlength="400">
-                            {{- recipe.description -}}
-                        </textarea>
-                    </div>
-                    <!-- Serving -->
-                    <div class="col-12 col-md-2">
-                        <label for="serving" class="form-label"><i class="fas fa-users"></i> Serves</label>
-                        <input type="text" class="form-control" id="serving" name="serving" value="{{ recipe.serving }}" required> person
-                    </div>
-                    <!-- Prep & Cooking Time -->
-                    <div class="col-12 col-md-4">
-                        <label for="time" class="form-label"><i class="fas fa-clock"></i> Prep + Cooking Time</label>
-                        <input type="text" class="form-control" id="time" name="time" value="{{ recipe.time }}" required> minutes
-                    </div>
-                    <!-- Categories selection -->
-                    <div class="col-12 col-md-6">
-                        <label for="category_name" class="form-label"><i class="fas fa-tag"></i> Category</label>
-                        <select id="category_name" name="category_name" class="form-select" required>
-                            <option value="" disabled>Choose Category</option>
-                            {% for category in categories %}
-                                {% if category.category_name == recipe.category_name %}
-                                    <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
-                                {% else %}
-                                    <option value="{{ category.category_name }}">{{ category.category_name }}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <!-- Ingredients -->
-                    <div class="col-12">
-                        <label for="ingredients" class="form-label"><i class="fas fa-carrot"></i> Ingredients</label>
-                        <div class="col-12" id="ingredients-wrapper">
-                            {% for ingredient in recipe.ingredients %}
-                                <div class="d-flex flex-row">
-                                    <input type="text" class="form-control flex-grow ingredients" name="ingredients" value="{{ ingredient }}" required>
-                                    <!-- Add delete button on all fields, except the first field 
-                                    ref : https://stackoverflow.com/questions/20233721/how-do-you-index-on-a-jinja-template -->
-                                    {% if loop.index != 1 %} 
-                                        <button class="btn btn-remove" type="button"><i class="fas fa-trash-alt"></i></button>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        </div>
+                    <h3 class="my-5">Edit Recipe</h3>
+                    <form class="row g-3 form-width" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
+                        <!-- Recipe Name -->
                         <div class="col-12">
-                            <a href="" role="button" id="add-ing-btn"><i class="fas fa-plus"></i> Add more ingredients</a>
+                            <label for="recipe_name" class="form-label">
+                                <i class="fas fa-utensils"></i> Recipe Name
+                            </label>
+                            <input type="text" class="form-control" id="recipe_name" name="recipe_name" 
+                                minlength="5" maxlength="40" value="{{ recipe.recipe_name }}" required>
+                        <!-- Description -->
+                        </div><div class="col-12">
+                            <label for="description" class="form-label">
+                                <i class="fas fa-comment"></i> Descriptions or comments about this recipe
+                            </label>
+                            <textarea class="form-control" id="description" name="description" 
+                                rows="4" minlength="5" maxlength="400">
+                                {{- recipe.description -}}
+                            </textarea>
                         </div>
-                    </div>
-                    <!-- Directions -->
-                    <div class="col-12">
-                        <label for="directions" class="form-label"><i class="fas fa-clipboard-list"></i> Directions</label>
-                        <div class="col-12" id="directions-wrapper">
-                            {% for direction in recipe.directions %}
-                                <div class="d-flex flex-row">
-                                    <input type="text" class="form-control flex-grow directions" name="directions" value="{{ direction }}" required>
-                                    {% if loop.index != 1 %} 
-                                        <button class="btn btn-remove" type="button"><i class="fas fa-trash-alt"></i></button>
+                        <!-- Serving -->
+                        <div class="col-12 col-md-2">
+                            <label for="serving" class="form-label">
+                                <i class="fas fa-users"></i> Serves
+                            </label>
+                            <input type="text" class="form-control" id="serving" 
+                                name="serving" value="{{ recipe.serving }}" required> person
+                        </div>
+                        <!-- Prep & Cooking Time -->
+                        <div class="col-12 col-md-4">
+                            <label for="time" class="form-label">
+                                <i class="fas fa-clock"></i> Prep + Cooking Time
+                            </label>
+                            <input type="text" class="form-control" id="time" 
+                                name="time" value="{{ recipe.time }}" required> minutes
+                        </div>
+                        <!-- Categories selection -->
+                        <div class="col-12 col-md-6">
+                            <label for="category_name" class="form-label">
+                                <i class="fas fa-tag"></i> Category
+                            </label>
+                            <select id="category_name" name="category_name" class="form-select" required>
+                                <option value="" disabled>Choose Category</option>
+                                {% for category in categories %}
+                                    {% if category.category_name == recipe.category_name %}
+                                        <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
+                                    {% else %}
+                                        <option value="{{ category.category_name }}">{{ category.category_name }}</option>
                                     {% endif %}
-                                </div>
-                            {% endfor %}
+                                {% endfor %}
+                            </select>
                         </div>
+                        <!-- Ingredients -->
                         <div class="col-12">
-                            <a href="" role="button" id="add-dir-btn"><i class="fas fa-plus"></i> Add more steps</a>
+                            <label class="form-label">
+                                <i class="fas fa-carrot"></i> Ingredients
+                            </label>
+                            <div class="col-12" id="ingredients-wrapper">
+                                {% for ingredient in recipe.ingredients %}
+                                    <div class="d-flex flex-row">
+                                        <input type="text" class="form-control flex-grow ingredients" 
+                                            name="ingredients" value="{{ ingredient }}" required>
+                                        <!-- Add delete button on all fields, except the first field 
+                                        ref : https://stackoverflow.com/questions/20233721/how-do-you-index-on-a-jinja-template -->
+                                        {% if loop.index != 1 %} 
+                                            <button class="btn btn-remove" type="button" aria-label="delete ingredient">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="col-12">
+                                <a href="" role="button" id="add-ing-btn">
+                                    <i class="fas fa-plus"></i> Add more ingredients
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Recipe's Image Url input-->
-                    <div class="col-12">
-                        <label for="image-url" class="form-label"><i class="fas fa-image"></i> Recipe's Image (Url / Image's address)</label>
-                        <input type="text" class="form-control image-url" name="recipe_image" value="{{ recipe.recipe_image }}">
-                    </div>
-                    <!-- Rendering image from url -->
-                    <div class="mb-4 text-center">
-                        <img class="show-image" src="{{ recipe.recipe_image }}" onerror="this.src='../../static/images/dish-placeholder.png';" width="300">
-                    </div>
-                    <!-- Buttons -->
-                    <div class="d-flex align-items-center justify-content-center my-5">
-                        <a href="{{ url_for('get_recipes') }}" role="button" class="btn btn-rec-secondary btn-rounded btn-lg me-5"><i class="fas fa-window-close"></i> Cancel</a>
-                        <button type="submit" class="btn btn-rec-primary btn-rounded btn-lg"><i class="fas fa-edit"></i> Edit Recipe</button>
-                    </div>
-                </form>
+                        <!-- Directions -->
+                        <div class="col-12">
+                            <label class="form-label">
+                                <i class="fas fa-clipboard-list"></i> Directions
+                            </label>
+                            <div class="col-12" id="directions-wrapper">
+                                {% for direction in recipe.directions %}
+                                    <div class="d-flex flex-row">
+                                        <input type="text" class="form-control flex-grow directions" 
+                                            name="directions" value="{{ direction }}" required>
+                                        {% if loop.index != 1 %} 
+                                            <button class="btn btn-remove" type="button">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="col-12">
+                                <a href="" role="button" id="add-dir-btn">
+                                    <i class="fas fa-plus"></i> Add more steps
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Recipe's Image Url input-->
+                        <div class="col-12">
+                            <label for="recipe-image" class="form-label">
+                                <i class="fas fa-image"></i> Recipe's Image (Url / Image's address)
+                            </label>
+                            <input type="text" id="recipe-image" class="form-control image-url" 
+                                name="recipe_image" value="{{ recipe.recipe_image }}">
+                        </div>
+                        <!-- Rendering image from url -->
+                        <div class="mb-4 text-center">
+                            <img class="show-image" src="{{ recipe.recipe_image }}" alt="display the image" 
+                                onerror="this.src='../../static/images/dish-placeholder.png';">
+                        </div>
+                        <!-- Buttons -->
+                        <div class="d-flex align-items-center justify-content-center my-5">
+                            <a href="{{ url_for('get_recipes') }}" role="button" 
+                                class="btn btn-rec-secondary btn-rounded btn-lg me-5">
+                                <i class="fas fa-window-close"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-rec-primary btn-rounded btn-lg">
+                                <i class="fas fa-edit"></i> Edit Recipe
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-
-
+    </section>
 {% endblock %}

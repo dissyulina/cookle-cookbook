@@ -10,17 +10,17 @@
         <div class="w-100 background">
             <div class="overlay py-5">
                 <div class="container d-flex flex-column justify-content-center align-items-center">
-                        <!-- flash messages -->
-                        {% with messages = get_flashed_messages(with_categories=True) %}
-                            {% if messages %}
-                                {% for category, message in messages %}
-                                    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-                                        <h4>{{ message }}</h4>
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
-                        {% endwith %}
 
+                    <!-- flash messages -->
+                    {% with messages = get_flashed_messages(with_categories=True) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                                    <h4>{{ message }}</h4>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
 
                     <h3 class="my-5">Edit Recipe</h3>
                     <form class="row g-3 form-width" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
@@ -81,12 +81,12 @@
                             <div class="col-12" id="ingredients-wrapper">
                                 {% for ingredient in recipe.ingredients %}
                                     <div class="d-flex flex-row">
-                                        <input type="text" class="form-control flex-grow ingredients" 
-                                            name="ingredients" value="{{ ingredient }}" required>
+                                        <input type="text" class="form-control flex-grow ingredients" name="ingredients" 
+                                            value="{{ ingredient }}" aria-label="ingredient {{loop.index }}" required>
                                         <!-- Add delete button on all fields, except the first field 
                                         ref : https://stackoverflow.com/questions/20233721/how-do-you-index-on-a-jinja-template -->
                                         {% if loop.index != 1 %} 
-                                            <button class="btn btn-remove" type="button" aria-label="delete ingredient">
+                                            <button class="btn btn-remove" type="button" aria-label="remove ingredient">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         {% endif %}
@@ -108,10 +108,10 @@
                             <div class="col-12" id="directions-wrapper">
                                 {% for direction in recipe.directions %}
                                     <div class="d-flex flex-row">
-                                        <input type="text" class="form-control flex-grow directions" 
-                                            name="directions" value="{{ direction }}" required>
+                                        <input type="text" class="form-control flex-grow directions" name="directions" 
+                                            value="{{ direction }}" aria-label="direction {{loop.index }}" required>
                                         {% if loop.index != 1 %} 
-                                            <button class="btn btn-remove" type="button">
+                                            <button class="btn btn-remove" type="button" aria-label="remove direction">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         {% endif %}

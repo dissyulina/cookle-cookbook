@@ -172,3 +172,40 @@ As an Administrative Account holder, I want to:
 5. Be able to delete offensive reviews on the site as needed.  
    * The Delete review button inside the ellipsis dropdown button is available for admin to access. Admin can only delete a review, not edit it.  
 
+<br/>  
+
+## **3. Auto Prefixer CSS**   
+Autoprefixer CSS was used to add CSS vendor prefixes to the CSS rules after the developing process was done, to ensure that the they work across all browsers. 
+
+<br/>  
+
+## **4. W3C Validator Testing**  
+The [W3C Markup Validator](https://validator.w3.org) and [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) were used to validate the website to ensure there were no syntax errors in the project. The results are below:  
+
+### **HTML**  
+These are the summary of warning/ errors that I got on the first test. 
+Error/ Warnings | Actions  
+ --- | ---
+Element div not allowed as child of element ul in this context. (Suppressing further errors from this subtree.) | Change the ```<div>``` to ```<li>``` element   
+An img element must have an alt attribute, except under certain conditions. | Add an ```alt``` attribute   
+The value of the for attribute of the label element must be the ID of a non-hidden form control. | Add an id to the ```input``` element   
+Duplicate IDs | Change the repeated id   
+
+The duplicate IDs error is existed on almost all pages. This happened because for element inside a loop, for example a review inside a for loop template that has an id attribute. Because the number of the reviews that generated were more than 1, the id repeated and therefore gave an error. The solution for this was to put ```review._id``` inside the id, so that it will become unique.  
+All warnings and erros were fixed and I put the Html file back to the test. In the end, no warnings or errors were found on all pages.  
+* [Homepage (index.html)](static/images/readme/testing/html-css-validator/index.jpg)  
+* [Explore Recipes Page (explore-recipes.html)](static/images/readme/testing/html-css-validator/explore-recipes.jpg)  
+* [Sign Up Page (register.html)](static/images/readme/testing/html-css-validator/register.jpg)  
+* [Log In Page (login.html)](static/images/readme/testing/html-css-validator/login.jpg)  
+* [Profile Page (profile.html)](static/images/readme/testing/html-css-validator/profile.jpg)  
+* [Edit Profile Page (edit-profile.html)](static/images/readme/testing/html-css-validator/edit-profile.jpg)  
+* [Change Password Page (change-password.html)](static/images/readme/testing/html-css-validator/change-password.jpg)  
+* [Create Recipe Page (add-recipe.html)](static/images/readme/testing/html-css-validator/add-recipe.jpg)  
+* [Individual Recipe Page (single-recipe.html)](static/images/readme/testing/html-css-validator/single-recipe.jpg)  
+* [Edit Recipe Page (edit-recipe.html)](static/images/readme/testing/html-css-validator/edit-recipe.jpg)  
+* [My Cookbook Page (add-recipe.html)](static/images/readme/testing/html-css-validator/cookbook.jpg)  
+* [Manage Categories Page (categories.html)](static/images/readme/testing/html-css-validator/categories.jpg)  
+* [Edit Category Page (edit-category.html)](static/images/readme/testing/html-css-validator/edit-category.jpg)  
+* [Add Category Page (add-category.html)](static/images/readme/testing/html-css-validator/add-category.jpg)  
+
+

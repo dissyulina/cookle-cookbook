@@ -6,208 +6,206 @@
 {% endblock %}
 
 {% block content %}
-<section>
-    <div class="w-100 background">
-        <div class="overlay py-5">
-            <div class="container">
+    <section>
+        <div class="w-100 background">
+            <div class="overlay py-5">
+                <div class="container">
 
-                 <!-- flash messages -->
-                 {% with messages = get_flashed_messages(with_categories=True) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-                                <h4>{{ message }}</h4>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
+                    <!-- flash messages -->
+                    {% with messages = get_flashed_messages(with_categories=True) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                                    <h4>{{ message }}</h4>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
 
-                <!-- Profile -->
-                <h3 class="pb-5 pt-3 text-center">My Profile Page</h3>
-                <div class="row pb-3 pb-md-5 d-flex justify-content-center">
-                    <div class="col-12 col-md-4 square-image">
-                        <img src="{{ user.user_image }}" class="img-fluid" onerror="this.src='../../static/images/user.png';" alt="{{ user.username }}'s profile picture">
-                    </div>
-                    <div class="col-12 col-md-8 py-3 px-2 px-sm-3">
-                        <div class= "d-flex justify-content-end align-items-center mb-4">
-                            <div class="nav-item dropdown">
-                                <a class="dropdown-toggle d-flex align-items-center btn btn-secondary py-2 px-3" role="button" 
-                                    id="navbarDropdownMenuLink" data-mdb-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user-cog"></i> Manage Account
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                                    <li class="nav-item">
-                                        <a class="nav-link dropdown-item" href="{{ url_for('edit_profile', user_id=user._id) }}">
-                                            <i class="fas fa-user-edit"></i> Edit Profile
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link dropdown-item"
-                                            href="{{ url_for('change_password', user_id=user._id) }}">
-                                            <i class="fas fa-key"></i> Change Password
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link dropdown-item"
-                                        data-mdb-toggle="modal" data-mdb-target="#modalDeleteProfile">
-                                        <i class="fas fa-trash-alt"></i> Delete Account
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                    <!-- Profile -->
+                    <h3 class="pb-5 pt-3 text-center">My Profile Page</h3>
+                    <div class="row pb-3 pb-md-5 d-flex justify-content-center">
+                        <div class="col-12 col-md-4 square-image">
+                            <img src="{{ user.user_image }}" class="img-fluid" onerror="this.src='../../static/images/user.png';" alt="{{ user.username }}'s profile picture">
                         </div>
-                        <p><strong>Username : </strong><span>{{ user.username }}</span></p>
-                        <p><strong>Email : </strong><span>{{ user.email }}</span></p>
-                        <p><strong>About you and your love for cooking : </strong><span>{{ user.about }}</span></p>
-                    </div>
-                </div>
-
-                <!-- Modal confirmation before deleting your account -->
-                <div class="modal fade" id="modalDeleteProfile" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1"
-                aria-labelledby="modalDeleteProfileLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content bg-green">
-                            <button type="button" class="btn-close btn-close-white" data-mdb-dismiss="modal" aria-label="Close"></button>
-                            <div class="modal-header text-white d-flex flex-column justify-content-center align-items-center">
-                                <i class="fas fa-trash-alt fa-5x py-3"></i>
-                                <h4 class="modal-title text-center" id="modalDeleteProfileLabel"><strong>Are you sure you want to delete your account?</strong></h4>
-                                <p>We'll miss you..</p>
-                            </div>
-                            <div class="modal-body text-center">
-                                Please note that deleting your account doesn't mean removing all your recipes or reviews. If you want to do that, you'll have to delete them one by one manually before deleting your account.
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-                                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
-                                    Cancel
-                                </button>
-                                <a class="btn btn-secondary" href="{{ url_for('delete_profile', user_id=user._id) }}">
-                                    <i class="fas fa-trash-alt"></i> Yes, Delete
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Modal -->
-
-                <hr/>
-
-                <!-- Buttons -->
-                <div class="row text-center pt-3 pt-md-4 pt-lg-5 btn-nav-profile">
-                    <div class="col-12 col-lg-3 py-1 mb-md-4 mb-lg-0">
-                        <h4><strong>What do you want to do?</strong></h4>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 py-1">
-                        <a href="{{ url_for('add_recipe') }}" role="button" class="btn btn-rec-primary btn-lg d-flex align-items-center justify-content-center"><i class="fas fa-folder-plus me-2"></i> Create A Recipe</a>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 py-1">
-                        <a href="{{ url_for('get_recipes') }}" role="button" class="btn btn-rec-primary btn-lg d-flex align-items-center justify-content-center"><i class="fas fa-search me-2"></i> Explore Recipes</a>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 py-1">
-                        <a href="{{ url_for('get_cookbook', username=session['user']) }}" role="button" class="btn btn-rec-primary btn-lg d-flex align-items-center justify-content-center"><i class="fas fa-book-open me-2"></i>Go to My Cookbook</a>
-                    </div>
-                </div>
-
-                <!-- See All My Recipes -->
-                <div class="row mt-5">
-                    <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target=".collapseUploadedRecipes"
-                        aria-expanded="false">
-                        See all my uploaded recipes: <i class="fas fa-chevron-circle-down"></i>
-                    </button>
-                    <!-- Collapsed content -->
-                    {% for recipe in uploaded_recipes %}
-                        <div class="col-12 col-lg-6">
-                            <div class="collapse mt-3 collapseUploadedRecipes">
-                                <div class="card card-body d-flex flex-row align-items-center">
-                                    <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" class="flex-grow-1">{{ recipe.recipe_name }}</a>
-                                    <div class="ms-auto dropstart">
-                                        <button type="button" class="btn-edit-delete" data-mdb-toggle="dropdown" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}"><i class="fas fa-edit"></i> Edit</a></li>
-                                            <li><a class="dropdown-item" data-mdb-toggle="modal" data-mdb-target="#modalDeleteRecipe{{ recipe._id }}"><i class="fas fa-trash-alt"></i> Delete</a></li>
-                                        </ul>
-                                    </div>
+                        <div class="col-12 col-md-8 py-3 px-2 px-sm-3">
+                            <div class= "d-flex justify-content-end align-items-center mb-4">
+                                <div class="nav-item dropdown">
+                                    <a class="dropdown-toggle d-flex align-items-center btn btn-secondary py-2 px-3" role="button" 
+                                        id="navbarDropdownMenuLink" data-mdb-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user-cog"></i> Manage Account
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                                        <li class="nav-item">
+                                            <a class="nav-link dropdown-item" href="{{ url_for('edit_profile', user_id=user._id) }}">
+                                                <i class="fas fa-user-edit"></i> Edit Profile
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link dropdown-item"
+                                                href="{{ url_for('change_password', user_id=user._id) }}">
+                                                <i class="fas fa-key"></i> Change Password
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link dropdown-item"
+                                            data-mdb-toggle="modal" data-mdb-target="#modalDeleteProfile">
+                                            <i class="fas fa-trash-alt"></i> Delete Account
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
+                            <p><strong>Username : </strong><span>{{ user.username }}</span></p>
+                            <p><strong>Email : </strong><span>{{ user.email }}</span></p>
+                            <p><strong>About you and your love for cooking : </strong><span>{{ user.about }}</span></p>
                         </div>
+                    </div>
 
-                        <!-- Modal confirmation before deleting your recipe -->
-                        <div class="modal fade" id="modalDeleteRecipe{{ recipe._id }}" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1"
-                            aria-labelledby="staticBackdropLabel{{ recipe._id }}" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content bg-green">
-                                    <button type="button" class="btn-close btn-close-white" data-mdb-dismiss="modal" aria-label="Close"></button>
-                                    <div class="modal-header text-white d-flex flex-column justify-content-center align-items-center">
-                                        <i class="fas fa-trash-alt fa-5x py-3"></i>
-                                        <h4 class="modal-title text-center" id="staticBackdropLabel{{ recipe._id }}">Are you sure you want to delete this recipe?</h4>
-                                    </div>
-                                    <div class="modal-body text-center">
-                                        Please note that deleting this recipe also means deleting it from other users' cookbooks as well
-                                    </div>
-                                    <div class="modal-footer d-flex justify-content-center">
-                                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
-                                            Cancel
-                                        </button>
-                                        <a class="btn btn-secondary" href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}">
-                                            <i class="fas fa-trash-alt"></i> Yes, Delete
-                                        </a>
-                                    </div>
+                    <!-- Modal confirmation before deleting your account -->
+                    <div class="modal fade" id="modalDeleteProfile" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1"
+                    aria-labelledby="modalDeleteProfileLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content bg-green">
+                                <button type="button" class="btn-close btn-close-white" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                <div class="modal-header text-white d-flex flex-column justify-content-center align-items-center">
+                                    <i class="fas fa-trash-alt fa-5x py-3"></i>
+                                    <h4 class="modal-title text-center" id="modalDeleteProfileLabel"><strong>Are you sure you want to delete your account?</strong></h4>
+                                    <p>We'll miss you..</p>
                                 </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-
-                <!-- See All Saved Recipes -->
-                <div class="row mt-5">
-                    <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target=".collapseSavedRecipes"
-                        aria-expanded="false">
-                        See all my saved recipes: <i class="fas fa-chevron-circle-down"></i>
-                    </button>
-                    <!-- Collapsed content -->
-                    {% for recipe in saved_recipes %}
-                        <div class="col-12 col-lg-6">
-                            <div class="collapse mt-3 collapseSavedRecipes">
-                                <div class="card card-body d-flex flex-row align-items-center">
-                                    <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" class="flex-grow-1">{{ recipe.recipe_name }}</a>
-                                    <a role="button" data-mdb-toggle="modal" data-mdb-target="#modalRemoveFromCookbook{{ recipe._id }}" 
-                                        class="btn btn-sm btn-rec-secondary d-inline-flex">
-                                        <i class="fas fa-trash-alt"></i>
+                                <div class="modal-body text-center">
+                                    Please note that deleting your account doesn't mean removing all your recipes or reviews. If you want to do that, you'll have to delete them one by one manually before deleting your account.
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                                        Cancel
+                                    </button>
+                                    <a class="btn btn-secondary" href="{{ url_for('delete_profile', user_id=user._id) }}">
+                                        <i class="fas fa-trash-alt"></i> Yes, Delete
                                     </a>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <!-- End of Modal -->
 
-                        <!-- Modal confirmation before removing recipe from cookbook -->
-                        <div class="modal fade" id="modalRemoveFromCookbook{{ recipe._id }}" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1"
-                            aria-labelledby="modalRemoveRecipeLabel{{ recipe._id }}" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content bg-green">
-                                    <button type="button" class="btn-close btn-close-white" data-mdb-dismiss="modal" aria-label="Close"></button>
-                                    <div class="modal-header text-white d-flex flex-column justify-content-center align-items-center">
-                                        <i class="fas fa-book-open fa-5x py-3"></i>
-                                        <h4 class="modal-title text-center" id="modalRemoveRecipeLabel{{ recipe._id }}">
-                                            Do you want to remove this recipe from your cookbook?
-                                        </h4>
+                    <hr/>
+
+                    <!-- Buttons -->
+                    <div class="row text-center pt-3 pt-md-4 pt-lg-5 btn-nav-profile">
+                        <div class="col-12 col-lg-3 py-1 mb-md-4 mb-lg-0">
+                            <h4><strong>What do you want to do?</strong></h4>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3 py-1">
+                            <a href="{{ url_for('add_recipe') }}" role="button" class="btn btn-rec-primary btn-lg d-flex align-items-center justify-content-center"><i class="fas fa-folder-plus me-2"></i> Create A Recipe</a>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3 py-1">
+                            <a href="{{ url_for('get_recipes') }}" role="button" class="btn btn-rec-primary btn-lg d-flex align-items-center justify-content-center"><i class="fas fa-search me-2"></i> Explore Recipes</a>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3 py-1">
+                            <a href="{{ url_for('get_cookbook', username=session['user']) }}" role="button" class="btn btn-rec-primary btn-lg d-flex align-items-center justify-content-center"><i class="fas fa-book-open me-2"></i>Go to My Cookbook</a>
+                        </div>
+                    </div>
+
+                    <!-- See All My Recipes -->
+                    <div class="row mt-5">
+                        <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target=".collapseUploadedRecipes"
+                            aria-expanded="false">
+                            See all my uploaded recipes: <i class="fas fa-chevron-circle-down"></i>
+                        </button>
+                        <!-- Collapsed content -->
+                        {% for recipe in uploaded_recipes %}
+                            <div class="col-12 col-lg-6">
+                                <div class="collapse mt-3 collapseUploadedRecipes">
+                                    <div class="card card-body d-flex flex-row align-items-center">
+                                        <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" class="flex-grow-1">{{ recipe.recipe_name }}</a>
+                                        <div class="ms-auto dropstart">
+                                            <button type="button" class="btn-edit-delete" data-mdb-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}"><i class="fas fa-edit"></i> Edit</a></li>
+                                                <li><a class="dropdown-item" data-mdb-toggle="modal" data-mdb-target="#modalDeleteRecipe{{ recipe._id }}"><i class="fas fa-trash-alt"></i> Delete</a></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="modal-footer d-flex justify-content-center">
-                                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
-                                            <i class="far fa-window-close"></i> Cancel
-                                        </button>
-                                        <a class="btn btn-secondary" href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}">
-                                            <i class="fas fa-trash-alt"></i> Yes, Remove
+                                </div>
+                            </div>
+
+                            <!-- Modal confirmation before deleting your recipe -->
+                            <div class="modal fade" id="modalDeleteRecipe{{ recipe._id }}" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1"
+                                aria-labelledby="staticBackdropLabel{{ recipe._id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content bg-green">
+                                        <button type="button" class="btn-close btn-close-white" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                        <div class="modal-header text-white d-flex flex-column justify-content-center align-items-center">
+                                            <i class="fas fa-trash-alt fa-5x py-3"></i>
+                                            <h4 class="modal-title text-center" id="staticBackdropLabel{{ recipe._id }}">Are you sure you want to delete this recipe?</h4>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            Please note that deleting this recipe also means deleting it from other users' cookbooks as well
+                                        </div>
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                            <a class="btn btn-secondary" href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}">
+                                                <i class="fas fa-trash-alt"></i> Yes, Delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- See All Saved Recipes -->
+                    <div class="row mt-5">
+                        <button class="btn" type="button" data-mdb-toggle="collapse" data-mdb-target=".collapseSavedRecipes"
+                            aria-expanded="false">
+                            See all my saved recipes: <i class="fas fa-chevron-circle-down"></i>
+                        </button>
+                        <!-- Collapsed content -->
+                        {% for recipe in saved_recipes %}
+                            <div class="col-12 col-lg-6">
+                                <div class="collapse mt-3 collapseSavedRecipes">
+                                    <div class="card card-body d-flex flex-row align-items-center">
+                                        <a href="{{ url_for('get_single_recipe', recipe_id=recipe._id) }}" class="flex-grow-1">{{ recipe.recipe_name }}</a>
+                                        <a role="button" data-mdb-toggle="modal" data-mdb-target="#modalRemoveFromCookbook{{ recipe._id }}" 
+                                            class="btn btn-sm btn-rec-secondary d-inline-flex">
+                                            <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+
+                            <!-- Modal confirmation before removing recipe from cookbook -->
+                            <div class="modal fade" id="modalRemoveFromCookbook{{ recipe._id }}" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1"
+                                aria-labelledby="modalRemoveRecipeLabel{{ recipe._id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content bg-green">
+                                        <button type="button" class="btn-close btn-close-white" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                        <div class="modal-header text-white d-flex flex-column justify-content-center align-items-center">
+                                            <i class="fas fa-book-open fa-5x py-3"></i>
+                                            <h4 class="modal-title text-center" id="modalRemoveRecipeLabel{{ recipe._id }}">
+                                                Do you want to remove this recipe from your cookbook?
+                                            </h4>
+                                        </div>
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                                                <i class="far fa-window-close"></i> Cancel
+                                            </button>
+                                            <a class="btn btn-secondary" href="{{ url_for('save_to_cookbook', recipe_id=recipe._id) }}">
+                                                <i class="fas fa-trash-alt"></i> Yes, Remove
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-
+    </section>
 {% endblock %}

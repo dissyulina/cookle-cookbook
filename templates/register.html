@@ -6,83 +6,81 @@
 {% endblock %}
 
 {% block content %}
-<section>
-    <div class="w-100 background">
-        <div class="overlay py-5">
-            <div class="container d-flex flex-column justify-content-center align-items-center">
-                    <!-- flash messages -->
+    <section>
+        <div class="w-100 background">
+            <div class="overlay py-5">
+                <div class="container d-flex flex-column justify-content-center align-items-center">
+                        <!-- flash messages -->
 
-                    {% with messages = get_flashed_messages(with_categories=True) %}
-                        {% if messages %}
-                            {% for category, message in messages %}
-                                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-                                    <h4>{{ message }}</h4>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
+                        {% with messages = get_flashed_messages(with_categories=True) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                                        <h4>{{ message }}</h4>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
 
-                <h3 class="my-5">Register</h3>
-                <div class="card p-2 p-md-5 form-width">                 
-                    <form method="POST" action="{{ url_for('register') }}" id="form-register">
-                        <!-- Name input -->
-                        <div class="form-outline mb-4">
-                            <input type="text" name="name" class="form-control" required>
-                            <label class="form-label" for="name">Name</label>
-                        </div>
-                        <!-- Username input -->
-                        <div class="form-outline mb-4">
-                            <input type="text" name="username" id="username" pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{4,15}$" class="form-control" minlength="4" 
-                            maxlength="20" required>
-                            <label class="form-label" for="username">Username</label>
-                        </div>
-                        <!-- Email input -->
-                        <div class="form-outline mb-4">
-                            <input type="email" name="email" class="form-control" required>
-                            <label class="form-label" for="email">Email</label>
-                        </div>
-                        <!-- Password input -->
-                        <div class="form-outline mb-4">
-                            <input type="password" id="password" name="password" class="form-control" minlength="5" 
-                                maxlength="16" pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{4,15}$" required>
-                            <label class="form-label" for="password">Password</label>
-                            <div class="invalid-feedback">Password's length must be 5 to 16 characters.</div>
-                        </div>
-                        <!-- Repeat Password input -->
-                        <div class="form-outline">
-                            <input type="password" id="repeat-password" name="repeat-password" 
-                                class="form-control" required>
-                            <label class="form-label" for="repeat-password">Repeat password</label>
-                        </div>
-                        <div id="valid-message" class="mb-4"></div>
-                        <!-- About input -->
-                        <div class="form-outline mb-4">
-                            <textarea class="form-control" id="about" name="about" rows="4"></textarea>
-                            <label class="form-label" for="about">About you and your love for cooking</label>
-                        </div>
-                        <!-- Upload image/ profile picture -->
-                        <div class="form-outline mb-4">
-                            <input type="text" class="form-control image-url" id="profile-url" name="profile-url">
-                            <label for="profile-url" class="form-label">Profile Image (Url / Image's address)</label>
-                        </div>
-                        <!-- Rendering image from url -->
-                        <div class="mb-4 text-center">
-                            <img class="show-image" id="show-image-profile" src="{{ url_for('static', filename='images/user.png') }}" 
-                                alt="display the image">
-                        </div>
-                        <!-- Submit button & Log In link-->
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary my-3 submit-btn">Sign Up</button>
-                            <p>Already a member? 
-                                <span><a href="{{ url_for('login') }}">Log In</a></span>
-                            </p>
-                        </div>
-                    </form>
+                    <h3 class="my-5">Register</h3>
+                    <div class="card p-2 p-md-5 form-width">                 
+                        <form method="POST" action="{{ url_for('register') }}" id="form-register">
+                            <!-- Name input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" name="name" class="form-control" required>
+                                <label class="form-label" for="name">Name</label>
+                            </div>
+                            <!-- Username input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" name="username" id="username" pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{4,15}$" class="form-control" minlength="4" 
+                                maxlength="20" required>
+                                <label class="form-label" for="username">Username</label>
+                            </div>
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input type="email" name="email" class="form-control" required>
+                                <label class="form-label" for="email">Email</label>
+                            </div>
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" id="password" name="password" class="form-control" minlength="5" 
+                                    maxlength="16" pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{5,15}$" required>
+                                <label class="form-label" for="password">Password</label>
+                                <div class="invalid-feedback">Password's length must be 5 to 16 characters.</div>
+                            </div>
+                            <!-- Repeat Password input -->
+                            <div class="form-outline">
+                                <input type="password" id="repeat-password" name="repeat-password" 
+                                    class="form-control" required>
+                                <label class="form-label" for="repeat-password">Repeat password</label>
+                            </div>
+                            <div id="valid-message" class="mb-4"></div>
+                            <!-- About input -->
+                            <div class="form-outline mb-4">
+                                <textarea class="form-control" id="about" name="about" rows="4"></textarea>
+                                <label class="form-label" for="about">About you and your love for cooking</label>
+                            </div>
+                            <!-- Upload image/ profile picture -->
+                            <div class="form-outline mb-4">
+                                <input type="text" class="form-control image-url" id="profile-url" name="profile-url">
+                                <label for="profile-url" class="form-label">Profile Image (Url / Image's address)</label>
+                            </div>
+                            <!-- Rendering image from url -->
+                            <div class="mb-4 text-center">
+                                <img class="show-image" id="show-image-profile" src="{{ url_for('static', filename='images/user.png') }}" 
+                                    alt="display the image">
+                            </div>
+                            <!-- Submit button & Log In link-->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary my-3 submit-btn">Sign Up</button>
+                                <p>Already a member? 
+                                    <span><a href="{{ url_for('login') }}">Log In</a></span>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-
+    </section>
 {% endblock %}

@@ -25,7 +25,6 @@
             emailjs.init("user_ezh2VDVtQvTX8KoZQDplM");
         })();
     </script>
-    <title>Cookle</title>
 </head>
 
 <body>
@@ -70,11 +69,11 @@
                             </li>
                             <li class="btn-group nav-item dropdown">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center profile-img" role="button" 
-                                    id="navbarDropdownMenuLink" data-mdb-toggle="dropdown" aria-expanded="false">
+                                    id="navbarDropdownProfile" data-mdb-toggle="dropdown" aria-expanded="false">
                                     <img src="{{ user.user_image}}" onerror="this.src='../../static/images/user.png';" 
                                         class="rounded-circle" alt="profile picture" loading="lazy">
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownProfile">
                                     <li class="nav-item">
                                         <a class="nav-link dropdown-item" href="{{ url_for('add_recipe') }}">
                                             Create Recipe
@@ -99,10 +98,10 @@
                                     </li>
                                 </ul>
                             </li>
-                    </ul>
-                    <!-- Sign up / log in buttons -->
+                        
+                        <!-- Sign up / log in buttons -->
                         {% else %}
-                            <div class="d-flex align-items-center">
+                            <li class="d-flex align-items-center">
                                 <a role="button" class="btn btn-primary me-2" href="{{ url_for('register') }}">
                                     Sign Up
                                 </a>
@@ -110,8 +109,9 @@
                                     id="login-btn" href="{{ url_for('login') }}">
                                     Log In
                                 </a>
-                            </div>
+                            </li>
                         {% endif %}
+                    </ul>
                 </div>
             </div>
         </nav>

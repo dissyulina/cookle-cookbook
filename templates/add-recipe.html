@@ -1,9 +1,16 @@
 {% extends "base.html" %}
+
+{% block styles %}
+    <!-- Title -->
+    <title>Cookle - Add Recipe</title>
+{% endblock %}
+
 {% block content %}
 <section>
     <div class="w-100 background">
         <div class="overlay py-5">
             <div class="container d-flex flex-column justify-content-center align-items-center">
+
                     <!-- flash messages -->
                     {% with messages = get_flashed_messages(with_categories=True) %}
                         {% if messages %}
@@ -15,31 +22,42 @@
                         {% endif %}
                     {% endwith %}
 
-
                 <h3 class="my-5">Add Recipe</h3>
                 <form class="row g-3 form-width" method="POST" action="{{ url_for('add_recipe') }}">
                     <!-- Recipe Name -->
                     <div class="col-12">
-                        <label for="recipe_name" class="form-label"><i class="fas fa-utensils"></i> Recipe Name</label>
-                        <input type="text" class="form-control" id="recipe_name" name="recipe_name" minlength="5" maxlength="40" required>
+                        <label for="recipe_name" class="form-label">
+                            <i class="fas fa-utensils"></i> Recipe Name
+                        </label>
+                        <input type="text" class="form-control" id="recipe_name" 
+                            name="recipe_name" minlength="5" maxlength="40" required>
                     <!-- Description -->
                     </div><div class="col-12">
-                        <label for="description" class="form-label"><i class="fas fa-comment"></i> Descriptions or comments about this recipe</label>
-                        <textarea class="form-control" id="description" name="description" rows="4" minlength="5" maxlength="500"></textarea>
+                        <label for="description" class="form-label">
+                            <i class="fas fa-comment"></i> Descriptions or comments about this recipe
+                        </label>
+                        <textarea class="form-control" id="description" name="description" 
+                            rows="4" minlength="5" maxlength="500"></textarea>
                     </div>
                     <!-- Serving -->
                     <div class="col-12 col-md-2">
-                        <label for="serving" class="form-label"><i class="fas fa-users"></i> Serves</label>
+                        <label for="serving" class="form-label">
+                            <i class="fas fa-users"></i> Serves
+                        </label>
                         <input type="text" class="form-control" id="serving" name="serving"> person
                     </div>
                     <!-- Prep & Cooking Time -->
                     <div class="col-12 col-md-4">
-                        <label for="time" class="form-label"><i class="fas fa-clock"></i> Prep + Cooking Time</label>
+                        <label for="time" class="form-label">
+                            <i class="fas fa-clock"></i> Prep + Cooking Time
+                        </label>
                         <input type="text" class="form-control" id="time" name="time"> minutes
                     </div>
                     <!-- Categories selection -->
                     <div class="col-12 col-md-6">
-                        <label for="category_name" class="form-label"><i class="fas fa-tag"></i> Category</label>
+                        <label for="category_name" class="form-label">
+                            <i class="fas fa-tag"></i> Category
+                        </label>
                         <select id="category_name" name="category_name" class="form-select" required>
                             <option value="" disabled selected>Choose Category</option>
                             {% for category in categories %}
@@ -49,37 +67,56 @@
                     </div>
                     <!-- Ingredients -->
                     <div class="col-12">
-                        <label for="ingredients" class="form-label"><i class="fas fa-carrot"></i> Ingredients</label>
+                        <label for="ingredient" class="form-label">
+                            <i class="fas fa-carrot"></i> Ingredients
+                        </label>
                         <div class="col-12" id="ingredients-wrapper">
-                            <input type="text" class="form-control ingredients" name="ingredients" required>
+                            <input type="text" class="form-control ingredients" 
+                                id="ingredient" name="ingredients" required>
                         </div>
                         <div class="col-12">
-                            <a href="" role="button" id="add-ing-btn"><i class="fas fa-plus"></i> Add more ingredients</a>
+                            <a href="" role="button" id="add-ing-btn">
+                                <i class="fas fa-plus"></i> Add more ingredients
+                            </a>
                         </div>
                     </div>
                     <!-- Directions -->
                     <div class="col-12">
-                        <label for="directions" class="form-label"><i class="fas fa-clipboard-list"></i> Directions</label>
+                        <label for="direction" class="form-label">
+                            <i class="fas fa-clipboard-list"></i> Directions
+                        </label>
                         <div class="col-12" id="directions-wrapper">
-                            <input type="text" class="form-control directions" name="directions" required>
+                            <input type="text" class="form-control directions" 
+                                id="direction" name="directions" required>
                         </div>
                         <div class="col-12">
-                            <a href="" role="button" id="add-dir-btn"><i class="fas fa-plus"></i> Add more steps</a>
+                            <a href="" role="button" id="add-dir-btn">
+                                <i class="fas fa-plus"></i> Add more steps
+                            </a>
                         </div>
                     </div>
                     <!-- Recipe's Image Url input-->
                     <div class="col-12">
-                        <label for="image-url" class="form-label"><i class="fas fa-image"></i> Recipe's Image (Url / Image's address)</label>
-                        <input type="text" class="form-control image-url" name="recipe_image">
+                        <label for="recipe-image" class="form-label">
+                            <i class="fas fa-image"></i> Recipe's Image (Url / Image's address)
+                        </label>
+                        <input type="text" class="form-control image-url" 
+                            id="recipe-image" name="recipe_image">
                     </div>
                     <!-- Rendering image from url -->
                     <div class="mb-4 text-center">
-                        <img class="show-image" src="{{ url_for('static', filename='images/dish-placeholder.png') }}" width="300">
+                        <img class="show-image" alt="display the image" 
+                            src="{{ url_for('static', filename='images/dish-placeholder.png') }}">
                     </div>
                     <!-- Buttons -->
                     <div class="d-flex align-items-center justify-content-center my-5">
-                        <a href="{{ url_for('get_recipes') }}" role="button" class="btn btn-rec-secondary btn-rounded btn-lg me-5">Cancel</a>
-                        <button type="submit" class="btn btn-rec-primary btn-rounded btn-lg"><i class="fas fa-folder-plus"></i>  Submit Recipe</button>
+                        <a href="{{ url_for('get_recipes') }}" role="button" 
+                            class="btn btn-rec-secondary btn-rounded btn-lg me-5">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-rec-primary btn-rounded btn-lg">
+                            <i class="fas fa-folder-plus"></i> Submit Recipe
+                        </button>
                     </div>
                 </form>
             </div>

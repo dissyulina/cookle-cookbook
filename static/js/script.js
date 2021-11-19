@@ -149,6 +149,11 @@ $(document).ready(function(){
 });
 
 /* Homepage: EmailJS for Inviting Friends*/
+$('#invite-form').on('submit', function (e) {
+    e.preventDefault();
+    sendInvitation(this); 
+});
+
 function sendInvitation(inviteForm) {
     emailjs.send("yahoo","cookle_ms3", {"send_to": inviteForm.emailInvite.value})
     .then(function(response) {
@@ -167,7 +172,12 @@ function sendInvitation(inviteForm) {
     return false;
 }
 
-/* Footer (all pages) : EmailJS for Contact Form*/
+/* Footer (All Pages) : EmailJS for Contact Form*/
+$('#contact-form').on('submit', function (e) {
+    e.preventDefault();
+    sendMail(this); 
+});
+
 function sendMail(contactForm) {
     emailjs.send("yahoo", "contact_cookle", {
         "from_name": contactForm.name.value,

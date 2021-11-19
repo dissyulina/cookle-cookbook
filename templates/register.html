@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+
+{% block styles %}
+    <!-- Title -->
+    <title>Cookle - Sign Up</title>
+{% endblock %}
+
 {% block content %}
 <section>
     <div class="w-100 background">
@@ -26,7 +32,7 @@
                         </div>
                         <!-- Username input -->
                         <div class="form-outline mb-4">
-                            <input type="text" name="username" pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{4,15}$" class="form-control" minlength="4" 
+                            <input type="text" name="username" id="username" pattern="^^(?!\s*$)[-a-zA-Z0-9_:,.\s]{4,15}$" class="form-control" minlength="4" 
                             maxlength="20" required>
                             <label class="form-label" for="username">Username</label>
                         </div>
@@ -61,7 +67,8 @@
                         </div>
                         <!-- Rendering image from url -->
                         <div class="mb-4 text-center">
-                            <img class="show-image" id="show-image-profile" src="{{ url_for('static', filename='images/user.png') }}" width="300">
+                            <img class="show-image" id="show-image-profile" src="{{ url_for('static', filename='images/user.png') }}" 
+                                alt="display the image">
                         </div>
                         <!-- Submit button & Log In link-->
                         <div class="text-center">

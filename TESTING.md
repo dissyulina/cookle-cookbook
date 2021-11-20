@@ -174,10 +174,69 @@ As an Administrative Account holder, I want to:
 
 <br/>  
 
-## **3. Auto Prefixer CSS**   
+
+## **2. Auto Prefixer CSS**   
 Autoprefixer CSS was used to add CSS vendor prefixes to the CSS rules after the developing process was done, to ensure that the they work across all browsers. 
 
 <br/>  
+
+## **3. Manual Testing by the developer**  
+### **Browsers Compatibility**  
+The website was tested through the following browsers: Google Chrome, Microsoft Edge, Opera, Mozilla Firefox, and Safari (iOS) browsers.  
+
+### **Devices**
+The website was also views on the following devices: 
+- Windows Desktop 
+- Windows Laptop  
+- Tablets: iPad Mini 2 and iPad 2018
+- Mobile: iPhone7, iPhone 8, iPhone 12 Mini, Asus Zenfone Max Pro M2, and LG G5  
+- Friends and family members were asked to review the site on their devices and to point out any bugs and/or user experience issues.  
+
+### **Responsiveness**
+To check the responsiveness of the website across all devices, the developer tools are used regularly during the developing process.  
+[Responsiveness Checker](https://www.websiteplanet.com/webtools/responsive-checker/?url=https%3A%2F%2Fcookle-cookbook.herokuapp.com%2F) to test the responsiveness. Below are a few examples.
+- [Responsiveness check on Samsung Galaxy tab 7, Kindle Fire](static/images/readme/testing/responsiveness/galaxytab7-kindle.jpg)  
+- [Responsiveness check on Samsung S9](static/images/readme/testing/responsiveness/samsungS9.jpg)  
+- [Responsiveness check on 13 inch notebook](static/images/readme/testing/responsiveness/13notebook.jpg)    
+
+### **Links**  
+The links were tested to ensure that:  
+- All navigation links are linking correctly.  
+- All buttons on the forms are working (to cancel or to submit the form).  
+- The social media buttons are working and opening in a new tab.  
+
+All of the above are working properly.  
+
+### **Forms**
+The form was also tested to ensure that:  
+- The ```required``` attributes are working.  
+- The regex patterns for username and password are working.
+- There's a validation message that explains the correct format if user filled in the wrong format.  
+
+For Contact Form (using email js), the test was performed to ensure that:
+- When a valid Contact form is submitted, a modal will show up for 2 seconds with text "Message sent" as a response to the user.  
+- The Contact Form is reset (all fields are empty again).
+- The developer gets the notification message in their inbox.  
+- The sender gets a thank you message in their inbox.  
+
+For Invitation email (also using email js), the test was performed to ensure that:
+- When a valid email address is submitted, the button will turn to "Sent" for 2 seconds as a response to the user.  
+- The input area is blank again.
+- A message is sent to the email address, to invite the receiver to sign up to Cookle.  
+
+All of the above are working properly.  
+
+### **Defensive Testing**
+The defensive testing was done to make sure certain actions can only be performed by authorized user/admin. The test was done such as: 
+- Typing the url to try to access other user's edit recipe page : ```https://cookle-cookbook.herokuapp.com/edit_recipe/<recipe_id>``` 
+- Typing the url to try to access other user's profile page : ```https://cookle-cookbook.herokuapp.com/profile/<username>```   
+- Typing the url to try to access other user's cookbook page : ```https://cookle-cookbook.herokuapp.com/cookbook/<username>```   
+- Typing the url to try to access manage categories page without logging in as Admin : ```https://cookle-cookbook.herokuapp.com/manage_categories``` 
+- etc.
+
+When a user tries to perform unauthorized action such above, a flash message with red text "You are not authorized to view that page" will be showed.  
+
+<br/>   
 
 ## **4. W3C Validator Testing**  
 The [W3C Markup Validator](https://validator.w3.org) and [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) were used to validate the website to ensure there were no syntax errors in the project. The results are below:  
@@ -231,5 +290,32 @@ All of the warnings have been fixed, except for one warning which shows ```email
 
 ## **6. Python Testing**  
 I ran the python code through [Pep8 Online](http://pep8online.com/) and it returned no errors. [See here the screen capture of the testing result](static/images/readme/testing/pep8-test.jpg).   
+
+<br/>  
+
+## **7. Lighthouse Testing**  
+The Chrome Lighthouse testing was used to audit the performance, accessibility, best practices, and SEO. Below are the result.   
+
+Page Name | Performance | Accessbility | Best Practices | SEO | See link   
+--- | --- | --- | ---  | --- | ---    
+index.html |  94 | 97 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/index-desktop.jpg)   
+explore-recipes.html | 94 | 94 | 100 | 90 | [see here](static/images/readme/testing/lighthouse/explore-recipes-desktop.jpg)   
+register.html | 95 | 92 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/register-desktop.jpg)   
+login.html | 97 | 99 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/login-desktop.jpg)  
+profile.html | 91 | 98 | 100 | 90 | [see here](static/images/readme/testing/lighthouse/profile-desktop.jpg)  
+edit-profile.html | 86 | 99 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/edit-profile-desktop.jpg)   
+change-password.html | 96 | 99 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/change-password-desktop.jpg)  
+add-recipe.html | 88 | 97 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/add-recipe-desktop.jpg)  
+single-recipe.html | 94 | 91 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/single-recipe-desktop.jpg)  
+edit-recipe.html | 96 | 97 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/edit-recipe-desktop.jpg)  
+cookbook.html | 86 | 94 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/cookbook-desktop.jpg)  
+categories.html | 96 | 98 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/categories-desktop.jpg)  
+edit-category.html | 97 | 97 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/edit-category-desktop.jpg)  
+add-category.html | 94 | 97 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/add-category-desktop.jpg)  
+
+
+
+
+
 
 

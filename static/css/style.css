@@ -296,6 +296,7 @@ Code was sourced from https://bootstrap-menu.com/detail-autohide.html */
 }
 
 .show-image {
+    width: 300px;
     max-width: 80%;
 }
 

@@ -465,7 +465,7 @@ I ran into several issues and bugs while developing the website. Some of the tou
    **Solution** : After many trials and errors, here's what I did that solved the problem:   
    1. I created a form for every review, but with bootstrap class ```class="d-none"``` so that basically for every review listed, there's a hidden form.   
    2. I created an html costum data attribute for the form and for the review in accordance, so they would have the same ```data-id="{{ review._id }}```.   
-   3. If a user clicked a review to edit, form that has the ```data-id``` that matched the ```data-id``` on the clicked review, will be displayed. I used javascript to remove the class ```class="d-none"```, and then move it up (append the whole form it as a child of a div) on the top of review section.   
+   3. If a user clicked a review to edit, form that has the id that matched the ```data-id``` on the clicked review, will be displayed. I used javascript to remove the class ```class="d-none"```, and then move it up (append the whole form it as a child of a div) on the top of review section.   
    4. And then form can be submitted as usual by defining ```action="{{ url_for('edit_review', review_id=review._id) }}```.  
     
 <br/>  
@@ -708,9 +708,12 @@ Once the copy of the repository has been created, the environment variables has 
 4. Feature to check passoword match on Sign Up page and Change Password page was sourced from [this StackOverflow page](https://stackoverflow.com/questions/21727317/how-to-check-confirm-password-field-in-form-without-reloading-page/21727518).  
 5. Add delete button except on the first field on Add Recipe page and Edit Recipe page (Ingredients and Directions) was sourced from [this StackOverflow page](https://stackoverflow.com/questions/20233721/how-do-you-index-on-a-jinja-template).   
 6. Delete the one input box when delete button is clicked on Add Recipe page and Edit Recipe page (Ingredients and Directions) was sourced from [this StackOverflow page](https://stackoverflow.com/questions/6647736/how-to-delete-parent-element-using-jquery).   
-7. To share the recipe to social media using sharer.js was sourced from [this GitHub page](https://ellisonleao.github.io/sharer.js/).   
-8. To add meta tags for social media sharing was sourced from [this tutorial on css-tricks](https://css-tricks.com/essential-meta-tags-social-media/).  
-9. Autoprefixer CSS was used to add different vendor prefixer to CSS. All css code was inserted [here](https://autoprefixer.github.io), and paste it back to the style.css.     
+7. Regex pattern for username: contains any number, letters, hypens and underscore from [this thread](https://social.msdn.microsoft.com/Forums/vstudio/en-US/2c0fefcd-6ddf-4083-8f4c-72896eb66da7/regex-allow-letters-numbers-underscores-and-hyphens-what-am-i-missing).  
+8. Regex pattern for password: contains at least one number and one letter [this StackOverflow page](https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a).  
+
+9. To share the recipe to social media using sharer.js was sourced from [this GitHub page](https://ellisonleao.github.io/sharer.js/).   
+10. To add meta tags for social media sharing was sourced from [this tutorial on css-tricks](https://css-tricks.com/essential-meta-tags-social-media/).  
+11. Autoprefixer CSS was used to add different vendor prefixer to CSS. All css code was inserted [here](https://autoprefixer.github.io), and paste it back to the style.css.     
 
 
 ## **Contents**
@@ -719,7 +722,7 @@ All recipes content and recipes images in this website were sourced from [Allrec
 ## **Images and Icons**   
 * Hero image was sourced from [Freepik](https://www.freepik.com/), edited by the developer.  
 * Cookle logo was created from [Freelogodesign](https://www.freelogodesign.org/).  
-* 404 error image was sourced from [Undraw](https://undraw.co/illustrations).  
+* A tablet on the table image was sourced from [Unsplash](https://unsplash.com/images), photo by Jeff Sheldon.
 
 <br/>  
 
@@ -730,8 +733,10 @@ All recipes content and recipes images in this website were sourced from [Allrec
    * Slack community, as the first help to ask when I encountered a problem.  
 
 <br/>  
+
 [Back to top](https://github.com/dissyulina/cookle-cookbook#cookle)  
-<br />  
+<br />   
+
   
 
 

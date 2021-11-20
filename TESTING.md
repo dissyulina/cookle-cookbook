@@ -9,18 +9,25 @@
 <br/>  
 
 **Table of Contents** 
-1. [User Stories Testing]()  
-2. [Manual Testing]()  
-   a. [Responsiveness Testing]()  
-   b. [Links Testing]()  
-   c. [Game Play Testing]()   
-   d. [Form Testing]()  
-3. [Autoprefixer CSS]()  
-4. [W3C Validator Testing]()  
-5. [JSHint Testing]()   
-6. [Lighthouse Testing]()  
-7. [CI Peer Code Review on Slack]()
-8. [Further Testing]()  
+1. [User Stories Testing](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#1-user-stories-testing)  
+   - [Unregistered Users' Goals](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#unregistered-user-goals)   
+   - [Registered Users' Goals](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#registered-user-goals)  
+   - [Administrative Account Holder's Goals](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#administrative-account)  
+2. [Autoprefixer CSS](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#2-auto-prefixer-css)    
+2. [Manual Testing](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#3-manual-testing-by-the-developer)   
+   - [Browsers Compatibility](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#browsers-compatibility)   
+   - [Devices](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#devices)   
+   - [Responsiveness](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#responsiveness)   
+   - [Links](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#links)  
+   - [Forms](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#forms)   
+   - [Defensive Testing](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#defensive-testing)  
+4. [W3C Validator Testing](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#4-w3c-validator-testing)  
+   - [HTML](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#html)   
+   - [CSS](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#css)  
+5. [JSHint Testing](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#5-javascript-testing)    
+6. [Pep8 Online Testing](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#6-python-testing)
+7. [Lighthouse Testing](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#7-lighthouse-testing)  
+
 
 <br/>  
 
@@ -97,13 +104,13 @@ As a returning/ registered user, I want to:
      - Call to action button on the bottom of My Cookbook page, or  
      ![CTA create recipe on my cookbook page](static/images/readme/testing/user-stories/cta-cookbook-create-recipe.jpg "CTA create recipe on my cookbook page")  
      - Navigation link to Create Recipe on the footer 
-   * Once the user clicked the Create Recipe link/ button, they will be directed to the Create Recipe page (see here)
+   * Once the user clicked the Create Recipe link/ button, they will be directed to the Create Recipe page.
    * There are various was to Edit or Delete a recipe: 
      - After user created a recipe, the user will be directed to the newly created recipe page. On the top right of the recipe page, the user wil be able to locate an Edit button and a Delete button.  
      ![Edit and Delete Recipe on Recipe page](static/images/readme/testing/user-stories/edit-delete-recipe.jpg "Edit and Delete Recipe on Recipe page")  
      - The user can also manage all their created recipes from the Profile page by clicking the "Uploaded Recipes" collapse button, and navigate to the ellipsis button to find the option to Edit and Delete.  
      ![Edit and Delete Recipe on Profile page](static/images/readme/testing/user-stories/profile-uploaded-recipes.jpg "Edit and Delete Recipe on Profile page")  
-   * Once the user clicked the Edit Recipe button, they will be directed to the Edit Recipe page (see here).  
+   * Once the user clicked the Edit Recipe button, they will be directed to the Edit Recipe page.
    * Once the user clicked the Delete Recipe button, a modal will pop up to confirm the deletion, as a barrier in case the user accidentaly clicked the button. The modal comes with buttons to Cancel and to Delete the recipe.  
      ![Modal confirmatin before deleting recipe](static/images/readme/testing/user-stories/modal-delete-recipe.jpg "Modal confirmatin before deleting recipe")   
 
@@ -150,7 +157,7 @@ As a returning/ registered user, I want to:
    ![Contact form](static/images/readme/testing/user-stories/contact-form.jpg "Contact form")  
 
 
-### **Administrative Account**   
+### **Administrative Account Holder Goals**   
 As an Administrative Account holder, I want to:
 1. Be able to do all the functionalities as a registered user can
    * All functionalities as a general user are available for the admin.  
@@ -173,6 +180,9 @@ As an Administrative Account holder, I want to:
    * The Delete review button inside the ellipsis dropdown button is available for admin to access. Admin can only delete a review, not edit it.  
 
 <br/>  
+
+[Back to top](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#cookle---testing)  
+<br />  
 
 
 ## **2. Auto Prefixer CSS**   
@@ -275,6 +285,10 @@ No errors were found, but there are 15 warnings and they are all concerning the 
 
 <br/>  
 
+[Back to top](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#cookle---testing)  
+
+<br />  
+
 
 ## **5. JavaScript Testing**  
 I ran the javascript code through [JSHint](https://jshint.com/), and there were some warnings. 
@@ -288,7 +302,7 @@ All of the warnings have been fixed, except for one warning which shows ```email
 
 <br/>  
 
-## **6. Python Testing**  
+## **6. Pep8 Online Testing**  
 I ran the python code through [Pep8 Online](http://pep8online.com/) and it returned no errors. [See here the screen capture of the testing result](static/images/readme/testing/pep8-test.jpg).   
 
 <br/>  
@@ -313,6 +327,10 @@ categories.html | 96 | 98 | 100 | 100 | [see here](static/images/readme/testing/
 edit-category.html | 97 | 97 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/edit-category-desktop.jpg)  
 add-category.html | 94 | 97 | 100 | 100 | [see here](static/images/readme/testing/lighthouse/add-category-desktop.jpg)  
 
+<br/>  
+
+[Back to top](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#cookle---testing)  
+<br />  
 
 
 

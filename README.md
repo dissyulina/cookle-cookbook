@@ -37,7 +37,7 @@ Please note that this web application was created for the Code Institute’s Mil
    &nbsp;&nbsp;- [Known Issues & Unsolved Bugs](https://github.com/dissyulina/cookle-cookbook#known-issues--unsolved-bugs)  
    
 4. [Testing](https://github.com/dissyulina/cookle-cookbook#4-testing)   
-   &nbsp;&nbsp;- [Go to TESTING.md](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#cookle-cookbook---testing) 
+   &nbsp;&nbsp;- [Go to TESTING.md](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#cookle---testing) 
 
 5. [Technology Used](https://github.com/dissyulina/cookle-cookbook#5-technology-used)  
    &nbsp;&nbsp;- [Main Languanges](https://github.com/dissyulina/cookle-cookbook#main-languages-used)  
@@ -483,7 +483,7 @@ There is a new header from Github as part of an effort to ensure the privacy of 
 <br />  
 
 # **4. Testing**  
-The testing documentation can be found [here](). 
+The testing documentation can be found [here](https://github.com/dissyulina/cookle-cookbook/blob/main/TESTING.md#cookle---testing). 
 
 <br/>   
 

@@ -303,9 +303,10 @@ def edit_profile(user_id):
                     "about": request.form.get("about"),
                     "user_image": request.form.get("profile-url"),
                 }
+                # update the users coll and set the new session username
                 mongo.db.users.update({"_id": ObjectId(user_id)},
                                       {"$set": submit})
-
+                session["user"] = request.form.get("username").lower()
                 # update username and user image in recipes and reviews coll
                 update = {
                     "username": request.form.get("username").lower(),

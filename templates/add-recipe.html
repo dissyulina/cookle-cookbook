@@ -106,6 +106,7 @@
                         <!-- Rendering image from url -->
                         <div class="mb-4 text-center">
                             <img class="show-image" alt="display the image" 
+                                onerror="this.src='../../static/images/dish-placeholder.png';"
                                 src="{{ url_for('static', filename='images/dish-placeholder.png') }}">
                         </div>
                         <!-- Buttons -->

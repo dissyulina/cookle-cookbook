@@ -54,7 +54,7 @@ $('#repeat-password').on('keyup', function () {
 
 /* Add Recipe page and Edit Recipe Page: Add new line to ingredients (maximum 30 lines) */
 let ingredients;
-let maxIngredients = 15;
+let maxIngredients = 30;
 
 if ($("#number-ingredients").text()) {
     ingredients = parseInt($("#number-ingredients").text()); 
@@ -79,7 +79,7 @@ $("#add-ing-btn").click(function (e) {
 
 /* Add Recipe page and Edit Recipe Page: Add new line to directions (maximum 30 lines) */
 let directions;
-let maxDirections = 15; 
+let maxDirections = 30; 
 
 if ($("#number-directions").text()) {
     directions = parseInt($("#number-directions").text()); 

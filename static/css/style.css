@@ -51,8 +51,8 @@ h4 {
 .nav-pills .nav-link,
 .form-label, 
 .card-title, 
-#collapseUploadedRecipes a,
-#collapseSavedRecipes a  {
+.collapseUploadedRecipes a,
+.collapseSavedRecipes a  {
     color: #262626;
 }
 

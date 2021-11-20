@@ -54,7 +54,7 @@ Please note that this web application was created for the Code Institute’s Mil
    &nbsp;&nbsp;- [Contents](https://github.com/dissyulina/cookle-cookbook#contents)    
    &nbsp;&nbsp;- [Images](https://github.com/dissyulina/cookle-cookbook#images-and-icons)  
  
-8. [Acknowledgements](https://github.com/dissyulina/trivia-world#acknowledgements)  
+8. [Acknowledgements](https://github.com/dissyulina/cookle-cookbook#8-acknowledgements)  
 
 <br/>   
 
